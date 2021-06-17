@@ -1,0 +1,178 @@
+<h1 id="StructureNuker"><a href="#StructureNuker" class="headerlink" title="StructureNuker"></a>StructureNuker</h1><p><img src="img/nuke.png" alt align="right"></p>
+<p>向其他房间发射一枚核弹，对着落区域造成大量伤害。
+发射后需要时间冷却且需重新装填能量和 ghodium 资源。
+发射后将会在目标房间位置创建一个对任何玩家可见的 <a href="#Nuke">Nuke</a> 对象，直至其着陆。
+已发射的核弹无法移动或者取消。核弹不能从新手房间发射或者发射向新手房间。放置到 StructureNuker 中的资源无法被取出 (withdraw)。</p>
+<table class="table gameplay-info">
+    <tbody>
+    <tr>
+        <td colspan="2" style="width: 70px;"><strong>控制器等级</strong></td>
+    </tr>
+    <tr>
+        <td>1-7</td>
+        <td>—</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>1 nuke</td>
+    </tr>
+    <tr>
+        <td style="width: 70px;"><strong>建造花费</strong></td>
+        <td>100,000</td>
+    </tr>
+    <tr>
+        <td style="width: 70px;"><strong>生命值</strong></td>
+        <td>1,000</td>
+    </tr>
+    <tr>
+        <td style="width: 70px;"><strong>攻击范围</strong></td>
+        <td>10 rooms</td>
+    </tr>
+    <tr>
+        <td style="width: 70px;"><strong>发射花费</strong></td>
+        <td>300,000 energy<br> 5,000 ghodium</td>
+    </tr>
+    <tr>
+        <td style="width: 70px;"><strong>发射冷却</strong></td>
+        <td>100,000 ticks</td>
+    </tr>
+    <tr>
+        <td style="width: 70px;"><strong>着陆时间</strong></td>
+        <td>50,000 ticks</td>
+    </tr>
+    <tr>
+        <td style="width: 70px;"><strong>效果</strong></td>
+        <td>立刻清除所有的 creep，建筑工地(construction site)和掉落的资源，即使它位于 rampart 之下。并对建筑造成如下伤害：
+            <ul>
+                <li>对着落位置造成 10,000,000 hits 伤害。</li>
+                <li>对周围 5x5 区域中的建筑造成 5,000,000 hits 伤害。</li>
+            </ul>
+            <p>注意，您可以将来自多个不同房间的核弹叠加到同一位置来增强伤害。</p>
+            <p>Nuke 着落不会产生墓碑（tombstone）和遗迹（ruin），并且会销毁房间中所有存在的墓碑和遗迹。</p>
+            <p>如果核弹着落时房间正处于安全模式，则会立刻取消安全模式，并将安全模式的冷却时间重置为 0。</p>
+            <p>房间控制器将会触发 <code>upgradeBlocked</code> 计时，这意味着在接下来的 200 tick 中将无法再次使用安全模式。</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="StructureNuker.effects" class="api-property api-property--property  "><span class="api-property__name">effects</span><span class="api-property__type">array</span></h2>
+<p>附加的效果，一个包含如下属性的对象数组：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>effect</code></td><td>number</td><td><p>该附加效果的 ID。可以是自然效果 ID 或者 Power ID。</p>
+</td>
+</tr><tr><td><code>level (可选)</code></td><td>number </td><td><p>该附加效果的 Power 等级。如果效果不是 Power 效果则不存在该属性。</p>
+</td>
+</tr><tr><td><code>ticksRemaining</code></td><td>number</td><td><p>多长时间之后会失去这个效果。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="StructureNuker.pos" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">pos</span><span class="api-property__type"><a href="#RoomPosition">RoomPosition</a></span></h2>
+<p>表示该对象在房间中的坐标的对象。</p>
+<h2 id="StructureNuker.room" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">room</span><span class="api-property__type"><a href="#Room">Room</a></span></h2>
+<p>Room对象的链接。如果对象是标志或工地并且放置在你不可见的房间中，则可能为undefined。</p>
+
+<h2 id="StructureNuker.hits" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">hits</span><span class="api-property__type">number</span></h2>
+<p>当前这个建筑的当前生命值。</p>
+<h2 id="StructureNuker.hitsMax" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">hitsMax</span><span class="api-property__type">number</span></h2>
+<p>这个建筑的最大生命值。</p>
+<h2 id="StructureNuker.id" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">id</span><span class="api-property__type">string</span></h2>
+<p>一个唯一的对象标识。你可以使用<a href="#Game.getObjectById"><code>Game.getObjectById</code></a>方法获取对象实例。</p>
+<h2 id="StructureNuker.structureType" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">structureType</span><span class="api-property__type">string</span></h2>
+<p><code>STRUCTURE_*</code>常量之一。</p>
+<h2 id="StructureNuker.destroy" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">destroy</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>立即摧毁这个建筑。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个建筑的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>敌对creep在这个房间中。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="StructureNuker.isActive" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">isActive</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--2" title="该方法的CPU开销中等。"></div>
+        </h2>
+<p>检查这个建筑是否可用。如果房间控制等级不足，这个方法会返回false，并且这个建筑会在游戏中红色高亮。</p>
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>布尔值。</p>
+<h2 id="StructureNuker.notifyWhenAttacked" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">notifyWhenAttacked</span><span class="api-property__args">(enabled)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>切换这个建筑受到攻击时的自动通知。通知会发送到你的账户邮箱。默认开启。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>enabled</code></td><td>boolean</td><td><p>是否启用通知。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个建筑的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p><code>enable</code>参数不是一个布尔值。</p>
+</td></tr>
+</tbody></table>
+</p>
+  
+<h2 id="StructureNuker.my" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#OwnedStructure">OwnedStructure</a></div><span class="api-property__name">my</span><span class="api-property__type">boolean</span></h2>
+<p>是否是你拥有的建筑。</p>
+<h2 id="StructureNuker.owner" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#OwnedStructure">OwnedStructure</a></div><span class="api-property__name">owner</span><span class="api-property__type">object</span></h2>
+<p>建筑拥有者信息，一个包含如下属性的对象：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>username</code></td><td>string</td><td><p>拥有者姓名。</p>
+</td>
+</tr></tbody></table>
+
+
+<h2 id="StructureNuker.energy" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">energy</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#StructureExtension.store"><code>.store[RESOURCE_ENERGY]</code></a> 的别名。</p>
+<h2 id="StructureNuker.energyCapacity" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">energyCapacity</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#Store.getCapacity"><code>.store.getCapacity(RESOURCE_ENERGY)</code></a> 的别名。</p>
+<h2 id="StructureNuker.ghodium" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">ghodium</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#StructureExtension.store"><code>.store[RESOURCE_GHODIUM]</code></a> 的别名。</p>
+<h2 id="StructureNuker.ghodiumCapacity" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">ghodiumCapacity</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#Store.getCapacity"><code>.store.getCapacity(RESOURCE_GHODIUM)</code></a> 的别名。</p>
+<h2 id="StructureNuker.cooldown" class="api-property api-property--property  "><span class="api-property__name">cooldown</span><span class="api-property__type">number</span></h2>
+<p>下次发射前还需多少 tick 的冷却时间。</p>
+<h2 id="StructureNuker.store" class="api-property api-property--property  "><span class="api-property__name">store</span><span class="api-property__type"><a href="#Store">Store</a></span></h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>structure<span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">getFreeCapacity</span><span class="token punctuation">(</span><span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">transfer</span><span class="token punctuation">(</span>structure<span class="token punctuation">,</span> <span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>一个包含了该建筑中所存储资源的 <a href="#Store"><code>Store</code></a> 对象。</p>
+<h2 id="StructureNuker.launchNuke" class="api-property api-property--method  "><span class="api-property__name">launchNuke</span><span class="api-property__args">(pos)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>nuker<span class="token punctuation">.</span><span class="token function">launchNuke</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">RoomPosition</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span> <span class="token string">'W1N1'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>向指定位置发射核弹。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>pos</code></td><td><a href="#RoomPosition">RoomPosition</a></td><td><p>目标房间位置</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个建筑的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>该建筑没有足够的能量和/或 ghodium。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>nuke 无法发射至指定的 RoomPosition（见 <a href="/start-areas.html">起始区域</a>）</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标房间超出打击范围。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>目标不是有效的 RoomPosition。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>该建筑仍在冷却。</p>
+</td></tr>
+<tr><td><code>ERR_RCL_NOT_ENOUGH</code></td><td>-14</td><td><p>房间控制中心等级不足。</p>
+</td></tr>
+</tbody></table>
+</p>

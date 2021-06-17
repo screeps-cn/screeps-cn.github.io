@@ -1,0 +1,106 @@
+<h1 id="StructureContainer"><a href="#StructureContainer" class="headerlink" title="StructureContainer"></a>StructureContainer</h1><p><img src="img/container.png" alt align="right"></p>
+<p>一个可以用来存储资源的小型容器。这是一个允许走上去的建筑。所有丢弃在同一方格上的资源都会被自动存储到 container 中。</p>
+<table class="table gameplay-info">
+    <tbody>
+    <tr>
+        <td><strong>控制器等级</strong></td>
+        <td>任何等级 (包括无主房间)</td>
+    </tr>
+    <tr>
+        <td><strong>每个房间允许建造的数量</strong></td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td><strong>容量</strong></td>
+        <td>2,000</td>
+    </tr>
+    <tr>
+        <td><strong>建筑花费</strong></td>
+        <td>5,000</td>
+    </tr>
+    <tr>
+        <td><strong>生命值</strong></td>
+        <td>250,000</td>
+    </tr>
+    <tr>
+        <td><strong>老化</strong></td>
+        <td>在被自己控制的房间内每 500 tick 失去 5,000 生命值, 在没有控制的房间内该时间将降低至 100 tick。</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="StructureContainer.effects" class="api-property api-property--property  "><span class="api-property__name">effects</span><span class="api-property__type">array</span></h2>
+<p>附加的效果，一个包含如下属性的对象数组：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>effect</code></td><td>number</td><td><p>该附加效果的 ID。可以是自然效果 ID 或者 Power ID。</p>
+</td>
+</tr><tr><td><code>level (可选)</code></td><td>number </td><td><p>该附加效果的 Power 等级。如果效果不是 Power 效果则不存在该属性。</p>
+</td>
+</tr><tr><td><code>ticksRemaining</code></td><td>number</td><td><p>多长时间之后会失去这个效果。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="StructureContainer.pos" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">pos</span><span class="api-property__type"><a href="#RoomPosition">RoomPosition</a></span></h2>
+<p>表示该对象在房间中的坐标的对象。</p>
+<h2 id="StructureContainer.room" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">room</span><span class="api-property__type"><a href="#Room">Room</a></span></h2>
+<p>Room对象的链接。如果对象是标志或工地并且放置在你不可见的房间中，则可能为undefined。</p>
+
+<h2 id="StructureContainer.hits" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">hits</span><span class="api-property__type">number</span></h2>
+<p>当前这个建筑的当前生命值。</p>
+<h2 id="StructureContainer.hitsMax" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">hitsMax</span><span class="api-property__type">number</span></h2>
+<p>这个建筑的最大生命值。</p>
+<h2 id="StructureContainer.id" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">id</span><span class="api-property__type">string</span></h2>
+<p>一个唯一的对象标识。你可以使用<a href="#Game.getObjectById"><code>Game.getObjectById</code></a>方法获取对象实例。</p>
+<h2 id="StructureContainer.structureType" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">structureType</span><span class="api-property__type">string</span></h2>
+<p><code>STRUCTURE_*</code>常量之一。</p>
+<h2 id="StructureContainer.destroy" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">destroy</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>立即摧毁这个建筑。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个建筑的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>敌对creep在这个房间中。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="StructureContainer.isActive" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">isActive</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--2" title="该方法的CPU开销中等。"></div>
+        </h2>
+<p>检查这个建筑是否可用。如果房间控制等级不足，这个方法会返回false，并且这个建筑会在游戏中红色高亮。</p>
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>布尔值。</p>
+<h2 id="StructureContainer.notifyWhenAttacked" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">notifyWhenAttacked</span><span class="api-property__args">(enabled)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>切换这个建筑受到攻击时的自动通知。通知会发送到你的账户邮箱。默认开启。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>enabled</code></td><td>boolean</td><td><p>是否启用通知。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个建筑的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p><code>enable</code>参数不是一个布尔值。</p>
+</td></tr>
+</tbody></table>
+</p>
+
+<h2 id="StructureContainer.store" class="api-property api-property--property  "><span class="api-property__name">store</span><span class="api-property__type"><a href="#Store">Store</a></span></h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> containersWithEnergy <span class="token operator">=</span> room<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token constant">FIND_STRUCTURES</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">filter</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token parameter">i</span><span class="token punctuation">)</span> <span class="token operator">=></span> i<span class="token punctuation">.</span>structureType <span class="token operator">==</span> <span class="token constant">STRUCTURE_CONTAINER</span> <span class="token operator">&amp;&amp;</span>
+                   i<span class="token punctuation">.</span>store<span class="token punctuation">[</span><span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> total <span class="token operator">=</span> _<span class="token punctuation">.</span><span class="token function">sum</span><span class="token punctuation">(</span>container<span class="token punctuation">.</span>store<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>容器内容物对象。每一个键都是<code>RESOURCE_*</code>常量，值是资源数量。如果没有<code>RESOURCE_ENERGY</code>，它的值始终为0，而其他资源的值为undefined。你可以使用<a href="https://github.com/lodash/lodash/blob/3.10.1/doc/README.md#_sumcollection-iteratee-thisarg" target="_blank" rel="noopener"><code>lodash.sum</code></a>来获得内容物总量。</p>
+<h2 id="StructureContainer.storeCapacity" class="api-property api-property--property  "><span class="api-property__name">storeCapacity</span><span class="api-property__type">number</span></h2>
+<p>一个包含了该建筑中所存储的货物的 <a href="#Store"><code>Store</code></a> 对象。</p>
+<h2 id="StructureContainer.storeCapacity" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">storeCapacity</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#Store.getCapacity"><code>.store.getCapacity()</code></a> 的别名。</p>
+<h2 id="StructureContainer.ticksToDecay" class="api-property api-property--property  "><span class="api-property__name">ticksToDecay</span><span class="api-property__type">number</span></h2>
+<p>还有多少 tick 就要因老化而失去生命值。</p>

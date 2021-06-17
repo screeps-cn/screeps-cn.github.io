@@ -1,0 +1,359 @@
+<h1 id="StructureSpawn"><a href="#StructureSpawn" class="headerlink" title="StructureSpawn"></a>StructureSpawn</h1><p><img src="img/spawn.png" alt align="right"> </p>
+<p>母巢 (spawn) 是你的殖民地中心。此建筑可以创建、更新和回收 creeps 。
+你能通过 <a href="#Game.spawns"><code>Game.spawns</code></a> 这个hash list 访问所有的母巢 (spawn) 。
+母巢 (spawn) 每 tick 会生产少许能量，以免玩家陷入无 creep 可用、无 creep 可造的困境。</p>
+<table class="table gameplay-info">
+    <tbody>
+    <tr>
+        <td colspan="2"><strong>控制等级 (Controller level) </strong></td>
+    </tr>
+    <tr>
+        <td>1-6</td>
+        <td>1 spawn</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>2 spawns</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>3 spawns</td>
+    </tr>
+    <tr>
+        <td><strong>Cost</strong></td>
+        <td>15,000</td>
+    </tr>
+    <tr>
+        <td><strong>Hits</strong></td>
+        <td>5,000</td>
+    </tr>
+    <tr>
+        <td><strong>Capacity</strong></td>
+        <td>300</td>
+    </tr>
+    <tr>
+        <td><strong>Spawn time</strong></td>
+        <td>3 ticks 每 body 组件</td>
+    </tr>
+    <tr>
+        <td><strong>Energy auto-regeneration</strong></td>
+        <td>当房间内的能量（所有的母巢和扩展中）低于300 时，母巢每 tick 会自动生存 1 单位的能量。</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="StructureSpawn.effects" class="api-property api-property--property  "><span class="api-property__name">effects</span><span class="api-property__type">array</span></h2>
+<p>附加的效果，一个包含如下属性的对象数组：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>effect</code></td><td>number</td><td><p>该附加效果的 ID。可以是自然效果 ID 或者 Power ID。</p>
+</td>
+</tr><tr><td><code>level (可选)</code></td><td>number </td><td><p>该附加效果的 Power 等级。如果效果不是 Power 效果则不存在该属性。</p>
+</td>
+</tr><tr><td><code>ticksRemaining</code></td><td>number</td><td><p>多长时间之后会失去这个效果。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="StructureSpawn.pos" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">pos</span><span class="api-property__type"><a href="#RoomPosition">RoomPosition</a></span></h2>
+<p>表示该对象在房间中的坐标的对象。</p>
+<h2 id="StructureSpawn.room" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">room</span><span class="api-property__type"><a href="#Room">Room</a></span></h2>
+<p>Room对象的链接。如果对象是标志或工地并且放置在你不可见的房间中，则可能为undefined。</p>
+
+<h2 id="StructureSpawn.hits" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">hits</span><span class="api-property__type">number</span></h2>
+<p>当前这个建筑的当前生命值。</p>
+<h2 id="StructureSpawn.hitsMax" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">hitsMax</span><span class="api-property__type">number</span></h2>
+<p>这个建筑的最大生命值。</p>
+<h2 id="StructureSpawn.id" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">id</span><span class="api-property__type">string</span></h2>
+<p>一个唯一的对象标识。你可以使用<a href="#Game.getObjectById"><code>Game.getObjectById</code></a>方法获取对象实例。</p>
+<h2 id="StructureSpawn.structureType" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">structureType</span><span class="api-property__type">string</span></h2>
+<p><code>STRUCTURE_*</code>常量之一。</p>
+<h2 id="StructureSpawn.destroy" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">destroy</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>立即摧毁这个建筑。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个建筑的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>敌对creep在这个房间中。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="StructureSpawn.isActive" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">isActive</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--2" title="该方法的CPU开销中等。"></div>
+        </h2>
+<p>检查这个建筑是否可用。如果房间控制等级不足，这个方法会返回false，并且这个建筑会在游戏中红色高亮。</p>
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>布尔值。</p>
+<h2 id="StructureSpawn.notifyWhenAttacked" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">notifyWhenAttacked</span><span class="api-property__args">(enabled)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>切换这个建筑受到攻击时的自动通知。通知会发送到你的账户邮箱。默认开启。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>enabled</code></td><td>boolean</td><td><p>是否启用通知。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个建筑的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p><code>enable</code>参数不是一个布尔值。</p>
+</td></tr>
+</tbody></table>
+</p>
+  
+<h2 id="StructureSpawn.my" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#OwnedStructure">OwnedStructure</a></div><span class="api-property__name">my</span><span class="api-property__type">boolean</span></h2>
+<p>是否是你拥有的建筑。</p>
+<h2 id="StructureSpawn.owner" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#OwnedStructure">OwnedStructure</a></div><span class="api-property__name">owner</span><span class="api-property__type">object</span></h2>
+<p>建筑拥有者信息，一个包含如下属性的对象：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>username</code></td><td>string</td><td><p>拥有者姓名。</p>
+</td>
+</tr></tbody></table>
+
+
+<h2 id="StructureSpawn.energy" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">energy</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#StructureExtension.store"><code>.store[RESOURCE_ENERGY]</code></a> 的别名.</p>
+<h2 id="StructureSpawn.energyCapacity" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">energyCapacity</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#Store.getCapacity"><code>.store.getCapacity(RESOURCE_ENERGY)</code></a> 的别名.</p>
+<h2 id="StructureSpawn.memory" class="api-property api-property--property  "><span class="api-property__name">memory</span><span class="api-property__type">any</span></h2>
+<pre class="highlight javascript tab-javascript "><code>spawn<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>queue <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre><p><code>Memory.spawns[spawn.name]</code> 的一个简写。您可以使用它来快速访问母巢 (spawn) 的特定内存数据对象。 <a href="/global-objects.html#Memory-object">了解更多关于 memory</a></p>
+<h2 id="StructureSpawn.name" class="api-property api-property--property  "><span class="api-property__name">name</span><span class="api-property__type">string</span></h2>
+<p>Spawn 的名字。在创建新母巢 (spawn) 时赋予，一但创建就无法更改，除非拆除重造。此名称是一个散列键，用于通过 <a href="#Game.spawns">Game.spawns</a> 对象访问。</p>
+<h2 id="StructureSpawn.spawning" class="api-property api-property--property  "><span class="api-property__name">spawning</span><span class="api-property__type"><a href="#StructureSpawn-Spawning">StructureSpawn.Spawning</a></span></h2>
+<p>如果母巢 (spawn) 正在孵化一个新的 creep ， 母巢 (spawn) 将包含一个 <a href="#StructureSpawn-Spawning"><code>StructureSpawn.Spawning</code></a> 对象，否则为 null。</p>
+<h2 id="StructureSpawn.store" class="api-property api-property--property  "><span class="api-property__name">store</span><span class="api-property__type"><a href="#Store">Store</a></span></h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>structure<span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">getFreeCapacity</span><span class="token punctuation">(</span><span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">transfer</span><span class="token punctuation">(</span>structure<span class="token punctuation">,</span> <span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>一个 <a href="#Store"><code>Store</code></a> 对象，它包含这个建筑的所有货物。</p>
+<h2 id="StructureSpawn.canCreateCreep" class="api-property api-property--method  api-property--deprecated"><span class="api-property__name">canCreateCreep</span><span class="api-property__args">(body, [name])</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<div class="api-deprecated"><p>此方法已被弃用，不久将被删除。 请使用 <a href="#StructureSpawn.spawnCreep"><code>StructureSpawn.spawnCreep</code></a> 的 <code>dryRun</code> 标志代替。</p>
+</div>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>spawn<span class="token punctuation">.</span><span class="token function">canCreateCreep</span><span class="token punctuation">(</span>body<span class="token punctuation">,</span> name<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">OK</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    spawn<span class="token punctuation">.</span><span class="token function">createCreep</span><span class="token punctuation">(</span>body<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>检查是否可以创建 creep。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>body</code></td><td>array&lt;string&gt;</td><td><p>描述新 creep’s body 的数组。应该包含1至50个元素（以下常量之一）:</p>
+<ul>
+<li><code>WORK</code></li>
+<li><code>MOVE</code></li>
+<li><code>CARRY</code></li>
+<li><code>ATTACK</code></li>
+<li><code>RANGED_ATTACK</code></li>
+<li><code>HEAL</code></li>
+<li><code>TOUGH</code></li>
+<li><code>CLAIM</code></li>
+</ul>
+</td>
+</tr><tr><td><code>name (可选)</code></td><td>string</td><td><p>新 creep 的名字。最长不能超过 100 个字符。它应该是唯一的 creep 名称, 所以 <code>Game.creeps</code> 对象不应该包含另一个同名的 creep (hash key)。如果没有定义，将生成一个随机名称。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>可以创建具有给定 body 和名称的 creep。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是该 spawn 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_NAME_EXISTS</code></td><td>-3</td><td><p>已经有一个叫这个名字的 creep 了。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个母巢 (spawn) 已经在孵化另一个 creep 了。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_ENERGY</code></td><td>-6</td><td><p>这个母巢 (spawn) 和它的扩展 (extension) 包含的能量不足以孵化具有给定 body 的 creep。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>Body 没有被恰当地描述。</p>
+</td></tr>
+<tr><td><code>ERR_RCL_NOT_ENOUGH</code></td><td>-14</td><td><p>您的房间控制器级别不足以使用此 spawn。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="StructureSpawn.createCreep" class="api-property api-property--method  api-property--deprecated"><span class="api-property__name">createCreep</span><span class="api-property__args">(body, [name], [memory])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<div class="api-deprecated"><p>此方法已被弃用，不久将被删除。 请使用 <a href="#StructureSpawn.spawnCreep"><code>StructureSpawn.spawnCreep</code></a> 代替。</p>
+</div>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">createCreep</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token constant">WORK</span><span class="token punctuation">,</span> <span class="token constant">CARRY</span><span class="token punctuation">,</span> <span class="token constant">MOVE</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'Worker1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">createCreep</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token constant">WORK</span><span class="token punctuation">,</span> <span class="token constant">CARRY</span><span class="token punctuation">,</span> <span class="token constant">MOVE</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>role<span class="token punctuation">:</span> <span class="token string">'harvester'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> result <span class="token operator">=</span> Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">createCreep</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token constant">WORK</span><span class="token punctuation">,</span> <span class="token constant">CARRY</span><span class="token punctuation">,</span> <span class="token constant">MOVE</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span>_<span class="token punctuation">.</span><span class="token function">isString</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'The name is: '</span><span class="token operator">+</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Spawn error: '</span><span class="token operator">+</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>启动 creep 孵化过程。所需的能量量可以从房间里的所有母巢和扩展中提取出来。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>body</code></td><td>array&lt;string&gt;</td><td><p>描述新 creep’s body 的数组。应该包含1至50个元素（以下常量之一）</p>
+<ul>
+<li><code>WORK</code></li>
+<li><code>MOVE</code></li>
+<li><code>CARRY</code></li>
+<li><code>ATTACK</code></li>
+<li><code>RANGED_ATTACK</code></li>
+<li><code>HEAL</code></li>
+<li><code>TOUGH</code></li>
+<li><code>CLAIM</code></li>
+</ul>
+</td>
+</tr><tr><td><code>name (可选)</code></td><td>string</td><td><p>新 creep 的名字。最长不能超过 100 个字符。它应该是唯一的 creep 名称, 所以 <code>Game.creeps</code> 对象不应该包含另一个同名的 creep (hash key)。如果没有定义，将生成一个随机名称。</p>
+</td>
+</tr><tr><td><code>memory (可选)</code></td><td>any</td><td><p>一个新 creep 的 memory 。如果提供，它将立即存储到<code>Memory.creeps[name]</code>。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>产生一个新的 creep 会遇到这些错误代码之一:
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是该 spawn 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_NAME_EXISTS</code></td><td>-3</td><td><p>已经有一个叫这个名字的 creep 了。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个母巢已经在孵化另一个 creep 了。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_ENERGY</code></td><td>-6</td><td><p>这个母巢和他的扩展包含的能量不足以孵化具有给定 body 的 creep。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>Body 没有被恰当地描述。</p>
+</td></tr>
+<tr><td><code>ERR_RCL_NOT_ENOUGH</code></td><td>-14</td><td><p>您的房间控制器级别不足以使用此 spawn。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="StructureSpawn.spawnCreep" class="api-property api-property--method  "><span class="api-property__name">spawnCreep</span><span class="api-property__args">(body, name, [opts])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">spawnCreep</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token constant">WORK</span><span class="token punctuation">,</span> <span class="token constant">CARRY</span><span class="token punctuation">,</span> <span class="token constant">MOVE</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'Worker1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">spawnCreep</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token constant">WORK</span><span class="token punctuation">,</span> <span class="token constant">CARRY</span><span class="token punctuation">,</span> <span class="token constant">MOVE</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'Worker1'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    memory<span class="token punctuation">:</span> <span class="token punctuation">{</span>role<span class="token punctuation">:</span> <span class="token string">'harvester'</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">spawnCreep</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token constant">WORK</span><span class="token punctuation">,</span> <span class="token constant">CARRY</span><span class="token punctuation">,</span> <span class="token constant">MOVE</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'Worker1'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    energyStructures<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        Game<span class="token punctuation">.</span><span class="token function">getObjectById</span><span class="token punctuation">(</span><span class="token string">'anExtensionId'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">var</span> testIfCanSpawn <span class="token operator">=</span> Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">spawnCreep</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token constant">WORK</span><span class="token punctuation">,</span> <span class="token constant">CARRY</span><span class="token punctuation">,</span> <span class="token constant">MOVE</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'Worker1'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> dryRun<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>启动 creep 孵化过程。所需的能量量可以从房间里的所有母巢和扩展中提取出来。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>body</code></td><td>array&lt;string&gt;</td><td><p>描述新 creep’s body 的数组。应该包含1至50个元素（以下常量之一）</p>
+<ul>
+<li><code>WORK</code></li>
+<li><code>MOVE</code></li>
+<li><code>CARRY</code></li>
+<li><code>ATTACK</code></li>
+<li><code>RANGED_ATTACK</code></li>
+<li><code>HEAL</code></li>
+<li><code>TOUGH</code></li>
+<li><code>CLAIM</code></li>
+</ul>
+</td>
+</tr><tr><td><code>name</code></td><td>string</td><td><p>新 creep 的名字。最长不能超过 100 个字符。它应是个独一无二的 creep 名以保证 <code>Game.creeps</code> 不含有重名的的 creep 。</p>
+</td>
+</tr><tr><td><code>opts (可选)</code></td><td>object</td><td><p>为孵化进程提供附加选项的对象。</p>
+<ul>
+    <li>
+        <div class="api-arg-title">memory</div>
+        <div class="api-arg-type">any</div>
+        <div class="api-arg-desc">一个新 creep 的 memory 。如果提供，它将立即存储到<code>Memory.creeps[name]</code>。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">energyStructures</div>
+        <div class="api-arg-type">array</div>
+        <div class="api-arg-desc">孵化时使用能量的 spawns/extensions 数组，建筑将按顺序使用其中的能量。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">dryRun</div>
+        <div class="api-arg-type">boolean</div>
+        <div class="api-arg-desc">如果“dryRun”为 true，则操作将仅检查是否可以孵化 creep。</div>
+    </li>
+    <li>
+            <div class="api-arg-title">directions</div>
+            <div class="api-arg-type">array<number></number></div>
+            <div class="api-arg-desc">设置 creep 出生时移动的方向，是一个带有以下常量的数组:
+                                          <ul>
+                                              <li><code>TOP</code></li>
+                                              <li><code>TOP_RIGHT</code></li>
+                                              <li><code>RIGHT</code></li>
+                                              <li><code>BOTTOM_RIGHT</code></li>
+                                              <li><code>BOTTOM</code></li>
+                                              <li><code>BOTTOM_LEFT</code></li>
+                                              <li><code>LEFT</code></li>
+                                              <li><code>TOP_LEFT</code></li>
+                                          </ul></div>
+        </li>
+</ul></td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是该母巢 (spawn) 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_NAME_EXISTS</code></td><td>-3</td><td><p>已经有一个叫这个名字的 creep 了。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个母巢 (spawn) 已经在孵化另一个 creep 了。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_ENERGY</code></td><td>-6</td><td><p>这个母巢 (spawn) 和他的扩展包含的能量不足以孵化具有给定 body 的 creep。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>Body 没有被恰当地描述。</p>
+</td></tr>
+<tr><td><code>ERR_RCL_NOT_ENOUGH</code></td><td>-14</td><td><p>您的房间控制器级别不足以使用此 spawn。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="StructureSpawn.recycleCreep" class="api-property api-property--method  "><span class="api-property__name">recycleCreep</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p> 杀死 creep ，并视其剩余寿命而掉落最多100％的资源用于其繁殖和增强。目标应该在相邻的方块上。每个身体部位的能量回收限制在125个单位。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Creep">Creep</a></td><td><p>目标 creep 对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-3"><a href="#返回值-3" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>您不是此母巢 (spawn) 或目标 creep 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>指定的目标不是一个 creep 对象。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标 creep 太远了。</p>
+</td></tr>
+<tr><td><code>ERR_RCL_NOT_ENOUGH</code></td><td>-14</td><td><p>您的房间控制器级别不足以使用此 spawn。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="StructureSpawn.renewCreep" class="api-property api-property--method  "><span class="api-property__name">renewCreep</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>增加目标 creep 的剩余生存时间。目标应在相邻的方格处。spawn 不应忙于孵化过程，且不能包含 CLAIM 身体部件。每次执行都会增加 creep 的计时器，根据此公式按 ticks 数计算：</p>
+<pre class="highlight javascript tab-javascript nosidebar"><code><span class="token function">floor</span><span class="token punctuation">(</span><span class="token number">600</span><span class="token operator">/</span>body_size<span class="token punctuation">)</span></code></pre><p>每次执行所需的能量由以下公式确定:</p>
+<pre class="highlight javascript tab-javascript nosidebar"><code><span class="token function">ceil</span><span class="token punctuation">(</span>creep_cost<span class="token operator">/</span><span class="token number">2.5</span><span class="token operator">/</span>body_size<span class="token punctuation">)</span></code></pre><p>更新 creep 会移除所有的增益。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Creep">Creep</a></td><td><p>目标 creep 对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-4"><a href="#返回值-4" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是该母巢 (spawn) 或者该 creep 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个母巢 (spawn) 已经在孵化另一个 creep 了。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_ENERGY</code></td><td>-6</td><td><p>这个母巢 (spawn) 和他的扩展 (extension) 包含的能量不足以孵化具有给定 body 的 creep。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>指定的目标不是一个 creep 对象，或者其携带有 CLAIM 身体部件。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>目标计时器的时间已经满了。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标 creep 太远了。</p>
+</td></tr>
+<tr><td><code>ERR_RCL_NOT_ENOUGH</code></td><td>-14</td><td><p>您的房间控制器级别不足以使用此 spawn。</p>
+</td></tr>
+</tbody></table>
+</p>

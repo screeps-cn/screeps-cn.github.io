@@ -1,0 +1,311 @@
+<h1 id="RoomPosition"><a href="#RoomPosition" class="headerlink" title="RoomPosition"></a>RoomPosition</h1><p>表示房间中指定位置的对象。房间中的每个 <code>RoomObject</code> 都通过其 <code>pos</code> 属性链接到对应的 <code>RoomPosition</code> 上。可以使用 <a href="#Room.getPositionAt"><code>Room.getPositionAt</code></a> 或者构造函数创建自定义地点的位置对象。</p>
+<h2 id="RoomPosition.constructor" class="api-property   "><span class="api-property__name">constructor</span><span class="api-property__args">(x, y, roomName)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> pos <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RoomPosition</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">,</span> <span class="token string">'sim'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>你可以使用其构造函数创建一个新的 <code>RoomPosition</code> 对象。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>房间中的 X 坐标。</p>
+</td>
+</tr><tr><td><code>y</code></td><td>number</td><td><p>房间中的 Y 坐标。</p>
+</td>
+</tr><tr><td><code>roomName</code></td><td>string</td><td><p>房间名称。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="RoomPosition.roomName" class="api-property api-property--property  "><span class="api-property__name">roomName</span><span class="api-property__type">string</span></h2>
+<p>所处房间的名称。</p>
+<h2 id="RoomPosition.x" class="api-property api-property--property  "><span class="api-property__name">x</span><span class="api-property__type">number</span></h2>
+<p>所处房间的 X 坐标。</p>
+<h2 id="RoomPosition.y" class="api-property api-property--property  "><span class="api-property__name">y</span><span class="api-property__type">number</span></h2>
+<p>所处房间的 Y 坐标。</p>
+<h2 id="RoomPosition.createConstructionSite" class="api-property api-property--method  "><span class="api-property__name">createConstructionSite</span><span class="api-property__args">(structureType, [name])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>flags<span class="token punctuation">[</span><span class="token string">'Flag1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">createConstructionSite</span><span class="token punctuation">(</span><span class="token constant">STRUCTURE_ROAD</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>flags<span class="token punctuation">[</span><span class="token string">'Flag1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">createConstructionSite</span><span class="token punctuation">(</span><span class="token constant">STRUCTURE_SPAWN</span><span class="token punctuation">,</span> <span class="token string">'MySpawn2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>在指定位置创建新的 <a href="#ConstructionSite">ConstructionSite</a>。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>structureType</code></td><td>string</td><td><p><code>STRUCTURE_*</code> 常量之一。</p>
+</td>
+</tr><tr><td><code>name (可选)</code></td><td>string</td><td><p>建筑的名称，该建筑必须支持设置名字（当前仅有 spawn）。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>该建筑无法被放置在指定位置。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>你已经放置了太多建筑工地。其上限为 100。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>不正确的位置。</p>
+</td></tr>
+<tr><td><code>ERR_RCL_NOT_ENOUGH</code></td><td>-14</td><td><p>房间控制器等级不足。<a href="/control.html">了解更多</a></p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="RoomPosition.createFlag" class="api-property api-property--method  "><span class="api-property__name">createFlag</span><span class="api-property__args">([name], [color], [secondaryColor])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">createFlag</span><span class="token punctuation">(</span><span class="token string">'Flag1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>在指定位置创建一个新的 <a href="#Flag">Flag</a>。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>name (可选)</code></td><td>string</td><td><p>新旗帜的名称。它应该是唯一的，即 <code>Game.flags</code> 不应该包含拥有相同名称(哈希键)的不同旗帜。如果未定义，则会生成随机名称。最长不得超过 60 字符。</p>
+</td>
+</tr><tr><td><code>color (可选)</code></td><td>string</td><td><p>新旗帜的颜色。应为 <code>COLOR_*</code> 常量之一。默认值为 <code>COLOR_WHITE</code>。</p>
+</td>
+</tr><tr><td><code>secondaryColor (可选)</code></td><td>string</td><td><p>新旗帜的次要颜色。应为 <code>COLOR_*</code> 常量之一。默认值等于 <code>color</code> 属性值。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>新旗帜的名称，或者下列错误码之一：
+<br></p>
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>ERR_NAME_EXISTS</code></td><td>-3</td><td><p>该名称已被现有的旗帜使用。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>位置或者颜色不正确。</p>
+</td></tr>
+</tbody></table>
+
+<h2 id="RoomPosition.findClosestByPath" class="api-property api-property--method  "><span class="api-property__name">findClosestByPath</span><span class="api-property__args">(type, [opts])<br>(objects, [opts])</span>
+        <div class="api-property__cpu api-property__cpu--3" title="这种方法的CPU成本很高。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByPath</span><span class="token punctuation">(</span><span class="token constant">FIND_MY_SPAWNS</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByPath</span><span class="token punctuation">(</span><span class="token constant">FIND_MY_SPAWNS</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>maxOps<span class="token punctuation">:</span> <span class="token number">500</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByPath</span><span class="token punctuation">(</span><span class="token constant">FIND_HOSTILE_CREEPS</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">filter</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">object</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> object<span class="token punctuation">.</span><span class="token function">getActiveBodyparts</span><span class="token punctuation">(</span><span class="token constant">ATTACK</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByPath</span><span class="token punctuation">(</span><span class="token constant">FIND_HOSTILE_CREEPS</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    filter<span class="token punctuation">:</span> <span class="token punctuation">{</span> owner<span class="token punctuation">:</span> <span class="token punctuation">{</span> username<span class="token punctuation">:</span> <span class="token string">'Invader'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> targets <span class="token operator">=</span> <span class="token punctuation">[</span>
+    Game<span class="token punctuation">.</span>creeps<span class="token punctuation">.</span>John<span class="token punctuation">,</span>
+    Game<span class="token punctuation">.</span>creeps<span class="token punctuation">.</span>Mike<span class="token punctuation">,</span>
+    room<span class="token punctuation">.</span><span class="token function">getPositionAt</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> closest <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByPath</span><span class="token punctuation">(</span>targets<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>查找到该位置路径最短的对象。使用<a href="http://en.wikipedia.org/wiki/Jump_point_search" target="_blank">跳点搜索（Jump Point Search）算法</a>和 <a href="http://en.wikipedia.org/wiki/Dijkstra" target="_blank" rel="noopener">Dijkstra&#39;s 算法</a>进行搜索。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>type</code></td><td>number</td><td><p>详见 <a href="#Room.find">Room.find</a>。</p>
+</td>
+</tr><tr><td><code>objects</code></td><td>array</td><td><p>要执行搜索的房间对象数组或者 <a href="#RoomPosition">RoomPosition</a> 对象数组。</p>
+</td>
+</tr><tr><td><code>opts (可选)</code></td><td>object</td><td><p>一个对象，包含了寻路选项（详见 <a href="#Room.findPath">Room.findPath</a>），或下列属性：
+                    <ul>
+                        <li>
+                            <div class="api-arg-title">filter</div>
+                            <div class="api-arg-type">object, function, string</div>
+                            <div class="api-arg-desc">只有通过筛选器的对象才会被使用，由 <a href="https://lodash.com/docs#filter" target="_blank" rel="noopener">Lodash.filter</a> 执行筛选。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">algorithm</div>
+                            <div class="api-arg-type">string</div>
+                            <div class="api-arg-desc">下列常量之一：
+                                <ul>
+                                    <li><code>astar</code> 当可能存在的目标相对较少时运行速度更快；</li>
+                                    <li><code>dijkstra</code> 当可能存在的目标较多或者附近就有最近的目标时，速度会更快。</li>
+                                </ul>
+                                默认算法是使用启发法自行决定的。</div>
+                        </li>
+                    </ul></p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>返回找到的最近对象，没找到则返回 null。</p>
+<h2 id="RoomPosition.findClosestByRange" class="api-property api-property--method  "><span class="api-property__name">findClosestByRange</span><span class="api-property__args">(type, [opts])<br>(objects, [opts])</span>
+        <div class="api-property__cpu api-property__cpu--2" title="该方法的CPU开销中等。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_MY_SPAWNS</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_HOSTILE_CREEPS</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">filter</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">object</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> object<span class="token punctuation">.</span><span class="token function">getActiveBodyparts</span><span class="token punctuation">(</span><span class="token constant">ATTACK</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_HOSTILE_CREEPS</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    filter<span class="token punctuation">:</span> <span class="token punctuation">{</span> owner<span class="token punctuation">:</span> <span class="token punctuation">{</span> username<span class="token punctuation">:</span> <span class="token string">'Invader'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> targets <span class="token operator">=</span> <span class="token punctuation">[</span>
+    Game<span class="token punctuation">.</span>creeps<span class="token punctuation">.</span>John<span class="token punctuation">,</span>
+    Game<span class="token punctuation">.</span>creeps<span class="token punctuation">.</span>Mike<span class="token punctuation">,</span>
+    room<span class="token punctuation">.</span><span class="token function">getPositionAt</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> closest <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span>targets<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>查找到该位置线性距离最短的对象。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>type</code></td><td>number</td><td><p>See <a href="#Room.find">Room.find</a>.</p>
+</td>
+</tr><tr><td><code>objects</code></td><td>array</td><td><p>要执行搜索的房间对象数组或者 <a href="#RoomPosition">RoomPosition</a> 对象数组。</p>
+</td>
+</tr><tr><td><code>opts (可选)</code></td><td>object</td><td><p>一个对象，包含下列选项：
+                    <ul>
+                        <li>
+                            <div class="api-arg-title">filter</div>
+                            <div class="api-arg-type">object, function, string</div>
+                            <div class="api-arg-desc">只有通过筛选器的对象才会被使用，由 <a href="https://lodash.com/docs#filter" target="_blank" rel="noopener">Lodash.filter</a> 执行筛选。</div>
+                        </li>
+                    </ul></p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-3"><a href="#返回值-3" class="headerlink" title="返回值"></a>返回值</h3><p>返回找到的最近对象，没找到则返回 null。</p>
+<h2 id="RoomPosition.findInRange" class="api-property api-property--method  "><span class="api-property__name">findInRange</span><span class="api-property__args">(type, range, [opts])<br>(objects, range, [opts])</span>
+        <div class="api-property__cpu api-property__cpu--2" title="该方法的CPU开销中等。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> targets <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findInRange</span><span class="token punctuation">(</span><span class="token constant">FIND_HOSTILE_CREEPS</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>targets<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">rangedAttack</span><span class="token punctuation">(</span>targets<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> targets <span class="token operator">=</span> <span class="token punctuation">[</span>
+    Game<span class="token punctuation">.</span>creeps<span class="token punctuation">.</span>John<span class="token punctuation">,</span>
+    Game<span class="token punctuation">.</span>creeps<span class="token punctuation">.</span>Mike<span class="token punctuation">,</span>
+    room<span class="token punctuation">.</span><span class="token function">getPositionAt</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> inRangeTargets <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findInRange</span><span class="token punctuation">(</span>targets<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>查找在指定线性范围中的所有对象。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>type</code></td><td>number</td><td><p>详见 <a href="#Room.find">Room.find</a>。</p>
+</td>
+</tr><tr><td><code>objects</code></td><td>array</td><td><p>要执行搜索的房间对象数组或者 <a href="#RoomPosition">RoomPosition</a> 对象数组。</p>
+</td>
+</tr><tr><td><code>range</code></td><td>number</td><td><p>范围距离（半径）。</p>
+</td>
+</tr><tr><td><code>opts (可选)</code></td><td>object</td><td><p>详见 <a href="#Room.find">Room.find</a>。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-4"><a href="#返回值-4" class="headerlink" title="返回值"></a>返回值</h3><p>找到的对象数组。</p>
+<h2 id="RoomPosition.findPathTo" class="api-property api-property--method  "><span class="api-property__name">findPathTo</span><span class="api-property__args">(x, y, [opts])<br>(target, [opts])</span>
+        <div class="api-property__cpu api-property__cpu--3" title="这种方法的CPU成本很高。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> path <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findPathTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span>path<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>direction<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">let</span> path <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findPathTo</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> <span class="token punctuation">{</span>maxOps<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token operator">!</span>path<span class="token punctuation">.</span>length <span class="token operator">||</span> <span class="token operator">!</span>target<span class="token punctuation">.</span><span class="token function">equalsTo</span><span class="token punctuation">(</span>path<span class="token punctuation">[</span>path<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    path <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findPathTo</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>maxOps<span class="token punctuation">:</span> <span class="token number">1000</span><span class="token punctuation">,</span> ignoreDestructibleStructures<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span> path<span class="token punctuation">.</span>length <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span>path<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>direction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>使用 <a href="http://en.wikipedia.org/wiki/Jump_point_search" target="_blank">跳点搜索（Jump Point Search）算法</a>查找到指定位置的最佳路径。该方法是 <a href="#Room.findPath">Room.findPath</a> 的简写。如果目标在其他房间，则相应的出口将被作为目标。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>该房间中的 X 坐标。</p>
+</td>
+</tr><tr><td><code>y</code></td><td>number</td><td><p>该房间中的 Y 坐标。</p>
+</td>
+</tr><tr><td><code>target</code></td><td>object</td><td><p>可以是 <a href="#RoomPosition">RoomPosition</a> 对象或者任何包含 <a href="#RoomPosition">RoomPosition</a> 属性的对象。</p>
+</td>
+</tr><tr><td><code>opts (可选)</code></td><td>object</td><td><p>一个对象，包含了寻路相关的选项标识 (查看 <a href="#Room.findPath">Room.findPath</a> 来获得更多信息)。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-5"><a href="#返回值-5" class="headerlink" title="返回值"></a>返回值</h3><p>一个如下格式的路径步骤（path step）数组：</p>
+<pre class="highlight javascript tab-javascript nosidebar"><code><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span> x<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> dx<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>  dy<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> direction<span class="token punctuation">:</span> <span class="token constant">RIGHT</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> x<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token number">6</span><span class="token punctuation">,</span> dx<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>  dy<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> direction<span class="token punctuation">:</span> <span class="token constant">BOTTOM</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> x<span class="token punctuation">:</span> <span class="token number">9</span><span class="token punctuation">,</span>  y<span class="token punctuation">:</span> <span class="token number">7</span><span class="token punctuation">,</span> dx<span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> dy<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> direction<span class="token punctuation">:</span> <span class="token constant">BOTTOM_LEFT</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token operator">...</span>
+<span class="token punctuation">]</span>    </code></pre><h2 id="RoomPosition.getDirectionTo" class="api-property api-property--method  "><span class="api-property__name">getDirectionTo</span><span class="api-property__args">(x,y)<br>(target)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> direction <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">getDirectionTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span>direction<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>获取到指定位置的直线方向。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>房间中的 X 坐标。</p>
+</td>
+</tr><tr><td><code>y</code></td><td>number</td><td><p>房间中的 Y 坐标。</p>
+</td>
+</tr><tr><td><code>target</code></td><td>object</td><td><p>可以是 <a href="#RoomPosition">RoomPosition</a> 对象或者任何包含 <a href="#RoomPosition">RoomPosition</a> 属性的对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-6"><a href="#返回值-6" class="headerlink" title="返回值"></a>返回值</h3><p>某一个方向常量的数字值。</p>
+<h2 id="RoomPosition.getRangeTo" class="api-property api-property--method  "><span class="api-property__name">getRangeTo</span><span class="api-property__args">(x,y)<br>(target)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> range <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">getRangeTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>range <span class="token operator">&lt;=</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">rangedAttack</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>获取到指定位置的线性范围。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>房间中的 X 坐标。</p>
+</td>
+</tr><tr><td><code>y</code></td><td>number</td><td><p>房间中的 Y 坐标。</p>
+</td>
+</tr><tr><td><code>target</code></td><td>object</td><td><p>可以是 <a href="#RoomPosition">RoomPosition</a> 对象或者任何包含 <a href="#RoomPosition">RoomPosition</a> 属性的对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-7"><a href="#返回值-7" class="headerlink" title="返回值"></a>返回值</h3><p>到指定位置的地块数。</p>
+<h2 id="RoomPosition.inRangeTo" class="api-property api-property--method  "><span class="api-property__name">inRangeTo</span><span class="api-property__args">(x, y, range)<br>(target, range)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">inRangeTo</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">rangedAttack</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>检查该位置是否在其他位置的指定范围内。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>房间中的 X 坐标。</p>
+</td>
+</tr><tr><td><code>y</code></td><td>number</td><td><p>房间中的 Y 坐标。</p>
+</td>
+</tr><tr><td><code>target</code></td><td><a href="#RoomPosition">RoomPosition</a></td><td><p>目标位置</p>
+</td>
+</tr><tr><td><code>range</code></td><td>number</td><td><p>范围距离（半径）。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-8"><a href="#返回值-8" class="headerlink" title="返回值"></a>返回值</h3><p>一个布尔值。</p>
+<h2 id="RoomPosition.isEqualTo" class="api-property api-property--method  "><span class="api-property__name">isEqualTo</span><span class="api-property__args">(x,y)<br>(target)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">isEqualTo</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">25</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token constant">RIGHT</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">isEqualTo</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>flags<span class="token punctuation">.</span>Flag1<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token constant">RIGHT</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>检查该位置是否和指定位置相同。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>房间中的 X 坐标。</p>
+</td>
+</tr><tr><td><code>y</code></td><td>number</td><td><p>房间中的 Y 坐标。</p>
+</td>
+</tr><tr><td><code>target</code></td><td>object</td><td><p>可以是 <a href="#RoomPosition">RoomPosition</a> 对象或者任何包含 <a href="#RoomPosition">RoomPosition</a> 属性的对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-9"><a href="#返回值-9" class="headerlink" title="返回值"></a>返回值</h3><p>一个布尔值。</p>
+<h2 id="RoomPosition.isNearTo" class="api-property api-property--method  "><span class="api-property__name">isNearTo</span><span class="api-property__args">(x,y)<br>(target)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">isNearTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">transfer</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> <span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>检查该位置是否在紧邻指定位置的正方形区域内。类似于 <code>inRangeTo(target, 1)</code>。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>房间中的 X 坐标。</p>
+</td>
+</tr><tr><td><code>y</code></td><td>number</td><td><p>房间中的 Y 坐标。</p>
+</td>
+</tr><tr><td><code>target</code></td><td>object</td><td><p>可以是 <a href="#RoomPosition">RoomPosition</a> 对象或者任何包含 <a href="#RoomPosition">RoomPosition</a> 属性的对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-10"><a href="#返回值-10" class="headerlink" title="返回值"></a>返回值</h3><p>一个布尔值。</p>
+<h2 id="RoomPosition.look" class="api-property api-property--method  "><span class="api-property__name">look</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--2" title="该方法的CPU开销中等。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> look <span class="token operator">=</span> Game<span class="token punctuation">.</span>flags<span class="token punctuation">.</span>Flag1<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">look</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+look<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">lookObject</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>lookObject<span class="token punctuation">.</span>type <span class="token operator">==</span> <span class="token constant">LOOK_CREEPS</span> <span class="token operator">&amp;&amp;</span>
+       lookObject<span class="token punctuation">[</span><span class="token constant">LOOK_CREEPS</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">getActiveBodyparts</span><span class="token punctuation">(</span><span class="token constant">ATTACK</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>lookObject<span class="token punctuation">.</span>creep<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>获取位于该位置的对象列表。</p>
+<h3 id="返回值-11"><a href="#返回值-11" class="headerlink" title="返回值"></a>返回值</h3><p>如下格式的数组，元素为位于该位置的所有对象。</p>
+<pre class="highlight javascript tab-javascript nosidebar"><code><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span> type<span class="token punctuation">:</span> <span class="token string">'creep'</span><span class="token punctuation">,</span> creep<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> type<span class="token punctuation">:</span> <span class="token string">'structure'</span><span class="token punctuation">,</span> structure<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token operator">...</span>
+    <span class="token punctuation">{</span> type<span class="token punctuation">:</span> <span class="token string">'terrain'</span><span class="token punctuation">,</span> terrain<span class="token punctuation">:</span> <span class="token string">'swamp'</span> <span class="token punctuation">}</span>
+<span class="token punctuation">]</span></code></pre><h2 id="RoomPosition.lookFor" class="api-property api-property--method  "><span class="api-property__name">lookFor</span><span class="api-property__args">(type)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> found <span class="token operator">=</span> Game<span class="token punctuation">.</span>flags<span class="token punctuation">.</span>Flag1<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">lookFor</span><span class="token punctuation">(</span><span class="token constant">LOOK_CREEPS</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>found<span class="token punctuation">.</span>length <span class="token operator">&amp;&amp;</span> found<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">getActiveBodyparts</span><span class="token punctuation">(</span><span class="token constant">ATTACK</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>found<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>获取该位置上给定类型的对象列表。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>type</code></td><td>string</td><td><p><code>LOOK_*</code> 常量之一。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-12"><a href="#返回值-12" class="headerlink" title="返回值"></a>返回值</h3><p>在该位置上找到的指定类型的对象数组。</p>
