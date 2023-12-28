@@ -1,0 +1,369 @@
+<h1 id="Game-market"><a href="#Game-market" class="headerlink" title="Game.market"></a>Game.market</h1><p>描述游戏内市场的全局变量。您可以使用该对象追踪从您的终端接收/发送的资源交易，以及您的购买/出售订单。</p>
+<p>点击 <a href="/market.html">本文</a> 来了解更多关于市场系统的信息。</p>
+<h2 id="Game.market.credits" class="api-property api-property--property  "><span class="api-property__name">Game.market.credits</span><span class="api-property__type">number</span></h2>
+<p>您当前的 credit 余额。</p>
+<h2 id="Game.market.incomingTransactions" class="api-property api-property--property  "><span class="api-property__name">Game.market.incomingTransactions</span><span class="api-property__type">array</span></h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token punctuation">[</span><span class="token punctuation">{</span>
+    transactionId <span class="token punctuation">:</span> <span class="token string">"56dec546a180ce641dd65960"</span><span class="token punctuation">,</span>
+    time <span class="token punctuation">:</span> <span class="token number">10390687</span><span class="token punctuation">,</span>
+    sender <span class="token punctuation">:</span> <span class="token punctuation">{</span>username<span class="token punctuation">:</span> <span class="token string">"Sender"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    recipient <span class="token punctuation">:</span> <span class="token punctuation">{</span>username<span class="token punctuation">:</span> <span class="token string">"Me"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    resourceType <span class="token punctuation">:</span> <span class="token string">"U"</span><span class="token punctuation">,</span>
+    amount <span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+    <span class="token keyword">from</span> <span class="token punctuation">:</span> <span class="token string">"W0N0"</span><span class="token punctuation">,</span>
+    to <span class="token punctuation">:</span> <span class="token string">"W10N10"</span><span class="token punctuation">,</span>
+    description <span class="token punctuation">:</span> <span class="token string">"trade contract #1"</span><span class="token punctuation">,</span>
+    order<span class="token punctuation">:</span> <span class="token punctuation">{</span>        <span class="token comment">// 可选的</span>
+        id <span class="token punctuation">:</span> <span class="token string">"55c34a6b5be41a0a6e80c68b"</span><span class="token punctuation">,</span>
+        type <span class="token punctuation">:</span> <span class="token string">"sell"</span><span class="token punctuation">,</span>
+        price <span class="token punctuation">:</span> <span class="token number">2.95</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">]</span></code></pre><p>一个数组，内容为您终端接收的最近 100 笔交易，格式详见右侧：</p>
+<h2 id="Game.market.outgoingTransactions" class="api-property api-property--property  "><span class="api-property__name">Game.market.outgoingTransactions</span><span class="api-property__type">array</span></h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token punctuation">[</span><span class="token punctuation">{</span>
+    transactionId <span class="token punctuation">:</span> <span class="token string">"56dec546a180ce641dd65960"</span><span class="token punctuation">,</span>
+    time <span class="token punctuation">:</span> <span class="token number">10390687</span><span class="token punctuation">,</span>
+    sender <span class="token punctuation">:</span> <span class="token punctuation">{</span>username<span class="token punctuation">:</span> <span class="token string">"Me"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    recipient <span class="token punctuation">:</span> <span class="token punctuation">{</span>username<span class="token punctuation">:</span> <span class="token string">"Recipient"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    resourceType <span class="token punctuation">:</span> <span class="token string">"U"</span><span class="token punctuation">,</span>
+    amount <span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+    <span class="token keyword">from</span> <span class="token punctuation">:</span> <span class="token string">"W0N0"</span><span class="token punctuation">,</span>
+    to <span class="token punctuation">:</span> <span class="token string">"W10N10"</span><span class="token punctuation">,</span>
+    description <span class="token punctuation">:</span> <span class="token string">"trade contract #1"</span><span class="token punctuation">,</span>
+    order<span class="token punctuation">:</span> <span class="token punctuation">{</span>        <span class="token comment">// 可选的</span>
+        id <span class="token punctuation">:</span> <span class="token string">"55c34a6b5be41a0a6e80c68b"</span><span class="token punctuation">,</span>
+        type <span class="token punctuation">:</span> <span class="token string">"sell"</span><span class="token punctuation">,</span>
+        price <span class="token punctuation">:</span> <span class="token number">2.95</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">]</span></code></pre><p>一个数组，内容为您终端发送的最近 100 笔交易，格式详见右侧：</p>
+<h2 id="Game.market.orders" class="api-property api-property--property  "><span class="api-property__name">Game.market.orders</span><span class="api-property__type">object</span></h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token punctuation">{</span>
+    <span class="token string">"55c34a6b5be41a0a6e80c68b"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        id <span class="token punctuation">:</span> <span class="token string">"55c34a6b5be41a0a6e80c68b"</span><span class="token punctuation">,</span>
+        created <span class="token punctuation">:</span> <span class="token number">13131117</span><span class="token punctuation">,</span>
+        active<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        type <span class="token punctuation">:</span> <span class="token string">"sell"</span>
+        resourceType <span class="token punctuation">:</span> <span class="token string">"OH"</span><span class="token punctuation">,</span>
+        roomName <span class="token punctuation">:</span> <span class="token string">"W1N1"</span><span class="token punctuation">,</span>
+        amount <span class="token punctuation">:</span> <span class="token number">15821</span><span class="token punctuation">,</span>
+        remainingAmount <span class="token punctuation">:</span> <span class="token number">30000</span><span class="token punctuation">,</span>
+        totalAmount <span class="token punctuation">:</span> <span class="token number">50000</span><span class="token punctuation">,</span>
+        price <span class="token punctuation">:</span> <span class="token number">2.95</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"55c34a6b52411a0a6e80693a"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        id <span class="token punctuation">:</span> <span class="token string">"55c34a6b52411a0a6e80693a"</span><span class="token punctuation">,</span>
+        created <span class="token punctuation">:</span> <span class="token number">13134122</span><span class="token punctuation">,</span>
+        active<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        type <span class="token punctuation">:</span> <span class="token string">"buy"</span>
+        resourceType <span class="token punctuation">:</span> <span class="token string">"energy"</span><span class="token punctuation">,</span>
+        roomName <span class="token punctuation">:</span> <span class="token string">"W1N1"</span><span class="token punctuation">,</span>
+        amount <span class="token punctuation">:</span> <span class="token number">94000</span><span class="token punctuation">,</span>
+        remainingAmount <span class="token punctuation">:</span> <span class="token number">94000</span><span class="token punctuation">,</span>
+        totalAmount <span class="token punctuation">:</span> <span class="token number">94000</span>
+        price <span class="token punctuation">:</span> <span class="token number">0.45</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"55c34a6b5be41a0a6e80c123"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        id <span class="token punctuation">:</span> <span class="token string">"55c34a6b5be41a0a6e80c123"</span><span class="token punctuation">,</span>
+        created <span class="token punctuation">:</span> <span class="token number">13105123</span><span class="token punctuation">,</span>
+        active<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        type <span class="token punctuation">:</span> <span class="token string">"sell"</span>
+        resourceType <span class="token punctuation">:</span> <span class="token string">"token"</span><span class="token punctuation">,</span>
+        amount <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+        remainingAmount <span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+        totalAmount <span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+        price <span class="token punctuation">:</span> <span class="token number">50000</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre><p>一个对象，包含了您在市场中活跃 (activated) 和非活跃 (deactivated) 的购买/出售订单。
+查看
+<a href="#Game.market.getAllOrders"><code>getAllOrders</code></a>
+来了解其详细说明。</p>
+<h2 id="Game.market.calcTransactionCost" class="api-property api-property--method  "><span class="api-property__name">Game.market.calcTransactionCost</span><span class="api-property__args">(amount, roomName1, roomName2)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> cost <span class="token operator">=</span> Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">calcTransactionCost</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span> <span class="token string">'W0N0'</span><span class="token punctuation">,</span> <span class="token string">'W10N5'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// -> 284 单位能量</span></code></pre><p>估算 <a href="#StructureTerminal.send"><code>StructureTerminal.send</code></a> 和 <a href="#Game.market.deal"><code>Game.market.deal</code></a> 方法的能量交易成本。
+算法：</p>
+<pre class="highlight javascript tab-javascript nosidebar"><code>Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span> amount <span class="token operator">*</span> <span class="token punctuation">(</span> <span class="token number">1</span> <span class="token operator">-</span> Math<span class="token punctuation">.</span><span class="token function">exp</span><span class="token punctuation">(</span><span class="token operator">-</span>distanceBetweenRooms<span class="token operator">/</span><span class="token number">30</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span></code></pre><table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>amount</code></td><td>number</td><td><p>要发送的资源数量。</p>
+</td>
+</tr><tr><td><code>roomName1</code></td><td>string</td><td><p>第一个房间的名称。</p>
+</td>
+</tr><tr><td><code>roomName2</code></td><td>string</td><td><p>第二个房间的名称。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>进行交易所需的能量。</p>
+<h2 id="Game.market.cancelOrder" class="api-property api-property--method  "><span class="api-property__name">Game.market.cancelOrder</span><span class="api-property__args">(orderId)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> id <span class="token keyword">in</span> Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span>orders<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">cancelOrder</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>取消先前创建的订单。5% 的费用将不予退还。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>orderId</code></td><td>string</td><td><p><code>Game.market.orders</code> 中提供的订单 ID。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>无效的订单 ID。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Game.market.changeOrderPrice" class="api-property api-property--method  "><span class="api-property__name">Game.market.changeOrderPrice</span><span class="api-property__args">(orderId, newPrice)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">changeOrderPrice</span><span class="token punctuation">(</span><span class="token string">'57bec1bf77f4d17c4c011960'</span><span class="token punctuation">,</span> <span class="token number">9.95</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>修改一个已存在订单的单价。如果 <code>newPrice</code> 大于之前的单价，将向您收取 <code>(newPrice-oldPrice)*remainingAmount*0.05</code> credit 的费用。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>orderId</code></td><td>string</td><td><p><code>Game.market.orders</code> 提供的订单 ID。</p>
+</td>
+</tr><tr><td><code>newPrice</code></td><td>number</td><td><p>新的订单单价。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>您不是该房间终端的所有者或者该房间没有终端。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>您没有足够的 credit 来缴纳费用。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>提供了无效的参数。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Game.market.createOrder" class="api-property api-property--method  "><span class="api-property__name">Game.market.createOrder</span><span class="api-property__args">(params)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">createOrder</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token constant">ORDER_SELL</span><span class="token punctuation">,</span>
+    resourceType<span class="token punctuation">:</span> <span class="token constant">RESOURCE_GHODIUM</span><span class="token punctuation">,</span>
+    price<span class="token punctuation">:</span> <span class="token number">9.95</span><span class="token punctuation">,</span>
+    totalAmount<span class="token punctuation">:</span> <span class="token number">10000</span><span class="token punctuation">,</span>
+    roomName<span class="token punctuation">:</span> <span class="token string">"W1N1"</span>   
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>从您的终端创建一个市场订单。下单时将向您收取 <code>price*amount*0.05</code> credit 的费用。每个玩家最多可以拥有 300 个订单。您可以在任意时刻使用任意数量创建一个订单。之后会自动根据其可用资源量和 credit 来将其状态设置为活跃和非活跃。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>params</code></td><td>object</td><td><p>包含下列参数的对象：</p>
+<ul>
+    <li>
+        <div class="api-arg-title">type</div>
+        <div class="api-arg-type">string</div>
+        <div class="api-arg-desc">订单类型，<code>ORDER_SELL</code> 或者 <code>ORDER_BUY</code>。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">resourceType</div>
+        <div class="api-arg-type">string</div>
+        <div class="api-arg-desc">Either one of the <code>RESOURCE_*</code> constants or one of account-bound resources (See <code>INTERSHARD_RESOURCES</code> constant). If your Terminal doesn&#39;t have the specified resource, the order will be temporary inactive.</div>
+    </li>
+    <li>
+        <div class="api-arg-title">price</div>
+        <div class="api-arg-type">number</div>
+        <div class="api-arg-desc">资源的单价（单位: credit）。可以包含小数。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">totalAmount</div>
+        <div class="api-arg-type">number</div>
+        <div class="api-arg-desc">要交易的资源总量。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">roomName (可选)</div>
+        <div class="api-arg-type">string</div>
+        <div class="api-arg-desc">在创建订单时指定的房间中必须存在一个属于您的终端（Terminal），否则该订单将暂时无效。当 <code>resourceType</code> 参数的值为账户绑定资源之一（见 <code>INTERSHARD_RESOURCES</code> 常量）时本参数不使用。</div>
+    </li><br></ul></td>
+</tr></tbody></table>
+
+<h3 id="返回值-3"><a href="#返回值-3" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>您不是该房间终端的所有者或者该房间没有终端。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>您没有足够的 credit 来缴纳费用。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>您不能创建超过 300 个订单。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>提供了无效的参数。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Game.market.deal" class="api-property api-property--method  "><span class="api-property__name">Game.market.deal</span><span class="api-property__args">(orderId, amount, [yourRoomName])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">deal</span><span class="token punctuation">(</span><span class="token string">'57cd2b12cda69a004ae223a3'</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">,</span> <span class="token string">"W1N1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> amountToBuy <span class="token operator">=</span> <span class="token number">2000</span><span class="token punctuation">,</span> maxTransferEnergyCost <span class="token operator">=</span> <span class="token number">500</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> orders <span class="token operator">=</span> Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">getAllOrders</span><span class="token punctuation">(</span><span class="token punctuation">{</span>type<span class="token punctuation">:</span> <span class="token constant">ORDER_SELL</span><span class="token punctuation">,</span> resourceType<span class="token punctuation">:</span> <span class="token constant">RESOURCE_GHODIUM</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>orders<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> transferEnergyCost <span class="token operator">=</span> Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">calcTransactionCost</span><span class="token punctuation">(</span>
+        amountToBuy<span class="token punctuation">,</span> <span class="token string">'W1N1'</span><span class="token punctuation">,</span> orders<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>roomName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>transferEnergyCost <span class="token operator">&lt;</span> maxTransferEnergyCost<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">deal</span><span class="token punctuation">(</span>orders<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>id<span class="token punctuation">,</span> amountToBuy<span class="token punctuation">,</span> <span class="token string">"W1N1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre><p>使用 <code>yourRoomName</code> 房间中的终端处理一个贸易订单，根据订单类型(购入/卖出)来和其他玩家的终端进行交易。无论订单类型如何，您的终端都将承担本次资源交易所产生的能量消耗。您可以使用 <a href="#calcTransactionCost"><code>Game.market.calcTransactionCost</code></a> 方法估算运输成本。当多个玩家尝试处理同一个订单时，距离更近的玩家优先。您每 tick 不能处理超过 10 笔交易。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>orderId</code></td><td>string</td><td><p>来自 <code>Game.market.getAllOrders</code> 的订单 ID。</p>
+</td>
+</tr><tr><td><code>amount</code></td><td>number</td><td><p>要转移的资源数量。</p>
+</td>
+</tr><tr><td><code>yourRoomName (可选)</code></td><td>string</td><td><p>您某个房间的名称，该房间应该存在一个可用终端且该终端存放了足够的能量。当订单的资源类型为账户绑定资源之一（见 <code>INTERSHARD_RESOURCES</code> 常量）时本参数不使用。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-4"><a href="#返回值-4" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>目标房间中不存在属于您的终端。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>您没有足够的 credit 或者资源。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>您每 tick 不能处理超过 10 笔交易。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>提供了无效的参数。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>目标终端仍在冷却。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Game.market.extendOrder" class="api-property api-property--method  "><span class="api-property__name">Game.market.extendOrder</span><span class="api-property__args">(orderId, addAmount)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">extendOrder</span><span class="token punctuation">(</span><span class="token string">'57bec1bf77f4d17c4c011960'</span><span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>为一个已存在的订单添加容量。它将影响 <code>remainingAmount</code> 和 <code>totalAmount</code> 属性。您将要为此支付 <code>price*addAmount*0.05</code> credit 的手续费。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>orderId</code></td><td>string</td><td><p><code>Game.market.orders</code> 中提供的订单 ID。</p>
+</td>
+</tr><tr><td><code>addAmount</code></td><td>number</td><td><p>要增加多少容量。不能为负数。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-5"><a href="#返回值-5" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>您没有足够的 credit 来缴纳费用。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>提供了无效的参数。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Game.market.getAllOrders" class="api-property api-property--method  "><span class="api-property__name">Game.market.getAllOrders</span><span class="api-property__args">([filter])</span>
+        <div class="api-property__cpu api-property__cpu--3" title="这种方法的CPU成本很高。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">getAllOrders</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 更慢</span></code></pre><pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">getAllOrders</span><span class="token punctuation">(</span><span class="token punctuation">{</span>type<span class="token punctuation">:</span> <span class="token constant">ORDER_SELL</span><span class="token punctuation">,</span> resourceType<span class="token punctuation">:</span> <span class="token constant">RESOURCE_GHODIUM</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 更快</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> targetRoom <span class="token operator">=</span> <span class="token string">"W1N1"</span><span class="token punctuation">;</span>
+Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">getAllOrders</span><span class="token punctuation">(</span><span class="token parameter">order</span> <span class="token operator">=></span> order<span class="token punctuation">.</span>resourceType <span class="token operator">==</span> <span class="token constant">RESOURCE_GHODIUM</span> <span class="token operator">&amp;&amp;</span>
+    order<span class="token punctuation">.</span>type <span class="token operator">==</span> <span class="token constant">ORDER_SELL</span> <span class="token operator">&amp;&amp;</span>
+    Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">calcTransactionCost</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span> targetRoom<span class="token punctuation">,</span> order<span class="token punctuation">.</span>roomName<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 更慢</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token comment">// 输出：</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">{</span>
+    id <span class="token punctuation">:</span> <span class="token string">"55c34a6b5be41a0a6e80c68b"</span><span class="token punctuation">,</span>
+    created <span class="token punctuation">:</span> <span class="token number">13131117</span><span class="token punctuation">,</span>
+    type <span class="token punctuation">:</span> <span class="token string">"sell"</span><span class="token punctuation">,</span>
+    resourceType <span class="token punctuation">:</span> <span class="token string">"OH"</span><span class="token punctuation">,</span>
+    roomName <span class="token punctuation">:</span> <span class="token string">"W1N1"</span><span class="token punctuation">,</span>
+    amount <span class="token punctuation">:</span> <span class="token number">15821</span><span class="token punctuation">,</span>
+    remainingAmount <span class="token punctuation">:</span> <span class="token number">30000</span><span class="token punctuation">,</span>
+    price <span class="token punctuation">:</span> <span class="token number">2.95</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    createdTimestamp<span class="token punctuation">:</span> <span class="token number">1543253147522</span><span class="token punctuation">,</span>
+    type<span class="token punctuation">:</span> <span class="token string">"sell"</span><span class="token punctuation">,</span>
+    amount<span class="token punctuation">:</span> <span class="token number">1000</span><span class="token punctuation">,</span>
+    remainingAmount<span class="token punctuation">:</span> <span class="token number">1000</span><span class="token punctuation">,</span>
+    resourceType<span class="token punctuation">:</span> <span class="token string">"O"</span><span class="token punctuation">,</span>
+    price<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    roomName<span class="token punctuation">:</span> <span class="token string">"E2S7"</span><span class="token punctuation">,</span>
+    created<span class="token punctuation">:</span> <span class="token number">12010056</span><span class="token punctuation">,</span>
+    id<span class="token punctuation">:</span> <span class="token string">"5bfc2c9bd719fb605037c06d"</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    id <span class="token punctuation">:</span> <span class="token string">"55c34a6b5be41a0a6e80c123"</span><span class="token punctuation">,</span>
+    createdTimestamp<span class="token punctuation">:</span> <span class="token number">1543253155580</span><span class="token punctuation">,</span>
+    type <span class="token punctuation">:</span> <span class="token string">"sell"</span><span class="token punctuation">,</span>
+    resourceType <span class="token punctuation">:</span> <span class="token string">"token"</span><span class="token punctuation">,</span>
+    amount <span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+    remainingAmount <span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+    price <span class="token punctuation">:</span> <span class="token number">50000</span>
+<span class="token punctuation">}</span><span class="token punctuation">]</span></code></pre><p>获取当前市场上其他玩家活跃的订单。该方法支持 <code>resourceType</code> 内置索引。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>filter (可选)</code></td><td>object, function</td><td><p>一个对象或者函数，将使用 <a href="https://lodash.com/docs#filter" target="_blank" rel="noopener"><code>lodash.filter</code></a> 方法对结果列表进行筛选。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-6"><a href="#返回值-6" class="headerlink" title="返回值"></a>返回值</h3><p>一个订单数组，订单格式如下：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>唯一的订单 ID。</td>
+</tr>
+<tr>
+<td><code>created</code></td>
+<td>订单创建时的游戏 tick。inter-shard 市场中的订单不存在该属性。</td>
+</tr>
+<tr>
+<td><code>createdTimestamp</code></td>
+<td>订单创建时的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime#Syntax" target="_blank" rel="noopener">UNIX 毫秒时间戳</a>。老版本的订单不存在该属性。</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>ORDER_SELL</code> 或 <code>ORDER_BUY</code>。</td>
+</tr>
+<tr>
+<td><code>resourceType</code></td>
+<td><code>RESOURCE_*</code> 常量之一或者账户绑定资源之一（见 <code>INTERSHARD_RESOURCES</code> 常量）。</td>
+</tr>
+<tr>
+<td><code>roomName</code></td>
+<td>下订单的房间。</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>当前可用的交易量。</td>
+</tr>
+<tr>
+<td><code>remainingAmount</code></td>
+<td>该订单还可以交易多少资源。(How many resources are left to trade via this order.)</td>
+</tr>
+<tr>
+<td><code>price</code></td>
+<td>当前的交易单价。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Game.market.getHistory" class="api-property api-property--method  "><span class="api-property__name">Game.market.getHistory</span><span class="api-property__args">([resourceType])</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<p>获取最近 14 天以来市场中指定资源的每日价格记录。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>resourceType (可选)</code></td><td>string</td><td><p><code>RESOURCE_*</code> 常量之一。如果为 undefined，则返回所有资源的历史数据。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="Return-value"><a href="#Return-value" class="headerlink" title="Return value"></a>Return value</h3><p>返回具有以下格式的对象数组：</p>
+<pre class="highlight json tab-json nosidebar"><code><span class="token punctuation">[</span><span class="token punctuation">{</span>
+    <span class="token string">"resourceType"</span><span class="token punctuation">:</span> <span class="token string">"L"</span><span class="token punctuation">,</span>
+    <span class="token string">"date"</span><span class="token punctuation">:</span> <span class="token string">"2019-06-24"</span><span class="token punctuation">,</span>
+    <span class="token string">"transactions"</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+    <span class="token string">"volume"</span><span class="token punctuation">:</span> <span class="token number">400</span><span class="token punctuation">,</span>
+    <span class="token string">"avgPrice"</span><span class="token punctuation">:</span> <span class="token number">3.63</span><span class="token punctuation">,</span>
+    <span class="token string">"stddevPrice"</span><span class="token punctuation">:</span> <span class="token number">0.27</span>
+<span class="token punctuation">}</span><span class="token punctuation">]</span>    </code></pre><h2 id="Game.market.getOrderById" class="api-property api-property--method  "><span class="api-property__name">Game.market.getOrderById</span><span class="api-property__args">(id)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> order <span class="token operator">=</span> Game<span class="token punctuation">.</span>market<span class="token punctuation">.</span><span class="token function">getOrderById</span><span class="token punctuation">(</span><span class="token string">'55c34a6b5be41a0a6e80c123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>检索指定的市场订单。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>id</code></td><td>string</td><td><p>订单 ID。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-7"><a href="#返回值-7" class="headerlink" title="返回值"></a>返回值</h3><p>订单信息对象。查看
+<a href="#Game.market.getAllOrders"><code>getAllOrders</code></a>
+来了解其属性说明。</p>

@@ -1,0 +1,197 @@
+<h1 id="Game"><a href="#Game" class="headerlink" title="Game"></a>Game</h1><p>包含所有游戏信息的主要全局游戏对象。</p>
+<h2 id="Game.constructionSites" class="api-property api-property--property  "><span class="api-property__name">Game.constructionSites</span><span class="api-property__type">object&lt;string, <a href="#ConstructionSite">ConstructionSite</a>&gt;</span></h2>
+<p>包含你所有施工工地的 hash，并以 id 作为关键字。</p>
+<h2 id="Game.cpu" class="api-property api-property--property  "><span class="api-property__name">Game.cpu</span><span class="api-property__type">object</span></h2>
+<p>包含有关 CPU 使用率信息的对象，具有以下属性：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>limit</code></td><td>number</td><td><p>你在当前指定 shard 的CPU限制。</p>
+</td>
+</tr><tr><td><code>tickLimit</code></td><td>number</td><td><p>当前游戏 tick 可用的 CPU 时间。
+<br>通常它高于 <code>Game.cpu.limit</code>. <a href="/cpu-limit.html">了解更多</a></p>
+</td>
+</tr><tr><td><code>bucket</code></td><td>number</td><td><p>在你的 <a href="/cpu-limit.html#Bucket">bucket</a> 中累积的未使用的 CPU 数量。</p>
+</td>
+</tr><tr><td><code>shardLimits</code></td><td>object<br>&lt;string,number&gt;</td><td><p>包含了每个 shard cpu 上限的对象，以 shard 名称为关键字。你可以使用 <a href="#Game.setShardLimits"><code>setShardLimits</code></a>
+ 方法重设他们。</p>
+</td>
+</tr><tr><td><code>unlocked</code></td><td>boolean </td><td><p>您的账户是否已经解锁了完整的 CPU。</p>
+</td>
+</tr><tr><td><code>unlockedTime</code></td><td>number </td><td><p>您账户解锁完整 CPU 时的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime#Syntax" target="_blank" rel="noopener">UNIX 毫秒时间戳</a>。当您账户的完整 CPU 未解锁或未使用 subscription 时该属性未定义。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="Game.creeps" class="api-property api-property--property  "><span class="api-property__name">Game.creeps</span><span class="api-property__type">object&lt;string, <a href="#Creep">Creep</a>&gt;</span></h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> i <span class="token keyword">in</span> Game<span class="token punctuation">.</span>creeps<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span>creeps<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>flag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>包含你所有 creep 的 hash，并以 creep 名作为关键字。</p>
+<h2 id="Game.flags" class="api-property api-property--property  "><span class="api-property__name">Game.flags</span><span class="api-property__type">object&lt;string, <a href="#Flag">Flag</a>&gt;</span></h2>
+<pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>flags<span class="token punctuation">.</span>Flag1<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>包含你所有 flag 的 hash，以 flag 名作为关键字。</p>
+<h2 id="Game.gcl" class="api-property api-property--property  "><span class="api-property__name">Game.gcl</span><span class="api-property__type">object</span></h2>
+<p>你的<a href="/control.html#Global-Control-Level">全局控制等级（Global Control Level）</a>的对象，具有以下属性：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>level</code></td><td>number</td><td><p>当前的等级。</p>
+</td>
+</tr><tr><td><code>progress</code></td><td>number</td><td><p>到下一个等级当前的进展。</p>
+</td>
+</tr><tr><td><code>progressTotal</code></td><td>number</td><td><p>到下一个等级所需的进展。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="Game.gpl" class="api-property api-property--property  "><span class="api-property__name">Game.gpl</span><span class="api-property__type">object</span></h2>
+<p>你的全局能量等级（Global Power Level）的对象，具有以下属性：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>level</code></td><td>number</td><td><p>当前的等级。</p>
+</td>
+</tr><tr><td><code>progress</code></td><td>number</td><td><p>到下一个等级当前的进展。</p>
+</td>
+</tr><tr><td><code>progressTotal</code></td><td>number</td><td><p>到下一个等级所需的进展。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="Game.map" class="api-property api-property--property  "><span class="api-property__name">Game.map</span><span class="api-property__type">object</span></h2>
+<p>表示世界地图的全局对象。 请参照此<a href="#Game-map">文档</a>。</p>
+<h2 id="Game.market" class="api-property api-property--property  "><span class="api-property__name">Game.market</span><span class="api-property__type">object</span></h2>
+<p>表示游戏内市场的全局对象。 请参照此<a href="#Game-market">文档</a> </p>
+<h2 id="Game.powerCreeps" class="api-property api-property--property  "><span class="api-property__name">Game.powerCreeps</span><span class="api-property__type">object&lt;string, <a href="#PowerCreep">PowerCreep</a>&gt;</span></h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>powerCreeps<span class="token punctuation">[</span><span class="token string">'PC1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>flag<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>包含你所有超能 creep 的 hash，以 creep 名称为键。从这里也可以访问到未孵化的超能 creep。 </p>
+<h2 id="Game.resources" class="api-property api-property--property  "><span class="api-property__name">Game.resources</span><span class="api-property__type">object</span></h2>
+<p>表示你账户中全局资源的对象，例如 pixel 或 cpu unlock。每个对象的关键字都是一个资源常量，值是资源量。</p>
+<h2 id="Game.rooms" class="api-property api-property--property  "><span class="api-property__name">Game.rooms</span><span class="api-property__type">object&lt;string, <a href="#Room">Room</a>&gt;</span></h2>
+<p>包含所有对你可用的房间的 hash，以房间名作为关键字。一个房间在你有一个 creep 或者自有建筑在其中时可见。</p>
+<h2 id="Game.shard" class="api-property api-property--property  "><span class="api-property__name">Game.shard</span><span class="api-property__type">object</span></h2>
+<p>表示当前正在执行脚本的 shard 的对象。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>name</code></td><td>string</td><td><p>shard 的名称。</p>
+</td>
+</tr><tr><td><code>type</code></td><td>string</td><td><p>目前总是等于 <code>normal</code>.</p>
+</td>
+</tr><tr><td><code>ptr</code></td><td>boolean</td><td><p>这个 shard 是否为 <a href="/ptr.html">PTR</a>.</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="Game.spawns" class="api-property api-property--property  "><span class="api-property__name">Game.spawns</span><span class="api-property__type">object&lt;string, <a href="#StructureSpawn">StructureSpawn</a>&gt;</span></h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> i <span class="token keyword">in</span> Game<span class="token punctuation">.</span>spawns<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">createCreep</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>包含你所有 spawn 的 hash，以 spawn 名作为关键字。</p>
+<h2 id="Game.structures" class="api-property api-property--property  "><span class="api-property__name">Game.structures</span><span class="api-property__type">object&lt;string, <a href="#Structure">Structure</a>&gt;</span></h2>
+<p>包含你所有 structures 的 hash，以 structures 名作为关键字。</p>
+<h2 id="Game.time" class="api-property api-property--property  "><span class="api-property__name">Game.time</span><span class="api-property__type">number</span></h2>
+<pre class="highlight javascript tab-javascript "><code>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>系统游戏 tick 计数。他在每个 tick 自动递增。点此<a href="/game-loop.html">了解更多</a>。</p>
+<h2 id="Game.cpu.getHeapStatistics" class="api-property api-property--method  "><span class="api-property__name">Game.cpu.getHeapStatistics</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">let</span> heap <span class="token operator">=</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getHeapStatistics</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Used </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>heap<span class="token punctuation">.</span>total_heap_size<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> / </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>heap<span class="token punctuation">.</span>heap_size_limit<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p><em>这个方法只在<strong>虚拟机</strong>在你的<a href="https://screeps.com/a/#!/account/runtime" target="_blank" rel="noopener">账户运行时设置</a>中被设为 <strong>Isolated</strong> 时可用</em> </p>
+<p>使用此方法获取虚拟机的堆统计信息。 返回值几乎与 Node.js 函数 <a href="https://nodejs.org/dist/latest-v8.x/docs/api/v8.html#v8_v8_getheapstatistics" target="_blank" rel="noopener"><code>v8.getHeapStatistics()</code></a>相同。 此函数返回一个附加属性： <code>externally_allocated_size</code>，它是当前分配的内存总量，不包含在 v8 堆中，但会计入此隔离的内存限制。 超过一定大小的 <code>ArrayBuffer</code> 实例是外部分配的，将在此计算。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>以下列格式返回具有堆统计信息的对象：</p>
+<pre class="highlight javascript tab-javascript nosidebar"><code><span class="token punctuation">{</span>
+  <span class="token string">"total_heap_size"</span><span class="token punctuation">:</span> <span class="token number">29085696</span><span class="token punctuation">,</span>
+  <span class="token string">"total_heap_size_executable"</span><span class="token punctuation">:</span> <span class="token number">3670016</span><span class="token punctuation">,</span>
+  <span class="token string">"total_physical_size"</span><span class="token punctuation">:</span> <span class="token number">26447928</span><span class="token punctuation">,</span>
+  <span class="token string">"total_available_size"</span><span class="token punctuation">:</span> <span class="token number">319649520</span><span class="token punctuation">,</span>
+  <span class="token string">"used_heap_size"</span><span class="token punctuation">:</span> <span class="token number">17493824</span><span class="token punctuation">,</span>
+  <span class="token string">"heap_size_limit"</span><span class="token punctuation">:</span> <span class="token number">343932928</span><span class="token punctuation">,</span>
+  <span class="token string">"malloced_memory"</span><span class="token punctuation">:</span> <span class="token number">8192</span><span class="token punctuation">,</span>
+  <span class="token string">"peak_malloced_memory"</span><span class="token punctuation">:</span> <span class="token number">1060096</span><span class="token punctuation">,</span>
+  <span class="token string">"does_zap_garbage"</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token string">"externally_allocated_size"</span><span class="token punctuation">:</span> <span class="token number">38430000</span>
+<span class="token punctuation">}</span></code></pre><h2 id="Game.cpu.getUsed" class="api-property api-property--method  "><span class="api-property__name">Game.cpu.getUsed</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span>tickLimit <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Used half of CPU already!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> name <span class="token keyword">in</span> Game<span class="token punctuation">.</span>creeps<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> startCpu <span class="token operator">=</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// creep logic goes here</span>
+
+    <span class="token keyword">const</span> elapsed <span class="token operator">=</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> startCpu<span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Creep '</span><span class="token operator">+</span>name<span class="token operator">+</span><span class="token string">' has used '</span><span class="token operator">+</span>elapsed<span class="token operator">+</span><span class="token string">' CPU time'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>获取当前游戏开始时使用的 CPU 时间总量。在模拟模式下始终返回 0.</p>
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>以浮点数返回当前使用的 CPU 时间。</p>
+<h2 id="Game.cpu.halt" class="api-property api-property--method  "><span class="api-property__name">Game.cpu.halt</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">halt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p><em>这个方法只在<strong>虚拟机</strong>在你的<a href="https://screeps.com/a/#!/account/runtime" target="_blank" rel="noopener">账户运行时设置</a>中被设为 <strong>Isolated</strong> 时可用</em> </p>
+<p>重置你的运行环境并擦除堆内存中的所有数据。</p>
+<h2 id="Game.cpu.setShardLimits" class="api-property api-property--method  "><span class="api-property__name">Game.cpu.setShardLimits</span><span class="api-property__args">(limits)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">setShardLimits</span><span class="token punctuation">(</span><span class="token punctuation">{</span>shard0<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">,</span> shard1<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>分配 CPU 限制到不同的 shard。CPU总量应保持等于 <a href="#Game.cpu"><code>Game.cpu.shardLimits</code></a>。此方法每 12 小时只能使用一次。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>limits</code></td><td>object&lt;string, number&gt;</td><td><p>表示每个 shard 的 CPU 值，与 <code>Game.cpu.shardLimits</code> 格式相同。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>以下代码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>该操作已成功安排。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>12 小时的冷却时间尚未结束。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>该参数不是有效的 shard 限制对象。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Game.cpu.unlock" class="api-property api-property--method  "><span class="api-property__name">Game.cpu.unlock</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span>unlockedTime <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span>unlockedTime <span class="token operator">-</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1000</span><span class="token operator">*</span><span class="token number">60</span><span class="token operator">*</span><span class="token number">60</span><span class="token operator">*</span><span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>为您的账户解锁 24 小时的完整 CPU。该方法将消耗一个您账户中的 CPU unlock（详见 <a href="#Game.resources"><code>Game.resources</code></a>）。
+如果之前尚未激活过完整 CPU。则可能需要一点时间（5 分钟之内）来为您的账户应用解锁。</p>
+<h3 id="返回值-3"><a href="#返回值-3" class="headerlink" title="返回值"></a>返回值</h3><p>下列返回值之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>该操作已成功安排。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>您的账户没有足够的 <code>cpuUnlock</code> 资源。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>您的 CPU 已经使用了 subscription 解锁.</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Game.cpu.generatePixel" class="api-property api-property--method  "><span class="api-property__name">Game.cpu.generatePixel</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--3" title="这种方法的CPU成本很高。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span>bucket <span class="token operator">==</span> <span class="token number">10000</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">generatePixel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>从您的 bucket 中取出 10000 CPU 来生成一点 pixel 资源。</p>
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>该操作已成功安排。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>您的 bucket 中没有足够的 CPU。</p>
+</td></tr>
+</tbody></table>
+
+<h2 id="Game.getObjectById" class="api-property api-property--method  "><span class="api-property__name">Game.getObjectById</span><span class="api-property__args">(id)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>sourceId <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_SOURCES</span><span class="token punctuation">)</span><span class="token punctuation">.</span>id<span class="token punctuation">;</span>
+<span class="token keyword">const</span> source <span class="token operator">=</span> Game<span class="token punctuation">.</span><span class="token function">getObjectById</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>sourceId<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>获取具有唯一指定 ID 的对象。 它可以是任何类型的游戏对象。 只能访问您可见的房间内的物体。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>id</code></td><td>string</td><td><p>The unique identificator.</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-4"><a href="#返回值-4" class="headerlink" title="返回值"></a>返回值</h3><p>返回一个对象实例，若找不到则返回 null。</p>
+<h2 id="Game.notify" class="api-property api-property--method  "><span class="api-property__name">Game.notify</span><span class="api-property__args">(message, [groupInterval])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>hits <span class="token operator">&lt;</span> creep<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>lastHits<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span><span class="token string">'Creep '</span><span class="token operator">+</span>creep<span class="token operator">+</span><span class="token string">' has been attacked at '</span><span class="token operator">+</span>creep<span class="token punctuation">.</span>pos<span class="token operator">+</span><span class="token string">'!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+creep<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>lastHits <span class="token operator">=</span> creep<span class="token punctuation">.</span>hits<span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>energy <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span>
+        <span class="token string">'Spawn1 is out of energy'</span><span class="token punctuation">,</span>
+        <span class="token number">180</span>  <span class="token comment">// group these notifications for 3 hours</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>向你的个人资料中的邮件发送信息。由此，你可以在游戏中的任何场合为自己设置通知。你最多可以安排 20 个通知。在模拟模式中不可用。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>message</code></td><td>string</td><td><p>将在消息中发送的自定义文本。最大长度为 1000 个字符。</p>
+</td>
+</tr><tr><td><code>groupInterval</code></td><td>number</td><td><p>如果被设为 0 (默认), 通知将被立即安排。 否早他将于其他通知编组，并在指定的时间（分钟）寄出。</p>
+</td>
+</tr></tbody></table>
+

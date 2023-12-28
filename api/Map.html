@@ -1,0 +1,237 @@
+<h1 id="Game-map"><a href="#Game-map" class="headerlink" title="Game.map"></a>Game.map</h1><p>世界地图对象，用于在房间之间导航。</p>
+<h2 id="Game.map.describeExits" class="api-property api-property--method  "><span class="api-property__name">Game.map.describeExits</span><span class="api-property__args">(roomName)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> exits <span class="token operator">=</span> Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">describeExits</span><span class="token punctuation">(</span><span class="token string">'W8N3'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>根据给定的房间名列出所有可用的出口。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>roomName</code></td><td>string</td><td><p>房间名。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>出口信息按照以下格式给出，在房间不存在时返回null。</p>
+<pre class="highlight javascript tab-javascript nosidebar"><code><span class="token punctuation">{</span>
+    <span class="token string">"1"</span><span class="token punctuation">:</span> <span class="token string">"W8N4"</span><span class="token punctuation">,</span>    <span class="token comment">// TOP</span>
+    <span class="token string">"3"</span><span class="token punctuation">:</span> <span class="token string">"W7N3"</span><span class="token punctuation">,</span>    <span class="token comment">// RIGHT</span>
+    <span class="token string">"5"</span><span class="token punctuation">:</span> <span class="token string">"W8N2"</span><span class="token punctuation">,</span>    <span class="token comment">// BOTTOM</span>
+    <span class="token string">"7"</span><span class="token punctuation">:</span> <span class="token string">"W9N3"</span>     <span class="token comment">// LEFT</span>
+<span class="token punctuation">}</span></code></pre><h2 id="Game.map.findExit" class="api-property api-property--method  "><span class="api-property__name">Game.map.findExit</span><span class="api-property__args">(fromRoom, toRoom, [opts])</span>
+        <div class="api-property__cpu api-property__cpu--3" title="这种方法的CPU成本很高。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room <span class="token operator">!=</span> anotherRoomName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> exitDir <span class="token operator">=</span> Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">findExit</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">,</span> anotherRoomName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> exit <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span>exitDir<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>exit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 到另一个房间的某处去</span>
+<span class="token punctuation">}</span></code></pre><pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">RoomPosition</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">,</span> anotherRoomName<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>查找从给定房间到另一个房间的出口方向。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>fromRoom</code></td><td>string, <a href="#Room">Room</a></td><td><p>起点房间名或房间对象。</p>
+</td>
+</tr><tr><td><code>toRoom</code></td><td>string, <a href="#Room">Room</a></td><td><p>终点房间名或房间对象。</p>
+</td>
+</tr><tr><td><code>opts (可选)</code></td><td>object</td><td><p>包含寻路选项的对象。参见<code><a href="#findRoute">findRoute</a></code>。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>房间方向常量，下列之一：</p>
+<ul>
+<li><code>FIND_EXIT_TOP</code></li>
+<li><code>FIND_EXIT_RIGHT</code></li>
+<li><code>FIND_EXIT_BOTTOM</code></li>
+<li><code>FIND_EXIT_LEFT</code></li>
+</ul>
+<p>或下列错误码：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>ERR_NO_PATH</code></td><td>-2</td><td><p>找不到路径。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>位置不正确。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Game.map.findRoute" class="api-property api-property--method  "><span class="api-property__name">Game.map.findRoute</span><span class="api-property__args">(fromRoom, toRoom, [opts])</span>
+        <div class="api-property__cpu api-property__cpu--3" title="这种方法的CPU成本很高。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> route <span class="token operator">=</span> Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">findRoute</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">,</span> anotherRoomName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>route<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Now heading to room '</span><span class="token operator">+</span>route<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>room<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> exit <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span>route<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>exit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>exit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> route <span class="token operator">=</span> Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">findRoute</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">,</span> anotherRoomName<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token function">routeCallback</span><span class="token punctuation">(</span><span class="token parameter">roomName<span class="token punctuation">,</span> fromRoomName</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>roomName <span class="token operator">==</span> <span class="token string">'W10S10'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token comment">// 回避这个房间</span>
+            <span class="token keyword">return</span> <span class="token number">Infinity</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">let</span> <span class="token keyword">from</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RoomPosition</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">,</span> <span class="token string">'E1N1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> to <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RoomPosition</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">,</span> <span class="token string">'E4N1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 使用`findRoute`计算路径的高阶计划，优先选择大路和自有房间</span>
+<span class="token keyword">let</span> allowedRooms <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span> <span class="token keyword">from</span><span class="token punctuation">.</span>roomName <span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">findRoute</span><span class="token punctuation">(</span><span class="token keyword">from</span><span class="token punctuation">.</span>roomName<span class="token punctuation">,</span> to<span class="token punctuation">.</span>roomName<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token function">routeCallback</span><span class="token punctuation">(</span><span class="token parameter">roomName</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> parsed <span class="token operator">=</span> <span class="token regex">/^[WE]([0-9]+)[NS]([0-9]+)$/</span><span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span>roomName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> isHighway <span class="token operator">=</span> <span class="token punctuation">(</span>parsed<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">%</span> <span class="token number">10</span> <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">||</span> 
+                        <span class="token punctuation">(</span>parsed<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">%</span> <span class="token number">10</span> <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> isMyRoom <span class="token operator">=</span> Game<span class="token punctuation">.</span>rooms<span class="token punctuation">[</span>roomName<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span>
+            Game<span class="token punctuation">.</span>rooms<span class="token punctuation">[</span>roomName<span class="token punctuation">]</span><span class="token punctuation">.</span>controller <span class="token operator">&amp;&amp;</span>
+            Game<span class="token punctuation">.</span>rooms<span class="token punctuation">[</span>roomName<span class="token punctuation">]</span><span class="token punctuation">.</span>controller<span class="token punctuation">.</span>my<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>isHighway <span class="token operator">||</span> isMyRoom<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token number">2.5</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">info</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    allowedRooms<span class="token punctuation">[</span>info<span class="token punctuation">.</span>room<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 调用PathFinder, 只允许访问`findRoute`中的房间</span>
+<span class="token keyword">let</span> ret <span class="token operator">=</span> PathFinder<span class="token punctuation">.</span><span class="token function">search</span><span class="token punctuation">(</span><span class="token keyword">from</span><span class="token punctuation">,</span> to<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token function">roomCallback</span><span class="token punctuation">(</span><span class="token parameter">roomName</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>allowedRooms<span class="token punctuation">[</span>roomName<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>ret<span class="token punctuation">.</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>查找从给定房间到另一个房间的路径。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>fromRoom</code></td><td>string, <a href="#Room">Room</a></td><td><blockquote>
+</blockquote>
+<p>起点房间名或房间对象。</p>
+</td>
+</tr><tr><td><code>toRoom</code></td><td>string, <a href="#Room">Room</a></td><td><p>终点房间名或房间对象。</p>
+</td>
+</tr><tr><td><code>opts (可选)</code></td><td>object</td><td><p>包含下列选项的对象：
+                    <ul>
+                        <li>
+                            <div class="api-arg-title">routeCallback</div>
+                            <div class="api-arg-type">function</div>
+                            <div class="api-arg-desc">这个回调函数接受两个参数： <code>function(roomName, fromRoomName)</code>。 它可以用来计算进入一个房间的开销。你可以用它实现优先进入自己的房间或者回避某些房间等功能。你应该返回一个浮点数开销，或者返回<code>Infinity</code>代表不可进入。</div>
+                        </li>
+                    </ul></p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>如下格式的路径数组：</p>
+<pre class="highlight javascript tab-javascript nosidebar"><code><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span> exit<span class="token punctuation">:</span> <span class="token constant">FIND_EXIT_RIGHT</span><span class="token punctuation">,</span> room<span class="token punctuation">:</span> <span class="token string">'arena21'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> exit<span class="token punctuation">:</span> <span class="token constant">FIND_EXIT_BOTTOM</span><span class="token punctuation">,</span> room<span class="token punctuation">:</span> <span class="token string">'arena22'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token operator">...</span>
+<span class="token punctuation">]</span></code></pre><p>或如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>ERR_NO_PATH</code></td><td>-2</td><td><p>找不到路径。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Game.map.getRoomLinearDistance" class="api-property api-property--method  "><span class="api-property__name">Game.map.getRoomLinearDistance</span><span class="api-property__args">(roomName1, roomName2, [continuous])</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">getRoomLinearDistance</span><span class="token punctuation">(</span><span class="token string">'W1N1'</span><span class="token punctuation">,</span> <span class="token string">'W4N2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 3</span>
+Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">getRoomLinearDistance</span><span class="token punctuation">(</span><span class="token string">'E65S55'</span><span class="token punctuation">,</span><span class="token string">'W65S55'</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token comment">// 131</span>
+Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">getRoomLinearDistance</span><span class="token punctuation">(</span><span class="token string">'E65S55'</span><span class="token punctuation">,</span><span class="token string">'W65S55'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token comment">// 11</span></code></pre><p>获取两个房间之间直线距离（房间数）。你可以使用这个函数估算使用终端发送资源的能源开销，或用于使用观察者和核武器。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>roomName1</code></td><td>string</td><td><p>第一个房间名。</p>
+</td>
+</tr><tr><td><code>roomName2</code></td><td>string</td><td><p>第二个房间名。</p>
+</td>
+</tr><tr><td><code>continuous (可选)</code></td><td>boolean</td><td><p>是否视世界地图为在边界连续。 如果要计算交易或终端发送开销，请设置为true。 默认值为false。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-3"><a href="#返回值-3" class="headerlink" title="返回值"></a>返回值</h3><p>给定两个房间之间的房间数。</p>
+<h2 id="Game.map.getRoomTerrain" class="api-property api-property--method  "><span class="api-property__name">Game.map.getRoomTerrain</span><span class="api-property__args">(roomName)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> terrain <span class="token operator">=</span> Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">getRoomTerrain</span><span class="token punctuation">(</span><span class="token string">"E2S7"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">switch</span><span class="token punctuation">(</span>terrain<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token constant">TERRAIN_MASK_WALL</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token constant">TERRAIN_MASK_SWAMP</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>获取<a href="#Room-Terrain"><code>Room.Terrain</code> </a>对象，快捷访问静态地形数据。此方法适用于所有房间，哪怕是无法访问的房间。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>roomName</code></td><td>string</td><td><p>房间名。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-4"><a href="#返回值-4" class="headerlink" title="返回值"></a>返回值</h3><p>一个新<a href="#Room-Terrain"><code>Room.Terrain</code></a>对象。</p>
+<h2 id="Game.map.getTerrainAt" class="api-property api-property--method  api-property--deprecated"><span class="api-property__name">Game.map.getTerrainAt</span><span class="api-property__args">(x, y, roomName)<br>(pos)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<div class="api-deprecated"><p>此方法已被弃用，不久将被删除。 请使用更高效的方法<a href="#Game.map.getRoomTerrain"><code>Game.map.getRoomTerrain</code></a>替代.</p>
+</div>
+<pre class="highlight javascript tab-javascript "><code>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">getTerrainAt</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token string">'W10N10'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">getTerrainAt</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">RoomPosition</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token string">'W10N10'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>获取指定房间坐标的地形类型。此方法适用于所有房间，哪怕是无法访问的房间。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>房间内X坐标。</p>
+</td>
+</tr><tr><td><code>y</code></td><td>number</td><td><p>房间内Y坐标。</p>
+</td>
+</tr><tr><td><code>roomName</code></td><td>string</td><td><p>房间名。</p>
+</td>
+</tr><tr><td><code>pos</code></td><td><a href="#RoomPosition">RoomPosition</a></td><td><p>坐标对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-5"><a href="#返回值-5" class="headerlink" title="返回值"></a>返回值</h3><p>下列字符串值：</p>
+<ul>
+                <li><code>plain</code></li>
+                <li><code>swamp</code></li>
+                <li><code>wall</code></li>
+            </ul>
+
+
+<h2 id="Game.map.getWorldSize" class="api-property api-property--method  "><span class="api-property__name">Game.map.getWorldSize</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<p>返回世界尺寸，即世界对角之间的房间数。例如对于一个从 W50N50 至 E50S50 的世界这个方法返回102。</p>
+<h2 id="Game.map.isRoomAvailable" class="api-property api-property--method  api-property--deprecated"><span class="api-property__name">Game.map.isRoomAvailable</span><span class="api-property__args">(roomName)</span>
+        <div class="api-property__cpu api-property__cpu--2" title="该方法的CPU开销中等。"></div>
+        </h2>
+<div class="api-deprecated"><p>此方法已被弃用，不久将被删除。 Please use <a href="#Game.map.getRoomStatus"><code>Game.map.getRoomStatus</code></a> instead.</p>
+</div>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">isRoomAvailable</span><span class="token punctuation">(</span>room<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>room<span class="token punctuation">.</span><span class="token function">getPositionAt</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span><span class="token number">25</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>检查一个房间是否可以进入。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>roomName</code></td><td>string</td><td><p>The room name.</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-6"><a href="#返回值-6" class="headerlink" title="返回值"></a>返回值</h3><p>布尔值</p>
+<h2 id="Game.map.getRoomStatus" class="api-property api-property--method  "><span class="api-property__name">Game.map.getRoomStatus</span><span class="api-property__args">(roomName)</span>
+        <div class="api-property__cpu api-property__cpu--2" title="该方法的CPU开销中等。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">getRoomStatus</span><span class="token punctuation">(</span>room<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">.</span>status <span class="token operator">==</span> <span class="token string">'normal'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    nuker<span class="token punctuation">.</span><span class="token function">launchNuke</span><span class="token punctuation">(</span>room<span class="token punctuation">.</span><span class="token function">getPositionAt</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span><span class="token number">25</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>获取指定房间的开放状态。点击 <a href="/start-areas.html">本文</a> 了解更多起始区域的相关信息。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>roomName</code></td><td>string</td><td><p>房间名</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-7"><a href="#返回值-7" class="headerlink" title="返回值"></a>返回值</h3><p>包含如下属性的对象：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>下列字符串之一：<ul><li><code>normal</code> &ndash; 该房间没有限制 </li><li><code>closed</code> &ndash; 该房间未启用（not available）</li><li><code>novice</code> &ndash; 该房间是新手区的一部分 </li><li><code>respawn</code> &ndash; 该房间是重生区的一部分</li></ul></td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>number</td>
+<td>状态终止时间 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime#Syntax" target="_blank" rel="noopener">UNIX 毫秒时间戳</a>。如果房间状态没有终止时间，则该属性为 null。</td>
+</tr>
+</tbody>
+</table>

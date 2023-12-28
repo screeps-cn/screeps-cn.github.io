@@ -1,0 +1,29 @@
+<h1 id="InterShardMemory"><a href="#InterShardMemory" class="headerlink" title="InterShardMemory"></a>InterShardMemory</h1><p><code>InterShardMemory</code> 对象提供了在不同的 shard 之间通信的接口。你的脚本在不同的 shard 内是单独执行的，并且他们的 <a href="#Memory"><code>Memory</code></a> 对象对彼此隔离。为了在不同的 shard 之间传递信息，您需要使用 <code>InterShardMemory</code>。</p>
+<p>每个 shard 可以拥有能被其他 shard 访问的数据字符串，最长 100 KB。每个数据字符串只有其所属的 shard 才有写权限，
+而其他的 shard 只有读权限。</p>
+<p>该数据和 <code>Memory</code> 完全不相关，它是一个独立的数据容器。     </p>
+<h2 id="InterShardMemory.getLocal" class="api-property api-property--method  "><span class="api-property__name">InterShardMemory.getLocal</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<p>返回当前 shard 的数据字符串内容。</p>
+<h2 id="InterShardMemory.setLocal" class="api-property api-property--method  "><span class="api-property__name">InterShardMemory.setLocal</span><span class="api-property__args">(value)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">var</span> data <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>InterShardMemory<span class="token punctuation">.</span><span class="token function">getLocal</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token string">"{}"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+data<span class="token punctuation">.</span>message <span class="token operator">=</span> <span class="token string">"hello from another shard!"</span><span class="token punctuation">;</span>
+InterShardMemory<span class="token punctuation">.</span><span class="token function">setLocal</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>将当前 shard 的数据替换为新的值。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>value</code></td><td>string</td><td><p>格式化为字符串的新数据。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="InterShardMemory.getRemote" class="api-property api-property--method  "><span class="api-property__name">InterShardMemory.getRemote</span><span class="api-property__args">(shard)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">var</span> data <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>InterShardMemory<span class="token punctuation">.</span><span class="token function">getRemote</span><span class="token punctuation">(</span><span class="token string">'shard0'</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token string">"{}"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>返回其他 shard 的数据字符串内容。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>shard</code></td><td>string</td><td><p>Shard 名称。</p>
+</td>
+</tr></tbody></table>
+

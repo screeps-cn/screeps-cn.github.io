@@ -1,0 +1,130 @@
+<h1 id="Room-Terrain"><a href="#Room-Terrain" class="headerlink" title="Room.Terrain"></a>Room.Terrain</h1><p>提供快速访问房间地形数据的对象。您可以为游戏世界中的任何房间构造这些对象，即使没有该房间的视野。</p>
+<p>从技术上讲，每个 <code>Room.Terrain</code> 对象都是一个非常轻量级的适配器，用于提供具有最小访问权限的静态地形缓冲区。</p>
+<h2 id="Room.Terrain.constructor" class="api-property   "><span class="api-property__name">constructor</span><span class="api-property__args">(roomName)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> terrain <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Room<span class="token punctuation">.</span>Terrain</span><span class="token punctuation">(</span><span class="token string">"E2S7"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> terrain <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Room<span class="token punctuation">.</span>Terrain</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>creeps<span class="token punctuation">.</span>John<span class="token punctuation">.</span>room<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>通过房间名称创建一个新的 <code>Terrain</code>。<code>Terrain</code> 对象可以从游戏世界中的任何房间构造，即使没有该房间的视野。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>roomName</code></td><td>string</td><td><p>房间名称。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="Room.Terrain.get" class="api-property api-property--method  "><span class="api-property__name">get</span><span class="api-property__args">(x, y)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">switch</span><span class="token punctuation">(</span>terrain<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token constant">TERRAIN_MASK_WALL</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token constant">TERRAIN_MASK_SWAMP</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> roomName <span class="token operator">=</span> <span class="token string">"E2S7"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> terrain <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Room<span class="token punctuation">.</span>Terrain</span><span class="token punctuation">(</span>roomName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> matrix <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PathFinder<span class="token punctuation">.</span>CostMatrix</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> visual <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RoomVisual</span><span class="token punctuation">(</span>roomName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 用默认地形成本填充 CostMatrix，以供将来分析：</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> y <span class="token operator">&lt;</span> <span class="token number">50</span><span class="token punctuation">;</span> y<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> x <span class="token operator">&lt;</span> <span class="token number">50</span><span class="token punctuation">;</span> x<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> tile <span class="token operator">=</span> terrain<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">const</span> weight <span class="token operator">=</span>
+            tile <span class="token operator">===</span> <span class="token constant">TERRAIN_MASK_WALL</span>  <span class="token operator">?</span> <span class="token number">255</span> <span class="token punctuation">:</span> <span class="token comment">// 墙壁 => 无法通行</span>
+            tile <span class="token operator">===</span> <span class="token constant">TERRAIN_MASK_SWAMP</span> <span class="token operator">?</span>   <span class="token number">5</span> <span class="token punctuation">:</span> <span class="token comment">// 沼泽 => 移动成本:  5</span>
+                                            <span class="token number">1</span> <span class="token punctuation">;</span> <span class="token comment">// 平原 => 移动成本:  1</span>
+        matrix<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> weight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        visual<span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span>weight<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token comment">// 绑定到 WASM module heap</span>
+<span class="token keyword">const</span> heapView <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint8Array</span><span class="token punctuation">(</span>wasmModule<span class="token punctuation">.</span><span class="token constant">HEAPU8</span><span class="token punctuation">.</span>buffer<span class="token punctuation">,</span> <span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">const</span> terrain <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Room<span class="token punctuation">.</span>Terrain</span><span class="token punctuation">(</span><span class="token string">"E2S7"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 将地形数据复制到二进制 WASM module heap：</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> y <span class="token operator">&lt;</span> <span class="token number">50</span><span class="token punctuation">;</span> y<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> x <span class="token operator">&lt;</span> <span class="token number">50</span><span class="token punctuation">;</span> x<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        heapView<span class="token punctuation">[</span>y <span class="token operator">*</span> <span class="token number">50</span> <span class="token operator">+</span> x<span class="token punctuation">]</span> <span class="token operator">=</span> terrain<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span></code></pre><p>通过 <code>(x,y)</code> 坐标获取指定房间位置处的地形。和 <a href="#Game.map.getTerrainAt"><code>Game.map.getTerrainAt(...)</code></a> 方法不同，此方法不执行任何字符串操作，并返回整数 terrain 类型值（详见下文）。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>该房间中的 X 坐标。</p>
+</td>
+</tr><tr><td><code>y</code></td><td>number</td><td><p>该房间中的 Y 坐标。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>以下整数值之一：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th><a href="#Constants">常量名</a> (<em>如果存在</em>)</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><em>不存在</em></td>
+<td>地形为 <code>plain</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>TERRAIN_MASK_WALL</code></td>
+<td>地形为 <code>wall</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>TERRAIN_MASK_SWAMP</code></td>
+<td>地形为 <code>swamp</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="Room.Terrain.getRawBuffer" class="api-property api-property--method  "><span class="api-property__name">getRawBuffer</span><span class="api-property__args">([destinationArray])</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">function</span> <span class="token function">myPrintRawTerain</span><span class="token punctuation">(</span><span class="token parameter">raw</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> visual <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RoomVisual</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> y <span class="token operator">&lt;</span> <span class="token number">50</span><span class="token punctuation">;</span> y<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> x <span class="token operator">&lt;</span> <span class="token number">50</span><span class="token punctuation">;</span> x<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">const</span> code <span class="token operator">=</span> raw<span class="token punctuation">[</span>y <span class="token operator">*</span> <span class="token number">50</span> <span class="token operator">+</span> x<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">const</span> color <span class="token operator">=</span>
+                <span class="token punctuation">(</span>code <span class="token operator">&amp;</span> <span class="token constant">TERRAIN_MASK_WALL</span> <span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">"gray"</span>  <span class="token punctuation">:</span>
+                <span class="token punctuation">(</span>code <span class="token operator">&amp;</span> <span class="token constant">TERRAIN_MASK_SWAMP</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">"green"</span> <span class="token punctuation">:</span> <span class="token string">"white"</span> <span class="token punctuation">;</span>
+            visual<span class="token punctuation">.</span><span class="token function">circle</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token punctuation">{</span>fill<span class="token punctuation">:</span> color<span class="token punctuation">,</span> radius<span class="token punctuation">:</span> <span class="token number">0.5</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> raw <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Room<span class="token punctuation">.</span>Terrain</span><span class="token punctuation">(</span><span class="token string">"E2S7"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getRawBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">myPrintRawTerain</span><span class="token punctuation">(</span>raw<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token comment">// 绑定到 WASM module heap</span>
+<span class="token keyword">const</span> heapView <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint8Array</span><span class="token punctuation">(</span>wasmModule<span class="token punctuation">.</span><span class="token constant">HEAPU8</span><span class="token punctuation">.</span>buffer<span class="token punctuation">,</span> <span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">const</span> terrain <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Room<span class="token punctuation">.</span>Terrain</span><span class="token punctuation">(</span><span class="token string">"E2S7"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 快速将地形数据复制到 WASM module heap:</span>
+<span class="token keyword">const</span> t <span class="token operator">=</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> result <span class="token operator">=</span> terrain<span class="token punctuation">.</span><span class="token function">getRawBuffer</span><span class="token punctuation">(</span>heapView<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>result <span class="token operator">!==</span> <span class="token constant">ERR_INVALID_ARGS</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 复制成功，在此处调用 WASM 函数：</span>
+    <span class="token comment">// wasmModule.myFunc(...); // 修改 "heapView" 的原始内存</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Distance transform done in"</span><span class="token punctuation">,</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">myPrintRawTerain</span><span class="token punctuation">(</span>heapView<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><pre class="highlight cpp tab-cpp "><code><span class="token comment">// 二进制模块内的某处源代码...</span>
+<span class="token keyword">void</span> <span class="token function">myFunc</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">void</span><span class="token operator">*</span> ptr</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    auto u8ptr <span class="token operator">=</span> static_cast<span class="token operator">&lt;</span>uint8_t<span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 在这里进行计算...</span>
+<span class="token punctuation">}</span></code></pre><p>获取基础静态地形缓冲区的副本。 <strong>当前使用的基础类型为 <code>Uint8Array</code></strong>。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>destinationArray (可选)</code></td><td>Uint8Array</td><td><p>地形数据要拷贝到的已定义的数组视图。</p>
+</td>
+</tr></tbody></table>
+
+<p><strong><em>警告:</em></strong> <em>此方法依赖于地形数据的基础类型。此方法是获取整个房间（2500 地块）地形数据的最快方法，但是使用者需要始终牢记，该方法可能随时会被标记为已弃用。或者返回值的类型可能会因为基础类型的改变而改变。</em></p>
+<p>请查看使用示例。点击 <a href="/modules.html#Binary-modules"><em>二进制模块</em></a> 来了解更多。</p>
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>基础房间地形数据的副本，存放在大小为 2500 的新 <code>Uint8Array</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray" target="_blank" rel="noopener">类型数组（typed array）</a>中。</p>
+<p>每一个元素都是整数，地形类型可以通过对相应的 <code>TERRAIN_MASK_*</code> 常量执行位运算“与”（<code>&amp;</code>）来获得。房间地块按行存储。</p>
+<p>如果指定了 <code>destinationArray</code> 并且成功复制，则函数将会返回已填充 <code>destinationArray</code> 的引用，否则返回下列错误码：</p>
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p><code>destinationArray</code> 类型不兼容。</p>
+</td></tr>
+</tbody></table>
+

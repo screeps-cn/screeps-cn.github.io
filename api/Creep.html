@@ -1,0 +1,1047 @@
+<h1 id="Creep"><a href="#Creep" class="headerlink" title="Creep"></a>Creep</h1><p>creep 是你的单位, creep 可以移动、采集能量、建造建筑、攻击其他 creep 以及执行其他动作。每个 creep 都由最多 50 个身体部件构成，身体部件的类型如下：</p>
+<p><img src="img/bodyparts.png" alt>   </p>
+<table class="table gameplay-info">
+    <tbody>
+    <tr>
+        <th style="width: 20%;">身体部件</th>
+        <th style="width: 10%;">孵化成本</th>
+        <th>每个部件效果</th>
+    </tr>
+    <tr>
+        <td><code style="background: #333; color: #a9b7c6;">MOVE</code></td>
+        <td>50</td>
+        <td>每 tick 减少 2 点疲惫值</td>
+    </tr>
+    <tr>
+        <td><code style="background: #333; color: #ffe56d;">WORK</code></td>
+        <td>100</td>
+        <td>
+            <p>每 tick 从能量源采集 2 单位能量。</p>
+            <p>每 tick 从矿区采集 1 单位矿物。</p>
+            <p>每 tick 增加工地建设进度 5 点，花费 5 单位能量。</p>
+            <p>每 tick 增加建筑 100 耐久度，花费 1 单位能量。</p>
+            <p>每 tick 拆减建筑 50 点耐久，并返还 0.25 单位能量。</p>
+            <p>每 tick 提高控制器升级进度 1 点，花费 1 单位能量。</p>
+        </td>
+    </tr>
+    <tr>
+        <td><code style="background: #333; color: #777;">CARRY</code></td>
+        <td>50</td>
+        <td>携带最多 50 单位资源。</td>
+    </tr>
+    <tr>
+        <td><code style="background: #333; color: #f93842;">ATTACK</code></td>
+        <td>80</td>
+        <td>对相邻的 creep 或建筑造成 30 点伤害。</td>
+    </tr>
+    <tr>
+        <td><code style="background: #333; color: #5d80b2;">RANGED_ATTACK</code></td>
+        <td>150</td>
+        <td>
+            <p>单个目标时，每 tick 对 creep 或建筑造成 10 点伤害，范围为 3 格。</p>
+            <p>多个目标时，每 tick 对范围内所有 creep 与建筑造成 1-4-10 点伤害，具体伤害取决于距离，范围为 3 格。</p>
+        </td>
+    </tr>
+    <tr>
+        <td><code style="background: #333; color: #65fd62;">HEAL</code></td>
+        <td>250</td>
+        <td>治疗对象可为自己或其它 creep。自愈或治疗相邻 creep 时每 tick 恢复 12 点耐久，一定距离内远程治疗每 tick 恢复 4 点耐久。</td>
+    </tr>
+    <tr>
+        <td><code style="background: #333; color: #b99cfb;">CLAIM</code></td>
+        <td>600</td>
+        <td>
+            <p>占领一个中立房间的控制器。</p>
+            <p>每部件每 tick 使己方对中立房间控制器的预定时间增加 1 tick，或使其他玩家的预定时间减少 1 tick。</p>
+            <p>每部件每 tick 使其他玩家控制器降级计数器加速 300 tick。</p>
+            <p>注：拥有该部件的 creep 寿命只有 600 tick，且无法被 renew。</p>
+        </td>
+    </tr>
+    <tr>
+        <td><code style="background: #333; color: #fff;">TOUGH</code></td>
+        <td>10</td>
+        <td>无附加效果，唯一作用是增加 creep 的最大耐久值。可被强化以承受更多伤害。</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="Creep.effects" class="api-property api-property--property  "><span class="api-property__name">effects</span><span class="api-property__type">array</span></h2>
+<p>附加的效果，一个包含如下属性的对象数组：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>effect</code></td><td>number</td><td><p>该附加效果的 ID。可以是自然效果 ID 或者 Power ID。</p>
+</td>
+</tr><tr><td><code>level (可选)</code></td><td>number </td><td><p>该附加效果的 Power 等级。如果效果不是 Power 效果则不存在该属性。</p>
+</td>
+</tr><tr><td><code>ticksRemaining</code></td><td>number</td><td><p>多长时间之后会失去这个效果。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="Creep.pos" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">pos</span><span class="api-property__type"><a href="#RoomPosition">RoomPosition</a></span></h2>
+<p>表示该对象在房间中的坐标的对象。</p>
+<h2 id="Creep.room" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">room</span><span class="api-property__type"><a href="#Room">Room</a></span></h2>
+<p>Room对象的链接。如果对象是标志或工地并且放置在你不可见的房间中，则可能为undefined。</p>
+
+<h2 id="Creep.body" class="api-property api-property--property  "><span class="api-property__name">body</span><span class="api-property__type">array</span></h2>
+<p>一个描述了该 creep 身体部件的数组，每一个数组元素都拥有如下的属性:</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>boost</code></td><td>string | undefined</td><td><p>如果该身体部件被强化(boost)了，则该属性指定了强化所用的化合物类型。化合物为 <code>RESOURCE_*</code> 常量之一。 <a href="/resources.html">了解更多</a></p>
+</td>
+</tr><tr><td><code>type</code></td><td>string</td><td><p>身体部件常量之一。</p>
+</td>
+</tr><tr><td><code>hits</code></td><td>number</td><td><p>该身体部件剩余的生命值。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="Creep.carry" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">carry</span><span class="api-property__type">object</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#Creep.store"><code>Creep.store</code></a> 的别名。</p>
+<h2 id="Creep.carryCapacity" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">carryCapacity</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#Store.getCapacity"><code>Creep.store.getCapacity()</code></a> 的别名。</p>
+<h2 id="Creep.fatigue" class="api-property api-property--property  "><span class="api-property__name">fatigue</span><span class="api-property__type">number</span></h2>
+<p>每次移动的疲劳值指示器，当该值大于零时 creep 无法移动。</p>
+<h2 id="Creep.hits" class="api-property api-property--property  "><span class="api-property__name">hits</span><span class="api-property__type">number</span></h2>
+<p>当前的 creep 生命值。</p>
+<h2 id="Creep.hitsMax" class="api-property api-property--property  "><span class="api-property__name">hitsMax</span><span class="api-property__type">number</span></h2>
+<p>该 creep 的最大生命值。</p>
+<h2 id="Creep.id" class="api-property api-property--property  "><span class="api-property__name">id</span><span class="api-property__type">string</span></h2>
+<p>一个唯一的对象标识。你可以使用<a href="#Game.getObjectById"><code>Game.getObjectById</code></a>方法获取对象实例。</p>
+<h2 id="Creep.memory" class="api-property api-property--property  "><span class="api-property__name">memory</span><span class="api-property__type">any</span></h2>
+<pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>task <span class="token operator">=</span> <span class="token string">'building'</span><span class="token punctuation">;</span></code></pre><p>指向 <code>Memory.creeps[creep.name]</code> 的链接。你可以用它来快速访问该 creep 的特定内存对象。 <a href="/global-objects.html#Memory-object">点此了解更多关于 memory 的信息</a></p>
+<h2 id="Creep.my" class="api-property api-property--property  "><span class="api-property__name">my</span><span class="api-property__type">boolean</span></h2>
+<p>该 creep 属于您还是其他人。</p>
+<h2 id="Creep.name" class="api-property api-property--property  "><span class="api-property__name">name</span><span class="api-property__type">string</span></h2>
+<p>creep 的名字。您可以在创建一个新的 creep 时给它取名，名称一旦指定无法更改。此名称是 <a href="#Game.creeps">Game.creeps</a> 对象中指向该 creep 对象的哈希键。你可以使用它来快速访问到该 creep。</p>
+<h2 id="Creep.owner" class="api-property api-property--property  "><span class="api-property__name">owner</span><span class="api-property__type">object</span></h2>
+<p>该 creep 的所有者信息，包含以下属性：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>username</code></td><td>string</td><td><p>所有者姓名。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="Creep.saying" class="api-property api-property--property  "><span class="api-property__name">saying</span><span class="api-property__type">string</span></h2>
+<p>creep 所说的最后一句话。</p>
+<h2 id="Creep.spawning" class="api-property api-property--property  "><span class="api-property__name">spawning</span><span class="api-property__type">boolean</span></h2>
+<p>该 creep 是否仍在孵化中。</p>
+<h2 id="Creep.store" class="api-property api-property--property  "><span class="api-property__name">store</span><span class="api-property__type"><a href="#Store">Store</a></span></h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>store<span class="token punctuation">[</span><span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> creep<span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">getCapacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">goHarvest</span><span class="token punctuation">(</span>creep<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>一个包含了该建筑中所存储的货物的 <a href="#Store"><code>Store</code></a> 对象。</p>
+<h2 id="Creep.ticksToLive" class="api-property api-property--property  "><span class="api-property__name">ticksToLive</span><span class="api-property__type">number</span></h2>
+<p>该 creep 还有多少 tick 死亡。</p>
+<h2 id="Creep.attack" class="api-property api-property--method  "><span class="api-property__name">attack</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_HOSTILE_CREEPS</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">attack</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>使用近战攻击其他 creep、超能(power) creep 或建筑。需要 <code>ATTACK</code> 身体部件。如果目标在 rampart 中，则优先攻击 rampart。目标必须与 creep 相邻，如果目标是一个带有 <code>ATTACK</code> 身体的 creep 并且没有自己没有在 rampart 中，则该目标会自动进行反击。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Creep">Creep</a>, <a href="#PowerCreep">PowerCreep</a>, <a href="#Structure">Structure</a></td><td><p>要攻击的目标</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>这个目标不是一个有效的攻击目标。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>这个 creep 身上没有 <code>ATTACK</code> 部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.attackController" class="api-property api-property--method  "><span class="api-property__name">attackController</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">.</span>my<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">attackController</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>攻击时，每个 <code>CLAIM</code> 身体部件都能使得房间控制器的降级计时器降低 300 tick，或者将预定计时器降低 1 tick。如果受到攻击的控制器已经有所属者，则接下来的 1000 tick 将无法升级(upgrade)或再次进行攻击。目标必须与 creep 相邻。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Structure">Structure</a></td><td><p>目标房间控制器对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>该目标不存在有效的所属者或者预订者对象。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>您必须等待控制器可以被再次攻击。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>这个 creep 身上没有 <code>CLAIM</code> 部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.build" class="api-property api-property--method  "><span class="api-property__name">build</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_CONSTRUCTION_SITES</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>使用自己携带的能量来在目标工地上建造一个建筑。需要 <code>WORK</code> 和 <code>CARRY</code> 身体部件。目标必须位于以 creep 为中心的 7*7 正方形区域内。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#ConstructionSite">ConstructionSite</a></td><td><p>待建造的目标工地。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>这个creep没有携带任何能量。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>该目标不是一个有效的建筑工地(construction site)或者此处无法建造建筑(有可能是 creep 站在该地块上导致的)。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>这个 creep 身上没有 <code>WORK</code> 部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.cancelOrder" class="api-property api-property--method  "><span class="api-property__name">cancelOrder</span><span class="api-property__args">(methodName)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token constant">LEFT</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep<span class="token punctuation">.</span><span class="token function">cancelOrder</span><span class="token punctuation">(</span><span class="token string">'move'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// creep 本 tick 将不会移动</span></code></pre><p>取消当前 tick 中给出的某个指令。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>methodName</code></td><td>string</td><td><p>需要被取消的 creep 方法名。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-3"><a href="#返回值-3" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作被成功取消了。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_FOUND</code></td><td>-5</td><td><p>找不到给出的指令名。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.claimController" class="api-property api-property--method  "><span class="api-property__name">claimController</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">claimController</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>占领一个中立的房间。需要 <code>CLAIM</code> 身体部件。目标必须与 creep 相邻。你需要有对应的全局控制等级(Global Control Level)才能占领新的房间。如果你没有足够的 GCL。请考虑 <a href="#reserveController">预定(reserving)</a> 该房间。<a href="/control.html#Global-Control-Level">点击了解更多</a></p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#StructureController">StructureController</a></td><td><p>目标控制中心对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-4"><a href="#返回值-4" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个有效的中立控制中心对象。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>你不能在新手区占领超过3个房间。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>这个 creep 身上没有 <code>CLAIM</code> 部件。</p>
+</td></tr>
+<tr><td><code>ERR_GCL_NOT_ENOUGH</code></td><td>-15</td><td><p>你的全局控制等级不足。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.dismantle" class="api-property api-property--method  "><span class="api-property__name">dismantle</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_STRUCTURES</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>filter<span class="token punctuation">:</span> <span class="token punctuation">{</span>structureType<span class="token punctuation">:</span> <span class="token constant">STRUCTURE_WALL</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">dismantle</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>拆解任意可以建造的建筑（即使是敌人的）并且返回 50% 其修理所花的能量。需要 <code>WORK</code> 身体部件。如果 creep 有空余的 <code>CARRY</code> 身体部件，则会直接将能量转移进去；否则能量将掉落在地上。目标必须与 creep 相邻。</p>
+<p><strong>译者注</strong>：拆解效率和 <code>WORK</code> 部件的数量正相关。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Structure">Structure</a></td><td><p>目标建筑。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-5"><a href="#返回值-5" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个有效的建筑对象。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>这个 creep 身上没有 <code>WORK</code> 部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.drop" class="api-property api-property--method  "><span class="api-property__name">drop</span><span class="api-property__args">(resourceType, [amount])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">drop</span><span class="token punctuation">(</span><span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token comment">// 丢弃身上所有资源</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> resourceType <span class="token keyword">in</span> creep<span class="token punctuation">.</span>carry<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">drop</span><span class="token punctuation">(</span>resourceType<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>将资源丢弃到地上。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>resourceType</code></td><td>string</td><td><p><code>RESOURCE_*</code> 常量之一。</p>
+</td>
+</tr><tr><td><code>amount (可选)</code></td><td>number</td><td><p>丢弃资源的数量。如果没有这个参数，丢弃全部资源。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-6"><a href="#返回值-6" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>这个creep没有足够的资源。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>resourceType不是一个有效的<code>RESOURCE_*</code>常量。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.generateSafeMode" class="api-property api-property--method  "><span class="api-property__name">generateSafeMode</span><span class="api-property__args">(controller)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">generateSafeMode</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>向房间控制器添加一个新的安全模式激活次数。creep 必须与房间控制器相邻并且带有 1000 ghodium 资源。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#StructureController">StructureController</a></td><td><p>目标控制中心。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-7"><a href="#返回值-7" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>这个 creep 没有足够的 ghodium。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个有效的控制中心对象。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.getActiveBodyparts" class="api-property api-property--method  "><span class="api-property__name">getActiveBodyparts</span><span class="api-property__args">(type)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_HOSTILE_CREEPS</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">filter</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">object</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> object<span class="token punctuation">.</span><span class="token function">getActiveBodyparts</span><span class="token punctuation">(</span><span class="token constant">ATTACK</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>获取指定类型可用的身体部件数量。完全毁坏的部件不会被计算。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>type</code></td><td>string</td><td><p>一个身体部件类型，下列身体部件类型常量之一：
+                    <ul>
+                        <li><code>MOVE</code></li>
+                        <li><code>WORK</code></li>
+                        <li><code>CARRY</code></li>
+                        <li><code>ATTACK</code></li>
+                        <li><code>RANGED_ATTACK</code></li>
+                        <li><code>HEAL</code></li>
+                        <li><code>TOUGH</code></li>
+                    </ul></p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-8"><a href="#返回值-8" class="headerlink" title="返回值"></a>返回值</h3><p>身体部件的数量。</p>
+<h2 id="Creep.harvest" class="api-property api-property--method  "><span class="api-property__name">harvest</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_SOURCES_ACTIVE</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">harvest</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>从 source 中采集能量或者从 mineral 或 deposit 中采集资源。需要 <code>WORK</code> 身体部件。如果 creep 有空余的 <code>CARRY</code> 身体，则会自动将采集到的资源转移进去；否则将会掉落在地上。目标必须与 creep 相邻。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Source">Source</a>, <a href="#Mineral">Mineral</a>, <a href="#Deposit">Deposit</a></td><td><p>要采集的对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-9"><a href="#返回值-9" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是该 creep 的所有者，或者其他玩家已经占领或者预定了该房间的控制器。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_FOUND</code></td><td>-5</td><td><p>未找到 extractor。你必须建造一个 extractor 来开采矿物。<a href="/resources.html">了解更多</a></p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>目标中已经没有可采集的能量或者矿物。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是有效的 source 或者 mineral 对象。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>extractor 仍在冷却中。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>这个 creep 身上没有 <code>WORK</code> 部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.heal" class="api-property api-property--method  "><span class="api-property__name">heal</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_MY_CREEPS</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">filter</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">object</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> object<span class="token punctuation">.</span>hits <span class="token operator">&lt;</span> object<span class="token punctuation">.</span>hitsMax<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">heal</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>治疗自己或者其他 creep。这将恢复目标 creep 受损身体部件的功能，并恢复已损失的生命值(hits)。需要 <code>HEAL</code> 身体部件。目标必须与 creep 相邻。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Creep">Creep</a>, <a href="#PowerCreep">PowerCreep</a></td><td><p>目标 creep 对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-10"><a href="#返回值-10" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是有效的 creep 对象。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>这个 creep 身上没有 <code>HEAL</code> 部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.move" class="api-property api-property--method  "><span class="api-property__name">move</span><span class="api-property__args">(direction)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token constant">RIGHT</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> path <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findPathTo</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>flags<span class="token punctuation">.</span>Flag1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span>path<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>direction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><pre class="highlight javascript tab-javascript "><code>creep1<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token constant">TOP</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep1<span class="token punctuation">.</span><span class="token function">pull</span><span class="token punctuation">(</span>creep2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep2<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span>creep1<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>使 creep 朝指定方向移动一个地块。需要 <code>MOVE</code> 身体部件，或者其他 creep 在其附近并<a href="#Creep.pull">拉动</a>该 creep。如果你对着一个相邻 creep 调用了 <code>move</code> 方法，将会使本 creep 跳过 <code>ERR_TIRED</code> 和 <code>ERR_NO_BODYPART</code> 检查; 否则将跳过 <code>ERR_NOT_IN_RANGE</code> 检查。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>direction</code></td><td><a href="#Creep">Creep</a>|number</td><td><p>一个相邻的 creep 或者下列常量之一：
+                    <ul>
+                        <li><code>TOP</code></li>
+                        <li><code>TOP_RIGHT</code></li>
+                        <li><code>RIGHT</code></li>
+                        <li><code>BOTTOM_RIGHT</code></li>
+                        <li><code>BOTTOM</code></li>
+                        <li><code>BOTTOM_LEFT</code></li>
+                        <li><code>LEFT</code></li>
+                        <li><code>TOP_LEFT</code></li>
+                    </ul></p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-11"><a href="#返回值-11" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标 creep 距离过远。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>提供的方向不正确。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>该 creep 的疲劳（fatigue）计数器不为零。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>该 creep 没有 <code>MOVE</code> 身体部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.moveByPath" class="api-property api-property--method  "><span class="api-property__name">moveByPath</span><span class="api-property__args">(path)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> path <span class="token operator">=</span> spawn<span class="token punctuation">.</span>room<span class="token punctuation">.</span><span class="token function">findPath</span><span class="token punctuation">(</span>spawn<span class="token punctuation">,</span> source<span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep<span class="token punctuation">.</span><span class="token function">moveByPath</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>creep<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>path<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>path <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findPathTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+creep<span class="token punctuation">.</span><span class="token function">moveByPath</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>使用预先定义的路径进行移动。需要 <code>MOVE</code> 身体部件。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>path</code></td><td>array|string</td><td><p>从 <a href="#Room.findPath"><code>Room.findPath</code></a>, <a href="#RoomPosition.findPathTo"><code>RoomPosition.findPathTo</code></a> 或 <a href="#PathFinder.search"><code>PathFinder.search</code></a> 方法返回的路径值，数组或序列字符串形式都可接受。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-12"><a href="#返回值-12" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_FOUND</code></td><td>-5</td><td><p>指定的路径与该 creep 的位置不匹配。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p><code>path</code> 不是一个有效的路径数组。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>该 creep 的疲劳（fatigue）计数器不为零。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>该 creep 没有 <code>MOVE</code> 身体部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.moveTo" class="api-property api-property--method  "><span class="api-property__name">moveTo</span><span class="api-property__args">(x, y, [opts])<br>(target, [opts])</span>
+        <div class="api-property__cpu api-property__cpu--3" title="这种方法的CPU成本很高。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>flags<span class="token punctuation">.</span>Flag1<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">RoomPosition</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token string">'W10N5'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>pos<span class="token punctuation">,</span> <span class="token punctuation">{</span>reusePath<span class="token punctuation">:</span> <span class="token number">50</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token comment">// 优先使用缓存路径进行移动</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> name <span class="token keyword">in</span> Game<span class="token punctuation">.</span>creeps<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span>creeps<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> <span class="token punctuation">{</span>noPathFinding<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 仅当有足够 CPU 时才执行寻路</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span>tickLimit <span class="token operator">-</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> name <span class="token keyword">in</span> Game<span class="token punctuation">.</span>creeps<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Game<span class="token punctuation">.</span>creeps<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre><p>在本房间内查询到目标的最佳路径并向目标移动。该方法是 <a href="#RoomPosition.findPathTo">pos.findPathTo( )</a> <a href="#Creep.move">move( )</a> 的调用简写。如果目标在其他房间，则相应的出口将被当做目标(在本房间中)。需要 <code>MOVE</code> 身体部件。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>目标在 creep 所在房间中的 x 坐标。</p>
+</td>
+</tr><tr><td><code>y</code></td><td>number</td><td><p>目标在 creep 所在房间中的 y 坐标。</p>
+</td>
+</tr><tr><td><code>target</code></td><td>object</td><td><p>可以是 <a href="#RoomPosition">RoomPosition</a> 对象或者任何包含 <a href="#RoomPosition">RoomPosition</a> 属性的对象。该位置不必和 creep 在同一房间。</p>
+</td>
+</tr><tr><td><code>opts (可选)</code></td><td>object</td><td><p>包含可选项的对象：
+                    <ul>
+                        <li>
+                            <div class="api-arg-title">reusePath</div>
+                            <div class="api-arg-type">number</div>
+                            <div class="api-arg-desc">此选项将缓存前方多个 tick 将要移动的路径。该操作可以节省 cpu 时间，但是会导致 creep 的反应变慢。路径被缓存到 creep 内存中的 <code>_move</code> 属性里。<code>reusePath</code> 的值定义了要缓存前方多少 tick 的移动路径。默认值为 5。增加该值来节省更多的 CPU。减少该值来使移动更加连贯。设置为 0 来禁用路径重用。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">serializeMemory</div>
+                            <div class="api-arg-type">boolean</div>
+                            <div class="api-arg-desc">如果 <code>reusePath</code> 启用并且该值设为 true，重用的路径将会使用 <a href="#Room.Room-serializePath"><code>Room.serializePath</code></a> 进行序列化并储存在内存中。默认值为 true。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">noPathFinding</div>
+                            <div class="api-arg-type">boolean</div>
+                            <div class="api-arg-desc">如果该选择设为 true 并且内存中没有重用路径时，<code>moveTo</code> 将会返回 <code>ERR_NOT_FOUND</code>。在某些情况下，这会节省大量的 CPU 时间。默认值为 false。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">visualizePathStyle</div>
+                            <div class="api-arg-type">object</div>
+                            <div class="api-arg-desc">使用 <a href="#RoomVisual.poly"><code>RoomVisual.poly</code></a> 来在 creep 的移动路线上画一条线。你可以提供一个空对象或者自定义样式参数。默认的样式如下：
+                                <pre class="language-javascript"><code>{
+    fill: &#39;transparent&#39;,
+    stroke: &#39;#fff&#39;,
+    lineStyle: &#39;dashed&#39;,
+    strokeWidth: .15,
+    opacity: .1
+}</code></pre>
+                            </div>
+                        </li>
+                        <li>任何 <a href="#Room.findPath"><code>Room.findPath</code></a> 方法支持的可选项。</li>
+                    </ul></p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-13"><a href="#返回值-13" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_NO_PATH</code></td><td>-2</td><td><p>没有找到可以抵达目标的路径。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_FOUND</code></td><td>-5</td><td><p>该 creep 没有找到可重用的路径。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>提供了无效目标。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>该 creep 的疲劳（fatigue）计数器不为零。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>该 creep 没有 <code>MOVE</code> 身体部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.notifyWhenAttacked" class="api-property api-property--method  "><span class="api-property__name">notifyWhenAttacked</span><span class="api-property__args">(enabled)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>role <span class="token operator">==</span> <span class="token string">'scout'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">notifyWhenAttacked</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">notifyWhenAttacked</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>当 creep 受到攻击时切换自动通知。通知将发送到您的帐户邮箱。默认情况下启用。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>enabled</code></td><td>boolean</td><td><p>是否启用通知。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-14"><a href="#返回值-14" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p><code>enable</code> 参数不是 boolean 值。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.pickup" class="api-property api-property--method  "><span class="api-property__name">pickup</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_DROPPED_RESOURCES</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">pickup</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>捡起一个物品 (如捡起一些能量)。需要 <code>CARRY</code> 身体部件。目标必须与 creep 相邻或者和 creep 在相同位置。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Resource">Resource</a></td><td><p>要捡起的目标对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-15"><a href="#返回值-15" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个有效的可拾取对象。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>该 creep 已无法存储更多资源。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.pull" class="api-property api-property--method  "><span class="api-property__name">pull</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>creep1<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token constant">TOP</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep1<span class="token punctuation">.</span><span class="token function">pull</span><span class="token punctuation">(</span>creep2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep2<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span>creep1<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_MY_CREEPS</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">filter</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">object</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>object<span class="token punctuation">.</span><span class="token function">getActiveBodyparts</span><span class="token punctuation">(</span><span class="token constant">MOVE</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> 
+            object<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>destinationId <span class="token operator">&amp;&amp;</span>
+            <span class="token operator">!</span>object<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">isNearTo</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span><span class="token function">getObjectById</span><span class="token punctuation">(</span>object<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>destinationId<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">pull</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        target<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span>creep<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">isNearTo</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span><span class="token function">getObjectById</span><span class="token punctuation">(</span>target<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>destinationId<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            creep<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">getDirectionTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span><span class="token function">getObjectById</span><span class="token punctuation">(</span>target<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>destinationId<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre><p>帮助其他 creep 跟随该 creep。目标 creep 移动产生的疲劳值将由该 creep 承担。需要 <code>MOVE</code> 身体部件。目标必须与 creep 相邻。该 creep 必须<a href="#Creep.move">移动</a>到其他地方，目标 creep 也必须朝该 creep 移动。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Creep">Creep</a></td><td><p>目标 creep。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-16"><a href="#返回值-16" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>提供了无效目标。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.rangedAttack" class="api-property api-property--method  "><span class="api-property__name">rangedAttack</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> targets <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findInRange</span><span class="token punctuation">(</span><span class="token constant">FIND_HOSTILE_CREEPS</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>targets<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">rangedAttack</span><span class="token punctuation">(</span>targets<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>远程攻击其他 creep 或者建筑。需要 <code>RANGED_ATTACK</code> 身体部件。如果目标在 rampart 中，则 rampart 将被优先攻击。目标必须位于以 creep 为中心的 7*7 正方形区域内。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Creep">Creep</a>, <a href="#PowerCreep">PowerCreep</a>, <a href="#Structure">Structure</a></td><td><p>要攻击的目标。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-17"><a href="#返回值-17" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>这个目标不是一个有效的攻击目标。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>该 creep 没有 <code>RANGED_ATTACK</code> 身体部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.rangedHeal" class="api-property api-property--method  "><span class="api-property__name">rangedHeal</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_MY_CREEPS</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">filter</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">object</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> object<span class="token punctuation">.</span>hits <span class="token operator">&lt;</span> object<span class="token punctuation">.</span>hitsMax<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">isNearTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">heal</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">rangedHeal</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre><p>远程治疗其他 creep。这将恢复目标 creep 受损身体部件的功能，并恢复已损失的生命值(hits)。需要 <code>HEAL</code> 身体部件。目标必须位于以 creep 为中心的 7*7 正方形区域内。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Creep">Creep</a>, <a href="#PowerCreep">PowerCreep</a></td><td><p>目标 creep 对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-18"><a href="#返回值-18" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个有效的creep对象。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>这个 creep 身上没有 <code>HEAL</code> 部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.rangedMassAttack" class="api-property api-property--method  "><span class="api-property__name">rangedMassAttack</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> targets <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findInRange</span><span class="token punctuation">(</span><span class="token constant">FIND_HOSTILE_CREEPS</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>targets<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">rangedMassAttack</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>对以该 creep 为中心，3 格范围内的所有敌方 creep 和建筑进行攻击。需要 <code>RANGED_ATTACK</code> 身体部件。对目标造成的伤害随距离的增加而衰减。友方单位不会受到影响。</p>
+<h3 id="返回值-19"><a href="#返回值-19" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>这个 creep 身上没有 <code>RANGED_ATTACK</code> 部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.repair" class="api-property api-property--method  "><span class="api-property__name">repair</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> targets <span class="token operator">=</span> creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token constant">FIND_STRUCTURES</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">filter</span><span class="token punctuation">:</span> <span class="token parameter">object</span> <span class="token operator">=></span> object<span class="token punctuation">.</span>hits <span class="token operator">&lt;</span> object<span class="token punctuation">.</span>hitsMax
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+targets<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span>b</span><span class="token punctuation">)</span> <span class="token operator">=></span> a<span class="token punctuation">.</span>hits <span class="token operator">-</span> b<span class="token punctuation">.</span>hits<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span>targets<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">repair</span><span class="token punctuation">(</span>targets<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>targets<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre><p>使用携带的能量修复受损建筑。需要 <code>WORK</code> 和 <code>CARRY</code> 身体部件。目标必须位于以 creep 为中心的 7*7 正方形区域内。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Structure">Structure</a></td><td><p>要修复的目标建筑。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-20"><a href="#返回值-20" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>该 creep 没有携带任何能量。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个有效的 structure 对象。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>该 creep 身上没有 <code>WORK</code> 部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.reserveController" class="api-property api-property--method  "><span class="api-property__name">reserveController</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">reserveController</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>暂时阻止其他玩家占领该房间控制器并且将 source 的能量上限恢复至正常容量。每 tick 执行该命令都可以让控制器的不可占领时间增加，增加的 tick 等同于 <code>CLAIM</code> 身体部件的数量。最大的预定时间为 5,000 tick。目标必须与 creep 相邻。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#StructureController">StructureController</a></td><td><p>要预定的目标控制器对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-21"><a href="#返回值-21" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个有效的中立房间控制器对象。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>这个 creep 身上没有 <code>CLAIM</code> 部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.say" class="api-property api-property--method  "><span class="api-property__name">say</span><span class="api-property__args">(message, [public])</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> hostiles <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findInRange</span><span class="token punctuation">(</span><span class="token constant">FIND_HOSTILE_CREEPS</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>hostiles<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">say</span><span class="token punctuation">(</span><span class="token string">'OMG!😨'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token function">doWork</span><span class="token punctuation">(</span>creep<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>在该 creep 上显示带有指定内容的可视对话气泡。此信息只会显示 1 tick。你可以通过 <code>saying</code> 属性获取说过的最后一条信息。允许使用任何有效的 Unicode 字符。包括 <a href="http://unicode.org/emoji/charts/emoji-style.txt" target="_blank">emoji</a>。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>message</code></td><td>string</td><td><p>要显示的信息，最长 10 字符。</p>
+</td>
+</tr><tr><td><code>public (可选)</code></td><td>boolean</td><td><p>设置为 true 来让其他玩家也能看到该信息。默认为 false。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-22"><a href="#返回值-22" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.signController" class="api-property api-property--method  "><span class="api-property__name">signController</span><span class="api-property__args">(target, text)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">signController</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">,</span> <span class="token string">"I'm going to claim this room in a few days. I warned ya!"</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>用对所有玩家可见的任意文本对控制器进行签名。该文本将显示在世界地图的房间 UI 中。并可通过 api 进行访问。你可以签名无主甚至敌对玩家的控制器。目标必须与 creep 相邻。传递一个空字符串来移除签名。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#StructureController">StructureController</a></td><td><p>要签名的目标控制器对象。</p>
+</td>
+</tr><tr><td><code>text</code></td><td>string</td><td><p>签名文本，最多 100 字符，之后的内容将被截断。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-23"><a href="#返回值-23" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个有效的控制器对象。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.suicide" class="api-property api-property--method  "><span class="api-property__name">suicide</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>立刻杀死该 creep。</p>
+<h3 id="返回值-24"><a href="#返回值-24" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.transfer" class="api-property api-property--method  "><span class="api-property__name">transfer</span><span class="api-property__args">(target, resourceType, [amount])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">transfer</span><span class="token punctuation">(</span>storage<span class="token punctuation">,</span> <span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>storage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token comment">// 转移所有资源</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> resourceType <span class="token keyword">in</span> creep<span class="token punctuation">.</span>carry<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">transfer</span><span class="token punctuation">(</span>storage<span class="token punctuation">,</span> resourceType<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>将资源从该 creep 转移至其他对象。目标必须与 creep 相邻。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Creep">Creep</a>, <a href="#PowerCreep">PowerCreep</a>, <a href="#Structure">Structure</a></td><td><p>目标对象。</p>
+</td>
+</tr><tr><td><code>resourceType</code></td><td>string</td><td><p><code>RESOURCE_*</code> 常量之一。</p>
+</td>
+</tr><tr><td><code>amount (可选)</code></td><td>number</td><td><p>要转移的资源数量。如果省略，将转移携带的全部指定资源。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-25"><a href="#返回值-25" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>该 creep 没有携带足够的资源。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个能存放指定资源的有效对象。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>目标无法携带更多的资源。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>resourceType 不是 <code>RESOURCE_*</code> 常量之一，或者 amount 数量错误。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.upgradeController" class="api-property api-property--method  "><span class="api-property__name">upgradeController</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">upgradeController</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>使用携带的能量将您的控制器升级到新的等级。升级控制器将同时提高你的全局控制等级(Global Control Level)。需要 <code>WORK</code> 和 <code>CARRY</code> 身体部件。目标必须位于以 creep 为中心的 7*7 正方形区域内。</p>
+<p>一个完全升级的 8 级控制器每 tick 最多接受 15 能量的升级，无论 creep 的能力有没有超过。该值限制了当前 tick 所有 creep 执行 <code>upgradeController</code> 积累的总能量值。可以使用 <a href="/resources.html">ghodium 化合物强化</a> 来提高此上限。</p>
+<p>升级控制器会把它的 <code>ticksToDowngrade</code> 计时器提高 100 tick。该计时器必须填满才能提升控制器等级。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#StructureController">StructureController</a></td><td><p>要进行升级的目标控制器。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-26"><a href="#返回值-26" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是该 creep 或目标控制器的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>这个creep没有携带任何能量。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是有效的控制器对象，或控制器的升级被阻滞了。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>这个 creep 身上没有 <code>WORK</code> 部件。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Creep.withdraw" class="api-property api-property--method  "><span class="api-property__name">withdraw</span><span class="api-property__args">(target, resourceType, [amount])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">withdraw</span><span class="token punctuation">(</span>storage<span class="token punctuation">,</span> <span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>storage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>从建筑(structure)或是墓碑(tombstone)中拿取资源。目标必须与 creep 相邻。多个 creep 可以在同一 tick 里从相同对象中拿取资源。你的 creep 同样也可以从敌对建筑/墓碑中拿取资源，如果它上面没有敌对的 rampart 的话。</p>
+<p>此方法不应该被用来在 creep 之间转移资源。想要在 creep 之间转移，请对携带资源的 creep 执行 <a href="#Creep.transfer"><code>transfer</code></a> 方法。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Structure">Structure</a>, <a href="#Tombstone">Tombstone</a>, <a href="#Ruin">Ruin</a></td><td><p>目标对象。</p>
+</td>
+</tr><tr><td><code>resourceType</code></td><td>string</td><td><p><code>RESOURCE_*</code> 常量之一。</p>
+</td>
+</tr><tr><td><code>amount (可选)</code></td><td>number</td><td><p>被传递资源的数量。如果没有这个参数，传递全部可用数量的资源。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-27"><a href="#返回值-27" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是此 creep 的所有者，或者目标位于敌方 rampart 之下。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>这个 creep 依然在孵化中。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>目标中没有足够数量的资源。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个能存储指定资源的对象。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>此 creep 的存储已经满了。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>resourceType 不是 <code>RESOURCE_*</code> 常量之一, 或者 amount 数量错误。</p>
+</td></tr>
+</tbody></table>
+</p>

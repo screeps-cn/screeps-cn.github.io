@@ -1,0 +1,45 @@
+<h1 id="Mineral"><a href="#Mineral" class="headerlink" title="Mineral"></a>Mineral</h1><p>矿床。在建有 extractor 建筑时可以通过带有 <code>WORK</code> 身体部件的 creep 采集。
+点击 <a href="/resources.html">本文</a> 来了解更多关于 mineral 的信息。</p>
+<table class="table gameplay-info">
+    <tbody>
+    <tr>
+        <td><strong>再生容量</strong></td>
+        <td><code>DENSITY_LOW</code>: 15,000 <br> <code>DENSITY_MODERATE</code>: 35,000<br> <code>DENSITY_HIGH</code>: 70,000 <br> <code>DENSITY_ULTRA</code>: 100,000</td>
+    </tr>
+    <tr>
+        <td><strong>再生时间</strong></td>
+        <td>50,000 ticks</td>
+    </tr>
+    <tr>
+        <td><strong>丰度(Density)改变机率</strong></td>
+        <td><code>DENSITY_LOW</code>: 100% 机率改变<br> <code>DENSITY_MODERATE</code>: 5% 机率改变<br> <code>DENSITY_HIGH</code>: 5% 机率改变<br> <code>DENSITY_ULTRA</code>: 100% 机率改变</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="Mineral.effects" class="api-property api-property--property  "><span class="api-property__name">effects</span><span class="api-property__type">array</span></h2>
+<p>附加的效果，一个包含如下属性的对象数组：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>effect</code></td><td>number</td><td><p>该附加效果的 ID。可以是自然效果 ID 或者 Power ID。</p>
+</td>
+</tr><tr><td><code>level (可选)</code></td><td>number </td><td><p>该附加效果的 Power 等级。如果效果不是 Power 效果则不存在该属性。</p>
+</td>
+</tr><tr><td><code>ticksRemaining</code></td><td>number</td><td><p>多长时间之后会失去这个效果。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="Mineral.pos" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">pos</span><span class="api-property__type"><a href="#RoomPosition">RoomPosition</a></span></h2>
+<p>表示该对象在房间中的坐标的对象。</p>
+<h2 id="Mineral.room" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">room</span><span class="api-property__type"><a href="#Room">Room</a></span></h2>
+<p>Room对象的链接。如果对象是标志或工地并且放置在你不可见的房间中，则可能为undefined。</p>
+
+<h2 id="Mineral.density" class="api-property api-property--property  "><span class="api-property__name">density</span><span class="api-property__type">number</span></h2>
+<p>矿床丰度。丰度越高其容量越大。一旦再生时间 (<code>ticksToRegeneration</code>) 降为 0，该矿床的丰度将被重置为 <code>DENSITY_*</code> 常量之一。</p>
+<h2 id="Mineral.mineralAmount" class="api-property api-property--property  "><span class="api-property__name">mineralAmount</span><span class="api-property__type">number</span></h2>
+<p>资源的剩余容量。</p>
+<h2 id="Mineral.mineralType" class="api-property api-property--property  "><span class="api-property__name">mineralType</span><span class="api-property__type">string</span></h2>
+<p>资源类型， <code>RESOURCE_*</code> 常量之一。</p>
+<h2 id="Mineral.id" class="api-property api-property--property  "><span class="api-property__name">id</span><span class="api-property__type">string</span></h2>
+<p>一个唯一的对象标识。你可以使用<a href="#Game.getObjectById"><code>Game.getObjectById</code></a>方法获取对象实例。</p>
+<h2 id="Mineral.ticksToRegeneration" class="api-property api-property--property  "><span class="api-property__name">ticksToRegeneration</span><span class="api-property__type">number</span></h2>
+<p>矿床容量将要恢复满额的剩余时间。</p>

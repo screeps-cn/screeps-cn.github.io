@@ -1,0 +1,48 @@
+<h1 id="ConstructionSite"><a href="#ConstructionSite" class="headerlink" title="ConstructionSite"></a>ConstructionSite</h1><p>一个正在建设中的工地。可以使用游戏界面右侧的&#39;Construct&#39;按钮创建工地或<a href="#Room.createConstructionSite"><code>Room.createConstructionSite</code></a>方法。</p>
+<p>要在工地建造一个建筑，需要给工人creep一些能量并执行<a href="#Creep.build"><code>Creep.build</code></a>动作。</p>
+<p>如果想移除敌人的工地，只需让一个creep踩在上面即可。</p>
+<h2 id="ConstructionSite.effects" class="api-property api-property--property  "><span class="api-property__name">effects</span><span class="api-property__type">array</span></h2>
+<p>附加的效果，一个包含如下属性的对象数组：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>effect</code></td><td>number</td><td><p>该附加效果的 ID。可以是自然效果 ID 或者 Power ID。</p>
+</td>
+</tr><tr><td><code>level (可选)</code></td><td>number </td><td><p>该附加效果的 Power 等级。如果效果不是 Power 效果则不存在该属性。</p>
+</td>
+</tr><tr><td><code>ticksRemaining</code></td><td>number</td><td><p>多长时间之后会失去这个效果。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="ConstructionSite.pos" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">pos</span><span class="api-property__type"><a href="#RoomPosition">RoomPosition</a></span></h2>
+<p>表示该对象在房间中的坐标的对象。</p>
+<h2 id="ConstructionSite.room" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">room</span><span class="api-property__type"><a href="#Room">Room</a></span></h2>
+<p>Room对象的链接。如果对象是标志或工地并且放置在你不可见的房间中，则可能为undefined。</p>
+ 
+<h2 id="ConstructionSite.id" class="api-property api-property--property  "><span class="api-property__name">id</span><span class="api-property__type">string</span></h2>
+<p>全局唯一的对象标识。你可以通过调用<a href="#Game.getObjectById"><code>Game.getObjectById</code></a>方法取得对象实例。</p>
+<h2 id="ConstructionSite.my" class="api-property api-property--property  "><span class="api-property__name">my</span><span class="api-property__type">boolean</span></h2>
+<p>你是否拥有这个工地。</p>
+<h2 id="ConstructionSite.owner" class="api-property api-property--property  "><span class="api-property__name">owner</span><span class="api-property__type">object</span></h2>
+<p>建筑拥有者信息，一个包含如下属性的对象：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>username</code></td><td>string</td><td><p>拥有者姓名。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="ConstructionSite.progress" class="api-property api-property--property  "><span class="api-property__name">progress</span><span class="api-property__type">number</span></h2>
+<p>当前建造进度。</p>
+<h2 id="ConstructionSite.progressTotal" class="api-property api-property--property  "><span class="api-property__name">progressTotal</span><span class="api-property__type">number</span></h2>
+<p>完成建造所需的建造总进度。</p>
+<h2 id="ConstructionSite.structureType" class="api-property api-property--property  "><span class="api-property__name">structureType</span><span class="api-property__type">string</span></h2>
+<p><code>STRUCTURE_*</code>常量之一。</p>
+<h2 id="ConstructionSite.remove" class="api-property api-property--method  "><span class="api-property__name">remove</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>删除这个工地。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个工地的拥有者，或者这不是你的房间。</p>
+</td></tr>
+</tbody></table>
+</p>

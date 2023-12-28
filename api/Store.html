@@ -1,0 +1,46 @@
+<h1 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h1><p>一个代表了其存储中资源的对象。</p>
+<p>游戏中有两种类型的 store：通用型 store 和限定型 store。</p>
+<ul>
+<li><p>通用型 store 可以储存任意类型的资源 (例如: creep, 容器(containers), 存储(storages), 终端(terminals))。</p>
+</li>
+<li><p>限定型 store 只能储存该对象所需的几种特定资源 (例如: spawn, 拓展(extension), 实验室(lab), 核弹(nuker))。</p>
+</li>
+</ul>
+<p>两种 <code>Store</code> 的原型都是相同的，但是其返回值取决于调用方法时传入的 <code>resource</code> 参数。</p>
+<p>你可以把资源的类型当做对象属性来获取对应的资源:</p>
+<pre class="highlight javascript tab-javascript nosidebar"><code>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>store<span class="token punctuation">[</span><span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h2 id="Store.getCapacity" class="api-property api-property--method  "><span class="api-property__name">getCapacity</span><span class="api-property__args">([resource])</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>store<span class="token punctuation">[</span><span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> creep<span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">getCapacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">goHarvest</span><span class="token punctuation">(</span>creep<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>返回指定资源的存储容量, 对于通用型 store，当 <code>reource</code> 参数为 undefined 则返回总容量。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>resource (可选)</code></td><td>string</td><td><p>资源的类型</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>返回存储的数量, 当 <code>resource</code> 参数不是一个有效的存储类型时返回 <code>null</code>。</p>
+<h2 id="Store.getFreeCapacity" class="api-property api-property--method  "><span class="api-property__name">getFreeCapacity</span><span class="api-property__args">([resource])</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>structure<span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">getFreeCapacity</span><span class="token punctuation">(</span><span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">transfer</span><span class="token punctuation">(</span>structure<span class="token punctuation">,</span> <span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>返回该存储的剩余可用容量，对于限定型 store 来说，将在 <code>resource</code> 对该存储有效时返回该资源的剩余可用容量。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>resource (可选)</code></td><td>string</td><td><p>资源类型。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>返回可用的剩余容量，如果 <code>resource</code> 对该 store 无效则返回 <code>null</code>。</p>
+<h2 id="Store.getUsedCapacity" class="api-property api-property--method  "><span class="api-property__name">getUsedCapacity</span><span class="api-property__args">([resource])</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>rooms<span class="token punctuation">[</span><span class="token string">'W1N1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>terminal<span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">getUsedCapacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// terminal is empty</span>
+<span class="token punctuation">}</span></code></pre><p>返回指定资源已使用的容量, 若为通用型存储时, <code>reource</code> 参数不存在则返回总使用容量。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>resource (可选)</code></td><td>string</td><td><p>资源的类型</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>返回已使用的容量, 当 <code>resource</code> 参数不是一个有效的存储类型时返回 <code>null</code>。</p>
