@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>缓存概述 | Screeps 中文文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://screeps-cn.github.io/contributed/caching-overview.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="http://screeps-cn.github.io/contributed/caching-overview.html">
+    
+      <link rel="alternative" hreflang="zh-tw" href="http://screeps-cn.github.io/zh-tw/contributed/caching-overview.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="http://screeps-cn.github.io/zh-cn/contributed/caching-overview.html">
+    
+      <link rel="alternative" hreflang="ru" href="http://screeps-cn.github.io/ru/contributed/caching-overview.html">
+    
+      <link rel="alternative" hreflang="ko" href="http://screeps-cn.github.io/ko/contributed/caching-overview.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/css/navy.css?1">
+  <link rel="stylesheet" href="/css/prism.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Screeps 中文文档">
+  <!-- Open Graph -->
+  <meta name="description" content="Screeps 是一个以性能为中心的游戏 - 性能越好，每个 tick 就能完成更多的工作。而缓存则是性能优化中极其重要的元素，在 Screeps 里使用缓存将会让你接触到许多独特的机遇和挑战。
+从本质上来说，缓存的概念十分简单 - 通过把昂贵的代码执行结果保存起来，来让之后的调用变得更加简单。缓存还有另外一个好处，它可以使得运行的函数在无法得出结果的时候也正常给出返回值。这里有个简单的例子：缓存">
+<meta property="og:type" content="website">
+<meta property="og:title" content="缓存概述">
+<meta property="og:url" content="http://screeps-cn.github.io/contributed/caching-overview.html">
+<meta property="og:site_name" content="Screeps 中文文档">
+<meta property="og:description" content="Screeps 是一个以性能为中心的游戏 - 性能越好，每个 tick 就能完成更多的工作。而缓存则是性能优化中极其重要的元素，在 Screeps 里使用缓存将会让你接触到许多独特的机遇和挑战。
+从本质上来说，缓存的概念十分简单 - 通过把昂贵的代码执行结果保存起来，来让之后的调用变得更加简单。缓存还有另外一个好处，它可以使得运行的函数在无法得出结果的时候也正常给出返回值。这里有个简单的例子：缓存">
+<meta property="og:updated_time" content="2024-09-20T13:38:58.407Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="缓存概述">
+<meta name="twitter:description" content="Screeps 是一个以性能为中心的游戏 - 性能越好，每个 tick 就能完成更多的工作。而缓存则是性能优化中极其重要的元素，在 Screeps 里使用缓存将会让你接触到许多独特的机遇和挑战。
+从本质上来说，缓存的概念十分简单 - 通过把昂贵的代码执行结果保存起来，来让之后的调用变得更加简单。缓存还有另外一个好处，它可以使得运行的函数在无法得出结果的时候也正常给出返回值。这里有个简单的例子：缓存">
+  <!-- Google Analytics -->
+  
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="https://screeps.com" id="logo">Screeps</a>
+      <a href="/index.html" id="logo-docs">docs</a>
+    </h1>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+    <div id="header-main"></div>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name" id="top">缓存概述</h1>
+                <a href="https://github.com/screeps-cn/docs/edit/master/source/contributed/caching-overview.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                
+                <div class="article-author">Contributed by <a href="https://github.com/tedivm" target="_blank">tedivm</a> on <time datetime="2017-06-14T00:00:00.000Z">6月 14, 2017</time></div>
+                
+                <p>Screeps 是一个以性能为中心的游戏 - 性能越好，每个 tick 就能完成更多的工作。而缓存则是性能优化中极其重要的元素，在 Screeps 里使用缓存将会让你接触到许多独特的机遇和挑战。</p>
+<p>从本质上来说，缓存的概念十分简单 - 通过把昂贵的代码执行结果保存起来，来让之后的调用变得更加简单。缓存还有另外一个好处，它可以使得运行的函数在无法得出结果的时候也正常给出返回值。这里有个简单的例子：缓存寻路结果可以使得 creep 在没有房间视野的情况下也可以正常移动，所以说，缓存可以使代码的性能更好也更加的健壮。</p>
+<h2 id="数据存储位置" class="article-heading"><a href="#数据存储位置" class="headerlink" title="数据存储位置"></a>数据存储位置<a class="article-anchor" href="#数据存储位置" aria-hidden="true"></a></h2><h3 id="内存（Memory）" class="article-heading"><a href="#内存（Memory）" class="headerlink" title="内存（Memory）"></a>内存（Memory）<a class="article-anchor" href="#内存（Memory）" aria-hidden="true"></a></h3><p>存储缓存数据最常见位置就是 <a href="/global-objects.html#Memory-object">Memory</a> 了。只有这里可以真正持久的保存数据 - 存储在 <a href="/global-objects.html#Memory-object">Memory</a> 中的所有数据会一直保留直到被删除。因此，如果数据非常珍贵或必须保存，则可以把它放到内存里。</p>
+<p><a href="/global-objects.html#Memory-object">Memory</a> 有两个主要缺点：</p>
+<ul>
+<li><a href="/global-objects.html#Memory-object">Memory</a> 的空间最大只有 2048kb。</li>
+<li><a href="/global-objects.html#Memory-object">Memory</a> 在被首次访问时会使用 JSON.parse 进行数据解析，保存的数据越多，解析开销就越大。</li>
+</ul>
+<p>因为这些原因，我们很有必要限制 <a href="/global-objects.html#Memory-object">Memory</a> 中保存的数据。</p>
+<h3 id="全局（Global）" class="article-heading"><a href="#全局（Global）" class="headerlink" title="全局（Global）"></a>全局（Global）<a class="article-anchor" href="#全局（Global）" aria-hidden="true"></a></h3><p><a href="/game-loop.html">游戏循环</a>架构允许您在 ”loop“ 中定义每个 tick 都会执行的代码。此外，它还允许您在外部定义开销较大的一次性运行代码。这是最常用的<code>require</code> 模块 -</p>
+<pre class="highlight undefined tab-undefined "><code><span class="token comment" spellcheck="true">// 仅在新的全局变量新建时执行</span>
+<span class="token keyword">var</span> mod <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mod'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports<span class="token punctuation">.</span>loop <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 每个 tick 都会执行</span>
+    mod<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>另一个示例说明了如何保存性能损耗较大的函数的执行结果。在第一次执行之后，后续调用都会返回之前缓存下来的结果：</p>
+<pre class="highlight undefined tab-undefined "><code><span class="token keyword">let</span> runExpensiveCodeResults <span class="token operator">=</span> <span class="token boolean">false</span>
+<span class="token keyword">function</span> <span class="token function">runExpensiveCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>runExpensiveCodeResults<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        runExpensiveCodeResults <span class="token operator">=</span> <span class="token function">someExpensiveCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> runExpensiveCodeResults<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>这两个示例的缺点在于，它们仅在代码首次加载 &quot;require&quot; 时才运行或定义。您可以通过访问 <a href="https://nodejs.org/api/globals.html#globals_global" target="_blank" rel="external"><code>global</code></a>  对象来让代码更加简洁，该对象是 Node 中的一个特殊对象，可以在任何地方进行访问。</p>
+<pre class="highlight undefined tab-undefined "><code><span class="token keyword">function</span> <span class="token function">runExpensiveCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>global<span class="token punctuation">.</span>runExpensiveCodeResults<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        global<span class="token punctuation">.</span>runExpensiveCodeResults <span class="token operator">=</span> <span class="token function">someExpensiveCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> global<span class="token punctuation">.</span>runExpensiveCodeResults<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>global 缓存还有一些严格的限制：</p>
+<ul>
+<li><code>global</code> 对象会定期重置，这意味着所有数据都会被周期性清除。所以 <code>global</code> 对象不能视为持久性存储。</li>
+<li>将大量数据放入 <code>global</code> 缓存中可能会导致 node 的垃圾回收器被更频繁地调用并消耗更多的 CPU。</li>
+</ul>
+<p>这些限制使得 <code>global</code> 对象成为某些类型缓存的理想选择，例如，函数的执行结果始终是相同的，或者使用“老旧”的数据也无关紧要，那么这种就更适合在 <code>global</code> 里进行存储。而对于结果可能会更改并且会导致数据变得无效的情况下，就必须将元数据（例如 TTL 或版本标识符）与结果保存在一起来方便进行过期检查。</p>
+<h2 id="代码引入缓存（Require-Cache）" class="article-heading"><a href="#代码引入缓存（Require-Cache）" class="headerlink" title="代码引入缓存（Require Cache）"></a>代码引入缓存（Require Cache）<a class="article-anchor" href="#代码引入缓存（Require-Cache）" aria-hidden="true"></a></h2><p>每次调用<code>require</code>时其执行结果都会被缓存。这会减少服务器和脚本的运行消耗，因为它避免了每个 tick 都必须编译各种 javascript 模块。require 缓存和 <code>global</code> 缓存有着很高的相关性并且会被同时清除。但是在某些情况下，<code>require</code> 缓存会被（全部或部分）清除而 <code>global</code> 不会。</p>
+<p>站在性能的角度来看，<code>require</code> 和 <code>global</code> 缓存会被清除这个事实意味着 <code>global resets</code> 是一个尤其耗费性能的事件。</p>
+<h2 id="提示" class="article-heading"><a href="#提示" class="headerlink" title="提示"></a>提示<a class="article-anchor" href="#提示" aria-hidden="true"></a></h2><ul>
+<li>请不要随意往 Memory 里添加您的缓存，因为内存解析时间可能会比较昂贵。</li>
+<li>解析对象要比解析字符串的损耗更大。在储存之前想办法把 <a href="/api/#RoomPosition">RoomPositions</a> 之类的对象转换为字符串，然后在需要时再将其转换回来。这种操作可能会带来令人惊讶的性能提升。</li>
+<li>你可以压缩具有重复数据的超大对象例如 <a href="/api/#PathFinder-CostMatrix">CostMatrixes</a> 来节省大量的内存空间。经常利用这些对象的玩家最好学会使用 <a href="http://pieroxy.net/blog/pages/lz-string/index.html" target="_blank" rel="external">lzstring</a>，并且还应该保证最大限度的利用 <code>global</code> 缓存来尽可能的减少缓存所需的解压次数。</li>
+<li>通常来讲，大多数缓存系统会把 TTL 放进 <code>set</code> 方法里，但是对于 Screeps 来说，把它放在 <code>get</code> 方法里可能更有意义。这样就可以根据需要调整 TTL。例如，可以把没有视野的房间已缓存 Costmax 的 TTL 设置为无限（Infinity）并且对其进行压缩来保证数据始终可用，尽管这些数据可能会比较老旧。</li>
+<li>不要忘了添加一些逻辑来自动清理过时的缓存信息，不然您的 Memory 将随着时间推移而变得越来越臃肿。</li>
+</ul>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2024-09-20T13:38:58.407Z" itemprop="dateModified">上次更新：9月 20, 2024</time>
+                <a href="/contributed/modifying-prototypes.html" class="article-footer-prev"><i class="fa fa-chevron-left"></i><span>修改原型</span></a><a href="/contributed/ps_ubuntu.html" class="article-footer-next"><span>私有服务器 MongoDB</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据存储位置"><span class="toc-text">数据存储位置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内存（Memory）"><span class="toc-text">内存（Memory）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全局（Global）"><span class="toc-text">全局（Global）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码引入缓存（Require-Cache）"><span class="toc-text">代码引入缓存（Require Cache）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提示"><span class="toc-text">提示</span></a></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+            
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="sidebar-link">总览</a><strong class="sidebar-title">游戏环境</strong><a href="/introduction.html" class="sidebar-link">简介</a><a href="/creeps.html" class="sidebar-link">Creeps</a><a href="/control.html" class="sidebar-link">控制</a><a href="/defense.html" class="sidebar-link">防御</a><a href="/respawn.html" class="sidebar-link">重生</a><a href="/start-areas.html" class="sidebar-link">初始区域</a><a href="/resources.html" class="sidebar-link">资源</a><a href="/market.html" class="sidebar-link">市场</a><a href="/invaders.html" class="sidebar-link">NPC 入侵者</a><a href="/power.html" class="sidebar-link">超能</a><strong class="sidebar-title">脚本</strong><a href="/scripting-basics.html" class="sidebar-link">脚本基础</a><a href="/global-objects.html" class="sidebar-link">全局对象</a><a href="/modules.html" class="sidebar-link">模块</a><a href="/debugging.html" class="sidebar-link">调试</a><a href="/game-loop.html" class="sidebar-link">游戏循环</a><a href="/commit.html" class="sidebar-link">外部提交</a><a href="/simultaneous-actions.html" class="sidebar-link">同步操作</a><a href="/cpu-limit.html" class="sidebar-link">CPU 限制</a><strong class="sidebar-title">其他</strong><a href="/architecture.html" class="sidebar-link">服务器架构</a><a href="/ptr.html" class="sidebar-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="sidebar-link">第三方工具</a><a href="/auth-tokens.html" class="sidebar-link">验证令牌</a><a href="/community-servers.html" class="sidebar-link">社区服务器</a><a href="/tos.html" class="sidebar-link">服务条款</a><a href="/privacy-policy.html" class="sidebar-link">隐私政策</a><strong class="sidebar-title">资源</strong><a href="http://blog.screeps.com" class="sidebar-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="sidebar-link">修改日志</a><a href="http://chat.screeps.com" class="sidebar-link">聊天室</a><a href="https://screeps.com/forum/" class="sidebar-link">论坛</a><strong class="sidebar-title">贡献文章</strong><a href="/contributed/rules.html" class="sidebar-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="sidebar-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="sidebar-link">修改原型</a><a href="/contributed/caching-overview.html" class="sidebar-link current">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="sidebar-link">私有服务器 MongoDB</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2024 <a href="https://screeps.com/" target="_blank">Screeps</a><br>
+      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
+    </div>
+    <div id="footer-links">
+      <a href="https://github.com/screeps-cn/docs" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    
+      <a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="mobile-nav-link">总览</a><strong class="mobile-nav-title">游戏环境</strong><a href="/introduction.html" class="mobile-nav-link">简介</a><a href="/creeps.html" class="mobile-nav-link">Creeps</a><a href="/control.html" class="mobile-nav-link">控制</a><a href="/defense.html" class="mobile-nav-link">防御</a><a href="/respawn.html" class="mobile-nav-link">重生</a><a href="/start-areas.html" class="mobile-nav-link">初始区域</a><a href="/resources.html" class="mobile-nav-link">资源</a><a href="/market.html" class="mobile-nav-link">市场</a><a href="/invaders.html" class="mobile-nav-link">NPC 入侵者</a><a href="/power.html" class="mobile-nav-link">超能</a><strong class="mobile-nav-title">脚本</strong><a href="/scripting-basics.html" class="mobile-nav-link">脚本基础</a><a href="/global-objects.html" class="mobile-nav-link">全局对象</a><a href="/modules.html" class="mobile-nav-link">模块</a><a href="/debugging.html" class="mobile-nav-link">调试</a><a href="/game-loop.html" class="mobile-nav-link">游戏循环</a><a href="/commit.html" class="mobile-nav-link">外部提交</a><a href="/simultaneous-actions.html" class="mobile-nav-link">同步操作</a><a href="/cpu-limit.html" class="mobile-nav-link">CPU 限制</a><strong class="mobile-nav-title">其他</strong><a href="/architecture.html" class="mobile-nav-link">服务器架构</a><a href="/ptr.html" class="mobile-nav-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="mobile-nav-link">第三方工具</a><a href="/auth-tokens.html" class="mobile-nav-link">验证令牌</a><a href="/community-servers.html" class="mobile-nav-link">社区服务器</a><a href="/tos.html" class="mobile-nav-link">服务条款</a><a href="/privacy-policy.html" class="mobile-nav-link">隐私政策</a><strong class="mobile-nav-title">资源</strong><a href="http://blog.screeps.com" class="mobile-nav-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="mobile-nav-link">修改日志</a><a href="http://chat.screeps.com" class="mobile-nav-link">聊天室</a><a href="https://screeps.com/forum/" class="mobile-nav-link">论坛</a><strong class="mobile-nav-title">贡献文章</strong><a href="/contributed/rules.html" class="mobile-nav-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="mobile-nav-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="mobile-nav-link">修改原型</a><a href="/contributed/caching-overview.html" class="mobile-nav-link current">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="mobile-nav-link">私有服务器 MongoDB</a>
+    
+  </div>
+</nav>
+  <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/scrollingelement.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/custom.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+</body>
+</html>

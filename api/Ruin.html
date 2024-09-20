@@ -1,0 +1,37 @@
+<h1 id="Ruin"><a href="#Ruin" class="headerlink" title="Ruin"></a>Ruin</h1><p><img src="img/ruin.png" alt align="right"></p>
+<p>一个被摧毁的建筑。该对象允许其他单位在其上行走。</p>
+<table class="table gameplay-info">
+    <tbody>
+    <tr>
+        <td><strong>Decay</strong></td>
+        <td>500 tick 除了某些情况外</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="Ruin.effects" class="api-property api-property--property  "><span class="api-property__name">effects</span><span class="api-property__type">array</span></h2>
+<p>附加的效果，一个包含如下属性的对象数组：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>effect</code></td><td>number</td><td><p>该附加效果的 ID。可以是自然效果 ID 或者 Power ID。</p>
+</td>
+</tr><tr><td><code>level (可选)</code></td><td>number </td><td><p>该附加效果的 Power 等级。如果效果不是 Power 效果则不存在该属性。</p>
+</td>
+</tr><tr><td><code>ticksRemaining</code></td><td>number</td><td><p>多长时间之后会失去这个效果。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="Ruin.pos" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">pos</span><span class="api-property__type"><a href="#RoomPosition">RoomPosition</a></span></h2>
+<p>表示该对象在房间中的坐标的对象。</p>
+<h2 id="Ruin.room" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">room</span><span class="api-property__type"><a href="#Room">Room</a></span></h2>
+<p>Room对象的链接。如果对象是标志或工地并且放置在你不可见的房间中，则可能为undefined。</p>
+
+<h2 id="Ruin.destroyTime" class="api-property api-property--property  "><span class="api-property__name">destroyTime</span><span class="api-property__type">number</span></h2>
+<p>该建筑被摧毁的时间。</p>
+<h2 id="Ruin.id" class="api-property api-property--property  "><span class="api-property__name">id</span><span class="api-property__type">string</span></h2>
+<p>一个唯一的对象标识。你可以使用 <a href="#Game.getObjectById"><code>Game.getObjectById</code></a> 方法获取对象实例。</p>
+<h2 id="Ruin.store" class="api-property api-property--property  "><span class="api-property__name">store</span><span class="api-property__type"><a href="#Store">Store</a></span></h2>
+<p>一个包含了该建筑中所存储资源的 <a href="#Store"><code>Store</code></a> 对象。</p>
+<h2 id="Ruin.structure" class="api-property api-property--property  "><span class="api-property__name">structure</span><span class="api-property__type"><a href="#Structure">Structure</a> | <a href="#OwnedStructure">OwnedStructure</a></span></h2>
+<p>一个包含了已被摧毁建筑基本信息的对象。</p>
+<h2 id="Ruin.ticksToDecay" class="api-property api-property--property  "><span class="api-property__name">ticksToDecay</span><span class="api-property__type">number</span></h2>
+<p>该废墟离老化消失还有多少 tick。</p>

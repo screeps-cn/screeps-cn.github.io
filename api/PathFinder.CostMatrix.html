@@ -1,0 +1,54 @@
+<h1 id="PathFinder-CostMatrix"><a href="#PathFinder-CostMatrix" class="headerlink" title="PathFinder.CostMatrix"></a>PathFinder.CostMatrix</h1><p>存放自定义导航寻路成本的对象。默认情况下，<code>PathFinder</code> 在寻路时只考虑地形 (平原、沼泽、墙壁) —— 如果您需要绕过建筑或者 creep，就需要把他们放进一个 <code>CostMatrix</code> 里。通常情况下，您将在 <code>roomCallback</code> 内部创建 <code>CostMatrix</code>。如果在房间的 CostMatrix 里找到了一个非零值，那么它将替代默认的地形移动成本。您应该避免在 CostMatrix 和地形移动成本标志里使用较大值。例如，使用 <code>{ plainCost: 1, swampCost: 5 }</code> 的 <code>PathFinder.search</code> 将比使用 <code>{plainCost: 2, swampCost: 10 }</code> 的运行的更快，并且他们将会寻路出相同的路径。</p>
+<h2 id="PathFinder.CostMatrix.constructor" class="api-property   "><span class="api-property__name">constructor</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--undefined" title="undefined"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">let</span> costs <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PathFinder<span class="token punctuation">.</span>CostMatrix</span><span class="token punctuation">;</span></code></pre><p>创建一个新的 CostMatrix，其中所有位置的移动成本都为 0。</p>
+<h2 id="PathFinder.CostMatrix.set" class="api-property api-property--method  "><span class="api-property__name">set</span><span class="api-property__args">(x, y, cost)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">let</span> costs <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PathFinder<span class="token punctuation">.</span>CostMatrix</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> pos <span class="token operator">=</span> Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>pos<span class="token punctuation">;</span>
+costs<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>pos<span class="token punctuation">.</span>x<span class="token punctuation">,</span> pos<span class="token punctuation">.</span>y<span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 不能从该建筑上移动</span></code></pre><p>在 CostMatrix 中设置指定位置的移动成本。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>位置在房间中的 x 坐标。</p>
+</td>
+</tr><tr><td><code>y</code></td><td>number</td><td><p>位置在房间中的 y 坐标。</p>
+</td>
+</tr><tr><td><code>cost</code></td><td>number</td><td><p>该位置的移动成本，必须是整数。值为 0 时将使用该地块默认的地形移动成本。大于或等于 255 的移动成本将视为无法通过。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="PathFinder.CostMatrix.get" class="api-property api-property--method  "><span class="api-property__name">get</span><span class="api-property__args">(x, y)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<p>获取该 CostMatrix 中指定位置的移动成本。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>位置在房间中的 x 坐标。</p>
+</td>
+</tr><tr><td><code>y</code></td><td>number</td><td><p>位置在房间中的 y 坐标。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="PathFinder.CostMatrix.clone" class="api-property api-property--method  "><span class="api-property__name">clone</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<p>使用当前 CostMatrix 中的相同数据创建一个新的 CostMatrix。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>一个新的 CostMatrix 实例。</p>
+<h2 id="PathFinder.CostMatrix.serialize" class="api-property api-property--method  "><span class="api-property__name">serialize</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">let</span> costs <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PathFinder<span class="token punctuation">.</span>CostMatrix</span><span class="token punctuation">;</span>
+Memory<span class="token punctuation">.</span>savedMatrix <span class="token operator">=</span> costs<span class="token punctuation">.</span><span class="token function">serialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>返回该 CostMatrix 的紧凑形式，使其可以使用 <code>JSON.stringify</code> 进行存储。</p>
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>一个 number 数组。它除了可以被保存起来以备后续使用之外没有什么作用。</p>
+<h2 id="PathFinder.CostMatrix.deserialize" class="api-property api-property--method  "><span class="api-property__name">PathFinder.CostMatrix.deserialize</span><span class="api-property__args">(val)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">let</span> costs <span class="token operator">=</span> PathFinder<span class="token punctuation">.</span>CostMatrix<span class="token punctuation">.</span><span class="token function">deserialize</span><span class="token punctuation">(</span>Memory<span class="token punctuation">.</span>savedMatrix<span class="token punctuation">)</span></code></pre><p>静态方法，可以将 <code>serialize</code> 方法返回的值反序列化为一个新的 CostMatrix。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>val</code></td><td>object</td><td><p>任何 <code>serialize</code> 的返回值。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>返回新的
+<code>CostMatrix</code>
+实例。</p>

@@ -1,0 +1,270 @@
+<h1 id="StructureLab"><a href="#StructureLab" class="headerlink" title="StructureLab"></a>StructureLab</h1><p><img src="img/lab.png" alt align="right"></p>
+<p>使用基础矿物生产化合物，强化(boost) creep 和清除强化。
+点击<a href="/resources.html">本文</a>来了解更多关于矿物的信息。</p>
+<table class="table gameplay-info">
+    <tbody>
+    <tr>
+        <td colspan="2"><strong>控制器等级</strong></td>
+    </tr>
+    <tr>
+        <td>1-5</td>
+        <td>—</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>3 labs</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>6 labs</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>10 labs</td>
+    </tr>
+    <tr>
+        <td><strong>建造花费</strong></td>
+        <td>50,000</td>
+    </tr>
+    <tr>
+        <td><strong>生命值</strong></td>
+        <td>500</td>
+    </tr>
+    <tr>
+        <td><strong>容量</strong></td>
+        <td>3000 单位矿物，2000 单位能量</td>
+    </tr>
+    <tr>
+        <td><strong>产品</strong></td>
+        <td>每次反应生成 5 单位化合物</td>
+    </tr>
+    <tr>
+        <td><strong>反应冷却</strong></td>
+        <td>取决于反应类型 (详见<a href="/resources.html">本文</a>)</td>
+    </tr>
+    <tr>
+        <td><strong>到输入 lab 的距离</strong></td>
+        <td>2 格之内</td>
+    </tr>
+    <tr>
+        <td><strong>强化消耗</strong></td>
+        <td>每个身体部件消耗 30 单位矿物，20 单位能量</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="StructureLab.effects" class="api-property api-property--property  "><span class="api-property__name">effects</span><span class="api-property__type">array</span></h2>
+<p>附加的效果，一个包含如下属性的对象数组：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>effect</code></td><td>number</td><td><p>该附加效果的 ID。可以是自然效果 ID 或者 Power ID。</p>
+</td>
+</tr><tr><td><code>level (可选)</code></td><td>number </td><td><p>该附加效果的 Power 等级。如果效果不是 Power 效果则不存在该属性。</p>
+</td>
+</tr><tr><td><code>ticksRemaining</code></td><td>number</td><td><p>多长时间之后会失去这个效果。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="StructureLab.pos" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">pos</span><span class="api-property__type"><a href="#RoomPosition">RoomPosition</a></span></h2>
+<p>表示该对象在房间中的坐标的对象。</p>
+<h2 id="StructureLab.room" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">room</span><span class="api-property__type"><a href="#Room">Room</a></span></h2>
+<p>Room对象的链接。如果对象是标志或工地并且放置在你不可见的房间中，则可能为undefined。</p>
+
+<h2 id="StructureLab.hits" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">hits</span><span class="api-property__type">number</span></h2>
+<p>当前这个建筑的当前生命值。</p>
+<h2 id="StructureLab.hitsMax" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">hitsMax</span><span class="api-property__type">number</span></h2>
+<p>这个建筑的最大生命值。</p>
+<h2 id="StructureLab.id" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">id</span><span class="api-property__type">string</span></h2>
+<p>一个唯一的对象标识。你可以使用<a href="#Game.getObjectById"><code>Game.getObjectById</code></a>方法获取对象实例。</p>
+<h2 id="StructureLab.structureType" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">structureType</span><span class="api-property__type">string</span></h2>
+<p><code>STRUCTURE_*</code>常量之一。</p>
+<h2 id="StructureLab.destroy" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">destroy</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>立即摧毁这个建筑。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个建筑的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>敌对creep在这个房间中。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="StructureLab.isActive" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">isActive</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--2" title="该方法的CPU开销中等。"></div>
+        </h2>
+<p>检查这个建筑是否可用。如果房间控制等级不足，这个方法会返回false，并且这个建筑会在游戏中红色高亮。</p>
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>布尔值。</p>
+<h2 id="StructureLab.notifyWhenAttacked" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">notifyWhenAttacked</span><span class="api-property__args">(enabled)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>切换这个建筑受到攻击时的自动通知。通知会发送到你的账户邮箱。默认开启。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>enabled</code></td><td>boolean</td><td><p>是否启用通知。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个建筑的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p><code>enable</code>参数不是一个布尔值。</p>
+</td></tr>
+</tbody></table>
+</p>
+  
+<h2 id="StructureLab.my" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#OwnedStructure">OwnedStructure</a></div><span class="api-property__name">my</span><span class="api-property__type">boolean</span></h2>
+<p>是否是你拥有的建筑。</p>
+<h2 id="StructureLab.owner" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#OwnedStructure">OwnedStructure</a></div><span class="api-property__name">owner</span><span class="api-property__type">object</span></h2>
+<p>建筑拥有者信息，一个包含如下属性的对象：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>username</code></td><td>string</td><td><p>拥有者姓名。</p>
+</td>
+</tr></tbody></table>
+
+
+<h2 id="StructureLab.cooldown" class="api-property api-property--property  "><span class="api-property__name">cooldown</span><span class="api-property__type">number</span></h2>
+<p>下次反应或者清除强化之前还需等待多少 tick 的冷却。</p>
+<h2 id="StructureLab.energy" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">energy</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#StructureExtension.store"><code>.store[RESOURCE_ENERGY]</code></a> 的别名。</p>
+<h2 id="StructureLab.energyCapacity" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">energyCapacity</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#Store.getCapacity"><code>.store.getCapacity(RESOURCE_ENERGY)</code></a> 的别名。</p>
+<h2 id="StructureLab.mineralAmount" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">mineralAmount</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#StructureExtension.store"><code>lab.store[lab.mineralType]</code></a> 的别名。</p>
+<h2 id="StructureLab.mineralType" class="api-property api-property--property  "><span class="api-property__name">mineralType</span><span class="api-property__type">string</span></h2>
+<p>该 lab 储存的矿物类型。lab 同一时间内只能储存一种类型的矿物。</p>
+<h2 id="StructureLab.mineralCapacity" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">mineralCapacity</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#Store.getCapacity"><code>lab.store.getCapacity(lab.mineralType || yourMineral)</code></a> 的别名。</p>
+<h2 id="StructureLab.store" class="api-property api-property--property  "><span class="api-property__name">store</span><span class="api-property__type"><a href="#Store">Store</a></span></h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>structure<span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">getFreeCapacity</span><span class="token punctuation">(</span><span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">transfer</span><span class="token punctuation">(</span>structure<span class="token punctuation">,</span> <span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>一个包含了该建筑中所存储资源的 <a href="#Store"><code>Store</code></a> 对象。</p>
+<h2 id="StructureLab.boostCreep" class="api-property api-property--method  "><span class="api-property__name">boostCreep</span><span class="api-property__args">(creep, [bodyPartsCount])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>使用存储中的矿物强化 creep 的身体部件。creep 必须在相邻与 lab 的正方形区域内。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>creep</code></td><td><a href="#Creep">Creep</a></td><td><p>目标 creep。</p>
+</td>
+</tr><tr><td><code>bodyPartsCount (可选)</code></td><td>number</td><td><p>要强化的指定身体部件的数量。<code>TOUGH</code> 身体部件始终是从左到右进行强化，而其他部件则是从右到左。如果未指定，则对所有合适的身体部件进行强化。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>您不是该 lab 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_FOUND</code></td><td>-5</td><td><p>lab 中存放的矿物类型无法强化该 creep 的任何身体部件。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>lab 中没有足够的能量或者矿物。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是有效的 creep 对象。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标距离过远。</p>
+</td></tr>
+<tr><td><code>ERR_RCL_NOT_ENOUGH</code></td><td>-14</td><td><p>房间控制器等级不足。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="StructureLab.reverseReaction" class="api-property api-property--method  "><span class="api-property__name">reverseReaction</span><span class="api-property__args">(lab1, lab2)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>将化合物还原为其反应底物。同一个输出 lab 可以和多个输入 lab 进行反应。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>lab1</code></td><td><a href="#StructureLab">StructureLab</a></td><td><p>第一个输出 lab。</p>
+</td>
+</tr><tr><td><code>lab2</code></td><td><a href="#StructureLab">StructureLab</a></td><td><p>第二个输出 lab。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>下列返回值之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>您不是该 lab 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>源 lab 中没有足够的资源。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是有效的 lab 对象。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>有输出 lab 无法存放更多资源。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标距离过远。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>该资源无法进行还原。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>该 lab 尚在冷却。</p>
+</td></tr>
+<tr><td><code>ERR_RCL_NOT_ENOUGH</code></td><td>-14</td><td><p>房间控制器等级不足。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="StructureLab.runReaction" class="api-property api-property--method  "><span class="api-property__name">runReaction</span><span class="api-property__args">(lab1, lab2)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>使用另外两个 lab 中的矿物作为底物来生产化合物。同一个输入 lab 可以给多个输出 lab 提供底物。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>lab1</code></td><td><a href="#StructureLab">StructureLab</a> (lab)</td><td><p>第一个输入 lab。</p>
+</td>
+</tr><tr><td><code>lab2</code></td><td><a href="#StructureLab">StructureLab</a> (lab)</td><td><p>第二个输入 lab。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>您不是该 lab 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>输入 lab 没有足够的资源。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是有效的 lab 对象。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>目标无法接受更多资源。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标距离过远。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>无法使用输入 lab 中的资源进行反应。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>该 lab 仍在冷却中。</p>
+</td></tr>
+<tr><td><code>ERR_RCL_NOT_ENOUGH</code></td><td>-14</td><td><p>房间控制器等级不足。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="StructureLab.unboostCreep" class="api-property api-property--method  "><span class="api-property__name">unboostCreep</span><span class="api-property__args">(creep)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>立刻从 creep 身上移除强化并将强化所需的 50% 化合物丢弃在地面上，该操作不会关心 creep 的剩余存活时间。creep 必须在紧邻 lab 的正方形区域内。清除强化所需的冷却时间等于生产强化该 creep 所需化合物的总时间。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>creep</code></td><td><a href="#Creep">Creep</a></td><td><p>目标 creep。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-3"><a href="#返回值-3" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>您不是该 lab 或者目标 creep 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_FOUND</code></td><td>-5</td><td><p>目标没有强化过的身体部件。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是有效的 creep 对象。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>该 lab 仍在冷却当中。</p>
+</td></tr>
+<tr><td><code>ERR_RCL_NOT_ENOUGH</code></td><td>-14</td><td><p>房间控制器等级不足。</p>
+</td></tr>
+</tbody></table>
+</p>

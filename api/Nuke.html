@@ -1,0 +1,45 @@
+<h1 id="Nuke"><a href="#Nuke" class="headerlink" title="Nuke"></a>Nuke</h1><p>核弹原爆点，此对象无法被更改或移除。但可以用常数 <code>FIND_NUKES</code> 查找即将抵达房间的核弹。核弹只能由 <a href="#StructureNuker"><code>核弹发射井</code></a> 发射</p>
+<table class="table gameplay-info">
+    <tbody>
+    <tr>
+        <td><strong>着落时间</strong></td>
+        <td>50,000 ticks</td>
+    </tr>
+    <tr>
+        <td><strong>影响</strong></td>
+        <td>房间里的所有的 creeps 、建筑工地、掉落的资源会在核爆瞬间被移除，无论其是否在堡垒内。对建筑的伤害：
+            <ul>
+                <li>10,000,000 hits 在原爆点;</li>
+                <li>5,000,000 hits 对周边 5x5 区域内的所有建筑.</li>
+            </ul>
+            <p>注：向同一目标发射多枚核弹可叠加伤害。</p>
+            <p>Nuke 着落不会产生墓碑（tombstone）和遗迹（ruin），并且会销毁房间中所有存在的墓碑和遗迹。</p>
+            <p>如果目标房间处与安全模式，则其安全模式会被立即取消，但安全模式的冷却时间会被重置为0。</p>
+            <p>目标房间的控制器会进入 <code>upgradeBlocked</code> ，这意味着在 200 ticks 内其无法重新开启安全模式。</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="Nuke.effects" class="api-property api-property--property  "><span class="api-property__name">effects</span><span class="api-property__type">array</span></h2>
+<p>附加的效果，一个包含如下属性的对象数组：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>effect</code></td><td>number</td><td><p>该附加效果的 ID。可以是自然效果 ID 或者 Power ID。</p>
+</td>
+</tr><tr><td><code>level (可选)</code></td><td>number </td><td><p>该附加效果的 Power 等级。如果效果不是 Power 效果则不存在该属性。</p>
+</td>
+</tr><tr><td><code>ticksRemaining</code></td><td>number</td><td><p>多长时间之后会失去这个效果。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="Nuke.pos" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">pos</span><span class="api-property__type"><a href="#RoomPosition">RoomPosition</a></span></h2>
+<p>表示该对象在房间中的坐标的对象。</p>
+<h2 id="Nuke.room" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">room</span><span class="api-property__type"><a href="#Room">Room</a></span></h2>
+<p>Room对象的链接。如果对象是标志或工地并且放置在你不可见的房间中，则可能为undefined。</p>
+
+<h2 id="Nuke.id" class="api-property api-property--property  "><span class="api-property__name">id</span><span class="api-property__type">string</span></h2>
+<p>全局唯一的对象标识。你可以通过调用<a href="#Game.getObjectById"><code>Game.getObjectById</code></a>方法取得对象实例。</p>
+<h2 id="Nuke.launchRoomName" class="api-property api-property--property  "><span class="api-property__name">launchRoomName</span><span class="api-property__type">string</span></h2>
+<p>发射此核弹的房间名。</p>
+<h2 id="Nuke.timeToLand" class="api-property api-property--property  "><span class="api-property__name">timeToLand</span><span class="api-property__type">number</span></h2>
+<p>着落倒计时。</p>

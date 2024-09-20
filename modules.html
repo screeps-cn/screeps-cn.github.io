@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>使用模块归纳代码 | Screeps 中文文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://screeps-cn.github.io/modules.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="http://screeps-cn.github.io/modules.html">
+    
+      <link rel="alternative" hreflang="zh-tw" href="http://screeps-cn.github.io/zh-tw/modules.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="http://screeps-cn.github.io/zh-cn/modules.html">
+    
+      <link rel="alternative" hreflang="ru" href="http://screeps-cn.github.io/ru/modules.html">
+    
+      <link rel="alternative" hreflang="ko" href="http://screeps-cn.github.io/ko/modules.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/css/navy.css?1">
+  <link rel="stylesheet" href="/css/prism.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Screeps 中文文档">
+  <!-- Open Graph -->
+  <meta name="description" content="我们引入了 Node.js 的 require 和 module.exports 以方便玩家归纳整理代码。举例来说，玩家可以创造一个“侦察兵”模块：
+module.exports = {
+    run(creep) {
+        creep.moveTo(...);
+    }
+}然后将“侦察兵”模块导入主模块：
+var scout = require(&apos;scout&apos;);
+
+for(var">
+<meta property="og:type" content="website">
+<meta property="og:title" content="使用模块归纳代码">
+<meta property="og:url" content="http://screeps-cn.github.io/modules.html">
+<meta property="og:site_name" content="Screeps 中文文档">
+<meta property="og:description" content="我们引入了 Node.js 的 require 和 module.exports 以方便玩家归纳整理代码。举例来说，玩家可以创造一个“侦察兵”模块：
+module.exports = {
+    run(creep) {
+        creep.moveTo(...);
+    }
+}然后将“侦察兵”模块导入主模块：
+var scout = require(&apos;scout&apos;);
+
+for(var">
+<meta property="og:image" content="http://screeps-cn.github.io/img/binary1.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/binary2.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/binary3.png">
+<meta property="og:updated_time" content="2024-09-20T13:38:58.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用模块归纳代码">
+<meta name="twitter:description" content="我们引入了 Node.js 的 require 和 module.exports 以方便玩家归纳整理代码。举例来说，玩家可以创造一个“侦察兵”模块：
+module.exports = {
+    run(creep) {
+        creep.moveTo(...);
+    }
+}然后将“侦察兵”模块导入主模块：
+var scout = require(&apos;scout&apos;);
+
+for(var">
+<meta name="twitter:image" content="http://screeps-cn.github.io/img/binary1.png">
+  <!-- Google Analytics -->
+  
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="https://screeps.com" id="logo">Screeps</a>
+      <a href="/index.html" id="logo-docs">docs</a>
+    </h1>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+    <div id="header-main"></div>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name" id="top">使用模块归纳代码</h1>
+                <a href="https://github.com/screeps-cn/docs/edit/master/source/modules.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                
+                <p>我们引入了 Node.js 的 <code>require</code> 和 <code>module.exports</code> 以方便玩家归纳整理代码。举例来说，玩家可以创造一个“侦察兵”模块：</p>
+<pre class="highlight undefined tab-undefined "><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token function">run</span><span class="token punctuation">(</span>creep<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre><p>然后将“侦察兵”模块导入主模块：</p>
+<pre class="highlight undefined tab-undefined "><code><span class="token keyword">var</span> scout <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'scout'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token keyword">in</span> Game<span class="token punctuation">.</span>creeps<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    scout<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>creeps<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>除了亲自编写的模块，玩家还可以借用其他人的模块。目前我们内置了 <a href="http://lodash.com" target="_blank" rel="external">lodash</a> 库。</p>
+<pre class="highlight undefined tab-undefined "><code><span class="token keyword">var</span> _ <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'lodash'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 译注：由版本更新，此行现可省略</span>
+
+<span class="token keyword">var</span> harvesters <span class="token operator">=</span> _<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>creeps<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    memory<span class="token punctuation">:</span> <span class="token punctuation">{</span>role<span class="token punctuation">:</span> <span class="token string">'harvester'</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h2 id="二进制模块" class="article-heading"><a href="#二进制模块" class="headerlink" title="二进制模块"></a>二进制模块<a class="article-anchor" href="#二进制模块" aria-hidden="true"></a></h2><p>除了上述的普通模块，玩家还可以二进制模块。其会在玩家调用 <code>require</code> 时以原始二进制形式加载，由此允许玩家运行用其他语言（比如 <a href="http://webassembly.org/" target="_blank" rel="external">WebAssembly</a> ）编写的代码。</p>
+<p>WebAssembly 是个二进制编译的代码格式。其可以快速高效的运行 C/C++ 或 Rust 代码（及其他支持的语言）。参阅 <a href="https://developer.mozilla.org/en-US/docs/WebAssembly" target="_blank" rel="external">WebAssembly 文档</a>以获取更多信息。</p>
+<p>以下简述了如何用 <a href="https://kripken.github.io/emscripten-site/index.html" target="_blank" rel="external">Emscripten</a> 编译 C/C++ 代码及如何上传编译后的文件到游戏里。</p>
+<h3 id="创建-wasm-文件" class="article-heading"><a href="#创建-wasm-文件" class="headerlink" title="创建 .wasm 文件"></a>创建 <code>.wasm</code> 文件<a class="article-anchor" href="#创建-wasm-文件" aria-hidden="true"></a></h3><blockquote class="note info"><p>省略此步如果您想上传的文件已经是 <code>.wasm</code> 格式。</p>
+</blockquote>
+<p>安装 <a href="(https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html#sdk-installation-instructions">Emsripten SDK</a>。</p>
+<p>编写你的 C 函数并保存为 <code>addTwo.c</code></p>
+<pre class="highlight c++ tab-c++ "><code>int <span class="token function">addTwo</span><span class="token punctuation">(</span>int a<span class="token punctuation">,</span> int b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>将其编译成 <code>addTwo.wasm</code>：</p>
+<pre class="highlight undefined tab-undefined "><code>emcc <span class="token operator">-</span>s WASM<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">-</span>s SIDE_MODULE<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">-</span>O3 addTwo<span class="token punctuation">.</span>c <span class="token operator">-</span>o addTwo<span class="token punctuation">.</span>wasm</code></pre><h3 id="上传二进制模块" class="article-heading"><a href="#上传二进制模块" class="headerlink" title="上传二进制模块"></a>上传二进制模块<a class="article-anchor" href="#上传二进制模块" aria-hidden="true"></a></h3><p>点击此按钮添加新的二进制模组 <code>addTwo</code>：</p>
+<p><img src="img/binary1.png" alt=""></p>
+<p>以二进制模组的形式上传 <code>addTwo.wasm</code>：
+Upload your <code>addTwo.wasm</code> file as binary module contents, so that it looks as follows:</p>
+<p><img src="img/binary2.png" alt=""></p>
+<p>点击 ✔️ 提交代码。
+Click the ✔️ button to commit your modules.</p>
+<h3 id="在-Screeps-使用二进制模块" class="article-heading"><a href="#在-Screeps-使用二进制模块" class="headerlink" title="在 Screeps 使用二进制模块"></a>在 Screeps 使用二进制模块<a class="article-anchor" href="#在-Screeps-使用二进制模块" aria-hidden="true"></a></h3><p>如果您正确上传了你的二进制模块，您应该能在游戏内置 IDE 看见下图：</p>
+<p><img src="img/binary3.png" alt=""></p>
+<p>现在可通过 WebAssembly API 将二进制代码导入您的 <code>main</code></p>
+<pre class="highlight javascript tab-javascript "><code><span class="token comment" spellcheck="true">// 这将返回带有 `addTwo.wasm` 二进制内容的 ArrayBuffer</span>
+<span class="token keyword">const</span> bytecode <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'addTwo'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> wasmModule <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WebAssembly<span class="token punctuation">.</span>Module</span><span class="token punctuation">(</span>bytecode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> imports <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//有关 Emscripten 允许环境，请参见:</span>
+<span class="token comment" spellcheck="true">// https://github.com/WebAssembly/tool-conventions/blob/master/DynamicLinking.md</span>
+imports<span class="token punctuation">.</span>env <span class="token operator">=</span> <span class="token punctuation">{</span>
+    memoryBase<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    tableBase<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    memory<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">WebAssembly<span class="token punctuation">.</span>Memory</span><span class="token punctuation">(</span><span class="token punctuation">{</span> initial<span class="token punctuation">:</span> <span class="token number">256</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    table<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">WebAssembly<span class="token punctuation">.</span>Table</span><span class="token punctuation">(</span><span class="token punctuation">{</span> initial<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> element<span class="token punctuation">:</span> <span class="token string">'anyfunc'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> wasmInstance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WebAssembly<span class="token punctuation">.</span>Instance</span><span class="token punctuation">(</span>wasmModule<span class="token punctuation">,</span> imports<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>wasmInstance<span class="token punctuation">.</span>exports<span class="token punctuation">.</span><span class="token function">addTwo</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2024-09-20T13:38:58.408Z" itemprop="dateModified">上次更新：9月 20, 2024</time>
+                <a href="/global-objects.html" class="article-footer-prev"><i class="fa fa-chevron-left"></i><span>全局对象</span></a><a href="/debugging.html" class="article-footer-next"><span>调试</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二进制模块"><span class="toc-text">二进制模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-wasm-文件"><span class="toc-text">创建 .wasm 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上传二进制模块"><span class="toc-text">上传二进制模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在-Screeps-使用二进制模块"><span class="toc-text">在 Screeps 使用二进制模块</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+            
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="sidebar-link">总览</a><strong class="sidebar-title">游戏环境</strong><a href="/introduction.html" class="sidebar-link">简介</a><a href="/creeps.html" class="sidebar-link">Creeps</a><a href="/control.html" class="sidebar-link">控制</a><a href="/defense.html" class="sidebar-link">防御</a><a href="/respawn.html" class="sidebar-link">重生</a><a href="/start-areas.html" class="sidebar-link">初始区域</a><a href="/resources.html" class="sidebar-link">资源</a><a href="/market.html" class="sidebar-link">市场</a><a href="/invaders.html" class="sidebar-link">NPC 入侵者</a><a href="/power.html" class="sidebar-link">超能</a><strong class="sidebar-title">脚本</strong><a href="/scripting-basics.html" class="sidebar-link">脚本基础</a><a href="/global-objects.html" class="sidebar-link">全局对象</a><a href="/modules.html" class="sidebar-link current">模块</a><a href="/debugging.html" class="sidebar-link">调试</a><a href="/game-loop.html" class="sidebar-link">游戏循环</a><a href="/commit.html" class="sidebar-link">外部提交</a><a href="/simultaneous-actions.html" class="sidebar-link">同步操作</a><a href="/cpu-limit.html" class="sidebar-link">CPU 限制</a><strong class="sidebar-title">其他</strong><a href="/architecture.html" class="sidebar-link">服务器架构</a><a href="/ptr.html" class="sidebar-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="sidebar-link">第三方工具</a><a href="/auth-tokens.html" class="sidebar-link">验证令牌</a><a href="/community-servers.html" class="sidebar-link">社区服务器</a><a href="/tos.html" class="sidebar-link">服务条款</a><a href="/privacy-policy.html" class="sidebar-link">隐私政策</a><strong class="sidebar-title">资源</strong><a href="http://blog.screeps.com" class="sidebar-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="sidebar-link">修改日志</a><a href="http://chat.screeps.com" class="sidebar-link">聊天室</a><a href="https://screeps.com/forum/" class="sidebar-link">论坛</a><strong class="sidebar-title">贡献文章</strong><a href="/contributed/rules.html" class="sidebar-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="sidebar-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="sidebar-link">修改原型</a><a href="/contributed/caching-overview.html" class="sidebar-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="sidebar-link">私有服务器 MongoDB</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2024 <a href="https://screeps.com/" target="_blank">Screeps</a><br>
+      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
+    </div>
+    <div id="footer-links">
+      <a href="https://github.com/screeps-cn/docs" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    
+      <a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="mobile-nav-link">总览</a><strong class="mobile-nav-title">游戏环境</strong><a href="/introduction.html" class="mobile-nav-link">简介</a><a href="/creeps.html" class="mobile-nav-link">Creeps</a><a href="/control.html" class="mobile-nav-link">控制</a><a href="/defense.html" class="mobile-nav-link">防御</a><a href="/respawn.html" class="mobile-nav-link">重生</a><a href="/start-areas.html" class="mobile-nav-link">初始区域</a><a href="/resources.html" class="mobile-nav-link">资源</a><a href="/market.html" class="mobile-nav-link">市场</a><a href="/invaders.html" class="mobile-nav-link">NPC 入侵者</a><a href="/power.html" class="mobile-nav-link">超能</a><strong class="mobile-nav-title">脚本</strong><a href="/scripting-basics.html" class="mobile-nav-link">脚本基础</a><a href="/global-objects.html" class="mobile-nav-link">全局对象</a><a href="/modules.html" class="mobile-nav-link current">模块</a><a href="/debugging.html" class="mobile-nav-link">调试</a><a href="/game-loop.html" class="mobile-nav-link">游戏循环</a><a href="/commit.html" class="mobile-nav-link">外部提交</a><a href="/simultaneous-actions.html" class="mobile-nav-link">同步操作</a><a href="/cpu-limit.html" class="mobile-nav-link">CPU 限制</a><strong class="mobile-nav-title">其他</strong><a href="/architecture.html" class="mobile-nav-link">服务器架构</a><a href="/ptr.html" class="mobile-nav-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="mobile-nav-link">第三方工具</a><a href="/auth-tokens.html" class="mobile-nav-link">验证令牌</a><a href="/community-servers.html" class="mobile-nav-link">社区服务器</a><a href="/tos.html" class="mobile-nav-link">服务条款</a><a href="/privacy-policy.html" class="mobile-nav-link">隐私政策</a><strong class="mobile-nav-title">资源</strong><a href="http://blog.screeps.com" class="mobile-nav-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="mobile-nav-link">修改日志</a><a href="http://chat.screeps.com" class="mobile-nav-link">聊天室</a><a href="https://screeps.com/forum/" class="mobile-nav-link">论坛</a><strong class="mobile-nav-title">贡献文章</strong><a href="/contributed/rules.html" class="mobile-nav-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="mobile-nav-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="mobile-nav-link">修改原型</a><a href="/contributed/caching-overview.html" class="mobile-nav-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="mobile-nav-link">私有服务器 MongoDB</a>
+    
+  </div>
+</nav>
+  <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/scrollingelement.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/custom.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+</body>
+</html>

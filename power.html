@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>超能 | Screeps 中文文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://screeps-cn.github.io/power.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="http://screeps-cn.github.io/power.html">
+    
+      <link rel="alternative" hreflang="zh-tw" href="http://screeps-cn.github.io/zh-tw/power.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="http://screeps-cn.github.io/zh-cn/power.html">
+    
+      <link rel="alternative" hreflang="ru" href="http://screeps-cn.github.io/ru/power.html">
+    
+      <link rel="alternative" hreflang="ko" href="http://screeps-cn.github.io/ko/power.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/css/navy.css?1">
+  <link rel="stylesheet" href="/css/prism.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Screeps 中文文档">
+  <!-- Open Graph -->
+  <meta name="description" content="超能是是一种游戏后期的机制，在你的领地发展中开启一段全新的旅程：通过提高效率替代扩大领地规模。它的基本内容如下：
+
+你开采一种叫做“超能”的特殊资源。
+
+这项资源可以在8级以上的房间处理，并增加你的全局超能等级（Global Power Level GPL）
+
+全局超能等级 GPL 允许你创造超能 creep（Power Creeps PC），一种特殊的英雄单位，可以升级和获得技能。 
+
+
+超能宝">
+<meta property="og:type" content="website">
+<meta property="og:title" content="超能">
+<meta property="og:url" content="http://screeps-cn.github.io/power.html">
+<meta property="og:site_name" content="Screeps 中文文档">
+<meta property="og:description" content="超能是是一种游戏后期的机制，在你的领地发展中开启一段全新的旅程：通过提高效率替代扩大领地规模。它的基本内容如下：
+
+你开采一种叫做“超能”的特殊资源。
+
+这项资源可以在8级以上的房间处理，并增加你的全局超能等级（Global Power Level GPL）
+
+全局超能等级 GPL 允许你创造超能 creep（Power Creeps PC），一种特殊的英雄单位，可以升级和获得技能。 
+
+
+超能宝">
+<meta property="og:image" content="http://screeps-cn.github.io/img/power_banks.gif">
+<meta property="og:image" content="http://screeps-cn.github.io/img/gpl.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/operator.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/commander.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/executor.png">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/generate-ops.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/operate-spawn.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/operate-tower.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/operate-storage.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/operate-lab.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/operate-extension.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/operate-observer.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/operate-terminal.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/disrupt-spawn.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/disrupt-tower.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/disrupt-source.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/shield.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/regen-source.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/regen-mineral.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/disrupt-terminal.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/operate-power.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/fortify.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/operate-controller.svg">
+<meta property="og:image" content="https://screeps.com/a/app2/assets/powers/operator/operate-factory.svg">
+<meta property="og:updated_time" content="2024-09-20T13:38:58.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="超能">
+<meta name="twitter:description" content="超能是是一种游戏后期的机制，在你的领地发展中开启一段全新的旅程：通过提高效率替代扩大领地规模。它的基本内容如下：
+
+你开采一种叫做“超能”的特殊资源。
+
+这项资源可以在8级以上的房间处理，并增加你的全局超能等级（Global Power Level GPL）
+
+全局超能等级 GPL 允许你创造超能 creep（Power Creeps PC），一种特殊的英雄单位，可以升级和获得技能。 
+
+
+超能宝">
+<meta name="twitter:image" content="http://screeps-cn.github.io/img/power_banks.gif">
+  <!-- Google Analytics -->
+  
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="https://screeps.com" id="logo">Screeps</a>
+      <a href="/index.html" id="logo-docs">docs</a>
+    </h1>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+    <div id="header-main"></div>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name" id="top">超能</h1>
+                <a href="https://github.com/screeps-cn/docs/edit/master/source/power.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                
+                <p>超能是是一种游戏后期的机制，在你的领地发展中开启一段全新的旅程：通过提高效率替代扩大领地规模。它的基本内容如下：</p>
+<ul>
+<li><p>你开采一种叫做“超能”的特殊资源。</p>
+</li>
+<li><p>这项资源可以在8级以上的房间处理，并增加你的<strong>全局超能等级（Global Power Level GPL）</strong></p>
+</li>
+<li><p>全局超能等级 GPL 允许你创造<strong>超能 creep（Power Creeps PC）</strong>，一种特殊的英雄单位，可以升级和获得技能。 </p>
+</li>
+</ul>
+<h2 id="超能宝库（Power-Bank）" class="article-heading"><a href="#超能宝库（Power-Bank）" class="headerlink" title="超能宝库（Power Bank）"></a>超能宝库（Power Bank）<a class="article-anchor" href="#超能宝库（Power-Bank）" aria-hidden="true"></a></h2><p><img src="img/power_banks.gif" alt=""></p>
+<p>超能可以从叫作 <a href="/api/#StructurePowerBank">超能宝库（Power Bank）</a>的建筑物中收集，它时常出现在划分活动区域的中立空房间里。每个超能宝库包含随机数量的超能，摧毁该建筑可以获取它。由于这些建筑具有高能量的属性，它将会反弹所受伤害的 50% 给攻击它的 creep，因此需要在队伍中编入一些治疗者。</p>
+<p>你也可以从市场中买到超能，无论是其他玩家还是 NPC 商人。</p>
+<h2 id="Global-Power-Level" class="article-heading"><a href="#Global-Power-Level" class="headerlink" title="Global Power Level"></a>Global Power Level<a class="article-anchor" href="#Global-Power-Level" aria-hidden="true"></a></h2><p><img src="img/gpl.png" alt=""> </p>
+<p>8 级的房间将会解锁叫 <a href="/api/#StructurePowerSpawn">超能母巢（Power Spawn）</a>的建筑。它允许执行<a href="/api/#StructurePowerSpawn.processPower"><code>StructurePowerSpawn.processPower</code></a>方法。将 50 单位的能量与 1 单位的超能进行融合，你可以增加你的<strong>全局超能等级 GPL</strong>。通过提升等级，你将会解锁开发<strong>超能creep（PC）</strong>的能力。</p>
+<p>你可以在游戏中的<a href="https://screeps.com/a/#!/overview" target="_blank" rel="external">预览页面</a>查看你的全局超能等级 GPL。或者使用API<a href="/api/#Game.gpl"><code>Game.gpl</code></a>的属性。</p>
+<h2 id="超能-Creeps" class="article-heading"><a href="#超能-Creeps" class="headerlink" title="超能 Creeps"></a>超能 Creeps<a class="article-anchor" href="#超能-Creeps" aria-hidden="true"></a></h2><video autoplay loop muted playsinline="">
+    <source src="img/pc_anim.mp4" type="video/mp4">
+</video>
+
+<p><a href="/api/#PowerCreep">超能 creep Power Creeps</a> (PC)和游戏中的常规creep不同，类似于策略游戏中的英雄单位。</p>
+<p>超能 creep 是不朽的。一个新建造的超能 creep 将会你的账号绑定，甚至在还没被招募到游戏世界的时候就存在账号里了。在它死后（老死或者手动强制死亡），它只是会返回你的账号中，等待 8 小时的冷却后，你仍然可以在任何一个超能母巢中再次招募它。</p>
+<p>超能 creep 有以下三种类型：</p>
+<table>
+<tr>
+<td style="padding: 10px; background: #141414"><img src="img/operator.png"></td>
+<td><strong>操作员 Operator</strong><br>
+一种在后方基地工作的 creep，虽然它可以在进攻时作为破坏者使用。
+</td>
+</tr>
+<tr style="background: none">
+<td style="padding: 10px; background: #141414"><img src="img/commander.png"></td>
+<td><strong>司令官 Commander</strong><br>
+这种超能 creep 是团队辅助，单独使用时发挥不出来。它可以给己方常规 creep 施加增益效果，给敌方常规 creep 施加减益效果。
+</td>
+</tr>
+<tr>
+<td style="padding: 10px; background: #141414"><img src="img/executor.png"></td>
+<td><strong>执行官 Executor</strong><br>
+这类 creep 喜好独来独往。鉴于它的技能特点，它可以在和平时期加速经济发展，或在战争时期变身战争机器。
+</td>
+</tr> 
+</table> 
+
+<p>超能 creep 拥有 0 到 25 个等级和技能（也就是所谓的“<strong>超能力</strong>”），每当升一次级，你可以添加一项新的技能，或者提升现有技能的等级。</p>
+<p>你需要至少一个空余的全局超能等级GPL才能提升现有超能 creep 的等级，同样的你也需要一个空余的全局超能等级 GPL 创建一个新的 0 级超能 creep。</p>
+<p>你可以在任何没有控制器的房间使用超能creep的技能，或者在有 power-enabled 控制器的房间使用（详见 <a href="/api/#PowerCreep.enableRoom"><code>PowerCreep.enableRoom</code></a>）。</p>
+<p>虽然超能 creep 有寿并且会老死。但是你可以在任何超能母巢或者超能宝库附近执行<a href="/api/#PowerCreep.renew"><code>PowerCreep.renew</code></a>，这将会无花费的恢复它的寿命。如果你能及时地找到超能宝库并恢复，它可以进行长距离移动。</p>
+<blockquote class="note warn"><p><strong style="color: #f33">CAUTION</strong>: 你可以从你的账号中删除超能 creep（为了释放更多空余全局超能等级 GPL 或者新造一个），但是这个操作会<strong>降低你的全局超能等级 1 级</strong>！这项移除工作需要 24 个小时。</p>
+</blockquote>
+<p>如果你想要查看你的超能 creep 是如何配置的，并从头开始创建它们，请激活一个<strong>试验期</strong>。它将允许你在 24 小时之内在不影响 GPL 的情况下瞬时创建和删除你的超能 creep。每个玩家被授予 30 个试验期。如果平衡性调整或者引入新技能导致玩家需要重新审视自己的超能 creep 配置时，我们将会不时的补充一些试验期数量。</p>
+<h2 id="Powers" class="article-heading"><a href="#Powers" class="headerlink" title="Powers"></a>Powers<a class="article-anchor" href="#Powers" aria-hidden="true"></a></h2><h3 id="Operator" class="article-heading"><a href="#Operator" class="headerlink" title="Operator"></a>Operator<a class="article-anchor" href="#Operator" aria-hidden="true"></a></h3><table><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/generate-ops.svg">
+        </td>
+        <th>GENERATE_OPS</th>
+        <td>生成 1/2/4/6/8 点 ops 资源。冷却 50 tick。creep 等级要求: 0/2/7/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/operate-spawn.svg">
+        </td>
+        <th>OPERATE_SPAWN</th>
+        <td>减少 10/30/50/65/80% 的孵化时间。效果持续 1000 tick。冷却 300 tick。范围 3 格以内。消耗 100 点 ops 资源。creep 等级要求: 0/2/7/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/operate-tower.svg">
+        </td>
+        <th>OPERATE_TOWER</th>
+        <td>提升 10/20/30/40/50% 的攻击、修理或治疗效果。效果持续 100 tick。冷却 10 tick。范围 3 格以内。消耗 10 点 ops 资源。creep 等级要求: 0/2/7/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/operate-storage.svg">
+        </td>
+        <th>OPERATE_STORAGE</th>
+        <td>提升 500K/1M/2M/4M/7M 单位的存储容量。效果持续 1000 tick。冷却 800 tick。范围 3 格以内。消耗 100 点 ops 资源。creep 等级要求: 0/2/7/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/operate-lab.svg">
+        </td>
+        <th>OPERATE_LAB</th>
+        <td>增加 2/4/6/8/10 单位的反应效率。效果持续 1000 tick。冷却 50 tick。范围 3 格以内。消耗 10 点 ops 资源。creep 等级要求: 0/2/7/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/operate-extension.svg">
+        </td>
+        <th>OPERATE_EXTENSION</th>
+        <td>使用目标建筑（container、storage 或者 terminal）中的能量，立刻填充房间中 20/40/60/80/100% 的 extension。冷却 50 tick。范围 3 格以内。消耗 2 点 ops 资源。creep 等级要求: 0/2/7/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/operate-observer.svg">
+        </td>
+        <th>OPERATE_OBSERVER</th>
+        <td>给予无限视野范围。效果持续 200/400/600/800/1000 tick。冷却 400 tick。范围 3 格以内。消耗 10 点 ops 资源。creep 等级要求: 0/2/7/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/operate-terminal.svg">
+        </td>
+        <th>OPERATE_TERMINAL</th>
+        <td>将资源转移的能量消耗和冷却时间降低 10/20/30/40/50%。效果持续 1000 tick。冷却 500 tick。范围 3 格以内。消耗 100 点 ops 资源。creep 等级要求: 0/2/7/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/disrupt-spawn.svg">
+        </td>
+        <th>DISRUPT_SPAWN</th>
+        <td>暂停孵化进程。效果持续 1/2/3/4/5 tick。冷却 5 tick。范围 20 格以内。消耗 10 点 ops 资源。creep 等级要求: 0/2/7/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/disrupt-tower.svg">
+        </td>
+        <th>DISRUPT_TOWER</th>
+        <td>削弱 10/20/30/40/50% 的效果。效果持续 5 tick。无冷却。范围 50 格以内。消耗 10 点 ops 资源。creep 等级要求: 0/2/7/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/disrupt-source.svg">
+        </td>
+        <th>DISRUPT_SOURCE</th>
+        <td>暂停 Source 的能量再生。效果持续 100/200/300/400/500 tick。冷却 100 tick。范围 3 格以内。消耗 100 点 ops 资源。creep 等级要求: 0/2/7/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/shield.svg">
+        </td>
+        <th>SHIELD</th>
+        <td>在其所在地块上创建一个拥有 5K/10K/15K/20K/25K 点生命值、无法修复的临时 rampart。如果该地块已有 rampart 则无法使用。消耗 100 点能量。效果持续 50 tick。冷却 20 tick。creep 等级要求: 0/2/7/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/regen-source.svg">
+        </td>
+        <th>REGEN_SOURCE</th>
+        <td>使 Source 每 15 tick 重新生成 50/100/150/200/250 点能量。效果持续 300 tick。冷却 100 tick。范围 3 格以内。creep 等级要求: 10/11/12/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/regen-mineral.svg">
+        </td>
+        <th>REGEN_MINERAL</th>
+        <td>使矿藏每 10 tick 增加 2/4/6/8/10 点矿物。效果持续 100 tick。冷却 100 tick。范围 3 格以内。creep 等级要求: 10/11/12/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/disrupt-terminal.svg">
+        </td>
+        <th>DISRUPT_TERMINAL</th>
+        <td>阻止从 terminal 中取出（withdraw）或使用资源。效果持续 10 tick。冷却 8 tick。范围 50 格以内。消耗 50/40/30/20/10 点 ops 资源。creep 等级要求: 20/21/22/23/24.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/operate-power.svg">
+        </td>
+        <th>OPERATE_POWER</th>
+        <td>将 Power Spawn 的 power 处理速度提升  1/2/3/4/5 单位每秒。效果持续 1000 tick。冷却 800 tick。范围 3 格以内。消耗 200 点 ops 资源。creep 等级要求: 10/11/12/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/fortify.svg">
+        </td>
+        <th>FORTIFY</th>
+        <td>使得一个 wall 或者 rampart 免疫所有来自 creep 的伤害和 power 的效果。效果持续 1/2/3/4/5 tick。冷却 5 tick。范围 3 格以内。消耗 5 点 ops 资源。creep 等级要求: 0/2/7/14/22.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/operate-controller.svg">
+        </td>
+        <th>OPERATE_CONTROLLER</th>
+        <td>将一个 8 级 Controller 的每 tick 升级能量上限提高 10/20/30/40/50 单位。效果持续 1000 tick。冷却 800 tick。范围 3 格以内。消耗 200 点 ops 资源。creep 等级要求: 20/21/22/23/24.</td>
+        </tr><tr><td style="background: #141414; width: 50px; padding: 0; border-top: 1px solid #444">
+        <img src="https://screeps.com/a/app2/assets/powers/operator/operate-factory.svg">
+        </td>
+        <th>OPERATE_FACTORY</th>
+        <td>将 factory 的等级设置为该 power 的等级。该操作无法撤销，并且一旦设置无法修改为其他等级。持续时间结束后再次使用相同的 power 即可恢复效果。效果持续 1000 tick。冷却 800 tick。范围 3 格以内。消耗 100 点 ops 资源。creep 等级要求: 0/2/7/14/22.</td>
+        </tr></table>
+<h3 id="Commander" class="article-heading"><a href="#Commander" class="headerlink" title="Commander"></a>Commander<a class="article-anchor" href="#Commander" aria-hidden="true"></a></h3><p>尚在开发。</p>
+<h3 id="Executor" class="article-heading"><a href="#Executor" class="headerlink" title="Executor"></a>Executor<a class="article-anchor" href="#Executor" aria-hidden="true"></a></h3><p>尚在开发。</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2024-09-20T13:38:58.408Z" itemprop="dateModified">上次更新：9月 20, 2024</time>
+                <a href="/invaders.html" class="article-footer-prev"><i class="fa fa-chevron-left"></i><span>NPC 入侵者</span></a><a href="/scripting-basics.html" class="article-footer-next"><span>脚本基础</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#超能宝库（Power-Bank）"><span class="toc-text">超能宝库（Power Bank）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Global-Power-Level"><span class="toc-text">Global Power Level</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#超能-Creeps"><span class="toc-text">超能 Creeps</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Powers"><span class="toc-text">Powers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Operator"><span class="toc-text">Operator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Commander"><span class="toc-text">Commander</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Executor"><span class="toc-text">Executor</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+            
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="sidebar-link">总览</a><strong class="sidebar-title">游戏环境</strong><a href="/introduction.html" class="sidebar-link">简介</a><a href="/creeps.html" class="sidebar-link">Creeps</a><a href="/control.html" class="sidebar-link">控制</a><a href="/defense.html" class="sidebar-link">防御</a><a href="/respawn.html" class="sidebar-link">重生</a><a href="/start-areas.html" class="sidebar-link">初始区域</a><a href="/resources.html" class="sidebar-link">资源</a><a href="/market.html" class="sidebar-link">市场</a><a href="/invaders.html" class="sidebar-link">NPC 入侵者</a><a href="/power.html" class="sidebar-link current">超能</a><strong class="sidebar-title">脚本</strong><a href="/scripting-basics.html" class="sidebar-link">脚本基础</a><a href="/global-objects.html" class="sidebar-link">全局对象</a><a href="/modules.html" class="sidebar-link">模块</a><a href="/debugging.html" class="sidebar-link">调试</a><a href="/game-loop.html" class="sidebar-link">游戏循环</a><a href="/commit.html" class="sidebar-link">外部提交</a><a href="/simultaneous-actions.html" class="sidebar-link">同步操作</a><a href="/cpu-limit.html" class="sidebar-link">CPU 限制</a><strong class="sidebar-title">其他</strong><a href="/architecture.html" class="sidebar-link">服务器架构</a><a href="/ptr.html" class="sidebar-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="sidebar-link">第三方工具</a><a href="/auth-tokens.html" class="sidebar-link">验证令牌</a><a href="/community-servers.html" class="sidebar-link">社区服务器</a><a href="/tos.html" class="sidebar-link">服务条款</a><a href="/privacy-policy.html" class="sidebar-link">隐私政策</a><strong class="sidebar-title">资源</strong><a href="http://blog.screeps.com" class="sidebar-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="sidebar-link">修改日志</a><a href="http://chat.screeps.com" class="sidebar-link">聊天室</a><a href="https://screeps.com/forum/" class="sidebar-link">论坛</a><strong class="sidebar-title">贡献文章</strong><a href="/contributed/rules.html" class="sidebar-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="sidebar-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="sidebar-link">修改原型</a><a href="/contributed/caching-overview.html" class="sidebar-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="sidebar-link">私有服务器 MongoDB</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2024 <a href="https://screeps.com/" target="_blank">Screeps</a><br>
+      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
+    </div>
+    <div id="footer-links">
+      <a href="https://github.com/screeps-cn/docs" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    
+      <a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="mobile-nav-link">总览</a><strong class="mobile-nav-title">游戏环境</strong><a href="/introduction.html" class="mobile-nav-link">简介</a><a href="/creeps.html" class="mobile-nav-link">Creeps</a><a href="/control.html" class="mobile-nav-link">控制</a><a href="/defense.html" class="mobile-nav-link">防御</a><a href="/respawn.html" class="mobile-nav-link">重生</a><a href="/start-areas.html" class="mobile-nav-link">初始区域</a><a href="/resources.html" class="mobile-nav-link">资源</a><a href="/market.html" class="mobile-nav-link">市场</a><a href="/invaders.html" class="mobile-nav-link">NPC 入侵者</a><a href="/power.html" class="mobile-nav-link current">超能</a><strong class="mobile-nav-title">脚本</strong><a href="/scripting-basics.html" class="mobile-nav-link">脚本基础</a><a href="/global-objects.html" class="mobile-nav-link">全局对象</a><a href="/modules.html" class="mobile-nav-link">模块</a><a href="/debugging.html" class="mobile-nav-link">调试</a><a href="/game-loop.html" class="mobile-nav-link">游戏循环</a><a href="/commit.html" class="mobile-nav-link">外部提交</a><a href="/simultaneous-actions.html" class="mobile-nav-link">同步操作</a><a href="/cpu-limit.html" class="mobile-nav-link">CPU 限制</a><strong class="mobile-nav-title">其他</strong><a href="/architecture.html" class="mobile-nav-link">服务器架构</a><a href="/ptr.html" class="mobile-nav-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="mobile-nav-link">第三方工具</a><a href="/auth-tokens.html" class="mobile-nav-link">验证令牌</a><a href="/community-servers.html" class="mobile-nav-link">社区服务器</a><a href="/tos.html" class="mobile-nav-link">服务条款</a><a href="/privacy-policy.html" class="mobile-nav-link">隐私政策</a><strong class="mobile-nav-title">资源</strong><a href="http://blog.screeps.com" class="mobile-nav-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="mobile-nav-link">修改日志</a><a href="http://chat.screeps.com" class="mobile-nav-link">聊天室</a><a href="https://screeps.com/forum/" class="mobile-nav-link">论坛</a><strong class="mobile-nav-title">贡献文章</strong><a href="/contributed/rules.html" class="mobile-nav-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="mobile-nav-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="mobile-nav-link">修改原型</a><a href="/contributed/caching-overview.html" class="mobile-nav-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="mobile-nav-link">私有服务器 MongoDB</a>
+    
+  </div>
+</nav>
+  <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/scrollingelement.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/custom.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+</body>
+</html>

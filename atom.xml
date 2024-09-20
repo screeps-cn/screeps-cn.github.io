@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Screeps 中文文档</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://screeps-cn.github.io/"/>
+  <updated>2024-09-20T13:38:58.407Z</updated>
+  <id>http://screeps-cn.github.io/</id>
+  
+  <author>
+    <name>Screeps</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://screeps-cn.github.io/test/"/>
+    <id>http://screeps-cn.github.io/test/</id>
+    <published>2024-09-20T13:38:58.407Z</published>
+    <updated>2024-09-20T13:38:58.407Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>验证令牌（Authentication Tokens） | Screeps 中文文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://screeps-cn.github.io/auth-tokens.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="http://screeps-cn.github.io/auth-tokens.html">
+    
+      <link rel="alternative" hreflang="zh-tw" href="http://screeps-cn.github.io/zh-tw/auth-tokens.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="http://screeps-cn.github.io/zh-cn/auth-tokens.html">
+    
+      <link rel="alternative" hreflang="ru" href="http://screeps-cn.github.io/ru/auth-tokens.html">
+    
+      <link rel="alternative" hreflang="ko" href="http://screeps-cn.github.io/ko/auth-tokens.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/css/navy.css?1">
+  <link rel="stylesheet" href="/css/prism.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Screeps 中文文档">
+  <!-- Open Graph -->
+  <meta name="description" content="Screeps 并没有一个文档化的公共 Web API。但是，如果您想使用这些没有文档的 HTTP 接口在我们的服务器和客户端之间进行通信的话，没有关系。我们开发了一个 验证令牌（Authentication Tokens）系统可以让您的工作更加轻松。
+常见的浏览器客户端一般使用 Google Invisible reCAPTCHA 来在后台验证某些请求，包括登录请求。而 Steam 客户端使用加">
+<meta property="og:type" content="website">
+<meta property="og:title" content="验证令牌（Authentication Tokens）">
+<meta property="og:url" content="http://screeps-cn.github.io/auth-tokens.html">
+<meta property="og:site_name" content="Screeps 中文文档">
+<meta property="og:description" content="Screeps 并没有一个文档化的公共 Web API。但是，如果您想使用这些没有文档的 HTTP 接口在我们的服务器和客户端之间进行通信的话，没有关系。我们开发了一个 验证令牌（Authentication Tokens）系统可以让您的工作更加轻松。
+常见的浏览器客户端一般使用 Google Invisible reCAPTCHA 来在后台验证某些请求，包括登录请求。而 Steam 客户端使用加">
+<meta property="og:image" content="http://screeps-cn.github.io/img/auth_tokens.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/token-noratelimit.png">
+<meta property="og:updated_time" content="2024-09-20T13:38:58.407Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="验证令牌（Authentication Tokens）">
+<meta name="twitter:description" content="Screeps 并没有一个文档化的公共 Web API。但是，如果您想使用这些没有文档的 HTTP 接口在我们的服务器和客户端之间进行通信的话，没有关系。我们开发了一个 验证令牌（Authentication Tokens）系统可以让您的工作更加轻松。
+常见的浏览器客户端一般使用 Google Invisible reCAPTCHA 来在后台验证某些请求，包括登录请求。而 Steam 客户端使用加">
+<meta name="twitter:image" content="http://screeps-cn.github.io/img/auth_tokens.png">
+  <!-- Google Analytics -->
+  
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="https://screeps.com" id="logo">Screeps</a>
+      <a href="/index.html" id="logo-docs">docs</a>
+    </h1>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+    <div id="header-main"></div>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name" id="top">验证令牌（Authentication Tokens）</h1>
+                <a href="https://github.com/screeps-cn/docs/edit/master/source/auth-tokens.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                
+                <p>Screeps 并没有一个文档化的公共 Web API。但是，如果您想使用这些没有文档的 HTTP 接口在我们的服务器和客户端之间进行通信的话，没有关系。我们开发了一个 <strong>验证令牌</strong>（Authentication Tokens）系统可以让您的工作更加轻松。</p>
+<p>常见的浏览器客户端一般使用 Google Invisible reCAPTCHA 来在后台验证某些请求，包括登录请求。而 Steam 客户端使用加密的本地 Steam 连接来完成类似的功能。如果您想要构建一些不需要人工干预的外部工具，则可以生成持久的身份验证令牌来发出请求，从而避免输入验证码。令牌一经生成即可永久使用。</p>
+<h2 id="使用验证令牌" class="article-heading"><a href="#使用验证令牌" class="headerlink" title="使用验证令牌"></a>使用验证令牌<a class="article-anchor" href="#使用验证令牌" aria-hidden="true"></a></h2><p>您可以通过 <a href="https://screeps.com/a/#!/account/auth-tokens" target="_blank" rel="external">账户设置</a> 来生成一个验证令牌：</p>
+<p><img src="img/auth_tokens.png" alt=""> </p>
+<p>一个 <strong>完全权限</strong> 的令牌的访问范围和您用身份验证凭据登录的访问范围相同。您也可以限制该令牌的访问范围，包括<strong>指定的接口</strong>，<strong>websockets 事件</strong>和<strong>内存分段</strong>。</p>
+<p>下面这两种令牌的使用方法都是有效的：</p>
+<ul>
+<li><p>在您的请求 header 中携带 <code>X-Token</code> 字段：</p>
+<pre class="highlight undefined tab-undefined "><code> X<span class="token operator">-</span>Token<span class="token punctuation">:</span> 3bdd1da7<span class="token number">-3002</span><span class="token operator">-</span>4aaa<span class="token operator">-</span>be91<span class="token operator">-</span>330562f54093</code></pre></li>
+<li><p>在 URL 的请求参数中携带 <code>_token</code> 字段：</p>
+<pre class="highlight undefined tab-undefined "><code> https<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>screeps<span class="token punctuation">.</span>com<span class="token operator">/</span>api<span class="token operator">/</span>user<span class="token operator">/</span>name<span class="token operator">?</span>_token<span class="token operator">=</span>3bdd1da7<span class="token number">-3002</span><span class="token operator">-</span>4aaa<span class="token operator">-</span>be91<span class="token operator">-</span>330562f54093</code></pre></li>
+</ul>
+<h2 id="访问次数限制" class="article-heading"><a href="#访问次数限制" class="headerlink" title="访问次数限制"></a>访问次数限制<a class="article-anchor" href="#访问次数限制" aria-hidden="true"></a></h2><p>浏览器或者客户端发送的常规请求是<strong>不会</strong>受到该限制的影响。</p>
+<p>但是，所有通过验证令牌认证的请求都会受到访问次数的限制。当超出规定的访问次数后，请求将会返回 <code>429</code> HTTP 状态码。</p>
+<pre class="highlight undefined tab-undefined "><code>HTTP<span class="token operator">/</span><span class="token number">1.1</span> <span class="token number">429</span> Too Many Requests
+
+Rate limit exceeded<span class="token punctuation">,</span> retry after 51243ms</code></pre><p>HTTP 请求中包含下述三个 header 字段来提供频率限制的信息，您可以使用它们来规划请求次数：</p>
+<table>
+<thead>
+<tr>
+<th>Header 字段名</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>X-RateLimit-Limit</code></td>
+<td>每个限制窗口允许的最大请求数。</td>
+</tr>
+<tr>
+<td><nobr><code>X-RateLimit-Remaining</code></nobr></td>
+<td>当前窗口中剩余的请求数。</td>
+</tr>
+<tr>
+<td><code>X-RateLimit-Reset</code></td>
+<td>当前窗口的请求次数重置时间，以 UTC 时间秒为单位</td>
+</tr>
+</tbody>
+</table>
+<pre class="highlight undefined tab-undefined "><code>X<span class="token operator">-</span>RateLimit<span class="token operator">-</span>Limit<span class="token punctuation">:</span> <span class="token number">60</span>
+X<span class="token operator">-</span>RateLimit<span class="token operator">-</span>Remaining<span class="token punctuation">:</span> <span class="token number">35</span>
+X<span class="token operator">-</span>RateLimit<span class="token operator">-</span>Reset<span class="token punctuation">:</span> <span class="token number">1514539728</span></code></pre><p>请求限制分为下面两个等级：全局限制和接口限制：</p>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>全局</strong></td>
+<td><strong>120 / 分钟</strong></td>
+</tr>
+<tr>
+<td>GET /api/game/room-terrain</td>
+<td>360 / 小时</td>
+</tr>
+<tr>
+<td>POST /api/game/map-stats</td>
+<td>60 / 小时</td>
+</tr>
+<tr>
+<td>GET /api/user/code</td>
+<td>60 / 小时</td>
+</tr>
+<tr>
+<td>POST /api/user/code</td>
+<td>240 / 天</td>
+</tr>
+<tr>
+<td>POST /api/user/set-active-branch</td>
+<td>240 / 天</td>
+</tr>
+<tr>
+<td>GET /api/user/memory</td>
+<td>1440 / 天</td>
+</tr>
+<tr>
+<td>POST /api/user/memory</td>
+<td>240 / 天</td>
+</tr>
+<tr>
+<td>GET /api/user/memory-segment</td>
+<td>360 / 小时</td>
+</tr>
+<tr>
+<td>POST /api/user/memory-segment</td>
+<td>60 / 小时</td>
+</tr>
+<tr>
+<td>POST /api/user/console</td>
+<td>360 / 小时</td>
+</tr>
+<tr>
+<td>GET /api/game/market/orders-index</td>
+<td>60 / 小时</td>
+</tr>
+<tr>
+<td>GET /api/game/market/orders</td>
+<td>60 / 小时</td>
+</tr>
+<tr>
+<td>GET /api/game/market/my-orders</td>
+<td>60 / 小时</td>
+</tr>
+<tr>
+<td>GET /api/game/market/stats</td>
+<td>60 / 小时</td>
+</tr>
+<tr>
+<td>GET /api/game/user/money-history</td>
+<td>60 / 小时</td>
+</tr>
+</tbody>
+</table>
+<h3 id="解除限速" class="article-heading"><a href="#解除限速" class="headerlink" title="解除限速"></a>解除限速<a class="article-anchor" href="#解除限速" aria-hidden="true"></a></h3><p>如果您开发的第三方工具需要进行人工干预，那么您可以通过集成一个特殊流程来暂时关闭特定令牌的请求频率限制。为此，您必须为用户提供一个链接 <code>https://screeps.com/a/#!/account/auth-tokens/noratelimit?token=XXX</code>，并且引导用户导航到该链接。在用户点击该页面中的 ”Proceed“ 按钮后，该令牌将被授予两个小时的无限速率访问时间。</p>
+<p><img src="img/token-noratelimit.png" alt=""> </p>
+<p>如果您的工具是基于 web 开发的，那么您可以将该页面通过 <code>&lt;iframe&gt;</code> 嵌入进来并且监听 <code>screepsTokenSuccess</code> 事件信息：</p>
+<pre class="highlight javascript tab-javascript "><code>window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>data <span class="token operator">===</span> <span class="token string">'screepsTokenSuccess'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"We are not rate limited now!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>   
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>请注意，该页面使用 Google Invisible reCAPTCHA 进行验证，所以无法通过其他手段自动完成。</p>
+<p>您可以使用接口 <code>https://screeps.com/api/auth/query-token?token=XXX</code> 来查询指定令牌的信息（包含其不受限访问时长）。</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2024-09-20T13:38:58.407Z" itemprop="dateModified">上次更新：9月 20, 2024</time>
+                <a href="/third-party.html" class="article-footer-prev"><i class="fa fa-chevron-left"></i><span>第三方工具</span></a><a href="/community-servers.html" class="article-footer-next"><span>社区服务器</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用验证令牌"><span class="toc-text">使用验证令牌</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#访问次数限制"><span class="toc-text">访问次数限制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解除限速"><span class="toc-text">解除限速</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+            
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="sidebar-link">总览</a><strong class="sidebar-title">游戏环境</strong><a href="/introduction.html" class="sidebar-link">简介</a><a href="/creeps.html" class="sidebar-link">Creeps</a><a href="/control.html" class="sidebar-link">控制</a><a href="/defense.html" class="sidebar-link">防御</a><a href="/respawn.html" class="sidebar-link">重生</a><a href="/start-areas.html" class="sidebar-link">初始区域</a><a href="/resources.html" class="sidebar-link">资源</a><a href="/market.html" class="sidebar-link">市场</a><a href="/invaders.html" class="sidebar-link">NPC 入侵者</a><a href="/power.html" class="sidebar-link">超能</a><strong class="sidebar-title">脚本</strong><a href="/scripting-basics.html" class="sidebar-link">脚本基础</a><a href="/global-objects.html" class="sidebar-link">全局对象</a><a href="/modules.html" class="sidebar-link">模块</a><a href="/debugging.html" class="sidebar-link">调试</a><a href="/game-loop.html" class="sidebar-link">游戏循环</a><a href="/commit.html" class="sidebar-link">外部提交</a><a href="/simultaneous-actions.html" class="sidebar-link">同步操作</a><a href="/cpu-limit.html" class="sidebar-link">CPU 限制</a><strong class="sidebar-title">其他</strong><a href="/architecture.html" class="sidebar-link">服务器架构</a><a href="/ptr.html" class="sidebar-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="sidebar-link">第三方工具</a><a href="/auth-tokens.html" class="sidebar-link current">验证令牌</a><a href="/community-servers.html" class="sidebar-link">社区服务器</a><a href="/tos.html" class="sidebar-link">服务条款</a><a href="/privacy-policy.html" class="sidebar-link">隐私政策</a><strong class="sidebar-title">资源</strong><a href="http://blog.screeps.com" class="sidebar-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="sidebar-link">修改日志</a><a href="http://chat.screeps.com" class="sidebar-link">聊天室</a><a href="https://screeps.com/forum/" class="sidebar-link">论坛</a><strong class="sidebar-title">贡献文章</strong><a href="/contributed/rules.html" class="sidebar-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="sidebar-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="sidebar-link">修改原型</a><a href="/contributed/caching-overview.html" class="sidebar-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="sidebar-link">私有服务器 MongoDB</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2024 <a href="https://screeps.com/" target="_blank">Screeps</a><br>
+      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
+    </div>
+    <div id="footer-links">
+      <a href="https://github.com/screeps-cn/docs" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    
+      <a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="mobile-nav-link">总览</a><strong class="mobile-nav-title">游戏环境</strong><a href="/introduction.html" class="mobile-nav-link">简介</a><a href="/creeps.html" class="mobile-nav-link">Creeps</a><a href="/control.html" class="mobile-nav-link">控制</a><a href="/defense.html" class="mobile-nav-link">防御</a><a href="/respawn.html" class="mobile-nav-link">重生</a><a href="/start-areas.html" class="mobile-nav-link">初始区域</a><a href="/resources.html" class="mobile-nav-link">资源</a><a href="/market.html" class="mobile-nav-link">市场</a><a href="/invaders.html" class="mobile-nav-link">NPC 入侵者</a><a href="/power.html" class="mobile-nav-link">超能</a><strong class="mobile-nav-title">脚本</strong><a href="/scripting-basics.html" class="mobile-nav-link">脚本基础</a><a href="/global-objects.html" class="mobile-nav-link">全局对象</a><a href="/modules.html" class="mobile-nav-link">模块</a><a href="/debugging.html" class="mobile-nav-link">调试</a><a href="/game-loop.html" class="mobile-nav-link">游戏循环</a><a href="/commit.html" class="mobile-nav-link">外部提交</a><a href="/simultaneous-actions.html" class="mobile-nav-link">同步操作</a><a href="/cpu-limit.html" class="mobile-nav-link">CPU 限制</a><strong class="mobile-nav-title">其他</strong><a href="/architecture.html" class="mobile-nav-link">服务器架构</a><a href="/ptr.html" class="mobile-nav-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="mobile-nav-link">第三方工具</a><a href="/auth-tokens.html" class="mobile-nav-link current">验证令牌</a><a href="/community-servers.html" class="mobile-nav-link">社区服务器</a><a href="/tos.html" class="mobile-nav-link">服务条款</a><a href="/privacy-policy.html" class="mobile-nav-link">隐私政策</a><strong class="mobile-nav-title">资源</strong><a href="http://blog.screeps.com" class="mobile-nav-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="mobile-nav-link">修改日志</a><a href="http://chat.screeps.com" class="mobile-nav-link">聊天室</a><a href="https://screeps.com/forum/" class="mobile-nav-link">论坛</a><strong class="mobile-nav-title">贡献文章</strong><a href="/contributed/rules.html" class="mobile-nav-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="mobile-nav-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="mobile-nav-link">修改原型</a><a href="/contributed/caching-overview.html" class="mobile-nav-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="mobile-nav-link">私有服务器 MongoDB</a>
+    
+  </div>
+</nav>
+  <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/scrollingelement.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/custom.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+</body>
+</html>

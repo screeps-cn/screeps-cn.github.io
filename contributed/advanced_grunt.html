@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>高级 Grunt 用法 | Screeps 中文文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://screeps-cn.github.io/contributed/advanced_grunt.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="http://screeps-cn.github.io/contributed/advanced_grunt.html">
+    
+      <link rel="alternative" hreflang="zh-tw" href="http://screeps-cn.github.io/zh-tw/contributed/advanced_grunt.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="http://screeps-cn.github.io/zh-cn/contributed/advanced_grunt.html">
+    
+      <link rel="alternative" hreflang="ru" href="http://screeps-cn.github.io/ru/contributed/advanced_grunt.html">
+    
+      <link rel="alternative" hreflang="ko" href="http://screeps-cn.github.io/ko/contributed/advanced_grunt.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/css/navy.css?1">
+  <link rel="stylesheet" href="/css/prism.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Screeps 中文文档">
+  <!-- Open Graph -->
+  <meta name="description" content="使用 grunt 上传代码仅仅是开始。本指南涵盖了许多可以添加到脚本中的增强功能，它们可使您将自己的精力用在正确的地方上，并使您的开发更加轻松。
+假设条件本文做出了如下假设
+
+代码存放在 src 文件夹中。
+您已经读过了 Getting Started 指南。
+具体来说就是，您已经了解了如何使用 grunt.initConfig 安排工作。
+
+安全凭据随着您的 Gruntfile 变得越来越复杂，">
+<meta property="og:type" content="website">
+<meta property="og:title" content="高级 Grunt 用法">
+<meta property="og:url" content="http://screeps-cn.github.io/contributed/advanced_grunt.html">
+<meta property="og:site_name" content="Screeps 中文文档">
+<meta property="og:description" content="使用 grunt 上传代码仅仅是开始。本指南涵盖了许多可以添加到脚本中的增强功能，它们可使您将自己的精力用在正确的地方上，并使您的开发更加轻松。
+假设条件本文做出了如下假设
+
+代码存放在 src 文件夹中。
+您已经读过了 Getting Started 指南。
+具体来说就是，您已经了解了如何使用 grunt.initConfig 安排工作。
+
+安全凭据随着您的 Gruntfile 变得越来越复杂，">
+<meta property="og:updated_time" content="2024-09-20T13:38:58.407Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高级 Grunt 用法">
+<meta name="twitter:description" content="使用 grunt 上传代码仅仅是开始。本指南涵盖了许多可以添加到脚本中的增强功能，它们可使您将自己的精力用在正确的地方上，并使您的开发更加轻松。
+假设条件本文做出了如下假设
+
+代码存放在 src 文件夹中。
+您已经读过了 Getting Started 指南。
+具体来说就是，您已经了解了如何使用 grunt.initConfig 安排工作。
+
+安全凭据随着您的 Gruntfile 变得越来越复杂，">
+  <!-- Google Analytics -->
+  
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="https://screeps.com" id="logo">Screeps</a>
+      <a href="/index.html" id="logo-docs">docs</a>
+    </h1>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+    <div id="header-main"></div>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name" id="top">高级 Grunt 用法</h1>
+                <a href="https://github.com/screeps-cn/docs/edit/master/source/contributed/advanced_grunt.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                
+                <div class="article-author">Contributed by <a href="https://github.com/tedivm" target="_blank">tedivm</a> on <time datetime="2017-05-01T00:00:00.000Z">5月 01, 2017</time></div>
+                
+                <p>使用 grunt 上传代码仅仅是开始。本指南涵盖了许多可以添加到脚本中的增强功能，它们可使您将自己的精力用在正确的地方上，并使您的开发更加轻松。</p>
+<h2 id="假设条件" class="article-heading"><a href="#假设条件" class="headerlink" title="假设条件"></a>假设条件<a class="article-anchor" href="#假设条件" aria-hidden="true"></a></h2><p>本文做出了如下假设</p>
+<ul>
+<li>代码存放在 <code>src</code> 文件夹中。</li>
+<li>您已经读过了 <a href="http://gruntjs.com/getting-started" target="_blank" rel="external">Getting Started</a> 指南。</li>
+<li>具体来说就是，您已经了解了如何使用 grunt.initConfig 安排工作。</li>
+</ul>
+<h2 id="安全凭据" class="article-heading"><a href="#安全凭据" class="headerlink" title="安全凭据"></a>安全凭据<a class="article-anchor" href="#安全凭据" aria-hidden="true"></a></h2><p>随着您的 Gruntfile 变得越来越复杂，您将需要将其保存在源代码管理中，但与此同时，将账号密码等凭据保存在存储库中通常被认为是一个糟糕的想法。将凭证移动到单独的文件中可以使您提交不包含凭证的 Gruntfile。</p>
+<p>首先创建 <code>.screeps.json</code> 文件来保存您的凭据。</p>
+<pre class="highlight undefined tab-undefined "><code><span class="token punctuation">{</span>
+  <span class="token string">"email"</span><span class="token punctuation">:</span> <span class="token string">"&lt;YOUR EMAIL HERE>"</span><span class="token punctuation">,</span>
+  <span class="token string">"password"</span><span class="token punctuation">:</span> <span class="token string">"&lt;YOUR PASSWORD HERE>"</span><span class="token punctuation">,</span>
+  <span class="token string">"branch"</span><span class="token punctuation">:</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+  <span class="token string">"ptr"</span><span class="token punctuation">:</span> <span class="token boolean">false</span>
+<span class="token punctuation">}</span></code></pre><p>现在修改 <code>Gruntfile.js</code> 来使用新文件。</p>
+<pre class="highlight undefined tab-undefined "><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>grunt<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./.screeps.json'</span><span class="token punctuation">)</span>
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-screeps'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    grunt<span class="token punctuation">.</span><span class="token function">initConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        screeps<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                email<span class="token punctuation">:</span> config<span class="token punctuation">.</span>email<span class="token punctuation">,</span>
+                password<span class="token punctuation">:</span> config<span class="token punctuation">.</span>password<span class="token punctuation">,</span>
+                branch<span class="token punctuation">:</span> config<span class="token punctuation">.</span>branch<span class="token punctuation">,</span>
+                ptr<span class="token punctuation">:</span> config<span class="token punctuation">.</span>ptr
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            dist<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                src<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'src/*.js'</span><span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>最后，打开您的 <code>.gitignore</code>（不存在请创建）然后添加 <code>.screeps.json</code></p>
+<pre class="highlight undefined tab-undefined "><code><span class="token operator">/</span><span class="token punctuation">.</span>screeps<span class="token punctuation">.</span>json</code></pre><h2 id="使用-CLI-参数覆盖配置" class="article-heading"><a href="#使用-CLI-参数覆盖配置" class="headerlink" title="使用 CLI 参数覆盖配置"></a>使用 CLI 参数覆盖配置<a class="article-anchor" href="#使用-CLI-参数覆盖配置" aria-hidden="true"></a></h2><p>更改 Grunt 使用的配置不应该需要更改代码，我们可以通过命令行参数来完成该功能。</p>
+<p>现在更新 <code>Gruntfile.js</code> 来使用上面创建的 <code>.screeps.json</code> 以及 <code>grunt.option</code> 功能。</p>
+<pre class="highlight undefined tab-undefined "><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>grunt<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./.screeps.json'</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> branch <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'branch'</span><span class="token punctuation">)</span> <span class="token operator">||</span> config<span class="token punctuation">.</span>branch<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> email <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'email'</span><span class="token punctuation">)</span> <span class="token operator">||</span> config<span class="token punctuation">.</span>email<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> password <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'password'</span><span class="token punctuation">)</span> <span class="token operator">||</span> config<span class="token punctuation">.</span>password<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> ptr <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'ptr'</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token boolean">true</span> <span class="token punctuation">:</span> config<span class="token punctuation">.</span>ptr
+
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-screeps'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">initConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        screeps<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                email<span class="token punctuation">:</span> email<span class="token punctuation">,</span>
+                password<span class="token punctuation">:</span> password<span class="token punctuation">,</span>
+                branch<span class="token punctuation">:</span> branch<span class="token punctuation">,</span>
+                ptr<span class="token punctuation">:</span> ptr
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            dist<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                src<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'src/*.js'</span><span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>现在你可以随时通过命令行参数来覆盖任何配置，您也可以向 <code>.screeps.json</code> 中添加任何新的配置项。</p>
+<pre class="highlight undefined tab-undefined "><code>grunt screeps <span class="token operator">--</span>ptr<span class="token operator">=</span><span class="token boolean">true</span> <span class="token operator">--</span>branch<span class="token operator">=</span>development</code></pre><h2 id="使用文件夹" class="article-heading"><a href="#使用文件夹" class="headerlink" title="使用文件夹"></a>使用文件夹<a class="article-anchor" href="#使用文件夹" aria-hidden="true"></a></h2><p><strong>译者注</strong>：如果你是 TypeScript 玩家的话，下面的方法可能无法直接使用。</p>
+<p>一个困扰新玩家的常见问题是，默认情况下不能使用文件夹来存储文件。不过我们可以使用 Grunt 解决该问题。</p>
+<p>首先请安装 <a href="https://www.npmjs.com/package/grunt-contrib-copy" target="_blank" rel="external">grunt-contrib-copy</a> and <a href="https://www.npmjs.com/package/grunt-contrib-clean" target="_blank" rel="external">grunt-contrib-clean</a> 插件。</p>
+<pre class="highlight undefined tab-undefined "><code>npm install grunt<span class="token operator">-</span>contrib<span class="token operator">-</span>clean <span class="token operator">--</span>save<span class="token operator">-</span>dev
+npm install grunt<span class="token operator">-</span>contrib<span class="token operator">-</span>copy <span class="token operator">--</span>save<span class="token operator">-</span>dev</code></pre><p>在我们的解决方法中，”copy“ 插件将会把代码从 <code>src</code> 文件夹移动到 <code>dist</code> 里。该插件拥有一个配置项可以用来重命名文件，所以我们可以通过一个将目录分隔符(斜杠)转换为下划线的函数来”展开“文件结构。运行后，将产生如下效果：</p>
+<table>
+<thead>
+<tr>
+<th>之前</th>
+<th style="text-align:left">之后</th>
+<th>要求（代码里要提前这么写好）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>src/main.js</td>
+<td style="text-align:left">dist/main.js</td>
+<td>require(&#39;main&#39;);</td>
+</tr>
+<tr>
+<td>src/lib/creeptalk.js</td>
+<td style="text-align:left">dist/lib_creeptalk.js</td>
+<td>require(&#39;lib_creeptalk&#39;);</td>
+</tr>
+<tr>
+<td>src/lib/creeptalk/emoji.js</td>
+<td style="text-align:left">dist/lib_creeptalk_emoji.js</td>
+<td>require(&#39;lib_creeptalk_emoji&#39;);</td>
+</tr>
+<tr>
+<td>src/prototypes/creeps.js</td>
+<td style="text-align:left">dist/prototypes_creeps.js</td>
+<td>require(&#39;prototypes_creeps&#39;);</td>
+</tr>
+<tr>
+<td>src/prototypes/spawns.js</td>
+<td style="text-align:left">dist/prototypes_spawns.js</td>
+<td>require(&#39;prototypes_spawns&#39;);</td>
+</tr>
+</tbody>
+</table>
+<p>copy 插件在运行之前不会清理任何数据，所以 <code>clean</code> 插件可以保证在 <code>dist</code> 在移入文件之前是空的文件夹。</p>
+<p>最后我们使用 <code>grunt.registerTask()</code> 将这三个任务组合在一起，这里我们将其设置为默认任务。</p>
+<pre class="highlight undefined tab-undefined "><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>grunt<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./.screeps.json'</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> branch <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'branch'</span><span class="token punctuation">)</span> <span class="token operator">||</span> config<span class="token punctuation">.</span>branch<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> email <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'email'</span><span class="token punctuation">)</span> <span class="token operator">||</span> config<span class="token punctuation">.</span>email<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> password <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'password'</span><span class="token punctuation">)</span> <span class="token operator">||</span> config<span class="token punctuation">.</span>password<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> ptr <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'ptr'</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token boolean">true</span> <span class="token punctuation">:</span> config<span class="token punctuation">.</span>ptr
+
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-screeps'</span><span class="token punctuation">)</span>
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-contrib-clean'</span><span class="token punctuation">)</span>
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-contrib-copy'</span><span class="token punctuation">)</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">initConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        screeps<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                email<span class="token punctuation">:</span> email<span class="token punctuation">,</span>
+                password<span class="token punctuation">:</span> password<span class="token punctuation">,</span>
+                branch<span class="token punctuation">:</span> branch<span class="token punctuation">,</span>
+                ptr<span class="token punctuation">:</span> ptr
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            dist<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                src<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'dist/*.js'</span><span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment" spellcheck="true">// 移除 dist 文件夹中的所有文件。</span>
+        clean<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          <span class="token string">'dist'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'dist'</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment" spellcheck="true">// 将所有源文件复制到 dist 文件夹中并展平文件夹结构</span>
+        copy<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          <span class="token comment" spellcheck="true">// 将游戏代码推送到dist文件夹，以便在将其发送到 screeps 服务器之前可以对其进行修改。</span>
+          screeps<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            files<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+              expand<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+              cwd<span class="token punctuation">:</span> <span class="token string">'src/'</span><span class="token punctuation">,</span>
+              src<span class="token punctuation">:</span> <span class="token string">'**'</span><span class="token punctuation">,</span>
+              dest<span class="token punctuation">:</span> <span class="token string">'dist/'</span><span class="token punctuation">,</span>
+              filter<span class="token punctuation">:</span> <span class="token string">'isFile'</span><span class="token punctuation">,</span>
+              rename<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>dest<span class="token punctuation">,</span> src<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">// 通过将文件夹分隔符替换成下划线来重命名文件</span>
+                <span class="token keyword">return</span> dest <span class="token operator">+</span> src<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/\//g</span><span class="token punctuation">,</span><span class="token string">'_'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">registerTask</span><span class="token punctuation">(</span><span class="token string">'default'</span><span class="token punctuation">,</span>  <span class="token punctuation">[</span><span class="token string">'clean'</span><span class="token punctuation">,</span> <span class="token string">'copy:screeps'</span><span class="token punctuation">,</span> <span class="token string">'screeps'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>现在，只需要一条简单的命令，就可以将您的代码从 <code>src</code> 文件夹中复制出来，展平，并推送到 screeps 服务器。</p>
+<pre class="highlight undefined tab-undefined "><code>grunt</code></pre><h2 id="自动版本控制" class="article-heading"><a href="#自动版本控制" class="headerlink" title="自动版本控制"></a>自动版本控制<a class="article-anchor" href="#自动版本控制" aria-hidden="true"></a></h2><p>首先安装 <a href="https://www.npmjs.com/package/grunt-file-append" target="_blank" rel="external">file-append</a> 插件。</p>
+<pre class="highlight undefined tab-undefined "><code>npm install grunt<span class="token operator">-</span>file<span class="token operator">-</span>append <span class="token operator">--</span>save<span class="token operator">-</span>dev</code></pre><p>在您的源代码中创建一个名为 <code>version.js</code> 的空文件。Grunt 将使用该文件创建一个值为时间戳的全局变量 <code>SCRIPT_VERSION</code>。然后使用当前的时间填充该变量并创建一个新的 <code>file_append</code> 任务。</p>
+<pre class="highlight undefined tab-undefined "><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>grunt<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// 准备</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-screeps'</span><span class="token punctuation">)</span>
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-contrib-clean'</span><span class="token punctuation">)</span>
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-contrib-copy'</span><span class="token punctuation">)</span>
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-file-append'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> currentdate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 输入当前时间和分支</span>
+    grunt<span class="token punctuation">.</span>log<span class="token punctuation">.</span><span class="token function">subhead</span><span class="token punctuation">(</span><span class="token string">'Task Start: '</span> <span class="token operator">+</span> currentdate<span class="token punctuation">.</span><span class="token function">toLocaleString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    grunt<span class="token punctuation">.</span>log<span class="token punctuation">.</span><span class="token function">writeln</span><span class="token punctuation">(</span><span class="token string">'Branch: '</span> <span class="token operator">+</span> branch<span class="token punctuation">)</span>
+
+
+    grunt<span class="token punctuation">.</span><span class="token function">initConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+
+        <span class="token comment" spellcheck="true">// 此处省略</span>
+        screeps<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        clean<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        copy<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment" spellcheck="true">// 使用当前时间戳添加版本变量</span>
+        file_append<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          versioning<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            files<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+              <span class="token punctuation">{</span>
+                append<span class="token punctuation">:</span> <span class="token string">"\nglobal.SCRIPT_VERSION = "</span><span class="token operator">+</span> currentdate<span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">,</span>
+                input<span class="token punctuation">:</span> <span class="token string">'dist/version.js'</span><span class="token punctuation">,</span>
+              <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">registerTask</span><span class="token punctuation">(</span><span class="token string">'default'</span><span class="token punctuation">,</span>  <span class="token punctuation">[</span><span class="token string">'clean'</span><span class="token punctuation">,</span> <span class="token string">'copy:screeps'</span><span class="token punctuation">,</span> <span class="token string">'file_append:versioning'</span><span class="token punctuation">,</span> <span class="token string">'screeps'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>现在添加 <code>require(&#39;version&#39;)</code> 来启用 <code>SCRIPT_VERSION</code>。将其与保存在内存中的版本字符串进行比较，就可以让玩家看到代码是何时更新的了。</p>
+<pre class="highlight undefined tab-undefined "><code><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'version'</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>Memory<span class="token punctuation">.</span>SCRIPT_VERSION <span class="token operator">||</span> Memory<span class="token punctuation">.</span>SCRIPT_VERSION <span class="token operator">!=</span> SCRIPT_VERSION<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Memory<span class="token punctuation">.</span>SCRIPT_VERSION <span class="token operator">=</span> SCRIPT_VERSION
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'New code uplodated'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre><h2 id="私有服务器" class="article-heading"><a href="#私有服务器" class="headerlink" title="私有服务器"></a>私有服务器<a class="article-anchor" href="#私有服务器" aria-hidden="true"></a></h2><p>有两种使用 Grunt 上传代码到您的私有服务器帐户的方法。</p>
+<h3 id="通过-Steam-客户端" class="article-heading"><a href="#通过-Steam-客户端" class="headerlink" title="通过 Steam 客户端"></a>通过 Steam 客户端<a class="article-anchor" href="#通过-Steam-客户端" aria-hidden="true"></a></h3><p>Steam 客户端可以从您的本地文件夹上传代码。在这种情况下，可以使用 Grunt 将文件从 <code>dist</code> 文件夹复制到 Steam 用来上传数据的本地文件夹来完成提交代码的功能。</p>
+<p>不幸的是，该 <code>copy</code> 插件可能会导致 Steam 客户端出现一些问题，所以在这种情况下，应使用 <a href="https://www.npmjs.com/package/grunt-rsync" target="_blank" rel="external">rsync</a> 插件。</p>
+<pre class="highlight undefined tab-undefined "><code>npm install grunt<span class="token operator">-</span>rsync <span class="token operator">--</span>save<span class="token operator">-</span>dev</code></pre><p>  现在添加参数 <code>private_directory</code> 到您的凭据文件和 grunt 文件并配置 <code>rsync</code>。为了保证提交到主服务器任务的交叉兼容性，我们将使用 <code>grunt.registerTask</code> 创建一个新的 <code>private</code> 任务。</p>
+<pre class="highlight undefined tab-undefined "><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>grunt<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// 参数</span>
+    <span class="token keyword">var</span> private_directory <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'private_directory'</span><span class="token punctuation">)</span> <span class="token operator">||</span> config<span class="token punctuation">.</span>private_directory<span class="token punctuation">;</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-screeps'</span><span class="token punctuation">)</span>
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-contrib-clean'</span><span class="token punctuation">)</span>
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-contrib-copy'</span><span class="token punctuation">)</span>
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-rsync'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> currentdate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">initConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+
+        <span class="token comment" spellcheck="true">// 此处省略</span>
+        screeps<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        clean<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        copy<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment" spellcheck="true">// 将文件复制到客户端用于提交到私有服务器的文件夹。</span>
+        <span class="token comment" spellcheck="true">// 使用 rsync，以便客户端仅上传被更改的文件。</span>
+        rsync<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                args<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"--verbose"</span><span class="token punctuation">,</span> <span class="token string">"--checksum"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                exclude<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">".git*"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                recursive<span class="token punctuation">:</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token keyword">private</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                    src<span class="token punctuation">:</span> <span class="token string">'./dist/'</span><span class="token punctuation">,</span>
+                    dest<span class="token punctuation">:</span> private_directory<span class="token punctuation">,</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">registerTask</span><span class="token punctuation">(</span><span class="token string">'default'</span><span class="token punctuation">,</span>  <span class="token punctuation">[</span><span class="token string">'clean'</span><span class="token punctuation">,</span> <span class="token string">'copy:screeps'</span><span class="token punctuation">,</span> <span class="token string">'file_append:versioning'</span><span class="token punctuation">,</span> <span class="token string">'screeps'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    grunt<span class="token punctuation">.</span><span class="token function">registerTask</span><span class="token punctuation">(</span><span class="token string">'private'</span><span class="token punctuation">,</span>  <span class="token punctuation">[</span><span class="token string">'clean'</span><span class="token punctuation">,</span> <span class="token string">'copy:screeps'</span><span class="token punctuation">,</span> <span class="token string">'file_append:versioning'</span><span class="token punctuation">,</span> <span class="token string">'rsync:private'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>现在，代码就可以被简单的推送到您的私有服务器了。</p>
+<pre class="highlight undefined tab-undefined "><code>grunt <span class="token keyword">private</span></code></pre><h3 id="使用服务器-Mod" class="article-heading"><a href="#使用服务器-Mod" class="headerlink" title="使用服务器 Mod"></a>使用服务器 Mod<a class="article-anchor" href="#使用服务器-Mod" aria-hidden="true"></a></h3><p>您需要在私有服务器上安装一些身份验证模块，例如 <a href="https://github.com/ScreepsMods/screepsmod-auth" target="_blank" rel="external">screepsmod-auth</a>，之后才能使用该方法提交代码。</p>
+<pre class="highlight javascript tab-javascript "><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>grunt<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-screeps'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">initConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        screeps<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                server<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                    host<span class="token punctuation">:</span> <span class="token string">'your.server.hostname.or.ip'</span><span class="token punctuation">,</span>
+                    port<span class="token punctuation">:</span> <span class="token number">21025</span><span class="token punctuation">,</span>
+                    http<span class="token punctuation">:</span> <span class="token boolean">true</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                email<span class="token punctuation">:</span> <span class="token string">'YOUR_EMAIL'</span><span class="token punctuation">,</span>
+                password<span class="token punctuation">:</span> <span class="token string">'YOUR_PASSWORD'</span><span class="token punctuation">,</span>
+                branch<span class="token punctuation">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
+                ptr<span class="token punctuation">:</span> <span class="token boolean">false</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            dist<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                src<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'dist/*.js'</span><span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><h2 id="代码美化" class="article-heading"><a href="#代码美化" class="headerlink" title="代码美化"></a>代码美化<a class="article-anchor" href="#代码美化" aria-hidden="true"></a></h2><p>使代码格式保持优雅是 Grunt 的一项常见任务，可以通过 <a href="https://www.npmjs.com/package/grunt-jsbeautifier" target="_blank" rel="external">jsbeautifier</a> 插件来完成。</p>
+<pre class="highlight undefined tab-undefined "><code>npm install grunt<span class="token operator">-</span>jsbeautifier <span class="token operator">--</span>save<span class="token operator">-</span>dev</code></pre><p>现在，为 Grunt 添加两个新任务 - 一个用于清理代码，另一个用于验证代码标准，我们将把这些任务作为测试套件的开始（此任务可以在以后扩展）。该任务配置为在 <code>.jsbeautifyrc</code> 查找<a href="https://github.com/beautify-web/js-beautify#options" target="_blank" rel="external">样式规则</a>。</p>
+<pre class="highlight undefined tab-undefined "><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>grunt<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// 参数</span>
+    <span class="token keyword">var</span> private_directory <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'private_directory'</span><span class="token punctuation">)</span> <span class="token operator">||</span> config<span class="token punctuation">.</span>private_directory<span class="token punctuation">;</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-screeps'</span><span class="token punctuation">)</span>
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-contrib-clean'</span><span class="token punctuation">)</span>
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-contrib-copy'</span><span class="token punctuation">)</span>
+    grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-rsync'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> currentdate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">initConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+
+        <span class="token comment" spellcheck="true">// 此处省略</span>
+        screeps<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        clean<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        copy<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment" spellcheck="true">// 应用代码样式</span>
+        jsbeautifier<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          modify<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            src<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"src/**/*.js"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              config<span class="token punctuation">:</span> <span class="token string">'.jsbeautifyrc'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          verify<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            src<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"src/**/*.js"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              mode<span class="token punctuation">:</span> <span class="token string">'VERIFY_ONLY'</span><span class="token punctuation">,</span>
+              config<span class="token punctuation">:</span> <span class="token string">'.jsbeautifyrc'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">registerTask</span><span class="token punctuation">(</span><span class="token string">'default'</span><span class="token punctuation">,</span>  <span class="token punctuation">[</span><span class="token string">'clean'</span><span class="token punctuation">,</span> <span class="token string">'copy:screeps'</span><span class="token punctuation">,</span> <span class="token string">'file_append:versioning'</span><span class="token punctuation">,</span> <span class="token string">'screeps'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    grunt<span class="token punctuation">.</span><span class="token function">registerTask</span><span class="token punctuation">(</span><span class="token string">'private'</span><span class="token punctuation">,</span>  <span class="token punctuation">[</span><span class="token string">'clean'</span><span class="token punctuation">,</span> <span class="token string">'copy:screeps'</span><span class="token punctuation">,</span> <span class="token string">'file_append:versioning'</span><span class="token punctuation">,</span> <span class="token string">'rsync:private'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    grunt<span class="token punctuation">.</span><span class="token function">registerTask</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">,</span>     <span class="token punctuation">[</span><span class="token string">'jsbeautifier:verify'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    grunt<span class="token punctuation">.</span><span class="token function">registerTask</span><span class="token punctuation">(</span><span class="token string">'pretty'</span><span class="token punctuation">,</span>   <span class="token punctuation">[</span><span class="token string">'jsbeautifier:modify'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>现在可以在将代码按规则进行格式化</p>
+<pre class="highlight undefined tab-undefined "><code>grunt pretty</code></pre><p>或者执行简单的测试</p>
+<pre class="highlight undefined tab-undefined "><code>grunt test</code></pre><h2 id="添加统计" class="article-heading"><a href="#添加统计" class="headerlink" title="添加统计"></a>添加统计<a class="article-anchor" href="#添加统计" aria-hidden="true"></a></h2><p>有时看着代码上传会很无聊。<a href="https://www.npmjs.com/package/time-grunt" target="_blank" rel="external">time-grunt</a> 插件提供了每个任务花费多少时间的细分统计。</p>
+<pre class="highlight undefined tab-undefined "><code>npm install time<span class="token operator">-</span>grunt <span class="token operator">--</span>save<span class="token operator">-</span>dev</code></pre><p>现在，作为 grunt 函数的第一行，加载该插件并将 grunt 对象传递给它。</p>
+<pre class="highlight undefined tab-undefined "><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>grunt<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'time-grunt'</span><span class="token punctuation">)</span><span class="token punctuation">(</span>grunt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span></code></pre><h2 id="完整的例子" class="article-heading"><a href="#完整的例子" class="headerlink" title="完整的例子"></a>完整的例子<a class="article-anchor" href="#完整的例子" aria-hidden="true"></a></h2><p>将所有这些插件组合在一起可以即可提供一个功能强大但易于使用的工具来管理 Screeps 的部署。</p>
+<pre class="highlight undefined tab-undefined "><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>grunt<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'time-grunt'</span><span class="token punctuation">)</span><span class="token punctuation">(</span>grunt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// 从 .screeps.json 拉取默认配置（包括用户名和密码）</span>
+  <span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./.screeps.json'</span><span class="token punctuation">)</span>
+
+  <span class="token comment" spellcheck="true">// 允许 grunt 配置项覆盖默认配置</span>
+  <span class="token keyword">var</span> branch <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'branch'</span><span class="token punctuation">)</span> <span class="token operator">||</span> config<span class="token punctuation">.</span>branch<span class="token punctuation">;</span>
+  <span class="token keyword">var</span> email <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'email'</span><span class="token punctuation">)</span> <span class="token operator">||</span> config<span class="token punctuation">.</span>email<span class="token punctuation">;</span>
+  <span class="token keyword">var</span> password <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'password'</span><span class="token punctuation">)</span> <span class="token operator">||</span> config<span class="token punctuation">.</span>password<span class="token punctuation">;</span>
+  <span class="token keyword">var</span> ptr <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'ptr'</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token boolean">true</span> <span class="token punctuation">:</span> config<span class="token punctuation">.</span>ptr
+  <span class="token keyword">var</span> private_directory <span class="token operator">=</span> grunt<span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'private_directory'</span><span class="token punctuation">)</span> <span class="token operator">||</span> config<span class="token punctuation">.</span>private_directory<span class="token punctuation">;</span>
+
+
+  <span class="token keyword">var</span> currentdate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  grunt<span class="token punctuation">.</span>log<span class="token punctuation">.</span><span class="token function">subhead</span><span class="token punctuation">(</span><span class="token string">'Task Start: '</span> <span class="token operator">+</span> currentdate<span class="token punctuation">.</span><span class="token function">toLocaleString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  grunt<span class="token punctuation">.</span>log<span class="token punctuation">.</span><span class="token function">writeln</span><span class="token punctuation">(</span><span class="token string">'Branch: '</span> <span class="token operator">+</span> branch<span class="token punctuation">)</span>
+
+  <span class="token comment" spellcheck="true">// 加载需要的任务</span>
+  grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-screeps'</span><span class="token punctuation">)</span>
+  grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-contrib-clean'</span><span class="token punctuation">)</span>
+  grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-contrib-copy'</span><span class="token punctuation">)</span>
+  grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">'grunt-file-append'</span><span class="token punctuation">)</span>
+  grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">"grunt-jsbeautifier"</span><span class="token punctuation">)</span>
+  grunt<span class="token punctuation">.</span><span class="token function">loadNpmTasks</span><span class="token punctuation">(</span><span class="token string">"grunt-rsync"</span><span class="token punctuation">)</span>
+
+  grunt<span class="token punctuation">.</span><span class="token function">initConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// 将 dist 文件夹中的所有文件推送到 screeps。 dist 文件夹中的内容</span>
+    <span class="token comment" spellcheck="true">// 以及要发送的内容取决于所使用的任务。</span>
+    screeps<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        email<span class="token punctuation">:</span> email<span class="token punctuation">,</span>
+        password<span class="token punctuation">:</span> password<span class="token punctuation">,</span>
+        branch<span class="token punctuation">:</span> branch<span class="token punctuation">,</span>
+        ptr<span class="token punctuation">:</span> ptr
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      dist<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        src<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'dist/*.js'</span><span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    <span class="token operator">/</span><span class="token operator">/</span> 将所有源文件复制到 dist 文件夹
+    <span class="token operator">/</span><span class="token operator">/</span> 通过将路径分隔符转换为下划线来展平文件夹结构
+    copy<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token operator">/</span><span class="token operator">/</span> 将游戏代码推送到dist文件夹，以便在将其发送到 screeps 服务器之前可以对其进行修改。
+      screeps<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        files<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+          expand<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+          cwd<span class="token punctuation">:</span> <span class="token string">'src/'</span><span class="token punctuation">,</span>
+          src<span class="token punctuation">:</span> <span class="token string">'**'</span><span class="token punctuation">,</span>
+          dest<span class="token punctuation">:</span> <span class="token string">'dist/'</span><span class="token punctuation">,</span>
+          filter<span class="token punctuation">:</span> <span class="token string">'isFile'</span><span class="token punctuation">,</span>
+          rename<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>dest<span class="token punctuation">,</span> src<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token operator">/</span><span class="token operator">/</span> 通过将文件夹分隔符替换成下划线来重命名文件
+            <span class="token keyword">return</span> dest <span class="token operator">+</span> src<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/\//g</span><span class="token punctuation">,</span><span class="token string">'_'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+
+    <span class="token operator">/</span><span class="token operator">/</span> 将文件复制到客户端用于提交到私有服务器的文件夹。
+    <span class="token operator">/</span><span class="token operator">/</span> 使用 rsync，以便客户端仅上传被更改的文件。
+    rsync<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            args<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"--verbose"</span><span class="token punctuation">,</span> <span class="token string">"--checksum"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            exclude<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">".git*"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            recursive<span class="token punctuation">:</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token keyword">private</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                src<span class="token punctuation">:</span> <span class="token string">'./dist/'</span><span class="token punctuation">,</span>
+                dest<span class="token punctuation">:</span> private_directory<span class="token punctuation">,</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+
+    <span class="token operator">/</span><span class="token operator">/</span> 使用当前时间戳添加版本变量
+    file_append<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      versioning<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        files<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            append<span class="token punctuation">:</span> <span class="token string">"\nglobal.SCRIPT_VERSION = "</span><span class="token operator">+</span> currentdate<span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">,</span>
+            input<span class="token punctuation">:</span> <span class="token string">'dist/version.js'</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+
+    <span class="token operator">/</span><span class="token operator">/</span> 移除 dist 文件夹中的所有文件。
+    clean<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">'dist'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'dist'</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+
+    <span class="token operator">/</span><span class="token operator">/</span> 应用代码样式
+    jsbeautifier<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      modify<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        src<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"src/**/*.js"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          config<span class="token punctuation">:</span> <span class="token string">'.jsbeautifyrc'</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      verify<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        src<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"src/**/*.js"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          mode<span class="token punctuation">:</span> <span class="token string">'VERIFY_ONLY'</span><span class="token punctuation">,</span>
+          config<span class="token punctuation">:</span> <span class="token string">'.jsbeautifyrc'</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+  <span class="token comment" spellcheck="true">// 将它们组合为一个默认任务。</span>
+  grunt<span class="token punctuation">.</span><span class="token function">registerTask</span><span class="token punctuation">(</span><span class="token string">'default'</span><span class="token punctuation">,</span>  <span class="token punctuation">[</span><span class="token string">'clean'</span><span class="token punctuation">,</span> <span class="token string">'copy:screeps'</span><span class="token punctuation">,</span>  <span class="token string">'file_append:versioning'</span><span class="token punctuation">,</span> <span class="token string">'screeps'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  grunt<span class="token punctuation">.</span><span class="token function">registerTask</span><span class="token punctuation">(</span><span class="token string">'private'</span><span class="token punctuation">,</span>  <span class="token punctuation">[</span><span class="token string">'clean'</span><span class="token punctuation">,</span> <span class="token string">'copy:screeps'</span><span class="token punctuation">,</span>  <span class="token string">'file_append:versioning'</span><span class="token punctuation">,</span> <span class="token string">'rsync:private'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  grunt<span class="token punctuation">.</span><span class="token function">registerTask</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">,</span>     <span class="token punctuation">[</span><span class="token string">'jsbeautifier:verify'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  grunt<span class="token punctuation">.</span><span class="token function">registerTask</span><span class="token punctuation">(</span><span class="token string">'pretty'</span><span class="token punctuation">,</span>   <span class="token punctuation">[</span><span class="token string">'jsbeautifier:modify'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2024-09-20T13:38:58.407Z" itemprop="dateModified">上次更新：9月 20, 2024</time>
+                <a href="/contributed/rules.html" class="article-footer-prev"><i class="fa fa-chevron-left"></i><span>贡献规则</span></a><a href="/contributed/modifying-prototypes.html" class="article-footer-next"><span>修改原型</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#假设条件"><span class="toc-text">假设条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全凭据"><span class="toc-text">安全凭据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-CLI-参数覆盖配置"><span class="toc-text">使用 CLI 参数覆盖配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用文件夹"><span class="toc-text">使用文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动版本控制"><span class="toc-text">自动版本控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#私有服务器"><span class="toc-text">私有服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通过-Steam-客户端"><span class="toc-text">通过 Steam 客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用服务器-Mod"><span class="toc-text">使用服务器 Mod</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码美化"><span class="toc-text">代码美化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加统计"><span class="toc-text">添加统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完整的例子"><span class="toc-text">完整的例子</span></a></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+            
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="sidebar-link">总览</a><strong class="sidebar-title">游戏环境</strong><a href="/introduction.html" class="sidebar-link">简介</a><a href="/creeps.html" class="sidebar-link">Creeps</a><a href="/control.html" class="sidebar-link">控制</a><a href="/defense.html" class="sidebar-link">防御</a><a href="/respawn.html" class="sidebar-link">重生</a><a href="/start-areas.html" class="sidebar-link">初始区域</a><a href="/resources.html" class="sidebar-link">资源</a><a href="/market.html" class="sidebar-link">市场</a><a href="/invaders.html" class="sidebar-link">NPC 入侵者</a><a href="/power.html" class="sidebar-link">超能</a><strong class="sidebar-title">脚本</strong><a href="/scripting-basics.html" class="sidebar-link">脚本基础</a><a href="/global-objects.html" class="sidebar-link">全局对象</a><a href="/modules.html" class="sidebar-link">模块</a><a href="/debugging.html" class="sidebar-link">调试</a><a href="/game-loop.html" class="sidebar-link">游戏循环</a><a href="/commit.html" class="sidebar-link">外部提交</a><a href="/simultaneous-actions.html" class="sidebar-link">同步操作</a><a href="/cpu-limit.html" class="sidebar-link">CPU 限制</a><strong class="sidebar-title">其他</strong><a href="/architecture.html" class="sidebar-link">服务器架构</a><a href="/ptr.html" class="sidebar-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="sidebar-link">第三方工具</a><a href="/auth-tokens.html" class="sidebar-link">验证令牌</a><a href="/community-servers.html" class="sidebar-link">社区服务器</a><a href="/tos.html" class="sidebar-link">服务条款</a><a href="/privacy-policy.html" class="sidebar-link">隐私政策</a><strong class="sidebar-title">资源</strong><a href="http://blog.screeps.com" class="sidebar-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="sidebar-link">修改日志</a><a href="http://chat.screeps.com" class="sidebar-link">聊天室</a><a href="https://screeps.com/forum/" class="sidebar-link">论坛</a><strong class="sidebar-title">贡献文章</strong><a href="/contributed/rules.html" class="sidebar-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="sidebar-link current">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="sidebar-link">修改原型</a><a href="/contributed/caching-overview.html" class="sidebar-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="sidebar-link">私有服务器 MongoDB</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2024 <a href="https://screeps.com/" target="_blank">Screeps</a><br>
+      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
+    </div>
+    <div id="footer-links">
+      <a href="https://github.com/screeps-cn/docs" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    
+      <a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="mobile-nav-link">总览</a><strong class="mobile-nav-title">游戏环境</strong><a href="/introduction.html" class="mobile-nav-link">简介</a><a href="/creeps.html" class="mobile-nav-link">Creeps</a><a href="/control.html" class="mobile-nav-link">控制</a><a href="/defense.html" class="mobile-nav-link">防御</a><a href="/respawn.html" class="mobile-nav-link">重生</a><a href="/start-areas.html" class="mobile-nav-link">初始区域</a><a href="/resources.html" class="mobile-nav-link">资源</a><a href="/market.html" class="mobile-nav-link">市场</a><a href="/invaders.html" class="mobile-nav-link">NPC 入侵者</a><a href="/power.html" class="mobile-nav-link">超能</a><strong class="mobile-nav-title">脚本</strong><a href="/scripting-basics.html" class="mobile-nav-link">脚本基础</a><a href="/global-objects.html" class="mobile-nav-link">全局对象</a><a href="/modules.html" class="mobile-nav-link">模块</a><a href="/debugging.html" class="mobile-nav-link">调试</a><a href="/game-loop.html" class="mobile-nav-link">游戏循环</a><a href="/commit.html" class="mobile-nav-link">外部提交</a><a href="/simultaneous-actions.html" class="mobile-nav-link">同步操作</a><a href="/cpu-limit.html" class="mobile-nav-link">CPU 限制</a><strong class="mobile-nav-title">其他</strong><a href="/architecture.html" class="mobile-nav-link">服务器架构</a><a href="/ptr.html" class="mobile-nav-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="mobile-nav-link">第三方工具</a><a href="/auth-tokens.html" class="mobile-nav-link">验证令牌</a><a href="/community-servers.html" class="mobile-nav-link">社区服务器</a><a href="/tos.html" class="mobile-nav-link">服务条款</a><a href="/privacy-policy.html" class="mobile-nav-link">隐私政策</a><strong class="mobile-nav-title">资源</strong><a href="http://blog.screeps.com" class="mobile-nav-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="mobile-nav-link">修改日志</a><a href="http://chat.screeps.com" class="mobile-nav-link">聊天室</a><a href="https://screeps.com/forum/" class="mobile-nav-link">论坛</a><strong class="mobile-nav-title">贡献文章</strong><a href="/contributed/rules.html" class="mobile-nav-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="mobile-nav-link current">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="mobile-nav-link">修改原型</a><a href="/contributed/caching-overview.html" class="mobile-nav-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="mobile-nav-link">私有服务器 MongoDB</a>
+    
+  </div>
+</nav>
+  <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/scrollingelement.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/custom.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+</body>
+</html>

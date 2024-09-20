@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>修改对象原型 | Screeps 中文文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://screeps-cn.github.io/contributed/modifying-prototypes.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="http://screeps-cn.github.io/contributed/modifying-prototypes.html">
+    
+      <link rel="alternative" hreflang="zh-tw" href="http://screeps-cn.github.io/zh-tw/contributed/modifying-prototypes.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="http://screeps-cn.github.io/zh-cn/contributed/modifying-prototypes.html">
+    
+      <link rel="alternative" hreflang="ru" href="http://screeps-cn.github.io/ru/contributed/modifying-prototypes.html">
+    
+      <link rel="alternative" hreflang="ko" href="http://screeps-cn.github.io/ko/contributed/modifying-prototypes.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/css/navy.css?1">
+  <link rel="stylesheet" href="/css/prism.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Screeps 中文文档">
+  <!-- Open Graph -->
+  <meta name="description" content="本文将讨论对象原型以及可以使用/修改的几种原型，阅读本文来使您的 Screeps 生活更加轻松！
+什么是原型?原型（Prototypes）允许在 Javascript 中进行继承（inheritance），并且拥有许多强大的使用方法。
+Javascript 中的每个对象都有到另一个对象的链接，该对象称为原型对象，它从该对象继承属性和方法。而作为另一个对象，原型对象可能还具有到另一个原型对象的链接，">
+<meta property="og:type" content="website">
+<meta property="og:title" content="修改对象原型">
+<meta property="og:url" content="http://screeps-cn.github.io/contributed/modifying-prototypes.html">
+<meta property="og:site_name" content="Screeps 中文文档">
+<meta property="og:description" content="本文将讨论对象原型以及可以使用/修改的几种原型，阅读本文来使您的 Screeps 生活更加轻松！
+什么是原型?原型（Prototypes）允许在 Javascript 中进行继承（inheritance），并且拥有许多强大的使用方法。
+Javascript 中的每个对象都有到另一个对象的链接，该对象称为原型对象，它从该对象继承属性和方法。而作为另一个对象，原型对象可能还具有到另一个原型对象的链接，">
+<meta property="og:updated_time" content="2024-09-20T13:38:58.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="修改对象原型">
+<meta name="twitter:description" content="本文将讨论对象原型以及可以使用/修改的几种原型，阅读本文来使您的 Screeps 生活更加轻松！
+什么是原型?原型（Prototypes）允许在 Javascript 中进行继承（inheritance），并且拥有许多强大的使用方法。
+Javascript 中的每个对象都有到另一个对象的链接，该对象称为原型对象，它从该对象继承属性和方法。而作为另一个对象，原型对象可能还具有到另一个原型对象的链接，">
+  <!-- Google Analytics -->
+  
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="https://screeps.com" id="logo">Screeps</a>
+      <a href="/index.html" id="logo-docs">docs</a>
+    </h1>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+    <div id="header-main"></div>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name" id="top">修改对象原型</h1>
+                <a href="https://github.com/screeps-cn/docs/edit/master/source/contributed/modifying-prototypes.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                
+                <div class="article-author">Contributed by <a href="https://screeps.com/a/#!/profile/Helam" target="_blank">Helam</a> on <time datetime="2017-05-14T00:00:00.000Z">5月 14, 2017</time></div>
+                
+                <p>本文将讨论对象原型以及可以使用/修改的几种原型，阅读本文来使您的 Screeps 生活更加轻松！</p>
+<h2 id="什么是原型" class="article-heading"><a href="#什么是原型" class="headerlink" title="什么是原型?"></a>什么是原型?<a class="article-anchor" href="#什么是原型" aria-hidden="true"></a></h2><p>原型<a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes" target="_blank" rel="external">（Prototypes）</a>允许在 Javascript 中进行继承<a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance" target="_blank" rel="external">（inheritance）</a>，并且拥有许多强大的使用方法。</p>
+<p>Javascript 中的每个对象都有到另一个对象的链接，该对象称为<strong>原型</strong>对象，它从该对象继承属性和方法。而作为另一个对象，原型对象可能还具有到另一个原型对象的链接，从而构成了一个<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" target="_blank" rel="external">原型链</a>。或者，原型也可以是 null。</p>
+<p>如果您创建了一个名为 “John” 的 creep，那么 <code>Game.creeps.John</code> 将有一个指向 <a href="http://docs.screeps.com/api/#Creep" target="_blank" rel="external"><code>Creep</code></a> 原型的链接。该 <a href="http://docs.screeps.com/api/#Creep" target="_blank" rel="external"><code>Creep</code></a> 原型具有许多有用的属性和定义好的方法，例如你所熟悉的 <a href="http://docs.screeps.com/api/#Creep.name" target="_blank" rel="external"><code>.name</code></a>，<a href="http://docs.screeps.com/api/#Creep.moveTo" target="_blank" rel="external"><code>.moveTo()</code></a> 和 <a href="http://docs.screeps.com/api/#Creep.harvest" target="_blank" rel="external"><code>.harvest()</code></a>。由于您的 creep 都是基于 <a href="http://docs.screeps.com/api/#Creep" target="_blank" rel="external"><code>Creep</code></a> 对象的，所以这些方法在您的 creep 上都可以访问到。您所有的 creep 对象都有此原型的链接，所以可以继承该原型上的属性。这也是其他所有游戏对象中定义方法和属性的方式。查看更多原型例如：<a href="http://docs.screeps.com/api/#Room" target="_blank" rel="external"><code>Room</code></a>，<a href="http://docs.screeps.com/api/#Source" target="_blank" rel="external"><code>Source</code></a>，和 <a href="http://docs.screeps.com/api/#Structure" target="_blank" rel="external"><code>Structure</code></a>。</p>
+<h2 id="在原型上添加方法" class="article-heading"><a href="#在原型上添加方法" class="headerlink" title="在原型上添加方法"></a>在原型上添加方法<a class="article-anchor" href="#在原型上添加方法" aria-hidden="true"></a></h2><p>向原型添加方法的功能非常有用，尤其是在 Screeps 中。 您只需定义一次方法，就可以在所有的 creep 上使用它！</p>
+<p>在你开始使用原型方式时，最重要的是要了解 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions" target="_blank" rel="external">functions</a> 已经，或者说可以被存放在一个变量或者对象的属性里，就像是数字、对象、数组、字符串和布尔值一样。<a href="http://docs.screeps.com/api/#Creep.attack" target="_blank" rel="external"><code>.attack()</code></a> 或者 <a href="http://docs.screeps.com/api/#Creep.move" target="_blank" rel="external"><code>.move()</code></a> 这样的 Creep 方法都被存放在了 <a href="http://docs.screeps.com/api/#Creep" target="_blank" rel="external"><code>Creep</code></a> 原型的属性上。</p>
+<p>因为这些方法都是一个对象上的属性，就和其他类型的值一样，所以你可以这样添加一个新的方法：</p>
+<pre class="highlight javascript tab-javascript "><code>Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>sayHello <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    <span class="token comment" spellcheck="true">// 在原型方法中，"this" 通常代指该原型对象本身</span>
+    <span class="token comment" spellcheck="true">// 无论你在哪个 creep 上调用 '.sayHello()' 都可以执行这段代码</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">say</span><span class="token punctuation">(</span><span class="token string">"Hello!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>在这段代码之后你可以在任何你的 creep 上调用 <code>creep.sayHello();</code> 之类的方法，然后它们就会向你打招呼！</p>
+<p>你甚至可以重写已经存在的原型方法：</p>
+<pre class="highlight javascript tab-javascript "><code>Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>suicide <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">say</span><span class="token punctuation">(</span><span class="token string">"NO WAY!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>上面的代码重写了正常的 <a href="http://docs.screeps.com/api/#Creep.suicide" target="_blank" rel="external"><code>creep.suicide()</code></a> 方法，所以这段代码将会替代自杀操作，在你调用这个方法之后，creep 会生气的拒绝你的命令。</p>
+<h3 id="保存原始方法" class="article-heading"><a href="#保存原始方法" class="headerlink" title="保存原始方法"></a>保存原始方法<a class="article-anchor" href="#保存原始方法" aria-hidden="true"></a></h3><p>当你重写了一个原型方法后，你将无法访问原始方法。在 Screeps 中，无法访问像 <a href="http://docs.screeps.com/api/#Creep.move" target="_blank" rel="external"><code>.move()</code></a> 之类的重要方法可能会导致很严重的后果。所以在覆盖原始方法之前，你最好把它存储在其他属性中，这样可以避免无法访问重要的功能，以便以后可以在需要时使用它。</p>
+<p>在上面的例子里，我们在重写 <a href="http://docs.screeps.com/api/#Creep.suicide" target="_blank" rel="external"><code>.suicide()</code></a> 方法时并没有保存其原始方法，所以在需要时的时候我们就没办法真正的执行自杀了。接下来我们再次重写 <a href="http://docs.screeps.com/api/#Creep.suicide" target="_blank" rel="external"><code>.suicide()</code></a> 方法，不过这次我们添加一点新东西。</p>
+<p>我们将把原始方法存储在名为 <code>._suicide</code> 的新属性中。在属性名称前加下划线是一种 Javascript 命名约定，旨在表示该属性是<a href="https://developer.mozilla.org/en-US/Add-ons/SDK/Guides/Contributor_s_Guide/Private_Properties" target="_blank" rel="external">私有</a>的。</p>
+<pre class="highlight javascript tab-javascript "><code><span class="token comment" spellcheck="true">// 先确定我们还没把原始方法保存下来</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>_suicide<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// 保存原始方法</span>
+    Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>_suicide <span class="token operator">=</span> Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>suicide<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 创建一个新属性</span>
+    Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>suicide <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token comment" spellcheck="true">// 添加自定义功能</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`May </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> rest in peace.`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 调用并返回原始方法</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_suicide</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span></code></pre><p>运行上述代码后，在你的 creep 上调用该方法将会在控制台中显示这个 creep 实际自杀返回值和一条令人欣慰的信息。</p>
+<p>上面的代码演示了很多重要的地方：</p>
+<ul>
+<li>为了保证幂等性（无论执行多少次，返回值都是相同的），仅在原始方法没有保存时才进行保存并创建你的新方法。</li>
+<li>永远记得保存你的原始方法。</li>
+<li>如果可能的话，请始终返回原始方法的返回值，以使新方法尽可能与原始方法相似。其他代码，包括您自己的代码和游戏内部代码，都可能依赖于您正在修改的函数的返回值。</li>
+</ul>
+<h3 id="使用任意参数列表" class="article-heading"><a href="#使用任意参数列表" class="headerlink" title="使用任意参数列表"></a>使用任意参数列表<a class="article-anchor" href="#使用任意参数列表" aria-hidden="true"></a></h3><p>前面的示例很简单，因为 <a href="http://docs.screeps.com/api/#Creep.suicide" target="_blank" rel="external"><code>Creep.prototype.suicide</code></a> 没有任何的参数。但是在覆盖原型方法时，正确处理参数非常重要。</p>
+<p><a href="http://docs.screeps.com/api/#Creep.moveTo" target="_blank" rel="external"><code>Creep.prototype.moveTo</code></a> 方法是一个很好的例子，在覆盖该方法时需要仔细的处理参数，因为它具有两种可能的参数列表：<code>(x, y, [opts])</code> 或者 <code>(target, [opts])</code>。下面的示例将覆盖 <a href="http://docs.screeps.com/api/#Creep.moveTo" target="_blank" rel="external"><code>.moveTo()</code></a> 来记录每个 creep 移动所消耗的 CPU。接下来的三个示例会展示不同的参数处理方式：</p>
+<ol>
+<li><p>使用你自己的参数类别:</p>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>_moveTo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>_moveTo <span class="token operator">=</span> Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>moveTo<span class="token punctuation">;</span>
+ Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>moveTo <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>myArg1<span class="token punctuation">,</span> myArg2<span class="token punctuation">,</span> myArg3<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`My moveTo with my own arguments!`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+     <span class="token keyword">let</span> startCpu <span class="token operator">=</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token comment" spellcheck="true">// 调用原始方法并保存返回值</span>
+     <span class="token keyword">let</span> returnValue <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_moveTo</span><span class="token punctuation">(</span>myArg1<span class="token punctuation">,</span> myArg2<span class="token punctuation">,</span> myArg3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">let</span> endCpu <span class="token operator">=</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+     <span class="token keyword">let</span> used <span class="token operator">=</span> endCpu <span class="token operator">-</span> startCpu<span class="token punctuation">;</span>
+
+     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>moveToCPU<span class="token punctuation">)</span> <span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>moveToCPU <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+     <span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>moveToCPU <span class="token operator">+</span><span class="token operator">=</span> used<span class="token punctuation">;</span>
+
+     <span class="token keyword">return</span> returnValue<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 返回原方法返回值</span>
+ <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></li>
+<li><p>使用每个函数中都有的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments" target="_blank" rel="external"><code>arguments</code></a> 对象：</p>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>_moveTo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>_moveTo <span class="token operator">=</span> Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>moveTo<span class="token punctuation">;</span>
+ Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>moveTo <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`My moveTo using the arguments object!`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+     <span class="token keyword">let</span> startCpu <span class="token operator">=</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token comment" spellcheck="true">// 稍后会对 Function.apply() 方法进行简单描述</span>
+     <span class="token keyword">let</span> returnValue <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_moveTo<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> arguments<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">let</span> endCpu <span class="token operator">=</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+     <span class="token keyword">let</span> used <span class="token operator">=</span> endCpu <span class="token operator">-</span> startCpu<span class="token punctuation">;</span>
+
+     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>moveToCPU<span class="token punctuation">)</span> <span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>moveToCPU <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+     <span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>moveToCPU <span class="token operator">+</span><span class="token operator">=</span> used<span class="token punctuation">;</span>
+
+     <span class="token keyword">return</span> returnValue<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></li>
+<li><p>使用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters" target="_blank" rel="external">&quot;rest parameters&quot;</a>:</p>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>_moveTo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>_moveTo <span class="token operator">=</span> Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>moveTo<span class="token punctuation">;</span>
+ Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>moveTo <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">...</span>myArgumentsArray<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`My moveTo using rest parameters!`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+     <span class="token keyword">let</span> startCpu <span class="token operator">=</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">let</span> returnValue <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_moveTo<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> myArgumentsArray<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">let</span> endCpu <span class="token operator">=</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+     <span class="token keyword">let</span> used <span class="token operator">=</span> endCpu <span class="token operator">-</span> startCpu<span class="token punctuation">;</span>
+
+     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>moveToCPU<span class="token punctuation">)</span> <span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>moveToCPU <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+     <span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>moveToCPU <span class="token operator">+</span><span class="token operator">=</span> used<span class="token punctuation">;</span>
+
+     <span class="token keyword">return</span> returnValue<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></li>
+</ol>
+<h4 id="Function-apply" class="article-heading"><a href="#Function-apply" class="headerlink" title="Function.apply"></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply" target="_blank" rel="external">Function.apply</a><a class="article-anchor" href="#Function-apply" aria-hidden="true"></a></h4><p><code>Function.apply(thisArg, argumentsArray)</code> 调用具有指定 <code>this</code> 值的函数，并将参数数组的每个元素作为该函数的参数传递。
+例如：</p>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">let</span> name <span class="token operator">=</span> <span class="token string">"Helam"</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Hello my name is: "</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>执行的结果和下面代码相同：</p>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">let</span> name <span class="token operator">=</span> <span class="token string">"Helam"</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> myArguments <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"Hello my name is: "</span><span class="token punctuation">,</span> name<span class="token punctuation">]</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>console<span class="token punctuation">,</span> myArguments<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>另请参加 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call" target="_blank" rel="external">Function.call</a>。</p>
+<h3 id="其他例子" class="article-heading"><a href="#其他例子" class="headerlink" title="其他例子"></a>其他例子<a class="article-anchor" href="#其他例子" aria-hidden="true"></a></h3><h4 id="Spawn-createCreep-自动命名" class="article-heading"><a href="#Spawn-createCreep-自动命名" class="headerlink" title="Spawn.createCreep - 自动命名"></a><a href="http://docs.screeps.com/api/#StructureSpawn.spawnCreep" target="_blank" rel="external">Spawn.createCreep</a> - 自动命名<a class="article-anchor" href="#Spawn-createCreep-自动命名" aria-hidden="true"></a></h4><p>当您有大量 creep 时，使用默认的自动命名可能会消耗大量 CPU。 自己命名它们不失为节省 CPU 的一种方法。</p>
+<pre class="highlight javascript tab-javascript "><code><span class="token comment" spellcheck="true">// 确保该方法还没有被复写</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>StructureSpawn<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>_spawnCreep<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    StructureSpawn<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>_spawnCreep <span class="token operator">=</span> StructureSpawn<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>spawnCreep<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 原先的函数签名：spawnCreep(body, name, opts)</span>
+    <span class="token comment" spellcheck="true">// 设置一个新的函数签名：createCreep(body, opts)</span>
+    StructureSpawn<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>spawnCreep <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>body<span class="token punctuation">,</span> opts <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Memory<span class="token punctuation">.</span>myCreepNameCounter<span class="token punctuation">)</span> Memory<span class="token punctuation">.</span>myCreepNameCounter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 现在我们需要生成一个没有使用的名字</span>
+        <span class="token keyword">let</span> name<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> dryRun<span class="token punctuation">;</span>
+        <span class="token keyword">do</span> <span class="token punctuation">{</span>
+            name <span class="token operator">=</span> <span class="token template-string"><span class="token string">`c</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Memory<span class="token punctuation">.</span>creepNameCounter<span class="token operator">++</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">;</span>
+            dryRun <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_spawnCreep</span><span class="token punctuation">(</span>body<span class="token punctuation">,</span> name<span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token operator">...</span>opts<span class="token punctuation">,</span> dryRun<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>dryRun <span class="token operator">!==</span> ERR_NAME_EXISTS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 现在我们调用原始方法并传入我们生成的名称，然后</span>
+        <span class="token comment" spellcheck="true">// 向外传递原始返回值</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_spawnCreep</span><span class="token punctuation">(</span>body<span class="token punctuation">,</span> name<span class="token punctuation">,</span> opts<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><h4 id="StructureObserver-observeRoom-防止调用覆盖" class="article-heading"><a href="#StructureObserver-observeRoom-防止调用覆盖" class="headerlink" title="StructureObserver.observeRoom - 防止调用覆盖"></a><a href="http://docs.screeps.com/api/#StructureObserver" target="_blank" rel="external">StructureObserver.observeRoom</a> - 防止调用覆盖<a class="article-anchor" href="#StructureObserver-observeRoom-防止调用覆盖" aria-hidden="true"></a></h4><p>在同一 tick 中如果对单个 observer 调用多次 <a href="http://docs.screeps.com/api/#StructureObserver.observeRoom" target="_blank" rel="external"><code>.observeRoom</code></a> 的话，后面的调用将会覆盖之前的调用，而且哪怕只有最后一个调用会被真正执行，所有的调用也都会返回 <code>OK</code>。下面的例子将会介绍如何修改其行为，使得后续调用返回 <code>ERR_BUSY</code> 而不是覆盖先前的调用。</p>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>StructureObserver<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>_observeRoom<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    StructureObserver<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>_observeRoom <span class="token operator">=</span> StructureObserver<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>observeRoom<span class="token punctuation">;</span>
+    StructureObserver<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>observeRoom <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>observing<span class="token punctuation">)</span> 
+            <span class="token keyword">return</span> ERR_BUSY<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> observeResult <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_observeRoom<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> arguments<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>observeResult <span class="token operator">===</span> OK<span class="token punctuation">)</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>observing <span class="token operator">=</span> roomName<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> observeResult<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><h2 id="在原型上添加属性" class="article-heading"><a href="#在原型上添加属性" class="headerlink" title="在原型上添加属性"></a>在原型上添加属性<a class="article-anchor" href="#在原型上添加属性" aria-hidden="true"></a></h2><p>就像原型方法一样，原型对象上还有很多并不是方法的属性，例如从 <a href="http://docs.screeps.com/api/#Creep" target="_blank" rel="external"><code>Creep</code></a> 原型上继承的 <a href="http://docs.screeps.com/api/#Creep.name" target="_blank" rel="external"><code>.name</code></a> 或者从 <a href="http://docs.screeps.com/api/#Structure" target="_blank" rel="external"><code>Structure</code></a> 原型上继承的 <a href="http://docs.screeps.com/api/#Structure.hits" target="_blank" rel="external"><code>hits</code></a> 属性。这些属性从原型继承到游戏对象，所以你可以访问它们。而且并不是只能使用游戏 API 提供的属性，你还可以创建自己的属性！！！</p>
+<p>有很多方法来创建自定义的属性，这里我们仅介绍其中的几种：使用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="external"><code>Object.defineProperty</code></a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties" target="_blank" rel="external"><code>Object.defineProperties</code></a> 来添加属性。</p>
+<p>我们将在 <a href="http://docs.screeps.com/api/#Room" target="_blank" rel="external"><code>Room</code></a> 原型上创建一个属性 <code>sources</code>，该属性包含房间中的能量矿数组。在 Screeps 有 4 种不同的方法来创建自己的属性，我们会分别说明其中的不同。</p>
+<h3 id="只有-getter-访问器并且无缓存的基础属性" class="article-heading"><a href="#只有-getter-访问器并且无缓存的基础属性" class="headerlink" title="只有 getter 访问器并且无缓存的基础属性"></a>只有 getter 访问器并且无缓存的基础属性<a class="article-anchor" href="#只有-getter-访问器并且无缓存的基础属性" aria-hidden="true"></a></h3><p>注意：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="external"><code>Object.defineProperty</code></a> 需要下面三个参数：</p>
+<ol>
+<li>要添加属性的对象，通常是原型对象。在该例子里为 <code>Room.prototype</code>。</li>
+<li>要添加的属性名。在该例子里为 <code>sources</code>，但其实你可以起任何名字比如 <code>&#39;foo&#39;</code> 或者 <code>&#39;myProp&#39;</code>。</li>
+<li>一个对象，其中包含用于定义属性行为的选项。详情请参见 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="external">MDN 文档</a>。<pre class="highlight javascript tab-javascript "><code>Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>Room<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span> <span class="token string">'sources'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+ <span class="token comment" spellcheck="true">// 这个是 getter 访问器，当你输入 room.sources 时</span>
+ <span class="token comment" spellcheck="true">// 它的值就是该方法返回的</span>
+ <span class="token keyword">get</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token comment" spellcheck="true">// 由于我们是在 Room 原型上定义的属性，</span>
+     <span class="token comment" spellcheck="true">// 因此下面一行中的 'this' 是我们要从中获取 .sources 的任何 room 对象。</span>
+     <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>FIND_SOURCES<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token comment" spellcheck="true">// 这样可以使 creep 在枚举属性时不显示该属性</span>
+ <span class="token comment" spellcheck="true">// 如果你不太了解或者不太确定，将其设置为 false。</span>
+ enumerable<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+ <span class="token comment" spellcheck="true">// 这使属性的特性可以被修改，也可以删除该属性。</span>
+ <span class="token comment" spellcheck="true">// 如果你不太了解或者不太确定，将其设置为 true。</span>
+ configurable<span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>这种写法是最最基本的写法了，其实只是将 <code>room.find(FIND_SOURCES)</code> 替换成了 <code>room.sources</code>，这可能会让你节省一些打字的时间，但是没什么其他的好处了，请继续阅读下面的示例来了解更好的写法。</li>
+</ol>
+<h3 id="对象内部缓存" class="article-heading"><a href="#对象内部缓存" class="headerlink" title="对象内部缓存"></a>对象内部缓存<a class="article-anchor" href="#对象内部缓存" aria-hidden="true"></a></h3><p>在下面的代码中第一次调用 <code>this._sources</code> 时，getter 方法发现没有值，所以它将找到该值并将其保存下来，以便下次访问该属性时直接返回已存储的值。以这种方式存储的值在只能在当前 tick 访问，下个 tick 就会消失，下面的 Memory 缓存法会解决该问题。请注意，我们使用带有 <code>_</code> 的 <code>._sources</code> 来存储值，而不是直接访问 <code>.sources</code>。这是因为尝试访问 <code>.sources</code> 将再次调用其 getter 访问器，然后就导致了无限循环！</p>
+<pre class="highlight javascript tab-javascript "><code>Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>Room<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span> <span class="token string">'sources'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token keyword">get</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>_sources<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>_sources <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>FIND_SOURCES<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_sources<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    enumerable<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    configurable<span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h3 id="添加-setter-访问器" class="article-heading"><a href="#添加-setter-访问器" class="headerlink" title="添加 setter 访问器"></a>添加 setter 访问器<a class="article-anchor" href="#添加-setter-访问器" aria-hidden="true"></a></h3><p>这个示例添加了 setter 方法。如果你想修改自定义属性的值的话，就必须添加一个 setter，否则在赋值时就会出现错误。在本文的需求中不需要给 room.sources 赋值，因为 getter 访问器已经处理好了这一切，但是我们将展示如何使用 setter。</p>
+<pre class="highlight javascript tab-javascript "><code>Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>Room<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span> <span class="token string">'sources'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token keyword">get</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>_sources<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>_sources <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>FIND_SOURCES<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_sources<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token keyword">set</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 我们可以自行设置私有变量的值，来使下次调用 getter 访问器时可以</span>
+        <span class="token comment" spellcheck="true">// 返回新的值</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_sources <span class="token operator">=</span> newValue<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    enumerable<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    configurable<span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h3 id="Memory-缓存" class="article-heading"><a href="#Memory-缓存" class="headerlink" title="Memory 缓存"></a>Memory 缓存<a class="article-anchor" href="#Memory-缓存" aria-hidden="true"></a></h3><p>在这个版本中，我们将添加内存缓存来使得我们的值可以在 tick 之间持久保存。尽管在这个例子里很有用，但内存缓存并不总是适合任何情况。请记住，存储在内存中的对象越多，解析它所花费的 CPU 就越多！</p>
+<p>由于房间中的 source 并不会改变，这个例子中添加的缓存可以使得你只需要调用一次 <code>room.find(FIND_SOURCES)</code> 就可以永远使用其结果，除非内存中的值被删除了。</p>
+<pre class="highlight javascript tab-javascript "><code>Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>Room<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span> <span class="token string">'sources'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token keyword">get</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 如果 room 对象内部没有保存该值</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>_sources<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">// 如果房间内存中没有保存该值</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>sourceIds<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token comment" spellcheck="true">// 查找 source 并将它们的 id 保存到内存里，</span>
+                    <span class="token comment" spellcheck="true">// **不要** 保存整个 source 对象</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>sourceIds <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>FIND_SOURCES<span class="token punctuation">)</span>
+                                        <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>source <span class="token operator">=</span><span class="token operator">></span> source<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment" spellcheck="true">// 从内存中获取它们的 id 并找到对应的 source 对象，然后保存在 room 对象内部</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>_sources <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>sourceIds<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>id <span class="token operator">=</span><span class="token operator">></span> Game<span class="token punctuation">.</span><span class="token function">getObjectById</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 返回内部保存的 source 对象</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_sources<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token keyword">set</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 当数据保存在内存中时，你会希望在修改 room 上的 source 时</span>
+        <span class="token comment" spellcheck="true">// 也会自动修改内存中保存的 id 数据</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>sources <span class="token operator">=</span> newValue<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>source <span class="token operator">=</span><span class="token operator">></span> source<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_sources <span class="token operator">=</span> newValue<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    enumerable<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    configurable<span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>在这个例子中，非常重要的一点是，你只能将对象的 ID 存储在内存中，并使用 <a href="http://docs.screeps.com/api/#Game.getObjectById" target="_blank" rel="external"><code>Game.getObjectById(id)</code></a> 在每 tick 时获取最新的对象。将完整对象存储在内存中不仅会导致更高的内存使用率，进而导致 CPU 使用率增加，而且旧对象中的过时信息还有可能导致更多错误出现。请参阅<a href="http://docs.screeps.com/global-objects.html#Storing-game-objects-in-memory" target="_blank" rel="external">在内存中保存游戏对象</a>。</p>
+<h3 id="其他例子-1" class="article-heading"><a href="#其他例子-1" class="headerlink" title="其他例子"></a>其他例子<a class="article-anchor" href="#其他例子-1" aria-hidden="true"></a></h3><h4 id="Creep-prototype-isFull-你的-CARRY-装满了么？" class="article-heading"><a href="#Creep-prototype-isFull-你的-CARRY-装满了么？" class="headerlink" title="Creep.prototype.isFull - 你的 CARRY 装满了么？"></a>Creep.prototype.isFull - 你的 CARRY 装满了么？<a class="article-anchor" href="#Creep-prototype-isFull-你的-CARRY-装满了么？" aria-hidden="true"></a></h4><p>一个向 creep 添加属性的简单示例。可以这样用：<code>if (creep.isFull)</code>。这是一个说明在内存缓存不可用时应该怎么做的好例子，因为 CARRY 部件的资源携带量可能会随着 tick 的流逝发生变化，这会使得在内存里保存值变得毫无意义。</p>
+<pre class="highlight javascript tab-javascript "><code>Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>Creep<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span> <span class="token string">'isFull'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token keyword">get</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>_isFull<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>_isFull <span class="token operator">=</span> _<span class="token punctuation">.</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>carry<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token keyword">this</span><span class="token punctuation">.</span>carryCapacity<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_isFull<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    enumerable<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    configurable<span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h4 id="Source-memory-给其他对象添加内存" class="article-heading"><a href="#Source-memory-给其他对象添加内存" class="headerlink" title="Source.memory - (给其他对象添加内存)"></a>Source.memory - (给其他对象添加内存)<a class="article-anchor" href="#Source-memory-给其他对象添加内存" aria-hidden="true"></a></h4><p>让我们更进一步，向所有的 source 添加 <code>.memory</code> 属性。而且对下面例子进行简单的修改就可以向你所需的任何原型添加 <code>.memory</code> 属性。</p>
+<pre class="highlight javascript tab-javascript "><code>Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>Source<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span> <span class="token string">'memory'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    configurable<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token keyword">get</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>_<span class="token punctuation">.</span><span class="token function">isUndefined</span><span class="token punctuation">(</span>Memory<span class="token punctuation">.</span>mySourcesMemory<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Memory<span class="token punctuation">.</span>mySourcesMemory <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>_<span class="token punctuation">.</span><span class="token function">isObject</span><span class="token punctuation">(</span>Memory<span class="token punctuation">.</span>mySourcesMemory<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> undefined<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> Memory<span class="token punctuation">.</span>mySourcesMemory<span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> 
+                Memory<span class="token punctuation">.</span>mySourcesMemory<span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">||</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token keyword">set</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>_<span class="token punctuation">.</span><span class="token function">isUndefined</span><span class="token punctuation">(</span>Memory<span class="token punctuation">.</span>mySourcesMemory<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Memory<span class="token punctuation">.</span>mySourcesMemory <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>_<span class="token punctuation">.</span><span class="token function">isObject</span><span class="token punctuation">(</span>Memory<span class="token punctuation">.</span>mySourcesMemory<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'Could not set source memory'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        Memory<span class="token punctuation">.</span>mySourcesMemory<span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h4 id="Source-freeSpaceCount-该-source-边上有多少空位可供-creep-开采？" class="article-heading"><a href="#Source-freeSpaceCount-该-source-边上有多少空位可供-creep-开采？" class="headerlink" title="Source.freeSpaceCount - 该 source 边上有多少空位可供 creep 开采？"></a>Source.freeSpaceCount - 该 source 边上有多少空位可供 creep 开采？<a class="article-anchor" href="#Source-freeSpaceCount-该-source-边上有多少空位可供-creep-开采？" aria-hidden="true"></a></h4><p>这个例子建立在上个例子的基础上，使用新的 <code>source.memory</code> 属性来在 source 上缓存 <code>.freeSpaceCount</code> 属性，该属性返回一个数字，告诉你在 source 周围有多少个不是墙的空位。</p>
+<pre class="highlight javascript tab-javascript "><code>Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>Source<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span> <span class="token string">'freeSpaceCount'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token keyword">get</span><span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>_freeSpaceCount <span class="token operator">==</span> undefined<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>freeSpaceCount <span class="token operator">==</span> undefined<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">let</span> freeSpaceCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                <span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span>pos<span class="token punctuation">.</span>x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>pos<span class="token punctuation">.</span>x<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>pos<span class="token punctuation">.</span>x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>x <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                    <span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span>pos<span class="token punctuation">.</span>y <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>pos<span class="token punctuation">.</span>y<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>pos<span class="token punctuation">.</span>y <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>y <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>Game<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">getTerrainAt</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>pos<span class="token punctuation">.</span>roomName<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token string">'wall'</span><span class="token punctuation">)</span>
+                                freeSpaceCount<span class="token operator">++</span><span class="token punctuation">;</span>
+                            <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>freeSpaceCount <span class="token operator">=</span> freeSpaceCount<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>_freeSpaceCount <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>memory<span class="token punctuation">.</span>freeSpaceCount<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_freeSpaceCount<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    enumerable<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    configurable<span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2024-09-20T13:38:58.408Z" itemprop="dateModified">上次更新：9月 20, 2024</time>
+                <a href="/contributed/advanced_grunt.html" class="article-footer-prev"><i class="fa fa-chevron-left"></i><span>高级 Grunt 使用</span></a><a href="/contributed/caching-overview.html" class="article-footer-next"><span>缓存概述</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是原型"><span class="toc-text">什么是原型?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在原型上添加方法"><span class="toc-text">在原型上添加方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#保存原始方法"><span class="toc-text">保存原始方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用任意参数列表"><span class="toc-text">使用任意参数列表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Function-apply"><span class="toc-text">Function.apply</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他例子"><span class="toc-text">其他例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Spawn-createCreep-自动命名"><span class="toc-text">Spawn.createCreep - 自动命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StructureObserver-observeRoom-防止调用覆盖"><span class="toc-text">StructureObserver.observeRoom - 防止调用覆盖</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在原型上添加属性"><span class="toc-text">在原型上添加属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#只有-getter-访问器并且无缓存的基础属性"><span class="toc-text">只有 getter 访问器并且无缓存的基础属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象内部缓存"><span class="toc-text">对象内部缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加-setter-访问器"><span class="toc-text">添加 setter 访问器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-缓存"><span class="toc-text">Memory 缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他例子-1"><span class="toc-text">其他例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Creep-prototype-isFull-你的-CARRY-装满了么？"><span class="toc-text">Creep.prototype.isFull - 你的 CARRY 装满了么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Source-memory-给其他对象添加内存"><span class="toc-text">Source.memory - (给其他对象添加内存)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Source-freeSpaceCount-该-source-边上有多少空位可供-creep-开采？"><span class="toc-text">Source.freeSpaceCount - 该 source 边上有多少空位可供 creep 开采？</span></a></li></ol></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+            
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="sidebar-link">总览</a><strong class="sidebar-title">游戏环境</strong><a href="/introduction.html" class="sidebar-link">简介</a><a href="/creeps.html" class="sidebar-link">Creeps</a><a href="/control.html" class="sidebar-link">控制</a><a href="/defense.html" class="sidebar-link">防御</a><a href="/respawn.html" class="sidebar-link">重生</a><a href="/start-areas.html" class="sidebar-link">初始区域</a><a href="/resources.html" class="sidebar-link">资源</a><a href="/market.html" class="sidebar-link">市场</a><a href="/invaders.html" class="sidebar-link">NPC 入侵者</a><a href="/power.html" class="sidebar-link">超能</a><strong class="sidebar-title">脚本</strong><a href="/scripting-basics.html" class="sidebar-link">脚本基础</a><a href="/global-objects.html" class="sidebar-link">全局对象</a><a href="/modules.html" class="sidebar-link">模块</a><a href="/debugging.html" class="sidebar-link">调试</a><a href="/game-loop.html" class="sidebar-link">游戏循环</a><a href="/commit.html" class="sidebar-link">外部提交</a><a href="/simultaneous-actions.html" class="sidebar-link">同步操作</a><a href="/cpu-limit.html" class="sidebar-link">CPU 限制</a><strong class="sidebar-title">其他</strong><a href="/architecture.html" class="sidebar-link">服务器架构</a><a href="/ptr.html" class="sidebar-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="sidebar-link">第三方工具</a><a href="/auth-tokens.html" class="sidebar-link">验证令牌</a><a href="/community-servers.html" class="sidebar-link">社区服务器</a><a href="/tos.html" class="sidebar-link">服务条款</a><a href="/privacy-policy.html" class="sidebar-link">隐私政策</a><strong class="sidebar-title">资源</strong><a href="http://blog.screeps.com" class="sidebar-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="sidebar-link">修改日志</a><a href="http://chat.screeps.com" class="sidebar-link">聊天室</a><a href="https://screeps.com/forum/" class="sidebar-link">论坛</a><strong class="sidebar-title">贡献文章</strong><a href="/contributed/rules.html" class="sidebar-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="sidebar-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="sidebar-link current">修改原型</a><a href="/contributed/caching-overview.html" class="sidebar-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="sidebar-link">私有服务器 MongoDB</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2024 <a href="https://screeps.com/" target="_blank">Screeps</a><br>
+      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
+    </div>
+    <div id="footer-links">
+      <a href="https://github.com/screeps-cn/docs" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    
+      <a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="mobile-nav-link">总览</a><strong class="mobile-nav-title">游戏环境</strong><a href="/introduction.html" class="mobile-nav-link">简介</a><a href="/creeps.html" class="mobile-nav-link">Creeps</a><a href="/control.html" class="mobile-nav-link">控制</a><a href="/defense.html" class="mobile-nav-link">防御</a><a href="/respawn.html" class="mobile-nav-link">重生</a><a href="/start-areas.html" class="mobile-nav-link">初始区域</a><a href="/resources.html" class="mobile-nav-link">资源</a><a href="/market.html" class="mobile-nav-link">市场</a><a href="/invaders.html" class="mobile-nav-link">NPC 入侵者</a><a href="/power.html" class="mobile-nav-link">超能</a><strong class="mobile-nav-title">脚本</strong><a href="/scripting-basics.html" class="mobile-nav-link">脚本基础</a><a href="/global-objects.html" class="mobile-nav-link">全局对象</a><a href="/modules.html" class="mobile-nav-link">模块</a><a href="/debugging.html" class="mobile-nav-link">调试</a><a href="/game-loop.html" class="mobile-nav-link">游戏循环</a><a href="/commit.html" class="mobile-nav-link">外部提交</a><a href="/simultaneous-actions.html" class="mobile-nav-link">同步操作</a><a href="/cpu-limit.html" class="mobile-nav-link">CPU 限制</a><strong class="mobile-nav-title">其他</strong><a href="/architecture.html" class="mobile-nav-link">服务器架构</a><a href="/ptr.html" class="mobile-nav-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="mobile-nav-link">第三方工具</a><a href="/auth-tokens.html" class="mobile-nav-link">验证令牌</a><a href="/community-servers.html" class="mobile-nav-link">社区服务器</a><a href="/tos.html" class="mobile-nav-link">服务条款</a><a href="/privacy-policy.html" class="mobile-nav-link">隐私政策</a><strong class="mobile-nav-title">资源</strong><a href="http://blog.screeps.com" class="mobile-nav-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="mobile-nav-link">修改日志</a><a href="http://chat.screeps.com" class="mobile-nav-link">聊天室</a><a href="https://screeps.com/forum/" class="mobile-nav-link">论坛</a><strong class="mobile-nav-title">贡献文章</strong><a href="/contributed/rules.html" class="mobile-nav-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="mobile-nav-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="mobile-nav-link current">修改原型</a><a href="/contributed/caching-overview.html" class="mobile-nav-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="mobile-nav-link">私有服务器 MongoDB</a>
+    
+  </div>
+</nav>
+  <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/scrollingelement.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/custom.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+</body>
+</html>

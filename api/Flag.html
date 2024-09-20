@@ -1,0 +1,72 @@
+<h1 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h1><p>一个旗帜，旗帜可以用来标记房间中的一个特定的地点。旗帜只对其所有者可见。你最多只能拥有 10,000 个旗帜。</p>
+<h2 id="Flag.effects" class="api-property api-property--property  "><span class="api-property__name">effects</span><span class="api-property__type">array</span></h2>
+<p>附加的效果，一个包含如下属性的对象数组：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>effect</code></td><td>number</td><td><p>该附加效果的 ID。可以是自然效果 ID 或者 Power ID。</p>
+</td>
+</tr><tr><td><code>level (可选)</code></td><td>number </td><td><p>该附加效果的 Power 等级。如果效果不是 Power 效果则不存在该属性。</p>
+</td>
+</tr><tr><td><code>ticksRemaining</code></td><td>number</td><td><p>多长时间之后会失去这个效果。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="Flag.pos" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">pos</span><span class="api-property__type"><a href="#RoomPosition">RoomPosition</a></span></h2>
+<p>表示该对象在房间中的坐标的对象。</p>
+<h2 id="Flag.room" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">room</span><span class="api-property__type"><a href="#Room">Room</a></span></h2>
+<p>Room对象的链接。如果对象是标志或工地并且放置在你不可见的房间中，则可能为undefined。</p>
+
+<h2 id="Flag.color" class="api-property api-property--property  "><span class="api-property__name">color</span><span class="api-property__type">number</span></h2>
+<p>旗帜的主要颜色。<code>COLOR_*</code> 常量之一。</p>
+<h2 id="Flag.memory" class="api-property api-property--property  "><span class="api-property__name">memory</span><span class="api-property__type">any</span></h2>
+<p>指向 <code>Memory.flags[flag.name]</code> 的链接。你可以使用它来快速访问到该旗帜的内存数据对象。</p>
+<h2 id="Flag.name" class="api-property api-property--property  "><span class="api-property__name">name</span><span class="api-property__type">string</span></h2>
+<p>旗帜的名称。你可以在创建新的旗帜时为其指定名字，名字一旦确定无法修改。创建之后会以该名称为键，旗帜对象为值存放在 <a href="#Game.flags">Game.flags</a> 对象中。名称最长不能超过 100 字符。</p>
+<h2 id="Flag.secondaryColor" class="api-property api-property--property  "><span class="api-property__name">secondaryColor</span><span class="api-property__type">number</span></h2>
+<p>旗帜的次要颜色。<code>COLOR_*</code> 常量之一。</p>
+<h2 id="Flag.remove" class="api-property api-property--method  "><span class="api-property__name">remove</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>移除该旗帜。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>永远返回
+OK
+。</p>
+<h2 id="Flag.setColor" class="api-property api-property--method  "><span class="api-property__name">setColor</span><span class="api-property__args">(color, [secondaryColor])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>flags<span class="token punctuation">.</span>Flag1<span class="token punctuation">.</span><span class="token function">setColor</span><span class="token punctuation">(</span><span class="token constant">COLOR_GREEN</span><span class="token punctuation">,</span> <span class="token constant">COLOR_WHITE</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>给旗帜设置一个新颜色</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>color</code></td><td>string</td><td><p>旗帜的主要颜色。<code>COLOR_*</code> 常量之一。</p>
+</td>
+</tr><tr><td><code>secondaryColor (可选)</code></td><td>string</td><td><p>旗帜的次要颜色。<code>COLOR_*</code> 常量之一。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p><code>color</code> 或者 <code>secondaryColor</code> 不是一个有效的 <code>COLOR_*</code> 常量。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Flag.setPosition" class="api-property api-property--method  "><span class="api-property__name">setPosition</span><span class="api-property__args">(x,y)<br>(pos)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>flags<span class="token punctuation">.</span>Flag1<span class="token punctuation">.</span><span class="token function">setPosition</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>flags<span class="token punctuation">.</span>Flag1<span class="token punctuation">.</span><span class="token function">setPosition</span><span class="token punctuation">(</span> <span class="token keyword">new</span> <span class="token class-name">RoomPosition</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token string">'W3S5'</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>给旗帜设置一个新的位置。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>相同房间内的 x 坐标。</p>
+</td>
+</tr><tr><td><code>y</code></td><td>number</td><td><p>相同房间内的 y 坐标。</p>
+</td>
+</tr><tr><td><code>pos</code></td><td>object</td><td><p>可以是 <a href="#RoomPosition">RoomPosition</a> 对象或者任何包含 <a href="#RoomPosition">RoomPosition</a> 属性的对象。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>提供了无效的目标。</p>
+</td></tr>
+</tbody></table>
+</p>

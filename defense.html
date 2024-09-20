@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>防御你的房间 | Screeps 中文文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://screeps-cn.github.io/defense.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="http://screeps-cn.github.io/defense.html">
+    
+      <link rel="alternative" hreflang="zh-tw" href="http://screeps-cn.github.io/zh-tw/defense.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="http://screeps-cn.github.io/zh-cn/defense.html">
+    
+      <link rel="alternative" hreflang="ru" href="http://screeps-cn.github.io/ru/defense.html">
+    
+      <link rel="alternative" hreflang="ko" href="http://screeps-cn.github.io/ko/defense.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/css/navy.css?1">
+  <link rel="stylesheet" href="/css/prism.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Screeps 中文文档">
+  <!-- Open Graph -->
+  <meta name="description" content="Screeps 的世界危机重重，本文主要介绍保卫自己的领土不受入侵的方法。
+安全模式当你新开一局游戏的时候，房间的安全模式会被打开。这意味其他的 creeps 不能在你的房间里对你的 creeps 造成任何影响（但是你可以干爆他们，RUA！）。详细的介绍看 StructureController
+
+安全模式持续 20,000 个游戏 tick（大约20小时，实际取决于每个游戏 tick 的具体时长">
+<meta property="og:type" content="website">
+<meta property="og:title" content="防御你的房间">
+<meta property="og:url" content="http://screeps-cn.github.io/defense.html">
+<meta property="og:site_name" content="Screeps 中文文档">
+<meta property="og:description" content="Screeps 的世界危机重重，本文主要介绍保卫自己的领土不受入侵的方法。
+安全模式当你新开一局游戏的时候，房间的安全模式会被打开。这意味其他的 creeps 不能在你的房间里对你的 creeps 造成任何影响（但是你可以干爆他们，RUA！）。详细的介绍看 StructureController
+
+安全模式持续 20,000 个游戏 tick（大约20小时，实际取决于每个游戏 tick 的具体时长">
+<meta property="og:image" content="http://screeps-cn.github.io/img/safe_mode.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/defense1.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/defense2.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/defense3.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/defense4.png">
+<meta property="og:updated_time" content="2024-09-20T13:38:58.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="防御你的房间">
+<meta name="twitter:description" content="Screeps 的世界危机重重，本文主要介绍保卫自己的领土不受入侵的方法。
+安全模式当你新开一局游戏的时候，房间的安全模式会被打开。这意味其他的 creeps 不能在你的房间里对你的 creeps 造成任何影响（但是你可以干爆他们，RUA！）。详细的介绍看 StructureController
+
+安全模式持续 20,000 个游戏 tick（大约20小时，实际取决于每个游戏 tick 的具体时长">
+<meta name="twitter:image" content="http://screeps-cn.github.io/img/safe_mode.png">
+  <!-- Google Analytics -->
+  
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="https://screeps.com" id="logo">Screeps</a>
+      <a href="/index.html" id="logo-docs">docs</a>
+    </h1>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+    <div id="header-main"></div>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name" id="top">防御你的房间</h1>
+                <a href="https://github.com/screeps-cn/docs/edit/master/source/defense.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                
+                <p>Screeps 的世界危机重重，本文主要介绍保卫自己的领土不受入侵的方法。</p>
+<h2 id="安全模式" class="article-heading"><a href="#安全模式" class="headerlink" title="安全模式"></a>安全模式<a class="article-anchor" href="#安全模式" aria-hidden="true"></a></h2><p>当你新开一局游戏的时候，房间的<strong>安全模式</strong>会被打开。这意味其他的 creeps 不能在你的房间里对你的 creeps 造成任何影响（但是你可以干爆他们，RUA！）。详细的介绍看 <a href="/api/#StructureController"><code>StructureController</code></a></p>
+<p><img src="img/safe_mode.png" alt=""></p>
+<p>安全模式持续 <strong>20,000 个游戏 tick</strong>（大约20小时，实际取决于每个游戏 tick 的具体时长）。如果 room controller 存有额外的激活次数也可以通过 <a href="/api/#StructureController.activateSafeMode"><code>StructureController.activateSafeMode</code></a> 手动激活:</p>
+<pre class="highlight undefined tab-undefined "><code>Game<span class="token punctuation">.</span>rooms<span class="token punctuation">.</span>W1N1<span class="token punctuation">.</span>controller<span class="token punctuation">.</span><span class="token function">activateSafeMode</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><p>每一次升级时 controller 都会获得一次激活。除此之外还可以借助 ghodium 资源通过 <a href="/api/#Creep.generateSafeMode"><code>Creep.generateSafeMode</code></a> 增加激活次数。</p>
+<p>安全模式是 GG 前的最后一道防线，但是每个玩家在一个镜像世界同时最多只能有一个房间处于安全模式，因此不能依赖安全模式用来防御，而应该使用墙、城墙、塔、creep 来构建房间的防御体系。</p>
+<h2 id="被动防御：墙（Walls）" class="article-heading"><a href="#被动防御：墙（Walls）" class="headerlink" title="被动防御：墙（Walls）"></a>被动防御：墙（Walls）<a class="article-anchor" href="#被动防御：墙（Walls）" aria-hidden="true"></a></h2><p>最简单的防守方法就是在出生保护期内在合适的位置构建一些<strong>墙壁</strong>。和环境中天然的墙不同的是，建造的墙离房间边缘必须有 2 格以上的距离，并且可以被敌人摧毁。因此只是建造墙还不够，还需要<strong>强化</strong>墙壁以拖延对手的进攻时间。</p>
+<p><img src="img/defense1.png" alt=""></p>
+<p>墙的初始耐久只有 <strong>1 点</strong>。如果想要拖延敌人几小时（甚至几天）需要借助工人 Creep 使用<a href="/api/#Creep.repair"><code>修复</code></a>动作强化它。墙的耐久最多可以修复到 <strong>300,000,000</strong> 点。如果你花了足够多的资源，这样的一个墙可以抵御很多天的攻击。 一个墙的占地空间只有单个方格，你可以建造多排墙。</p>
+<h2 id="被动防御：城墙（Ramparts）" class="article-heading"><a href="#被动防御：城墙（Ramparts）" class="headerlink" title="被动防御：城墙（Ramparts）"></a>被动防御：城墙（Ramparts）<a class="article-anchor" href="#被动防御：城墙（Ramparts）" aria-hidden="true"></a></h2><p>然而，墙有个弊端就是：虽然可以阻止敌人，同时也会阻止自己的单位移动，阻碍己方势力的扩展。</p>
+<p>这也是<strong>城墙</strong>的意义所在。城墙对敌人来说和墙一样，但是自己的单位却可以自由穿过。城墙还可以保护 creep，在城墙被摧毁前，其中的单位是无法被攻击的，而且还可以攻击敌人。</p>
+<p><img src="img/defense2.png" alt=""></p>
+<p>和普通的墙一样，城墙的初始耐久也是 1 点，最大的耐久值由控制器等级决定。在之前的文章<a href="/control.html">控制</a>中介绍过。</p>
+<p>城墙和普通墙不一样的地方在于：每过若干个游戏 tick 耐久值就会掉一点，所以需要分配工人来让你所有的城墙都保持坚挺，并且没有磨损。</p>
+<h2 id="主动防御：塔（Towers）" class="article-heading"><a href="#主动防御：塔（Towers）" class="headerlink" title="主动防御：塔（Towers）"></a>主动防御：塔（Towers）<a class="article-anchor" href="#主动防御：塔（Towers）" aria-hidden="true"></a></h2><p>当被动的防御系统经历持续几天的攻击后（例如，当你下线登出游戏时），有时他将不可避免地被摧毁。因此在依靠强化之外，还要结合其他的一些机制来进一步提升防御效果。</p>
+<p><img src="img/defense3.png" alt=""></p>
+<p>在控制器等级 3 级以后就可以建造<strong>塔</strong>（Tower）来进行主动防御。和墙与城墙不同，塔的防御是主动的。通过消耗能量，塔可以<a href="/api/#StructureTower.attack">攻击(<code>attack</code>)</a>敌人、<a href="/api/#StructureTower.heal">治疗(<code>heal</code>)</a>友军以及<a href="/api/#StructureTower.repair">修复(<code>repair</code>)</a>建筑。</p>
+<blockquote class="note info"><p>塔的攻击距离覆盖整个房间，但是效果会随着与目标的距离而衰减。因此，应该始终将塔布置在接近它们潜在目标的位置。</p>
+</blockquote>
+<p>塔的任何动作将消耗 <strong>10 单位能量</strong>，所以你需要指派 Creep 监控塔的能量补给情况，并提供它们所需的补充。</p>
+<p>下列代码展示了一段关于如何利用塔在房间里攻击敌人简单的示例</p>
+<pre class="highlight undefined tab-undefined "><code><span class="token keyword">function</span> <span class="token function">defendRoom</span><span class="token punctuation">(</span>roomName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> hostiles <span class="token operator">=</span> Game<span class="token punctuation">.</span>rooms<span class="token punctuation">[</span>roomName<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>FIND_HOSTILE_CREEPS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>hostiles<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> username <span class="token operator">=</span> hostiles<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>owner<span class="token punctuation">.</span>username<span class="token punctuation">;</span>
+        Game<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`User </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>username<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> spotted in room </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>roomName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> towers <span class="token operator">=</span> Game<span class="token punctuation">.</span>rooms<span class="token punctuation">[</span>roomName<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+            FIND_MY_STRUCTURES<span class="token punctuation">,</span> <span class="token punctuation">{</span>filter<span class="token punctuation">:</span> <span class="token punctuation">{</span>structureType<span class="token punctuation">:</span> STRUCTURE_TOWER<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        towers<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>tower <span class="token operator">=</span><span class="token operator">></span> tower<span class="token punctuation">.</span><span class="token function">attack</span><span class="token punctuation">(</span>hostiles<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre><h2 id="主动防御：Creeps" class="article-heading"><a href="#主动防御：Creeps" class="headerlink" title="主动防御：Creeps"></a>主动防御：Creeps<a class="article-anchor" href="#主动防御：Creeps" aria-hidden="true"></a></h2><p>虽然塔可以用来主动防御，但是并不是万能的。当对面安排了一队分工合理的 Creeps 来入侵时，是能够抵御多个塔楼的近距离攻击的。相对应的，我们也可以组织 Creeps 防御者来进行防守反击。</p>
+<p><img src="img/defense4.png" alt=""></p>
+<p>因为城墙可以保证在其面积上的单位免受任何形式的攻击，因此我们可以开发防御体系，让任何一个受攻击的方格都与一个被城墙保护着的 Creep 防御者相邻。不过要注意在和平时期持续建造它们，是挺耗资源的。所以最好是在被围困时快速构建他们。</p>
+<p>为响应的 creep 编写 AI 逻辑非常复杂，但这是唯一能保护你的房间不受入侵的方法。</p>
+<blockquote class="note info"><p>你可以在房间里生成 <a href="/invaders.html">NPC 入侵者</a> 来测试你的防御体系。</p>
+</blockquote>
+<p>所以，设计具有适当行为逻辑的优秀的防御体系将使你的房间成为很难入侵的目标。但是永远不要在你的房间里匆匆忙忙的满足自己的成就。众所周知，进攻就是最好的防御。</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2024-09-20T13:38:58.408Z" itemprop="dateModified">上次更新：9月 20, 2024</time>
+                <a href="/control.html" class="article-footer-prev"><i class="fa fa-chevron-left"></i><span>控制</span></a><a href="/respawn.html" class="article-footer-next"><span>重生</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安全模式"><span class="toc-text">安全模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#被动防御：墙（Walls）"><span class="toc-text">被动防御：墙（Walls）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#被动防御：城墙（Ramparts）"><span class="toc-text">被动防御：城墙（Ramparts）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主动防御：塔（Towers）"><span class="toc-text">主动防御：塔（Towers）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主动防御：Creeps"><span class="toc-text">主动防御：Creeps</span></a></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+            
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="sidebar-link">总览</a><strong class="sidebar-title">游戏环境</strong><a href="/introduction.html" class="sidebar-link">简介</a><a href="/creeps.html" class="sidebar-link">Creeps</a><a href="/control.html" class="sidebar-link">控制</a><a href="/defense.html" class="sidebar-link current">防御</a><a href="/respawn.html" class="sidebar-link">重生</a><a href="/start-areas.html" class="sidebar-link">初始区域</a><a href="/resources.html" class="sidebar-link">资源</a><a href="/market.html" class="sidebar-link">市场</a><a href="/invaders.html" class="sidebar-link">NPC 入侵者</a><a href="/power.html" class="sidebar-link">超能</a><strong class="sidebar-title">脚本</strong><a href="/scripting-basics.html" class="sidebar-link">脚本基础</a><a href="/global-objects.html" class="sidebar-link">全局对象</a><a href="/modules.html" class="sidebar-link">模块</a><a href="/debugging.html" class="sidebar-link">调试</a><a href="/game-loop.html" class="sidebar-link">游戏循环</a><a href="/commit.html" class="sidebar-link">外部提交</a><a href="/simultaneous-actions.html" class="sidebar-link">同步操作</a><a href="/cpu-limit.html" class="sidebar-link">CPU 限制</a><strong class="sidebar-title">其他</strong><a href="/architecture.html" class="sidebar-link">服务器架构</a><a href="/ptr.html" class="sidebar-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="sidebar-link">第三方工具</a><a href="/auth-tokens.html" class="sidebar-link">验证令牌</a><a href="/community-servers.html" class="sidebar-link">社区服务器</a><a href="/tos.html" class="sidebar-link">服务条款</a><a href="/privacy-policy.html" class="sidebar-link">隐私政策</a><strong class="sidebar-title">资源</strong><a href="http://blog.screeps.com" class="sidebar-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="sidebar-link">修改日志</a><a href="http://chat.screeps.com" class="sidebar-link">聊天室</a><a href="https://screeps.com/forum/" class="sidebar-link">论坛</a><strong class="sidebar-title">贡献文章</strong><a href="/contributed/rules.html" class="sidebar-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="sidebar-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="sidebar-link">修改原型</a><a href="/contributed/caching-overview.html" class="sidebar-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="sidebar-link">私有服务器 MongoDB</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2024 <a href="https://screeps.com/" target="_blank">Screeps</a><br>
+      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
+    </div>
+    <div id="footer-links">
+      <a href="https://github.com/screeps-cn/docs" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    
+      <a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="mobile-nav-link">总览</a><strong class="mobile-nav-title">游戏环境</strong><a href="/introduction.html" class="mobile-nav-link">简介</a><a href="/creeps.html" class="mobile-nav-link">Creeps</a><a href="/control.html" class="mobile-nav-link">控制</a><a href="/defense.html" class="mobile-nav-link current">防御</a><a href="/respawn.html" class="mobile-nav-link">重生</a><a href="/start-areas.html" class="mobile-nav-link">初始区域</a><a href="/resources.html" class="mobile-nav-link">资源</a><a href="/market.html" class="mobile-nav-link">市场</a><a href="/invaders.html" class="mobile-nav-link">NPC 入侵者</a><a href="/power.html" class="mobile-nav-link">超能</a><strong class="mobile-nav-title">脚本</strong><a href="/scripting-basics.html" class="mobile-nav-link">脚本基础</a><a href="/global-objects.html" class="mobile-nav-link">全局对象</a><a href="/modules.html" class="mobile-nav-link">模块</a><a href="/debugging.html" class="mobile-nav-link">调试</a><a href="/game-loop.html" class="mobile-nav-link">游戏循环</a><a href="/commit.html" class="mobile-nav-link">外部提交</a><a href="/simultaneous-actions.html" class="mobile-nav-link">同步操作</a><a href="/cpu-limit.html" class="mobile-nav-link">CPU 限制</a><strong class="mobile-nav-title">其他</strong><a href="/architecture.html" class="mobile-nav-link">服务器架构</a><a href="/ptr.html" class="mobile-nav-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="mobile-nav-link">第三方工具</a><a href="/auth-tokens.html" class="mobile-nav-link">验证令牌</a><a href="/community-servers.html" class="mobile-nav-link">社区服务器</a><a href="/tos.html" class="mobile-nav-link">服务条款</a><a href="/privacy-policy.html" class="mobile-nav-link">隐私政策</a><strong class="mobile-nav-title">资源</strong><a href="http://blog.screeps.com" class="mobile-nav-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="mobile-nav-link">修改日志</a><a href="http://chat.screeps.com" class="mobile-nav-link">聊天室</a><a href="https://screeps.com/forum/" class="mobile-nav-link">论坛</a><strong class="mobile-nav-title">贡献文章</strong><a href="/contributed/rules.html" class="mobile-nav-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="mobile-nav-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="mobile-nav-link">修改原型</a><a href="/contributed/caching-overview.html" class="mobile-nav-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="mobile-nav-link">私有服务器 MongoDB</a>
+    
+  </div>
+</nav>
+  <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/scrollingelement.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/custom.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+</body>
+</html>

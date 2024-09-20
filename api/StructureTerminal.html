@@ -1,0 +1,150 @@
+<h1 id="StructureTerminal"><a href="#StructureTerminal" class="headerlink" title="StructureTerminal"></a>StructureTerminal</h1><p><img src="img/terminal.png" alt align="right"></p>
+<p>终端可以发送任意资源到另一个房间的终端。目标终端可以属于任何一个玩家。
+每个事务都需要额外消耗能量（无论传输资源类型如何），
+可以使用<a href="#Game.market.calcTransactionCost"><code>Game.market.calcTransactionCost</code></a>计算所需能量。
+例如，从W0N0发送1000单位矿物到W10N5需要消耗742单位能量。
+你可以使用<a href="#Game.market"><code>Game.market</code></a>对象跟踪你的收入和支出事务。
+一个房间只会有一个终端，所以可以通过<a href="#Room.terminal"><code>Room.terminal</code></a>属性访问。</p>
+<p>终端可以用于<a href="/market.html">交易系统</a>.</p>
+<table class="table gameplay-info">
+    <tbody>
+    <tr>
+        <td colspan="2"><strong>控制中心等级</strong></td>
+    </tr>
+    <tr>
+        <td>1-5</td>
+        <td>—</td>
+    </tr>
+    <tr>
+        <td>6-8</td>
+        <td>1 terminal</td>
+    </tr>
+    <tr>
+        <td><strong>建筑成本</strong></td>
+        <td>100,000</td>
+    </tr>
+    <tr>
+        <td><strong>生命值</strong></td>
+        <td>3,000</td>
+    </tr>
+    <tr>
+        <td><strong>容量</strong></td>
+        <td>300,000</td>
+    </tr>
+    <tr>
+        <td><strong>冷却时间</strong></td>
+        <td>10 ticks</td>
+    </tr>
+    </tbody>
+</table> 
+
+<h2 id="StructureTerminal.effects" class="api-property api-property--property  "><span class="api-property__name">effects</span><span class="api-property__type">array</span></h2>
+<p>附加的效果，一个包含如下属性的对象数组：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>effect</code></td><td>number</td><td><p>该附加效果的 ID。可以是自然效果 ID 或者 Power ID。</p>
+</td>
+</tr><tr><td><code>level (可选)</code></td><td>number </td><td><p>该附加效果的 Power 等级。如果效果不是 Power 效果则不存在该属性。</p>
+</td>
+</tr><tr><td><code>ticksRemaining</code></td><td>number</td><td><p>多长时间之后会失去这个效果。</p>
+</td>
+</tr></tbody></table>
+
+<h2 id="StructureTerminal.pos" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">pos</span><span class="api-property__type"><a href="#RoomPosition">RoomPosition</a></span></h2>
+<p>表示该对象在房间中的坐标的对象。</p>
+<h2 id="StructureTerminal.room" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">room</span><span class="api-property__type"><a href="#Room">Room</a></span></h2>
+<p>Room对象的链接。如果对象是标志或工地并且放置在你不可见的房间中，则可能为undefined。</p>
+
+<h2 id="StructureTerminal.hits" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">hits</span><span class="api-property__type">number</span></h2>
+<p>当前这个建筑的当前生命值。</p>
+<h2 id="StructureTerminal.hitsMax" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">hitsMax</span><span class="api-property__type">number</span></h2>
+<p>这个建筑的最大生命值。</p>
+<h2 id="StructureTerminal.id" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">id</span><span class="api-property__type">string</span></h2>
+<p>一个唯一的对象标识。你可以使用<a href="#Game.getObjectById"><code>Game.getObjectById</code></a>方法获取对象实例。</p>
+<h2 id="StructureTerminal.structureType" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#Structure">Structure</a></div><span class="api-property__name">structureType</span><span class="api-property__type">string</span></h2>
+<p><code>STRUCTURE_*</code>常量之一。</p>
+<h2 id="StructureTerminal.destroy" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">destroy</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>立即摧毁这个建筑。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个建筑的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>敌对creep在这个房间中。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="StructureTerminal.isActive" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">isActive</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--2" title="该方法的CPU开销中等。"></div>
+        </h2>
+<p>检查这个建筑是否可用。如果房间控制等级不足，这个方法会返回false，并且这个建筑会在游戏中红色高亮。</p>
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>布尔值。</p>
+<h2 id="StructureTerminal.notifyWhenAttacked" class="api-property api-property--method api-property--inherited "><div class="api-property__inherited">继承自 <a href="#Structure">Structure</a></div><span class="api-property__name">notifyWhenAttacked</span><span class="api-property__args">(enabled)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>切换这个建筑受到攻击时的自动通知。通知会发送到你的账户邮箱。默认开启。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>enabled</code></td><td>boolean</td><td><p>是否启用通知。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个建筑的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p><code>enable</code>参数不是一个布尔值。</p>
+</td></tr>
+</tbody></table>
+</p>
+  
+<h2 id="StructureTerminal.my" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#OwnedStructure">OwnedStructure</a></div><span class="api-property__name">my</span><span class="api-property__type">boolean</span></h2>
+<p>是否是你拥有的建筑。</p>
+<h2 id="StructureTerminal.owner" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#OwnedStructure">OwnedStructure</a></div><span class="api-property__name">owner</span><span class="api-property__type">object</span></h2>
+<p>建筑拥有者信息，一个包含如下属性的对象：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>username</code></td><td>string</td><td><p>拥有者姓名。</p>
+</td>
+</tr></tbody></table>
+
+
+<h2 id="StructureTerminal.cooldown" class="api-property api-property--property  "><span class="api-property__name">cooldown</span><span class="api-property__type">number</span></h2>
+<p>这个终端不能调用<a href="#StructureTerminal.send"><code>StructureTerminal.send</code></a>或<a href="#Game.market.deal"><code>Game.market.deal</code></a>的剩余tick。</p>
+<h2 id="StructureTerminal.store" class="api-property api-property--property  "><span class="api-property__name">store</span><span class="api-property__type"><a href="#Store">Store</a></span></h2>
+<p>A <a href="#Store"><code>Store</code></a> object that contains cargo of this structure.</p>
+<h2 id="StructureTerminal.storeCapacity" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">storeCapacity</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p>An alias for <a href="#Store.getCapacity"><code>.store.getCapacity()</code></a>.</p>
+<h2 id="StructureTerminal.send" class="api-property api-property--method  "><span class="api-property__name">send</span><span class="api-property__args">(resourceType, amount, destination, [description])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>rooms<span class="token punctuation">[</span><span class="token string">'W1N1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>terminal<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token constant">RESOURCE_UTRIUM</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token string">'W2N3'</span><span class="token punctuation">,</span>
+    <span class="token string">'trade contract #1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>发送资源给指定房间的终端</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>resourceType</code></td><td>string</td><td><p><code>RESOURCE_*</code> 常量之一。</p>
+</td>
+</tr><tr><td><code>amount</code></td><td>number</td><td><p>发送资源数量。</p>
+</td>
+</tr><tr><td><code>destination</code></td><td>string</td><td><p>目标房间名称。这个房间不需要对你可见。</p>
+</td>
+</tr><tr><td><code>description (可选)</code></td><td>string</td><td><p>这个事务的备注。它只对收件人可见。最大长度100字符。</p>
+</td>
+</tr></tbody></table>
+
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个建筑的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>这个建筑没有对应数量的资源。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>无效参数。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>这个终端依然在冷却中。</p>
+</td></tr>
+</tbody></table>
+</p>

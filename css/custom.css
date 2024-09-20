@@ -1,0 +1,37 @@
+.collapsible-table {
+  margin: 5px 0;
+}
+.collapsible-table__header {
+  padding: 30px;
+  background-color: #22242b;
+  color: #ddd;
+  font-size: 18px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.collapsible-table__header i.fa {
+  margin-right: 10px;
+  font-size: 25px;
+  vertical-align: middle;
+}
+.collapsible-table__header span {
+  vertical-align: middle;
+}
+.collapsible-table__header:hover {
+  color: #fff;
+}
+.collapsible-table__header em {
+  font-style: normal;
+  color: #999;
+  font-size: 14px;
+  margin-left: 10px;
+}
+.collapsible-table__header img {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.collapsible-table__content {
+  display: none;
+}

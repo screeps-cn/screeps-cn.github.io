@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>控制 | Screeps 中文文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://screeps-cn.github.io/control.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="http://screeps-cn.github.io/control.html">
+    
+      <link rel="alternative" hreflang="zh-tw" href="http://screeps-cn.github.io/zh-tw/control.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="http://screeps-cn.github.io/zh-cn/control.html">
+    
+      <link rel="alternative" hreflang="ru" href="http://screeps-cn.github.io/ru/control.html">
+    
+      <link rel="alternative" hreflang="ko" href="http://screeps-cn.github.io/ko/control.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/css/navy.css?1">
+  <link rel="stylesheet" href="/css/prism.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Screeps 中文文档">
+  <!-- Open Graph -->
+  <meta name="description" content="全局控制等级 （Global Control Level; 缩写：GCL）为了扩展你在游戏世界中的疆土，你需要提升的一个主要指标是 Global Control Level（GCL）。他的主要影响有：
+
+您的 CPU 限制。在官方服务器上，您将在开始游戏时获得 20 点 CPU 限额，您可以用其控制少量的单位。如果您通过使用 “CPU Unlock” 来解除了您的 CPU 限额，那么每提升一个 G">
+<meta property="og:type" content="website">
+<meta property="og:title" content="控制">
+<meta property="og:url" content="http://screeps-cn.github.io/control.html">
+<meta property="og:site_name" content="Screeps 中文文档">
+<meta property="og:description" content="全局控制等级 （Global Control Level; 缩写：GCL）为了扩展你在游戏世界中的疆土，你需要提升的一个主要指标是 Global Control Level（GCL）。他的主要影响有：
+
+您的 CPU 限制。在官方服务器上，您将在开始游戏时获得 20 点 CPU 限额，您可以用其控制少量的单位。如果您通过使用 “CPU Unlock” 来解除了您的 CPU 限额，那么每提升一个 G">
+<meta property="og:image" content="http://screeps-cn.github.io/img/gcl-cpu.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/c1.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/c2.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/controllerDowngrade.png">
+<meta property="og:updated_time" content="2024-09-20T13:38:58.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="控制">
+<meta name="twitter:description" content="全局控制等级 （Global Control Level; 缩写：GCL）为了扩展你在游戏世界中的疆土，你需要提升的一个主要指标是 Global Control Level（GCL）。他的主要影响有：
+
+您的 CPU 限制。在官方服务器上，您将在开始游戏时获得 20 点 CPU 限额，您可以用其控制少量的单位。如果您通过使用 “CPU Unlock” 来解除了您的 CPU 限额，那么每提升一个 G">
+<meta name="twitter:image" content="http://screeps-cn.github.io/img/gcl-cpu.png">
+  <!-- Google Analytics -->
+  
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="https://screeps.com" id="logo">Screeps</a>
+      <a href="/index.html" id="logo-docs">docs</a>
+    </h1>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+    <div id="header-main"></div>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name" id="top">控制</h1>
+                <a href="https://github.com/screeps-cn/docs/edit/master/source/control.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                
+                <h2 id="全局控制等级-（Global-Control-Level-缩写：GCL）" class="article-heading"><a href="#全局控制等级-（Global-Control-Level-缩写：GCL）" class="headerlink" title="全局控制等级 （Global Control Level; 缩写：GCL）"></a>全局控制等级 （Global Control Level; 缩写：GCL）<a class="article-anchor" href="#全局控制等级-（Global-Control-Level-缩写：GCL）" aria-hidden="true"></a></h2><p>为了扩展你在游戏世界中的疆土，你需要提升的一个主要指标是 <strong>Global Control Level</strong>（GCL）。他的主要影响有：</p>
+<ul>
+<li><strong>您的 CPU 限制</strong>。在官方服务器上，您将在开始游戏时获得 20 点 CPU 限额，您可以用其控制少量的单位。如果您通过使用 “CPU Unlock” 来解除了您的 CPU 限额，那么每提升一个 GCL 等级就可以多获得 10 点 CPU 资源，直到达到最大的 300 CPU 限制。</li>
+<li><strong>控制房间数量</strong>。比如说你想要控制 3 个房间就需要 3 级的 GCL。</li>
+</ul>
+<p>你当前的 GCL 等级在 <a href="https://screeps.com/a/#!/overview" target="_blank" rel="external">overview 页面</a> 显示.</p>
+<p><img src="img/gcl-cpu.png" alt=""></p>
+<h2 id="房间控制等级-（Room-Control-Level-缩写：RCL）" class="article-heading"><a href="#房间控制等级-（Room-Control-Level-缩写：RCL）" class="headerlink" title="房间控制等级 （Room Control Level; 缩写：RCL）"></a>房间控制等级 （Room Control Level; 缩写：RCL）<a class="article-anchor" href="#房间控制等级-（Room-Control-Level-缩写：RCL）" aria-hidden="true"></a></h2><p>如果想要在房间里建造设施，首先需要控制这个房间。在大多数房间里都有一个被称为 <strong>房间控制器</strong>（Room Controller）的特殊装置。你第一个房间里的房间控制器默认归你所有，其他的中立房间控制器可以通过带有 <code>CLAIM</code> 部件的 creep <a href="/api/#Creep.claimController">占有</a>以取得房间控制权。</p>
+<p><img src="img/c1.png" alt=""></p>
+<p>新占领的房间控制器可以让你在该房间建造一个 Spawn。如果需要建造额外的 Spawn 或者其他扩展就需要通过 <a href="/api/#Creep.upgradeController"><code>Creep.upgradeController</code></a>给控制器输入能量来提升房间控制器等级 （Room Controller Level，RCL）。</p>
+<p><img src="img/c2.png" alt=""></p>
+<h2 id="RCL-等级对应可建造建筑" class="article-heading"><a href="#RCL-等级对应可建造建筑" class="headerlink" title="RCL 等级对应可建造建筑"></a>RCL 等级对应可建造建筑<a class="article-anchor" href="#RCL-等级对应可建造建筑" aria-hidden="true"></a></h2><table>
+<tbody>
+<tr>
+<th style="width: 10%;">RCL</th>
+<th style="width: 15%;">升级所需能量</th>
+<th>建筑</th>
+</tr>
+<tr>
+<td>0</td>
+<td>—</td>
+<td>Roads, 5 Containers</td>
+</tr>
+<tr>
+<td>1</td>
+<td>200</td>
+<td>Roads, 5 Containers, 1 Spawn</td>
+</tr>
+<tr>
+<td>2</td>
+<td>45,000</td>
+<td>Roads, 5 Containers, 1 Spawn, 5 Extensions (50 容量), Ramparts (300K 最大生命值), Walls</td>
+</tr>
+<tr>
+<td>3</td>
+<td>135,000</td>
+<td>Roads, 5 Containers, 1 Spawn, 10 Extensions (50 容量), Ramparts (1M 最大生命值), Walls, 1 Tower</td>
+</tr>
+<tr>
+<td>4</td>
+<td>405,000</td>
+<td>Roads, 5 Containers, 1 Spawn, 20 Extensions (50 容量), Ramparts (3M 最大生命值), Walls, 1 Tower, Storage</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1,215,000</td>
+<td>Roads, 5 Containers, 1 Spawn, 30 Extensions (50 容量), Ramparts (10M 最大生命值), Walls, 2 Towers, Storage, 2 Links</td>
+</tr>
+<tr>
+<td>6</td>
+<td>3,645,000</td>
+<td>Roads, 5 Containers, 1 Spawn, 40 Extensions (50 容量), Ramparts (30M 最大生命值), Walls, 2 Towers, Storage, 3 Links, Extractor, 3 Labs, Terminal</td>
+</tr>
+<tr>
+<td>7</td>
+<td>10,935,000</td>
+<td>Roads, 5 Containers, 2 Spawns, 50 Extensions (100 容量), Ramparts (100M 最大生命值), Walls, 3 Towers, Storage, 4 Links, Extractor, 6 Labs, Terminal, Factory</td>
+</tr>
+<tr>
+<td>8</td>
+<td>—</td>
+<td>Roads, 5 Containers, 3 Spawns, 60 Extensions (200 容量), Ramparts (300M 最大生命值), Walls, 6 Towers, Storage, 6 Links, Extractor, 10 Labs, Terminal, Factory, Observer, Power Spawn, Nuker</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="攻击控制器" class="article-heading"><a href="#攻击控制器" class="headerlink" title="攻击控制器"></a>攻击控制器<a class="article-anchor" href="#攻击控制器" aria-hidden="true"></a></h2><p>控制器无法被攻击或毁坏。然而，控制器在没有受到 <a href="/api/#Creep.upgradeController"><code>upgradeController</code></a> 的作用下会缓慢降级，比如说 RCL1 的时候 20,000 个游戏 tick 会降一级，具体的降级规则看 <a href="/api/#StructureController"><code>StructureController</code></a>。当 RCL 等级降为 0 时，该房间控制器即变为中立，其他玩家就可以占领了。</p>
+<p>当然你可以通过 <a href="/api/#Creep.attackController"><code>attackController</code></a> 影响别人的 RC 降级计时器。</p>
+<p><img src="/img/controllerDowngrade.png" alt=""></p>
+<h2 id="提升GCL" class="article-heading"><a href="#提升GCL" class="headerlink" title="提升GCL"></a>提升GCL<a class="article-anchor" href="#提升GCL" aria-hidden="true"></a></h2><p>升级 GCL 需要向控制器中注入能量，GCL 与控制器的级别是同步增长的，即便控制器已经满级，往控制器中注入能量依旧会使 GCL 上涨。。</p>
+<p>一旦 GCL 级别提升就不会再降下来，即使游戏输到一个房间都不剩了。重新开始游戏时 GCL 仍然还是那么多，可以让你领先在起跑线上。</p>
+<p>如果一个房间所需的 GCL 比你的高，你仍然可以<a href="/api/#Creep.reserveController">保留（reserve）</a>它的控制器。此外，保留中立房间的控制器能够将能源恢复到最大容量。</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2024-09-20T13:38:58.408Z" itemprop="dateModified">上次更新：9月 20, 2024</time>
+                <a href="/creeps.html" class="article-footer-prev"><i class="fa fa-chevron-left"></i><span>Creeps</span></a><a href="/defense.html" class="article-footer-next"><span>防御</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#全局控制等级-（Global-Control-Level-缩写：GCL）"><span class="toc-text">全局控制等级 （Global Control Level; 缩写：GCL）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#房间控制等级-（Room-Control-Level-缩写：RCL）"><span class="toc-text">房间控制等级 （Room Control Level; 缩写：RCL）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RCL-等级对应可建造建筑"><span class="toc-text">RCL 等级对应可建造建筑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#攻击控制器"><span class="toc-text">攻击控制器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提升GCL"><span class="toc-text">提升GCL</span></a></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+            
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="sidebar-link">总览</a><strong class="sidebar-title">游戏环境</strong><a href="/introduction.html" class="sidebar-link">简介</a><a href="/creeps.html" class="sidebar-link">Creeps</a><a href="/control.html" class="sidebar-link current">控制</a><a href="/defense.html" class="sidebar-link">防御</a><a href="/respawn.html" class="sidebar-link">重生</a><a href="/start-areas.html" class="sidebar-link">初始区域</a><a href="/resources.html" class="sidebar-link">资源</a><a href="/market.html" class="sidebar-link">市场</a><a href="/invaders.html" class="sidebar-link">NPC 入侵者</a><a href="/power.html" class="sidebar-link">超能</a><strong class="sidebar-title">脚本</strong><a href="/scripting-basics.html" class="sidebar-link">脚本基础</a><a href="/global-objects.html" class="sidebar-link">全局对象</a><a href="/modules.html" class="sidebar-link">模块</a><a href="/debugging.html" class="sidebar-link">调试</a><a href="/game-loop.html" class="sidebar-link">游戏循环</a><a href="/commit.html" class="sidebar-link">外部提交</a><a href="/simultaneous-actions.html" class="sidebar-link">同步操作</a><a href="/cpu-limit.html" class="sidebar-link">CPU 限制</a><strong class="sidebar-title">其他</strong><a href="/architecture.html" class="sidebar-link">服务器架构</a><a href="/ptr.html" class="sidebar-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="sidebar-link">第三方工具</a><a href="/auth-tokens.html" class="sidebar-link">验证令牌</a><a href="/community-servers.html" class="sidebar-link">社区服务器</a><a href="/tos.html" class="sidebar-link">服务条款</a><a href="/privacy-policy.html" class="sidebar-link">隐私政策</a><strong class="sidebar-title">资源</strong><a href="http://blog.screeps.com" class="sidebar-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="sidebar-link">修改日志</a><a href="http://chat.screeps.com" class="sidebar-link">聊天室</a><a href="https://screeps.com/forum/" class="sidebar-link">论坛</a><strong class="sidebar-title">贡献文章</strong><a href="/contributed/rules.html" class="sidebar-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="sidebar-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="sidebar-link">修改原型</a><a href="/contributed/caching-overview.html" class="sidebar-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="sidebar-link">私有服务器 MongoDB</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2024 <a href="https://screeps.com/" target="_blank">Screeps</a><br>
+      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
+    </div>
+    <div id="footer-links">
+      <a href="https://github.com/screeps-cn/docs" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    
+      <a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="mobile-nav-link">总览</a><strong class="mobile-nav-title">游戏环境</strong><a href="/introduction.html" class="mobile-nav-link">简介</a><a href="/creeps.html" class="mobile-nav-link">Creeps</a><a href="/control.html" class="mobile-nav-link current">控制</a><a href="/defense.html" class="mobile-nav-link">防御</a><a href="/respawn.html" class="mobile-nav-link">重生</a><a href="/start-areas.html" class="mobile-nav-link">初始区域</a><a href="/resources.html" class="mobile-nav-link">资源</a><a href="/market.html" class="mobile-nav-link">市场</a><a href="/invaders.html" class="mobile-nav-link">NPC 入侵者</a><a href="/power.html" class="mobile-nav-link">超能</a><strong class="mobile-nav-title">脚本</strong><a href="/scripting-basics.html" class="mobile-nav-link">脚本基础</a><a href="/global-objects.html" class="mobile-nav-link">全局对象</a><a href="/modules.html" class="mobile-nav-link">模块</a><a href="/debugging.html" class="mobile-nav-link">调试</a><a href="/game-loop.html" class="mobile-nav-link">游戏循环</a><a href="/commit.html" class="mobile-nav-link">外部提交</a><a href="/simultaneous-actions.html" class="mobile-nav-link">同步操作</a><a href="/cpu-limit.html" class="mobile-nav-link">CPU 限制</a><strong class="mobile-nav-title">其他</strong><a href="/architecture.html" class="mobile-nav-link">服务器架构</a><a href="/ptr.html" class="mobile-nav-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="mobile-nav-link">第三方工具</a><a href="/auth-tokens.html" class="mobile-nav-link">验证令牌</a><a href="/community-servers.html" class="mobile-nav-link">社区服务器</a><a href="/tos.html" class="mobile-nav-link">服务条款</a><a href="/privacy-policy.html" class="mobile-nav-link">隐私政策</a><strong class="mobile-nav-title">资源</strong><a href="http://blog.screeps.com" class="mobile-nav-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="mobile-nav-link">修改日志</a><a href="http://chat.screeps.com" class="mobile-nav-link">聊天室</a><a href="https://screeps.com/forum/" class="mobile-nav-link">论坛</a><strong class="mobile-nav-title">贡献文章</strong><a href="/contributed/rules.html" class="mobile-nav-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="mobile-nav-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="mobile-nav-link">修改原型</a><a href="/contributed/caching-overview.html" class="mobile-nav-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="mobile-nav-link">私有服务器 MongoDB</a>
+    
+  </div>
+</nav>
+  <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/scrollingelement.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/custom.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+</body>
+</html>

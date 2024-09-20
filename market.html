@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>交易系统 | Screeps 中文文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://screeps-cn.github.io/market.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="http://screeps-cn.github.io/market.html">
+    
+      <link rel="alternative" hreflang="zh-tw" href="http://screeps-cn.github.io/zh-tw/market.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="http://screeps-cn.github.io/zh-cn/market.html">
+    
+      <link rel="alternative" hreflang="ru" href="http://screeps-cn.github.io/ru/market.html">
+    
+      <link rel="alternative" hreflang="ko" href="http://screeps-cn.github.io/ko/market.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/css/navy.css?1">
+  <link rel="stylesheet" href="/css/prism.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Screeps 中文文档">
+  <!-- Open Graph -->
+  <meta name="description" content="玩家可通过 终端（terminal）传送各种资源到指定房间，且无论距离远近，通过终端传送的资源无收发延迟。
+游戏内的虚拟货币为 积分（Credits） ，简称Cr。Cr与玩家账号直接关联，且可用于游戏内交易。
+要取得第一笔积分，你需要与市场上现有的买单成交。
+
+交易系统及市场订单Screeps 的交易系统本质是由终端（Terminal）收发的市场中间人交易。通过创建订单，您可以指定交易的目标终端，">
+<meta property="og:type" content="website">
+<meta property="og:title" content="交易系统">
+<meta property="og:url" content="http://screeps-cn.github.io/market.html">
+<meta property="og:site_name" content="Screeps 中文文档">
+<meta property="og:description" content="玩家可通过 终端（terminal）传送各种资源到指定房间，且无论距离远近，通过终端传送的资源无收发延迟。
+游戏内的虚拟货币为 积分（Credits） ，简称Cr。Cr与玩家账号直接关联，且可用于游戏内交易。
+要取得第一笔积分，你需要与市场上现有的买单成交。
+
+交易系统及市场订单Screeps 的交易系统本质是由终端（Terminal）收发的市场中间人交易。通过创建订单，您可以指定交易的目标终端，">
+<meta property="og:updated_time" content="2024-09-20T13:38:58.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="交易系统">
+<meta name="twitter:description" content="玩家可通过 终端（terminal）传送各种资源到指定房间，且无论距离远近，通过终端传送的资源无收发延迟。
+游戏内的虚拟货币为 积分（Credits） ，简称Cr。Cr与玩家账号直接关联，且可用于游戏内交易。
+要取得第一笔积分，你需要与市场上现有的买单成交。
+
+交易系统及市场订单Screeps 的交易系统本质是由终端（Terminal）收发的市场中间人交易。通过创建订单，您可以指定交易的目标终端，">
+  <!-- Google Analytics -->
+  
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="https://screeps.com" id="logo">Screeps</a>
+      <a href="/index.html" id="logo-docs">docs</a>
+    </h1>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+    <div id="header-main"></div>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name" id="top">交易系统</h1>
+                <a href="https://github.com/screeps-cn/docs/edit/master/source/market.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                
+                <p>玩家可通过 <a href="/api/#StructureTerminal">终端（terminal）</a>传送各种资源到指定房间，且无论距离远近，通过终端传送的资源无收发延迟。</p>
+<p>游戏内的虚拟货币为 <strong>积分（Credits）</strong> ，简称Cr。Cr与玩家账号直接关联，且可用于游戏内交易。</p>
+<blockquote class="note info"><p>要取得第一笔积分，你需要与市场上现有的买单成交。</p>
+</blockquote>
+<h2 id="交易系统及市场订单" class="article-heading"><a href="#交易系统及市场订单" class="headerlink" title="交易系统及市场订单"></a>交易系统及市场订单<a class="article-anchor" href="#交易系统及市场订单" aria-hidden="true"></a></h2><p>Screeps 的交易系统本质是由终端（Terminal）收发的市场中间人交易。通过创建订单，您可以指定交易的目标终端，、源类型、要出售/购买的资源数量以及资源的单价。每个发布的订单对游戏世界中的所有玩家均可见，你可以通过 <a href="https://screeps.com/a/#!/market" target="_blank" rel="external">Market</a> 页面或者 API 方法 <a href="/api/#Game.market.getAllOrders"><code>Game.market.getAllOrders</code></a> 来访问这些订单。创建任何类型的订单都需要缴纳订单总价的 5% credit 的手续费。</p>
+<p>为了执行交易，另一方同样需要有一个终端来接受资源（拍下一个卖出订单）或发送资源（拍下一个购买订单）。想要完成交易，你可以使用市场页面或者 <a href="/api/#Game.market.deal"><code>Game.market.deal</code></a> 方法并指定想要交易的来自其他玩家的订单、你的终端以及想要交易的资源数量。然后，双方的终端自动进行交易，从买方的帐户中取出相应的 credit，然后将这笔款项转移给卖方。</p>
+<blockquote class="note info"><p>由于能量开支为终端传送消耗，因此无论订单为买入类或卖出类，能量开支均从接单方终端扣除。</p>
+</blockquote>
+<p>如果一个卖单没有足够的资源，或者买单没有足够的Cr。这个订单会转为未激活状态。</p>
+<h2 id="例子" class="article-heading"><a href="#例子" class="headerlink" title="例子"></a>例子<a class="article-anchor" href="#例子" aria-hidden="true"></a></h2><p>一下举例以更好的说明：</p>
+<ul>
+<li>假设玩家“爱丽丝”从 W1N1 出了张以单价为 10 ，总量为 1000 UH2O 的买入单。因上文已阐述手续费为商品总价的 5%，
+“爱丽丝”需要缴纳 500 Cr（10 <em> 1000 </em> 5%）手续费给市场。</li>
+<li>“鲍勃”在市场上发现了“爱丽丝”的单，并决定从其相隔 3 个房间的 W4N2 终端卖 200 UH2O 给“爱丽丝”，
+则“鲍勃”需支付 60 能量<a href="/api/#Game.market.calcTransactionCost">^计算公式</a>。“鲍勃”交易成功后，200 UH2O 便会从“鲍勃”的终端传入“爱丽丝”的终端，
+“鲍勃”同时从“爱丽丝”处获得 2,000 Cr，且“鲍勃”终端会被扣除 60 能量的运输费。</li>
+<li>现在，“鲍勃”又发现了“查理”的单价为 0.5 的卖出单。“鲍勃”觉得用手上的 2,000 Cr从“查理”买入 4,000 能量。
+然而，“查理”的房间跟“鲍勃”的隔了 4 个房间，因此运输费为 1,600 能量。尽管是能量是由“查理”卖给“鲍勃”，但由于“鲍勃”为接单方，运输费还是由“鲍勃”出。
+于是，“鲍勃”在交易前至少需要有 1,600 能量存于终端。交易成功后，“查理”得到了 2,000 Cr，发出了 4,000 能量给“鲍勃”。</li>
+</ul>
+<p>小结上述交易：</p>
+<ul>
+<li>爱丽丝（下了个买入单，总量 1000 UH2O）：+200 UH2O）：, -2000-500 Cr</li>
+<li>鲍勃（接了两单）：-200 UH2O，+4000-60-1600 能量, +2000-2000 Cr.</li>
+<li>查理（下了个卖出单，卖能量）：-4000 能量，+2000 Cr</li>
+</ul>
+<h2 id="NPC-终端（NPC-Terminals）" class="article-heading"><a href="#NPC-终端（NPC-Terminals）" class="headerlink" title="NPC 终端（NPC Terminals）"></a>NPC 终端（NPC Terminals）<a class="article-anchor" href="#NPC-终端（NPC-Terminals）" aria-hidden="true"></a></h2><p>Sector 间的“十字路口”（比如，房间 W0N0，W10N0，W10N10，等），都有 NPC 终端。玩家可像与其他玩家交易一样，通过 <a href="/api/#Game.market"><code>Game.market</code></a> 与 NPC 交易。NPC 终端中的订单都存在一定的数量上限，并且会按照一组规则进行补充。尽管 NPC 开出的价格并不是很有竞争力，但您可以由此将您采集到的资源快速兑换成 credit，反之亦然。</p>
+<h2 id="订阅代币（Subscription-Tokens）" class="article-heading"><a href="#订阅代币（Subscription-Tokens）" class="headerlink" title="订阅代币（Subscription Tokens）"></a>订阅代币（Subscription Tokens）<a class="article-anchor" href="#订阅代币（Subscription-Tokens）" aria-hidden="true"></a></h2><p>玩家可从市场上购买<strong>订阅代币</strong>。当玩家激活订阅代币后，会获得为期 60 天的订阅。订阅代币虽不是游戏世界中的物品，但却可免终端放入市场中交易。</p>
+<p>玩家可以像购买 CPU 订阅那样来购买订阅代币。购买后，订阅代币会直接被放入账号，并可像虚拟物品一样买卖。</p>
+<p>因此，如果一个玩家的代码够优秀的话，他/她将不用花一分钱就可以解锁完全的 CPU！同时，订阅代币也可通过 <a href="http://steamcommunity.com/market/listings/464350/Subscription%20Token" target="_blank" rel="external">Steam 社区市场</a> 进行交易，也就是说，您可以通过出售订阅代币来在 Steam 钱包里换取真正的 money。</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2024-09-20T13:38:58.408Z" itemprop="dateModified">上次更新：9月 20, 2024</time>
+                <a href="/resources.html" class="article-footer-prev"><i class="fa fa-chevron-left"></i><span>资源</span></a><a href="/invaders.html" class="article-footer-next"><span>NPC 入侵者</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#交易系统及市场订单"><span class="toc-text">交易系统及市场订单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NPC-终端（NPC-Terminals）"><span class="toc-text">NPC 终端（NPC Terminals）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#订阅代币（Subscription-Tokens）"><span class="toc-text">订阅代币（Subscription Tokens）</span></a></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+            
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="sidebar-link">总览</a><strong class="sidebar-title">游戏环境</strong><a href="/introduction.html" class="sidebar-link">简介</a><a href="/creeps.html" class="sidebar-link">Creeps</a><a href="/control.html" class="sidebar-link">控制</a><a href="/defense.html" class="sidebar-link">防御</a><a href="/respawn.html" class="sidebar-link">重生</a><a href="/start-areas.html" class="sidebar-link">初始区域</a><a href="/resources.html" class="sidebar-link">资源</a><a href="/market.html" class="sidebar-link current">市场</a><a href="/invaders.html" class="sidebar-link">NPC 入侵者</a><a href="/power.html" class="sidebar-link">超能</a><strong class="sidebar-title">脚本</strong><a href="/scripting-basics.html" class="sidebar-link">脚本基础</a><a href="/global-objects.html" class="sidebar-link">全局对象</a><a href="/modules.html" class="sidebar-link">模块</a><a href="/debugging.html" class="sidebar-link">调试</a><a href="/game-loop.html" class="sidebar-link">游戏循环</a><a href="/commit.html" class="sidebar-link">外部提交</a><a href="/simultaneous-actions.html" class="sidebar-link">同步操作</a><a href="/cpu-limit.html" class="sidebar-link">CPU 限制</a><strong class="sidebar-title">其他</strong><a href="/architecture.html" class="sidebar-link">服务器架构</a><a href="/ptr.html" class="sidebar-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="sidebar-link">第三方工具</a><a href="/auth-tokens.html" class="sidebar-link">验证令牌</a><a href="/community-servers.html" class="sidebar-link">社区服务器</a><a href="/tos.html" class="sidebar-link">服务条款</a><a href="/privacy-policy.html" class="sidebar-link">隐私政策</a><strong class="sidebar-title">资源</strong><a href="http://blog.screeps.com" class="sidebar-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="sidebar-link">修改日志</a><a href="http://chat.screeps.com" class="sidebar-link">聊天室</a><a href="https://screeps.com/forum/" class="sidebar-link">论坛</a><strong class="sidebar-title">贡献文章</strong><a href="/contributed/rules.html" class="sidebar-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="sidebar-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="sidebar-link">修改原型</a><a href="/contributed/caching-overview.html" class="sidebar-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="sidebar-link">私有服务器 MongoDB</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2024 <a href="https://screeps.com/" target="_blank">Screeps</a><br>
+      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
+    </div>
+    <div id="footer-links">
+      <a href="https://github.com/screeps-cn/docs" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    
+      <a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="mobile-nav-link">总览</a><strong class="mobile-nav-title">游戏环境</strong><a href="/introduction.html" class="mobile-nav-link">简介</a><a href="/creeps.html" class="mobile-nav-link">Creeps</a><a href="/control.html" class="mobile-nav-link">控制</a><a href="/defense.html" class="mobile-nav-link">防御</a><a href="/respawn.html" class="mobile-nav-link">重生</a><a href="/start-areas.html" class="mobile-nav-link">初始区域</a><a href="/resources.html" class="mobile-nav-link">资源</a><a href="/market.html" class="mobile-nav-link current">市场</a><a href="/invaders.html" class="mobile-nav-link">NPC 入侵者</a><a href="/power.html" class="mobile-nav-link">超能</a><strong class="mobile-nav-title">脚本</strong><a href="/scripting-basics.html" class="mobile-nav-link">脚本基础</a><a href="/global-objects.html" class="mobile-nav-link">全局对象</a><a href="/modules.html" class="mobile-nav-link">模块</a><a href="/debugging.html" class="mobile-nav-link">调试</a><a href="/game-loop.html" class="mobile-nav-link">游戏循环</a><a href="/commit.html" class="mobile-nav-link">外部提交</a><a href="/simultaneous-actions.html" class="mobile-nav-link">同步操作</a><a href="/cpu-limit.html" class="mobile-nav-link">CPU 限制</a><strong class="mobile-nav-title">其他</strong><a href="/architecture.html" class="mobile-nav-link">服务器架构</a><a href="/ptr.html" class="mobile-nav-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="mobile-nav-link">第三方工具</a><a href="/auth-tokens.html" class="mobile-nav-link">验证令牌</a><a href="/community-servers.html" class="mobile-nav-link">社区服务器</a><a href="/tos.html" class="mobile-nav-link">服务条款</a><a href="/privacy-policy.html" class="mobile-nav-link">隐私政策</a><strong class="mobile-nav-title">资源</strong><a href="http://blog.screeps.com" class="mobile-nav-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="mobile-nav-link">修改日志</a><a href="http://chat.screeps.com" class="mobile-nav-link">聊天室</a><a href="https://screeps.com/forum/" class="mobile-nav-link">论坛</a><strong class="mobile-nav-title">贡献文章</strong><a href="/contributed/rules.html" class="mobile-nav-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="mobile-nav-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="mobile-nav-link">修改原型</a><a href="/contributed/caching-overview.html" class="mobile-nav-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="mobile-nav-link">私有服务器 MongoDB</a>
+    
+  </div>
+</nav>
+  <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/scrollingelement.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/custom.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+</body>
+</html>

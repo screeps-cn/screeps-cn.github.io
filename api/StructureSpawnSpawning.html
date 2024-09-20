@@ -1,0 +1,52 @@
+<h1 id="StructureSpawn-Spawning"><a href="#StructureSpawn-Spawning" class="headerlink" title="StructureSpawn.Spawning"></a>StructureSpawn.Spawning</h1><p>当前正在孵化的 creep 的详细信息，可以通过<a href="#StructureSpawn.spawning"><code>StructureSpawn.spawning</code></a>属性进行访问。</p>
+<h2 id="StructureSpawn.Spawning.directions" class="api-property api-property--property  "><span class="api-property__name">directions</span><span class="api-property__type">array<number></number></span></h2>
+<p>一个指示了出生方向的数组，参见 <a href="#StructureSpawn.Spawning.setDirections"><code>StructureSpawn.Spawning.setDirections</code></a>.</p>
+<h2 id="StructureSpawn.Spawning.name" class="api-property api-property--property  "><span class="api-property__name">name</span><span class="api-property__type">string</span></h2>
+<p>新 creep 的名字。</p>
+<h2 id="StructureSpawn.Spawning.needTime" class="api-property api-property--property  "><span class="api-property__name">needTime</span><span class="api-property__type">number</span></h2>
+<p>完成孵化总共需要的时间。</p>
+<h2 id="StructureSpawn.Spawning.remainingTime" class="api-property api-property--property  "><span class="api-property__name">remainingTime</span><span class="api-property__type">number</span></h2>
+<p>剩下的时间。</p>
+<h2 id="StructureSpawn.Spawning.spawn" class="api-property api-property--property  "><span class="api-property__name">spawn</span><span class="api-property__type"><a href="#StructureSpawn">StructureSpawn</a></span></h2>
+<p>一个到对应 spawn 的链接。</p>
+<h2 id="StructureSpawn.Spawning.cancel" class="api-property api-property--method  "><span class="api-property__name">cancel</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>spawning<span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>立即取消孵化。不返还消耗的资源。</p>
+<h3 id="Return-value"><a href="#Return-value" class="headerlink" title="Return value"></a>Return value</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是该 spawn 的所有者。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="StructureSpawn.Spawning.setDirections" class="api-property api-property--method  "><span class="api-property__name">setDirections</span><span class="api-property__args">(directions)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>spawning<span class="token punctuation">.</span><span class="token function">setDirections</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token constant">RIGHT</span><span class="token punctuation">,</span> <span class="token constant">TOP_RIGHT</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>设置出生方向，以使它们在生成时应移动到的位置。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>directions</code></td><td>array&lt;number></td><td><p>包含如下方向常量的数组:
+    <ul>
+        <li><code>TOP</code></li>
+        <li><code>TOP_RIGHT</code></li>
+        <li><code>RIGHT</code></li>
+        <li><code>BOTTOM_RIGHT</code></li>
+        <li><code>BOTTOM</code></li>
+        <li><code>BOTTOM_LEFT</code></li>
+        <li><code>LEFT</code></li>
+        <li><code>TOP_LEFT</code></li>
+    </ul></p>
+</td>
+</tr></tbody></table>
+
+<h3 id="Return-value-1"><a href="#Return-value-1" class="headerlink" title="Return value"></a>Return value</h3><p>如下错误码之一：
+<table class="api-return-codes"><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是该 spawn 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>无效的方向数组</p>
+</td></tr>
+</tbody></table>
+</p>

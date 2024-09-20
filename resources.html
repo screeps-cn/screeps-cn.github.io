@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>资源 | Screeps 中文文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://screeps-cn.github.io/resources.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="http://screeps-cn.github.io/resources.html">
+    
+      <link rel="alternative" hreflang="zh-tw" href="http://screeps-cn.github.io/zh-tw/resources.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="http://screeps-cn.github.io/zh-cn/resources.html">
+    
+      <link rel="alternative" hreflang="ru" href="http://screeps-cn.github.io/ru/resources.html">
+    
+      <link rel="alternative" hreflang="ko" href="http://screeps-cn.github.io/ko/resources.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/css/navy.css?1">
+  <link rel="stylesheet" href="/css/prism.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Screeps 中文文档">
+  <!-- Open Graph -->
+  <meta name="description" content="游戏中有 4 种资源：能源(energy)，矿物(minerals)，超能(power)和商品(commodities)。资源可以被采集，加工，在市场上交易，由 creeps 携带并存储在建筑物中。所有资源类型都有不同的用途，您只有在获得最基本的资源（能源）的情况下才能开始游戏。
+能量从哪里获取: 绝大多数房间中都有的 Source 结构. 
+怎么样获取: 派遣一个拥有 WORK 身体部件的 cr">
+<meta property="og:type" content="website">
+<meta property="og:title" content="资源">
+<meta property="og:url" content="http://screeps-cn.github.io/resources.html">
+<meta property="og:site_name" content="Screeps 中文文档">
+<meta property="og:description" content="游戏中有 4 种资源：能源(energy)，矿物(minerals)，超能(power)和商品(commodities)。资源可以被采集，加工，在市场上交易，由 creeps 携带并存储在建筑物中。所有资源类型都有不同的用途，您只有在获得最基本的资源（能源）的情况下才能开始游戏。
+能量从哪里获取: 绝大多数房间中都有的 Source 结构. 
+怎么样获取: 派遣一个拥有 WORK 身体部件的 cr">
+<meta property="og:image" content="http://screeps-cn.github.io/img/minerals-01.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/mining_minerals.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/minerals-02.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/2016-03-09_10-32-33.gif">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/OH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/H.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ZK.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/Z.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/K.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UL.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/U.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/L.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/G.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ZK.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UL.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/U.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/H.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UO.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/U.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/KH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/K.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/H.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/KO.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/K.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/LH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/L.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/H.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/LO.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/L.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ZH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/Z.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/H.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ZO.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/Z.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/GH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/G.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/H.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/GO.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/G.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/OH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UO.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/OH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/KH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/KH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/OH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/KHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/KO.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/OH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/LH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/LH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/OH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/LHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/LO.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/OH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ZH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ZH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/OH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ZHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ZO.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/OH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/GH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/GH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/OH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/GHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/GO.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/OH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/XUH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/X.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/XUHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/X.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/XKH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/KH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/X.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/XKHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/KHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/X.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/XLH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/LH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/X.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/XLHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/LHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/X.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/XZH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ZH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/X.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/XZHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ZHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/X.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/XGH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/GH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/X.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/XGHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/GHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/X.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/H.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/U.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/K.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/L.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/Z.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/X.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/G.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ZK.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UL.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/OH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UH.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UO.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/UHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/XUH2O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/XUHO2.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/commodities.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/commodities1.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/utrium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/U.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/lemergium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/L.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/zynthium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/Z.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/keanium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/K.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ghodium_melt.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/G.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/oxidant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/reductant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/H.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/purifier.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/X.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/battery.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/commodities2.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/U.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/utrium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/L.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/lemergium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/Z.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/zynthium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/K.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/keanium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/G.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ghodium_melt.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/O.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/oxidant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/H.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/reductant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/X.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/purifier.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/battery.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/commodities3.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/wire.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/utrium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/silicon.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/cell.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/lemergium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/biomass.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/alloy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/zynthium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/metal.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/condensate.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/keanium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/mist.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/commodities4.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/composite.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/utrium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/zynthium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/crystal.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/lemergium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/keanium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/purifier.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/liquid.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/oxidant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/reductant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ghodium_melt.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/commodities5.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/tube.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/alloy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/zynthium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/fixtures.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/composite.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/alloy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/oxidant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/frame.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/fixtures.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/tube.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/reductant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/zynthium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/hydraulics.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/liquid.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/fixtures.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/tube.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/purifier.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/machine.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/hydraulics.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/frame.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/fixtures.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/tube.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/commodities6.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/phlegm.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/cell.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/oxidant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/lemergium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/tissue.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/phlegm.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/cell.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/reductant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/muscle.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/tissue.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/phlegm.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/zynthium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/reductant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/organoid.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/muscle.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/tissue.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/purifier.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/oxidant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/organism.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/organoid.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/liquid.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/tissue.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/cell.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/commodities7.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/switch.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/wire.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/oxidant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/utrium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/transistor.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/switch.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/wire.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/reductant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/microchip.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/transistor.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/composite.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/wire.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/purifier.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/circuit.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/microchip.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/transistor.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/switch.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/oxidant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/device.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/circuit.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/microchip.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/crystal.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ghodium_melt.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io/img/commodities8.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/concentrate.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/condensate.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/keanium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/reductant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/extract.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/concentrate.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/condensate.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/oxidant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/spirit.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/extract.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/concentrate.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/reductant.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/purifier.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/emanation.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/spirit.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/extract.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/concentrate.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/keanium_bar.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/essence.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/emanation.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/spirit.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/crystal.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/ghodium_melt.png">
+<meta property="og:image" content="http://screeps-cn.github.io//static.screeps.com/upload/mineral-icons/energy.png">
+<meta property="og:updated_time" content="2024-09-20T13:38:58.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="资源">
+<meta name="twitter:description" content="游戏中有 4 种资源：能源(energy)，矿物(minerals)，超能(power)和商品(commodities)。资源可以被采集，加工，在市场上交易，由 creeps 携带并存储在建筑物中。所有资源类型都有不同的用途，您只有在获得最基本的资源（能源）的情况下才能开始游戏。
+能量从哪里获取: 绝大多数房间中都有的 Source 结构. 
+怎么样获取: 派遣一个拥有 WORK 身体部件的 cr">
+<meta name="twitter:image" content="http://screeps-cn.github.io/img/minerals-01.png">
+  <!-- Google Analytics -->
+  
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="https://screeps.com" id="logo">Screeps</a>
+      <a href="/index.html" id="logo-docs">docs</a>
+    </h1>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+    <div id="header-main"></div>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name" id="top">资源</h1>
+                <a href="https://github.com/screeps-cn/docs/edit/master/source/resources.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                
+                <p>游戏中有 4 种资源：<strong>能源(energy)</strong>，<strong>矿物(minerals)</strong>，<strong>超能(power)</strong>和<strong>商品(commodities)</strong>。资源可以被采集，加工，在市场上交易，由 creeps 携带并存储在建筑物中。所有资源类型都有不同的用途，您只有在获得最基本的资源（能源）的情况下才能开始游戏。</p>
+<h2 id="能量" class="article-heading"><a href="#能量" class="headerlink" title="能量"></a>能量<a class="article-anchor" href="#能量" aria-hidden="true"></a></h2><blockquote class="note info"><p><strong>从哪里获取:</strong> 绝大多数房间中都有的 <a href="/api/#Source"><code>Source</code></a> 结构. <br>
+<strong>怎么样获取:</strong> 派遣一个拥有 <code>WORK</code> 身体部件的 creep 来 <a href="/api/#Creep.harvest"><code>采集(harvest)</code></a> 它。<br>
+<strong>用来干什么:</strong> 孵化 creeps，建造建筑。</p>
+</blockquote> 
+<p>能量是 Screeps 世界中的主要建筑材料。你的基地运转依赖于能量。所以采集更多的能量对于每个领地都至关重要。你不仅可以从占领的房间里采集能量，同样可以从其他房间里采集能量来提高收入。</p>
+<h2 id="矿物" class="article-heading"><a href="#矿物" class="headerlink" title="矿物"></a>矿物<a class="article-anchor" href="#矿物" aria-hidden="true"></a></h2><blockquote class="note info"><p><strong>从哪里获取:</strong> 绝大多数房间中都有的 <a href="/api/#Mineral"><code>Mineral</code></a> 结构。 <br>
+<strong>怎么样获取:</strong> 建造一个 <a href="/api/#StructureExtractor"><code>StructureExtractor</code></a>, 然后派遣一个拥有 <code>WORK</code> 身体部件的 creep 来 <a href="/api/#Creep.harvest"><code>采集(harvest)</code></a> 它。<br>
+<strong>用来干什么:</strong> 强化 creep 的能力, 或者生产贸易商品。</p>
+</blockquote>
+<p>通过开采及使用矿物，玩家可显著的加速经济发展及提高 creep 的工作效率。</p>
+<p>矿物利用可分为三个步骤：</p>
+<ul>
+<li><strong>开采基本元素</strong></li>
+<li><strong>合成矿物</strong></li>
+<li><strong>强化 Creep</strong></li>
+</ul>
+<h3 id="基本元素开采" class="article-heading"><a href="#基本元素开采" class="headerlink" title="基本元素开采"></a>基本元素开采<a class="article-anchor" href="#基本元素开采" aria-hidden="true"></a></h3><p>下图为游戏中所有的七种基本元素</p>
+<p><img src="img/minerals-01.png" alt=""></p>
+<p>单个房间只会有一个元素矿产，所以若想获得多种矿产，玩家则得控制多个房间或与其他玩家建立贸易关系。</p>
+<p><img src="img/mining_minerals.png" align="right">右图即为矿的示意图（灰色圆形），其上的字母代表了其种类。矿上需要建造<a href="/api/#StructureExtractor">Extractor（矿机）</a>（绿色虚线圆环，解锁于房间控制等级 6 级）方可进行开采。矿机建造后，玩家的 Creep 便可像采集能量源般的对矿用 <a href="/api/#Creep.harvest"><code>harvest</code>（采集）</a>并采取相应的元素。</p>
+<h3 id="矿物合成" class="article-heading"><a href="#矿物合成" class="headerlink" title="矿物合成"></a>矿物合成<a class="article-anchor" href="#矿物合成" aria-hidden="true"></a></h3><p>基本元素本身无法被使用，得按照指定的合成路线被<a href="/api/#StructureLab"><strong>Lab（实验室）</strong></a>转化为化合物才能得以利用。</p>
+<p><img src="img/minerals-02.png" alt=""></p>
+<p>完成一个反应需要三个 lab ：两个提供底物，一个进行反应及收集产物，lab 的间距不得超过两格。同一 lab 不可混合放置多种化合物，但却能同时为多个反应提供底物。</p>
+<p><img src="img/2016-03-09_10-32-33.gif" align="right"></p>
+<pre class="highlight undefined tab-undefined "><code><span class="token keyword">var</span> labs <span class="token operator">=</span> room<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>FIND_MY_STRUCTURES<span class="token punctuation">,</span> 
+    <span class="token punctuation">{</span>filter<span class="token punctuation">:</span> <span class="token punctuation">{</span>structureType<span class="token punctuation">:</span> STRUCTURE_LAB<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+labs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">runReaction</span><span class="token punctuation">(</span>labs<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> labs<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 下一 tick ...</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>labs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>mineralType<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// -> OH</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>labs<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>mineralType<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// -> O</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>labs<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>mineralType<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// -> H</span></code></pre><h3 id="Creep-强化" class="article-heading"><a href="#Creep-强化" class="headerlink" title="Creep 强化"></a>Creep 强化<a class="article-anchor" href="#Creep-强化" aria-hidden="true"></a></h3><p>lab 除了能跑反应，还可用其存着的化合物来强化 Creep 的部件。</p>
+<p>玩家可用 <a href="/api/#StructureLab.boostCreep"><code>StructureLab.boostCreep</code></a> 来强化 Creep 的<a href="creeps.html">部件</a>，各化合物的强化效果见下表。一个被强化过的部件能顶多个未被强化的部件。要想完全强化一个 creep ，玩家得逐一强化该 creep 的部件。 </p>
+<p>强化一个部件需要 30 单位的化合物及 20 单位的能量，且一个部件只能被一种化合物强化。</p>
+<style>
+.minerals,
+.commodities {
+    margin-top: 0 !important;
+    border: 0 !important;
+    width: 100%;
+}
+.minerals td,
+.commodities td {
+    border-top: 1px solid #333;
+    color: #bbb;
+    background-color: #22242b;
+    font-size: 13px;
+}
+@media (min-width: 1280px) {
+    .minerals td:first-child {
+        white-space: nowrap;
+    }
+}
+.minerals td:nth-child(2) {
+    white-space: nowrap;
+}
+.minerals td:nth-child(3) {
+    text-align: center;
+}
+.minerals td:nth-child(4) {
+    min-width: 87px;
+}
+.minerals code {
+    background-color: #333;
+    color: #eee;
+    word-break: break-all;
+}
+.minerals img,
+.commodities img {
+    margin-right: 5px;
+    vertical-align: middle;
+} 
+.minerals__divider th {
+    background-color: #333;
+    color: #ffe099;
+    text-align: center;
+    font-size: 13px;
+}
+.minerals__head th,
+.commodities__head th{
+    background-color: #22242b;
+    color: #ccc;
+    font-weight: normal !important;
+    font-size: 11px;
+}
+
+.commodities em {
+    font-style: normal;
+    color: #eaeaea;
+}
+.commodities td {
+    padding: 10px 15px !important;
+}
+</style>
+
+<div class="collapsible-table">
+
+<div class="collapsible-table__header">
+<i class="fa fa-plus-square"></i>
+<span>矿物化合物</span>
+<em>(点击展开)</em>
+</div>
+
+<div class="collapsible-table__content">
+
+<table class="minerals">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr class="minerals__head">
+<th>名称</th>
+<th>化学式</th>
+<th>合成时间</th>
+<th>影响部件</th>
+<th>效果</th>
+</tr>
+<tr class="minerals__divider">
+<th colspan="5" align="center">基本元素</th>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/OH.png" alt="">hydroxide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/H.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/O.png" alt=""></td>
+<td>20</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/ZK.png" alt="">zynthium keanite</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/Z.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/K.png" alt=""></td>
+<td>5</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/UL.png" alt="">utrium lemergite</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/U.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/L.png" alt=""></td>
+<td>5</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/G.png" alt="">ghodium</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/ZK.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/UL.png" alt=""></td>
+<td>5</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="minerals__divider">
+<th colspan="5" align="center">一级化合物</th>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/UH.png" alt="">utrium hydride</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/U.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/H.png" alt=""></td>
+<td>10</td>
+<td><code>ATTACK</code></td>
+<td>+100% <code>attack</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/UO.png" alt="">utrium oxide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/U.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/O.png" alt=""></td>
+<td>10</td>
+<td><code>WORK</code></td>
+<td>+200% <code>harvest</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/KH.png" alt="">keanium hydride</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/K.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/H.png" alt=""></td>
+<td>10</td>
+<td><code>CARRY</code></td>
+<td>+50 容量</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/KO.png" alt="">keanium oxide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/K.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/O.png" alt=""></td>
+<td>10</td>
+<td><code>RANGED_ATTACK</code></td>
+<td>+100% <code>rangedAttack</code> 和 <code>rangedMassAttack</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/LH.png" alt="">lemergium hydride</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/L.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/H.png" alt=""></td>
+<td>15</td>
+<td><code>WORK</code></td>
+<td>+50% <code>repair</code> 和 <code>build</code> 效率但不增加其能量消耗</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/LO.png" alt="">lemergium oxide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/L.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/O.png" alt=""></td>
+<td>10</td>
+<td><code>HEAL</code></td>
+<td>+100% <code>heal</code> 和 <code>rangedHeal</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/ZH.png" alt="">zynthium hydride</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/Z.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/H.png" alt=""></td>
+<td>20</td>
+<td><code>WORK</code></td>
+<td>+100% <code>dismantle</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/ZO.png" alt="">zynthium oxide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/Z.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/O.png" alt=""></td>
+<td>10</td>
+<td><code>MOVE</code></td>
+<td>+100% <a href="creeps.html#移动力">fatigue(疲劳值)</a> 减低速度</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/GH.png" alt="">ghodium hydride</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/G.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/H.png" alt=""></td>
+<td>10</td>
+<td><code>WORK</code></td>
+<td>+50% <code>upgradeController</code> 效率但不增加其能量消耗</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/GO.png" alt="">ghodium oxide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/G.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/O.png" alt=""></td>
+<td>10</td>
+<td><code>TOUGH</code></td>
+<td>30% 伤害减免</td>
+</tr>
+<tr class="minerals__divider">
+<th colspan="5" align="center">二级化合物</th>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/UH2O.png" alt="">utrium acid</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/UH.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/OH.png" alt=""></td>
+<td>5</td>
+<td><code>ATTACK</code></td>
+<td>+200% <code>attack</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/UHO2.png" alt="">utrium alkalide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/UO.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/OH.png" alt=""></td>
+<td>5</td>
+<td><code>WORK</code></td>
+<td>+400% <code>harvest</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/KH2O.png" alt="">keanium acid</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/KH.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/OH.png" alt=""></td>
+<td>5</td>
+<td><code>CARRY</code></td>
+<td>+100 容量</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/KHO2.png" alt="">keanium alkalide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/KO.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/OH.png" alt=""></td>
+<td>5</td>
+<td><code>RANGED_ATTACK</code></td>
+<td>+200% <code>rangedAttack</code> 和 <code>rangedMassAttack</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/LH2O.png" alt="">lemergium acid</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/LH.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/OH.png" alt=""></td>
+<td>10</td>
+<td><code>WORK</code></td>
+<td>+80% <code>repair</code> 和 <code>build</code> 效率但不增加其能量消耗</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/LHO2.png" alt="">lemergium alkalide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/LO.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/OH.png" alt=""></td>
+<td>5</td>
+<td><code>HEAL</code></td>
+<td>+200% <code>heal</code> 和 <code>rangedHeal</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/ZH2O.png" alt="">zynthium acid</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/ZH.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/OH.png" alt=""></td>
+<td>40</td>
+<td><code>WORK</code></td>
+<td>+200% <code>dismantle</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/ZHO2.png" alt="">zynthium alkalide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/ZO.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/OH.png" alt=""></td>
+<td>5</td>
+<td><code>MOVE</code></td>
+<td>+200% <a href="creeps.html#移动力">fatigue(疲劳值)</a> 减低速度</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/GH2O.png" alt="">ghodium acid</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/GH.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/OH.png" alt=""></td>
+<td>15</td>
+<td><code>WORK</code></td>
+<td>+80% <code>upgradeController</code> 效率但不增加其能量消耗</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/GHO2.png" alt="">ghodium alkalide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/GO.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/OH.png" alt=""></td>
+<td>30</td>
+<td><code>TOUGH</code></td>
+<td>50% 伤害减免</td>
+</tr>
+<tr class="minerals__divider">
+<th colspan="5" align="center">三级化合物</th>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/XUH2O.png" alt="">catalyzed utrium acid</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/UH2O.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/X.png" alt=""></td>
+<td>60</td>
+<td><code>ATTACK</code></td>
+<td>+300% <code>attack</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/XUHO2.png" alt="">catalyzed utrium alkalide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/UHO2.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/X.png" alt=""></td>
+<td>60</td>
+<td><code>WORK</code></td>
+<td>+600% <code>harvest</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/XKH2O.png" alt="">catalyzed keanium acid</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/KH2O.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/X.png" alt=""></td>
+<td>60</td>
+<td><code>CARRY</code></td>
+<td>+150 容量</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/XKHO2.png" alt="">catalyzed keanium alkalide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/KHO2.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/X.png" alt=""></td>
+<td>60</td>
+<td><code>RANGED_ATTACK</code></td>
+<td>+300% <code>rangedAttack</code> 和 <code>rangedMassAttack</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/XLH2O.png" alt="">catalyzed lemergium acid</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/LH2O.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/X.png" alt=""></td>
+<td>65</td>
+<td><code>WORK</code></td>
+<td>+100% <code>repair</code> 和 <code>build</code> 效率但不增加其能量消耗</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/XLHO2.png" alt="">catalyzed lemergium alkalide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/LHO2.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/X.png" alt=""></td>
+<td>60</td>
+<td><code>HEAL</code></td>
+<td>+300% <code>heal</code> and <code>rangedHeal</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/XZH2O.png" alt="">catalyzed zynthium acid</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/ZH2O.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/X.png" alt=""></td>
+<td>160</td>
+<td><code>WORK</code></td>
+<td>+300% <code>dismantle</code> 效率</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/XZHO2.png" alt="">catalyzed zynthium alkalide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/ZHO2.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/X.png" alt=""></td>
+<td>60</td>
+<td><code>MOVE</code></td>
+<td>+300% <a href="creeps.html#移动力">fatigue(疲劳值)</a> 减低速度</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/XGH2O.png" alt="">catalyzed ghodium acid</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/GH2O.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/X.png" alt=""></td>
+<td>80</td>
+<td><code>WORK</code></td>
+<td>+100% <code>upgradeController</code> 效率但不增加其能量消耗</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/XGHO2.png" alt="">catalyzed ghodium alkalide</td>
+<td><img src="//static.screeps.com/upload/mineral-icons/GHO2.png" alt=""> + <img src="//static.screeps.com/upload/mineral-icons/X.png" alt=""></td>
+<td>150</td>
+<td><code>TOUGH</code></td>
+<td>70% 伤害减免</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<p><strong>译者注：</strong>元素、化合物名称的各单词取首及为其符号简写，中文译名见下表。</p>
+<div class="collapsible-table">
+
+<div class="collapsible-table__header">
+<i class="fa fa-plus-square"></i>
+<span>矿物中译名</span>
+<em>(点击展开)</em>
+</div>
+
+<div class="collapsible-table__content">
+
+<table class="minerals">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr class="minerals__head">
+<th>原名</th>
+<th>译名</th>
+</tr>
+<tr class="minerals__divider">
+<th colspan="5" align="center">基本元素</th>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/H.png" alt=""> HYDROGEN</td>
+<td>氢</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/O.png" alt=""> OXYGEN</td>
+<td>氧</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/U.png" alt=""> UTRIUM</td>
+<td>奥纯</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/K.png" alt=""> KEANIUM</td>
+<td>克安</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/L.png" alt=""> LEMERGIUM</td>
+<td>灵摩</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/Z.png" alt=""> ZYNTHIUM</td>
+<td>仁笛</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/X.png" alt=""> CATALYST</td>
+<td>萃托</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/G.png" alt=""> GHODIUM</td>
+<td>寇丁</td>
+</tr>
+<tr class="minerals__divider">
+<th colspan="5" align="center">一级化合物</th>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/ZK.png" alt=""> zynthium keanite</td>
+<td>仁克</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/UL.png" alt=""> utrium lemergite</td>
+<td>奥灵</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/OH.png" alt=""> hydroxide</td>
+<td>氢氧</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/UH.png" alt=""> utrium hydride</td>
+<td>氢化奥纯</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/UO.png" alt=""> utrium oxide</td>
+<td>氧化奥纯</td>
+</tr>
+<tr class="minerals__divider">
+<th colspan="5" align="center">二级化合物</th>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/UH2O.png" alt=""> utrium acid</td>
+<td>奥纯酸</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/UHO2.png" alt=""> utrium alkalide</td>
+<td>奥纯碱</td>
+</tr>
+<tr class="minerals__divider">
+<th colspan="5" align="center">三级化合物</th>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/XUH2O.png" alt=""> catalyzed utrium acid</td>
+<td>萃奥纯酸</td>
+</tr>
+<tr>
+<td><img src="//static.screeps.com/upload/mineral-icons/XUHO2.png" alt=""> catalyzed utrium alkalide</td>
+<td>萃奥纯碱</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<h2 id="商品" class="article-heading"><a href="#商品" class="headerlink" title="商品"></a>商品<a class="article-anchor" href="#商品" aria-hidden="true"></a></h2><blockquote class="note info"><p><strong>从哪里获取:</strong> 高速公路房间中的 <a href="/api/#StructurePowerBank"><code>Deposit</code></a> 结构. <br>
+<strong>怎么样获取:</strong> 派遣一个包含 <code>WORK</code> 身体部件的 creep 来 <a href="/api/#Creep.harvest"><code>采集</code></a> 它。<br>
+<strong>用来干什么:</strong> 生产交易商品来赚取积分 (credits)。</p>
+</blockquote> 
+<p>商品是 NPC 市场交易者最感兴趣的资源。这些资源除了被出售和赚取 credits 外没有其他任何作用。 生产高级商品是游戏中最赚钱的业务。</p>
+<h3 id="采集" class="article-heading"><a href="#采集" class="headerlink" title="采集"></a>采集<a class="article-anchor" href="#采集" aria-hidden="true"></a></h3><p>您可以从“高速公路”房间中的沉积物中提取原始资源，“高速公路”是指地图上不同区域之间的房间。有4种原始资源：金属(Metal)，硅(Silicon)，生物质(Biomass)，迷雾(Mist)。 它们在世界地图上并不是均匀分布的：每个地图象限（西北，东北，西南，东南）一种资源类型。</p>
+<p><img src="img/commodities.png" alt=""></p>
+<p>与矿物不同，这些沉积物(deposits)在采集(harvest)时会耗尽：采集的数量越多，其冷却时间也就越长。当您停止采集一段时间后，沉积物将会消失并重新出现在附近的其他地方。此外，如果某区块的沉积物都被消耗到一定水平之下，则会出现新的沉积物。</p>
+<h3 id="基础商品" class="article-heading"><a href="#基础商品" class="headerlink" title="基础商品"></a>基础商品<a class="article-anchor" href="#基础商品" aria-hidden="true"></a></h3><p>出售原始资源可能不是很赚钱。这就是为什么最好建造一个 <a href="/api/#StructureFactory"><strong>工厂(Factory)</strong></a> (在 RCL 7 时解锁)，以便 <a href="/api/#StructureFactory.produce">生产(<code>produce</code>)</a> 更复杂的商品的原因。</p>
+<p>刚刚建立的工厂是没有等级的，这意味着它只能从各种现有资源中生产几种基本商品（下表中的“每一级”商品）。它们还可以用于以“压缩”任何资源。</p>
+<div class="collapsible-table">
+
+<div class="collapsible-table__header">
+<i class="fa fa-plus-square"></i>
+<span>压缩商品</span>
+<em>(点击展开)</em>
+<img src="img/commodities1.png" alt="">
+</div>
+
+<div class="collapsible-table__content"> 
+<table class="commodities">
+<tbody>
+<tr class="commodities__head">
+<th>产品</th><th>工厂等级</th><th>材料</th><th>冷却</th>
+</tr> 
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/utrium_bar.png">Utrium bar&nbsp;&times;&nbsp;<em>100</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/U.png" alt="">Utrium&nbsp;&times;&nbsp;<em>500</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/lemergium_bar.png">Lemergium bar&nbsp;&times;&nbsp;<em>100</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/L.png" alt="">Lemergium&nbsp;&times;&nbsp;<em>500</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/zynthium_bar.png">Zynthium bar&nbsp;&times;&nbsp;<em>100</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/Z.png" alt="">Zynthium&nbsp;&times;&nbsp;<em>500</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/keanium_bar.png">Keanium bar&nbsp;&times;&nbsp;<em>100</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/K.png" alt="">Keanium&nbsp;&times;&nbsp;<em>500</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/ghodium_melt.png">Ghodium melt&nbsp;&times;&nbsp;<em>100</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/G.png" alt="">Ghodium&nbsp;&times;&nbsp;<em>500</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/oxidant.png">Oxidant&nbsp;&times;&nbsp;<em>100</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/O.png" alt="">Oxygen&nbsp;&times;&nbsp;<em>500</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/reductant.png">Reductant&nbsp;&times;&nbsp;<em>100</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/H.png" alt="">Hydrogen&nbsp;&times;&nbsp;<em>500</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/purifier.png">Purifier&nbsp;&times;&nbsp;<em>100</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/X.png" alt="">Catalyst&nbsp;&times;&nbsp;<em>500</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/battery.png">Battery&nbsp;&times;&nbsp;<em>50</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>600</em></td><td>10&nbsp;ticks</td></tr>
+</tbody>
+</table>
+
+</div>
+</div>
+
+<p>您也可以在需要时解压它们来恢复原始资源。</p>
+ <div class="collapsible-table">
+
+ <div class="collapsible-table__header">
+ <i class="fa fa-plus-square"></i>
+ <span>解压商品</span>
+ <em>(点击展开)</em>
+ <img src="img/commodities2.png" alt="">
+ </div>
+
+ <div class="collapsible-table__content">
+ <table class="commodities">
+ <tr class="commodities__head"><th>产品</th><th>工厂等级</th><th>材料</th><th>冷却</th></tr> 
+ <tr><td><img src="//static.screeps.com/upload/mineral-icons/U.png" alt="">Utrium&nbsp;&times;&nbsp;<em>500</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/utrium_bar.png">Utrium bar&nbsp;&times;&nbsp;<em>100</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+ <tr><td><img src="//static.screeps.com/upload/mineral-icons/L.png" alt="">Lemergium&nbsp;&times;&nbsp;<em>500</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/lemergium_bar.png">Lemergium bar&nbsp;&times;&nbsp;<em>100</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+ <tr><td><img src="//static.screeps.com/upload/mineral-icons/Z.png" alt="">Zynthium&nbsp;&times;&nbsp;<em>500</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/zynthium_bar.png">Zynthium bar&nbsp;&times;&nbsp;<em>100</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+ <tr><td><img src="//static.screeps.com/upload/mineral-icons/K.png" alt="">Keanium&nbsp;&times;&nbsp;<em>500</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/keanium_bar.png">Keanium bar&nbsp;&times;&nbsp;<em>100</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+ <tr><td><img src="//static.screeps.com/upload/mineral-icons/G.png" alt="">Ghodium&nbsp;&times;&nbsp;<em>500</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/ghodium_melt.png">Ghodium melt&nbsp;&times;&nbsp;<em>100</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+ <tr><td><img src="//static.screeps.com/upload/mineral-icons/O.png" alt="">Oxygen&nbsp;&times;&nbsp;<em>500</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/oxidant.png">Oxidant&nbsp;&times;&nbsp;<em>100</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+ <tr><td><img src="//static.screeps.com/upload/mineral-icons/H.png" alt="">Hydrogen&nbsp;&times;&nbsp;<em>500</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/reductant.png">Reductant&nbsp;&times;&nbsp;<em>100</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+ <tr><td><img src="//static.screeps.com/upload/mineral-icons/X.png" alt="">Catalyst&nbsp;&times;&nbsp;<em>500</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/purifier.png">Purifier&nbsp;&times;&nbsp;<em>100</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>200</em></td><td>20&nbsp;ticks</td></tr>
+ <tr><td><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>500</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/battery.png">Battery&nbsp;&times;&nbsp;<em>50</em></td><td>10&nbsp;ticks</td></tr>
+ </table> 
+
+ </div>
+ </div>
+
+<p>当您获得区域性沉积资源后，您就可以开始使用他们来生产其他基本商品。</p>
+<div class="collapsible-table">
+
+<div class="collapsible-table__header">
+<i class="fa fa-plus-square"></i>
+<span>基本区域性商品</span>
+<em>(点击展开)</em>
+<img src="img/commodities3.png" alt="">
+</div>
+
+<div class="collapsible-table__content">
+<table class="commodities">
+<tr class="commodities__head"><th>产品</th><th>工厂等级</th><th>材料</th><th>冷却</th></tr> 
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/wire.png">Wire&nbsp;&times;&nbsp;<em>20</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/utrium_bar.png">Utrium bar&nbsp;&times;&nbsp;<em>20</em><br><img src="//static.screeps.com/upload/mineral-icons/silicon.png">Silicon&nbsp;&times;&nbsp;<em>100</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>40</em></td><td>8&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/cell.png">Cell&nbsp;&times;&nbsp;<em>20</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/lemergium_bar.png">Lemergium bar&nbsp;&times;&nbsp;<em>20</em><br><img src="//static.screeps.com/upload/mineral-icons/biomass.png">Biomass&nbsp;&times;&nbsp;<em>100</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>40</em></td><td>8&nbsp;ticks</td>
+</tr><tr><td><img src="//static.screeps.com/upload/mineral-icons/alloy.png">Alloy&nbsp;&times;&nbsp;<em>20</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/zynthium_bar.png">Zynthium bar&nbsp;&times;&nbsp;<em>20</em><br><img src="//static.screeps.com/upload/mineral-icons/metal.png">Metal&nbsp;&times;&nbsp;<em>100</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>40</em></td><td>8&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/condensate.png">Condensate&nbsp;&times;&nbsp;<em>20</em></td><td>全等级通用</td><td><img src="//static.screeps.com/upload/mineral-icons/keanium_bar.png">Keanium bar&nbsp;&times;&nbsp;<em>20</em><br><img src="//static.screeps.com/upload/mineral-icons/mist.png">Mist&nbsp;&times;&nbsp;<em>100</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>40</em></td><td>8&nbsp;ticks</td></tr>
+</table>
+</div>
+</div>
+
+<p>上述的所有商品都可以从任何等级的工厂中生产。</p>
+<h3 id="高级商品" class="article-heading"><a href="#高级商品" class="headerlink" title="高级商品"></a>高级商品<a class="article-anchor" href="#高级商品" aria-hidden="true"></a></h3><p>只有 <a href="power.html#Power-Creeps">操作员(Operators)</a> 和它的 <code>OPERATE_FACTORY</code> 能力才能使工厂全功率运作。
+当一个操作员对一个没有等级的工厂使用了他的能力后，工厂的等级就会被锁定到和能力相同的等级，并且超能效果会停留在工厂上。
+该能力会使得工厂可以生产对应等级的商品。
+即工厂只能生产该等级的商品或者”全等级通用“商品。
+一旦进行了设置，该工厂的等级将无法被修改。
+当效果持续时间结束后，工厂将不再工作，但是其等级依旧会保留（依旧可以生产”全等级通用“商品）。
+此时您就需要使用操作员使用相同等级的能力来重新激活它。
+注意，工厂的等级无法被其他等级的超能修改，只有重新建造才能改变工厂的等级。</p>
+<p>每一个高等级的商品都需要其对应产业链上的低等级产品才能进行生产。游戏里一共有四条产业链，每种类型的新资源对应其中的一条：
+<strong>机械(Mechanical)</strong> (消耗金属), <strong>电子(Electronical)</strong> (消耗硅), <strong>生物(Biological)</strong> (消耗生物质), <strong>奥秘(Mystical)</strong> (消耗迷雾), 以及常规商品。 
+这些货物是市场上最值钱。</p>
+<div class="collapsible-table">
+<div class="collapsible-table__header">
+<i class="fa fa-plus-square"></i>
+<span>常规高等商品</span>
+<em>(点击展开)</em>
+<img src="img/commodities4.png" alt="">
+</div>
+
+<div class="collapsible-table__content">
+<table class="commodities">
+<tr class="commodities__head"><th>产品</th><th>工厂等级</th><th>材料</th><th>冷却</th></tr> 
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/composite.png">Composite&nbsp;&times;&nbsp;<em>20</em></td><td>Lvl 1</td><td><img src="//static.screeps.com/upload/mineral-icons/utrium_bar.png">Utrium bar&nbsp;&times;&nbsp;<em>20</em><br><img src="//static.screeps.com/upload/mineral-icons/zynthium_bar.png">Zynthium bar&nbsp;&times;&nbsp;<em>20</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>20</em></td><td>50&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/crystal.png">Crystal&nbsp;&times;&nbsp;<em>6</em></td><td>Lvl 2</td><td><img src="//static.screeps.com/upload/mineral-icons/lemergium_bar.png">Lemergium bar&nbsp;&times;&nbsp;<em>6</em><br><img src="//static.screeps.com/upload/mineral-icons/keanium_bar.png">Keanium bar&nbsp;&times;&nbsp;<em>6</em><br><img src="//static.screeps.com/upload/mineral-icons/purifier.png">Purifier&nbsp;&times;&nbsp;<em>6</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>45</em></td><td>21&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/liquid.png">Liquid&nbsp;&times;&nbsp;<em>12</em></td><td>Lvl 3</td><td><img src="//static.screeps.com/upload/mineral-icons/oxidant.png">Oxidant&nbsp;&times;&nbsp;<em>12</em><br><img src="//static.screeps.com/upload/mineral-icons/reductant.png">Reductant&nbsp;&times;&nbsp;<em>12</em><br><img src="//static.screeps.com/upload/mineral-icons/ghodium_melt.png">Ghodium melt&nbsp;&times;&nbsp;<em>12</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>90</em></td><td>60&nbsp;ticks</td></tr>
+</table>
+</div>
+</div>
+
+<div class="collapsible-table">
+<div class="collapsible-table__header">
+<i class="fa fa-plus-square"></i>
+<span>机械 (Mechanical) 产业链</span>
+<em>(点击展开)</em>
+<img src="img/commodities5.png" alt="">
+</div>
+
+<div class="collapsible-table__content">
+<table class="commodities">
+<tr class="commodities__head"><th>产品</th><th>工厂等级</th><th>材料</th><th>冷却</th></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/tube.png">Tube&nbsp;&times;&nbsp;<em>2</em></td><td>Lvl 1</td><td><img src="//static.screeps.com/upload/mineral-icons/alloy.png">Alloy&nbsp;&times;&nbsp;<em>40</em><br><img src="//static.screeps.com/upload/mineral-icons/zynthium_bar.png">Zynthium bar&nbsp;&times;&nbsp;<em>16</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>8</em></td><td>45&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/fixtures.png">Fixtures</td><td>Lvl 2</td><td><img src="//static.screeps.com/upload/mineral-icons/composite.png">Composite&nbsp;&times;&nbsp;<em>20</em><br><img src="//static.screeps.com/upload/mineral-icons/alloy.png">Alloy&nbsp;&times;&nbsp;<em>41</em><br><img src="//static.screeps.com/upload/mineral-icons/oxidant.png">Oxidant&nbsp;&times;&nbsp;<em>161</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>8</em></td><td>115&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/frame.png">Frame</td><td>Lvl 3</td><td><img src="//static.screeps.com/upload/mineral-icons/fixtures.png">Fixtures&nbsp;&times;&nbsp;<em>2</em><br><img src="//static.screeps.com/upload/mineral-icons/tube.png">Tube&nbsp;&times;&nbsp;<em>4</em><br><img src="//static.screeps.com/upload/mineral-icons/reductant.png">Reductant&nbsp;&times;&nbsp;<em>330</em><br><img src="//static.screeps.com/upload/mineral-icons/zynthium_bar.png">Zynthium bar&nbsp;&times;&nbsp;<em>31</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>16</em></td><td>125&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/hydraulics.png">Hydraulics</td><td>Lvl 4</td><td><img src="//static.screeps.com/upload/mineral-icons/liquid.png">Liquid&nbsp;&times;&nbsp;<em>150</em><br><img src="//static.screeps.com/upload/mineral-icons/fixtures.png">Fixtures&nbsp;&times;&nbsp;<em>3</em><br><img src="//static.screeps.com/upload/mineral-icons/tube.png">Tube&nbsp;&times;&nbsp;<em>15</em><br><img src="//static.screeps.com/upload/mineral-icons/purifier.png">Purifier&nbsp;&times;&nbsp;<em>208</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>32</em></td><td>800&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/machine.png">Machine</td><td>Lvl 5</td><td><img src="//static.screeps.com/upload/mineral-icons/hydraulics.png">Hydraulics&nbsp;&times;&nbsp;<em>1</em><br><img src="//static.screeps.com/upload/mineral-icons/frame.png">Frame&nbsp;&times;&nbsp;<em>2</em><br><img src="//static.screeps.com/upload/mineral-icons/fixtures.png">Fixtures&nbsp;&times;&nbsp;<em>3</em><br><img src="//static.screeps.com/upload/mineral-icons/tube.png">Tube&nbsp;&times;&nbsp;<em>12</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>64</em></td><td>600&nbsp;ticks</td></tr>
+</table>
+</div>
+</div>
+
+<div class="collapsible-table">
+<div class="collapsible-table__header">
+<i class="fa fa-plus-square"></i>
+<span>生物 (Biological) 产业链</span>
+<em>(点击展开)</em>
+<img src="img/commodities6.png" alt="">
+</div>
+
+<div class="collapsible-table__content">
+<table class="commodities">
+<tr class="commodities__head"><th>产品</th><th>工厂等级</th><th>材料</th><th>冷却</th></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/phlegm.png">Phlegm&nbsp;&times;&nbsp;<em>2</em></td><td>Lvl 1</td><td><img src="//static.screeps.com/upload/mineral-icons/cell.png">Cell&nbsp;&times;&nbsp;<em>20</em><br><img src="//static.screeps.com/upload/mineral-icons/oxidant.png">Oxidant&nbsp;&times;&nbsp;<em>36</em><br><img src="//static.screeps.com/upload/mineral-icons/lemergium_bar.png">Lemergium bar&nbsp;&times;&nbsp;<em>16</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>8</em></td><td>35&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/tissue.png">Tissue&nbsp;&times;&nbsp;<em>2</em></td><td>Lvl 2</td><td><img src="//static.screeps.com/upload/mineral-icons/phlegm.png">Phlegm&nbsp;&times;&nbsp;<em>10</em><br><img src="//static.screeps.com/upload/mineral-icons/cell.png">Cell&nbsp;&times;&nbsp;<em>10</em><br><img src="//static.screeps.com/upload/mineral-icons/reductant.png">Reductant&nbsp;&times;&nbsp;<em>110</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>16</em></td><td>164&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/muscle.png">Muscle</td><td>Lvl 3</td><td><img src="//static.screeps.com/upload/mineral-icons/tissue.png">Tissue&nbsp;&times;&nbsp;<em>3</em><br><img src="//static.screeps.com/upload/mineral-icons/phlegm.png">Phlegm&nbsp;&times;&nbsp;<em>3</em><br><img src="//static.screeps.com/upload/mineral-icons/zynthium_bar.png">Zynthium bar&nbsp;&times;&nbsp;<em>50</em><br><img src="//static.screeps.com/upload/mineral-icons/reductant.png">Reductant&nbsp;&times;&nbsp;<em>50</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>16</em></td><td>250&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/organoid.png">Organoid</td><td>Lvl 4</td><td><img src="//static.screeps.com/upload/mineral-icons/muscle.png">Muscle&nbsp;&times;&nbsp;<em>1</em><br><img src="//static.screeps.com/upload/mineral-icons/tissue.png">Tissue&nbsp;&times;&nbsp;<em>5</em><br><img src="//static.screeps.com/upload/mineral-icons/purifier.png">Purifier&nbsp;&times;&nbsp;<em>208</em><br><img src="//static.screeps.com/upload/mineral-icons/oxidant.png">Oxidant&nbsp;&times;&nbsp;<em>256</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>32</em></td><td>800&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/organism.png">Organism</td><td>Lvl 5</td><td><img src="//static.screeps.com/upload/mineral-icons/organoid.png">Organoid&nbsp;&times;&nbsp;<em>1</em><br><img src="//static.screeps.com/upload/mineral-icons/liquid.png">Liquid&nbsp;&times;&nbsp;<em>150</em><br><img src="//static.screeps.com/upload/mineral-icons/tissue.png">Tissue&nbsp;&times;&nbsp;<em>6</em><br><img src="//static.screeps.com/upload/mineral-icons/cell.png">Cell&nbsp;&times;&nbsp;<em>310</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>64</em></td><td>600&nbsp;ticks</td></tr>
+</table>
+</div>
+</div>
+
+<div class="collapsible-table">
+<div class="collapsible-table__header">
+<i class="fa fa-plus-square"></i>
+<span>电子 (Electronical) 产业链</span>
+<em>(点击展开)</em>
+<img src="img/commodities7.png" alt="">
+</div>
+
+<div class="collapsible-table__content">
+<table class="commodities">
+<tr class="commodities__head"><th>产品</th><th>工厂等级</th><th>材料</th><th>冷却</th></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/switch.png">Switch&nbsp;&times;&nbsp;<em>5</em></td><td>Lvl 1</td><td><img src="//static.screeps.com/upload/mineral-icons/wire.png">Wire&nbsp;&times;&nbsp;<em>40</em><br><img src="//static.screeps.com/upload/mineral-icons/oxidant.png">Oxidant&nbsp;&times;&nbsp;<em>95</em><br><img src="//static.screeps.com/upload/mineral-icons/utrium_bar.png">Utrium bar&nbsp;&times;&nbsp;<em>35</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>20</em></td><td>70&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/transistor.png">Transistor</td><td>Lvl 2</td><td><img src="//static.screeps.com/upload/mineral-icons/switch.png">Switch&nbsp;&times;&nbsp;<em>4</em><br><img src="//static.screeps.com/upload/mineral-icons/wire.png">Wire&nbsp;&times;&nbsp;<em>15</em><br><img src="//static.screeps.com/upload/mineral-icons/reductant.png">Reductant&nbsp;&times;&nbsp;<em>85</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>8</em></td><td>59&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/microchip.png">Microchip</td><td>Lvl 3</td><td><img src="//static.screeps.com/upload/mineral-icons/transistor.png">Transistor&nbsp;&times;&nbsp;<em>2</em><br><img src="//static.screeps.com/upload/mineral-icons/composite.png">Composite&nbsp;&times;&nbsp;<em>50</em><br><img src="//static.screeps.com/upload/mineral-icons/wire.png">Wire&nbsp;&times;&nbsp;<em>117</em><br><img src="//static.screeps.com/upload/mineral-icons/purifier.png">Purifier&nbsp;&times;&nbsp;<em>25</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>16</em></td><td>250&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/circuit.png">Circuit</td><td>Lvl 4</td><td><img src="//static.screeps.com/upload/mineral-icons/microchip.png">Microchip&nbsp;&times;&nbsp;<em>1</em><br><img src="//static.screeps.com/upload/mineral-icons/transistor.png">Transistor&nbsp;&times;&nbsp;<em>5</em><br><img src="//static.screeps.com/upload/mineral-icons/switch.png">Switch&nbsp;&times;&nbsp;<em>4</em><br><img src="//static.screeps.com/upload/mineral-icons/oxidant.png">Oxidant&nbsp;&times;&nbsp;<em>115</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>32</em></td><td>800&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/device.png">Device</td><td>Lvl 5</td><td><img src="//static.screeps.com/upload/mineral-icons/circuit.png">Circuit&nbsp;&times;&nbsp;<em>1</em><br><img src="//static.screeps.com/upload/mineral-icons/microchip.png">Microchip&nbsp;&times;&nbsp;<em>3</em><br><img src="//static.screeps.com/upload/mineral-icons/crystal.png">Crystal&nbsp;&times;&nbsp;<em>110</em><br><img src="//static.screeps.com/upload/mineral-icons/ghodium_melt.png">Ghodium melt&nbsp;&times;&nbsp;<em>150</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>64</em></td><td>600&nbsp;ticks</td></tr>
+</table>
+</div>
+</div>
+
+<div class="collapsible-table">
+<div class="collapsible-table__header">
+<i class="fa fa-plus-square"></i>
+<span>奥秘 (Mystical) 产业链</span>
+<em>(点击展开)</em>
+<img src="img/commodities8.png" alt="">
+</div>
+
+<div class="collapsible-table__content">
+<table class="commodities">
+<tr class="commodities__head"><th>产品</th><th>工厂等级</th><th>材料</th><th>冷却</th></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/concentrate.png">Concentrate&nbsp;&times;&nbsp;<em>3</em></td><td>Lvl 1</td><td><img src="//static.screeps.com/upload/mineral-icons/condensate.png">Condensate&nbsp;&times;&nbsp;<em>30</em><br><img src="//static.screeps.com/upload/mineral-icons/keanium_bar.png">Keanium bar&nbsp;&times;&nbsp;<em>15</em><br><img src="//static.screeps.com/upload/mineral-icons/reductant.png">Reductant&nbsp;&times;&nbsp;<em>54</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>12</em></td><td>41&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/extract.png">Extract&nbsp;&times;&nbsp;<em>2</em></td><td>Lvl 2</td><td><img src="//static.screeps.com/upload/mineral-icons/concentrate.png">Concentrate&nbsp;&times;&nbsp;<em>10</em><br><img src="//static.screeps.com/upload/mineral-icons/condensate.png">Condensate&nbsp;&times;&nbsp;<em>30</em><br><img src="//static.screeps.com/upload/mineral-icons/oxidant.png">Oxidant&nbsp;&times;&nbsp;<em>60</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>16</em></td><td>128&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/spirit.png">Spirit</td><td>Lvl 3</td><td><img src="//static.screeps.com/upload/mineral-icons/extract.png">Extract&nbsp;&times;&nbsp;<em>2</em><br><img src="//static.screeps.com/upload/mineral-icons/concentrate.png">Concentrate&nbsp;&times;&nbsp;<em>6</em><br><img src="//static.screeps.com/upload/mineral-icons/reductant.png">Reductant&nbsp;&times;&nbsp;<em>90</em><br><img src="//static.screeps.com/upload/mineral-icons/purifier.png">Purifier&nbsp;&times;&nbsp;<em>20</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>16</em></td><td>200&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/emanation.png">Emanation</td><td>Lvl 4</td><td><img src="//static.screeps.com/upload/mineral-icons/spirit.png">Spirit&nbsp;&times;&nbsp;<em>2</em><br><img src="//static.screeps.com/upload/mineral-icons/extract.png">Extract&nbsp;&times;&nbsp;<em>2</em><br><img src="//static.screeps.com/upload/mineral-icons/concentrate.png">Concentrate&nbsp;&times;&nbsp;<em>3</em><br><img src="//static.screeps.com/upload/mineral-icons/keanium_bar.png">Keanium bar&nbsp;&times;&nbsp;<em>112</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>32</em></td><td>800&nbsp;ticks</td></tr>
+<tr><td><img src="//static.screeps.com/upload/mineral-icons/essence.png">Essence</td><td>Lvl 5</td><td><img src="//static.screeps.com/upload/mineral-icons/emanation.png">Emanation&nbsp;&times;&nbsp;<em>1</em><br><img src="//static.screeps.com/upload/mineral-icons/spirit.png">Spirit&nbsp;&times;&nbsp;<em>3</em><br><img src="//static.screeps.com/upload/mineral-icons/crystal.png">Crystal&nbsp;&times;&nbsp;<em>110</em><br><img src="//static.screeps.com/upload/mineral-icons/ghodium_melt.png">Ghodium melt&nbsp;&times;&nbsp;<em>150</em><br><img src="//static.screeps.com/upload/mineral-icons/energy.png">Energy&nbsp;&times;&nbsp;<em>64</em></td><td>600&nbsp;ticks</td></tr>
+</table>
+</div>
+</div>
+
+
+<h2 id="超能" class="article-heading"><a href="#超能" class="headerlink" title="超能"></a>超能<a class="article-anchor" href="#超能" aria-hidden="true"></a></h2><blockquote class="note info"><p><strong>从哪里获取:</strong> &quot;高速公路&quot;房间中的 <a href="/api/#StructurePowerBank"><code>StructurePowerBank</code></a> 建筑. <br>
+<strong>怎么样获取:</strong> 摧毁该结构并搜刮掉落的资源<br>
+<strong>用来干什么:</strong> 创造超能 creep。</p>
+</blockquote> 
+<p>查看该文章来了解更多信息: <a href="power.html">超能</a>.</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2024-09-20T13:38:58.408Z" itemprop="dateModified">上次更新：9月 20, 2024</time>
+                <a href="/start-areas.html" class="article-footer-prev"><i class="fa fa-chevron-left"></i><span>初始区域</span></a><a href="/market.html" class="article-footer-next"><span>市场</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#能量"><span class="toc-text">能量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#矿物"><span class="toc-text">矿物</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本元素开采"><span class="toc-text">基本元素开采</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#矿物合成"><span class="toc-text">矿物合成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Creep-强化"><span class="toc-text">Creep 强化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#商品"><span class="toc-text">商品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#采集"><span class="toc-text">采集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基础商品"><span class="toc-text">基础商品</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高级商品"><span class="toc-text">高级商品</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#超能"><span class="toc-text">超能</span></a></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+            
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="sidebar-link">总览</a><strong class="sidebar-title">游戏环境</strong><a href="/introduction.html" class="sidebar-link">简介</a><a href="/creeps.html" class="sidebar-link">Creeps</a><a href="/control.html" class="sidebar-link">控制</a><a href="/defense.html" class="sidebar-link">防御</a><a href="/respawn.html" class="sidebar-link">重生</a><a href="/start-areas.html" class="sidebar-link">初始区域</a><a href="/resources.html" class="sidebar-link current">资源</a><a href="/market.html" class="sidebar-link">市场</a><a href="/invaders.html" class="sidebar-link">NPC 入侵者</a><a href="/power.html" class="sidebar-link">超能</a><strong class="sidebar-title">脚本</strong><a href="/scripting-basics.html" class="sidebar-link">脚本基础</a><a href="/global-objects.html" class="sidebar-link">全局对象</a><a href="/modules.html" class="sidebar-link">模块</a><a href="/debugging.html" class="sidebar-link">调试</a><a href="/game-loop.html" class="sidebar-link">游戏循环</a><a href="/commit.html" class="sidebar-link">外部提交</a><a href="/simultaneous-actions.html" class="sidebar-link">同步操作</a><a href="/cpu-limit.html" class="sidebar-link">CPU 限制</a><strong class="sidebar-title">其他</strong><a href="/architecture.html" class="sidebar-link">服务器架构</a><a href="/ptr.html" class="sidebar-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="sidebar-link">第三方工具</a><a href="/auth-tokens.html" class="sidebar-link">验证令牌</a><a href="/community-servers.html" class="sidebar-link">社区服务器</a><a href="/tos.html" class="sidebar-link">服务条款</a><a href="/privacy-policy.html" class="sidebar-link">隐私政策</a><strong class="sidebar-title">资源</strong><a href="http://blog.screeps.com" class="sidebar-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="sidebar-link">修改日志</a><a href="http://chat.screeps.com" class="sidebar-link">聊天室</a><a href="https://screeps.com/forum/" class="sidebar-link">论坛</a><strong class="sidebar-title">贡献文章</strong><a href="/contributed/rules.html" class="sidebar-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="sidebar-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="sidebar-link">修改原型</a><a href="/contributed/caching-overview.html" class="sidebar-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="sidebar-link">私有服务器 MongoDB</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2024 <a href="https://screeps.com/" target="_blank">Screeps</a><br>
+      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
+    </div>
+    <div id="footer-links">
+      <a href="https://github.com/screeps-cn/docs" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    
+      <a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="mobile-nav-link">总览</a><strong class="mobile-nav-title">游戏环境</strong><a href="/introduction.html" class="mobile-nav-link">简介</a><a href="/creeps.html" class="mobile-nav-link">Creeps</a><a href="/control.html" class="mobile-nav-link">控制</a><a href="/defense.html" class="mobile-nav-link">防御</a><a href="/respawn.html" class="mobile-nav-link">重生</a><a href="/start-areas.html" class="mobile-nav-link">初始区域</a><a href="/resources.html" class="mobile-nav-link current">资源</a><a href="/market.html" class="mobile-nav-link">市场</a><a href="/invaders.html" class="mobile-nav-link">NPC 入侵者</a><a href="/power.html" class="mobile-nav-link">超能</a><strong class="mobile-nav-title">脚本</strong><a href="/scripting-basics.html" class="mobile-nav-link">脚本基础</a><a href="/global-objects.html" class="mobile-nav-link">全局对象</a><a href="/modules.html" class="mobile-nav-link">模块</a><a href="/debugging.html" class="mobile-nav-link">调试</a><a href="/game-loop.html" class="mobile-nav-link">游戏循环</a><a href="/commit.html" class="mobile-nav-link">外部提交</a><a href="/simultaneous-actions.html" class="mobile-nav-link">同步操作</a><a href="/cpu-limit.html" class="mobile-nav-link">CPU 限制</a><strong class="mobile-nav-title">其他</strong><a href="/architecture.html" class="mobile-nav-link">服务器架构</a><a href="/ptr.html" class="mobile-nav-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="mobile-nav-link">第三方工具</a><a href="/auth-tokens.html" class="mobile-nav-link">验证令牌</a><a href="/community-servers.html" class="mobile-nav-link">社区服务器</a><a href="/tos.html" class="mobile-nav-link">服务条款</a><a href="/privacy-policy.html" class="mobile-nav-link">隐私政策</a><strong class="mobile-nav-title">资源</strong><a href="http://blog.screeps.com" class="mobile-nav-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="mobile-nav-link">修改日志</a><a href="http://chat.screeps.com" class="mobile-nav-link">聊天室</a><a href="https://screeps.com/forum/" class="mobile-nav-link">论坛</a><strong class="mobile-nav-title">贡献文章</strong><a href="/contributed/rules.html" class="mobile-nav-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="mobile-nav-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="mobile-nav-link">修改原型</a><a href="/contributed/caching-overview.html" class="mobile-nav-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="mobile-nav-link">私有服务器 MongoDB</a>
+    
+  </div>
+</nav>
+  <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/scrollingelement.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/custom.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+</body>
+</html>

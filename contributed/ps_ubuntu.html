@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>Ubuntu 上使用 MongoDB 和 Redis 搭建私人服务器 | Screeps 中文文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://screeps-cn.github.io/contributed/ps_ubuntu.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="http://screeps-cn.github.io/contributed/ps_ubuntu.html">
+    
+      <link rel="alternative" hreflang="zh-tw" href="http://screeps-cn.github.io/zh-tw/contributed/ps_ubuntu.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="http://screeps-cn.github.io/zh-cn/contributed/ps_ubuntu.html">
+    
+      <link rel="alternative" hreflang="ru" href="http://screeps-cn.github.io/ru/contributed/ps_ubuntu.html">
+    
+      <link rel="alternative" hreflang="ko" href="http://screeps-cn.github.io/ko/contributed/ps_ubuntu.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/css/navy.css?1">
+  <link rel="stylesheet" href="/css/prism.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Screeps 中文文档">
+  <!-- Open Graph -->
+  <meta name="description" content="Screeps 游戏引擎是 开源 的, 因此允许任何人自己运行私人服务器。 Screeps 的 Steam 客户端甚至提供了一套工具以简化创建私人服务器的步骤
+对于想要运行没有桌面环境系统(比如在 Linode 或是 AWS 上运行)的玩家, 需要一些额外的工作才能获得一个稳定的服务器, 特别是内建的 LokiJS 引擎不能很好地随着时间推移扩展。这篇教程会知道您使用 MongoDB 和 Redi">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ubuntu 上使用 MongoDB 和 Redis 搭建私人服务器">
+<meta property="og:url" content="http://screeps-cn.github.io/contributed/ps_ubuntu.html">
+<meta property="og:site_name" content="Screeps 中文文档">
+<meta property="og:description" content="Screeps 游戏引擎是 开源 的, 因此允许任何人自己运行私人服务器。 Screeps 的 Steam 客户端甚至提供了一套工具以简化创建私人服务器的步骤
+对于想要运行没有桌面环境系统(比如在 Linode 或是 AWS 上运行)的玩家, 需要一些额外的工作才能获得一个稳定的服务器, 特别是内建的 LokiJS 引擎不能很好地随着时间推移扩展。这篇教程会知道您使用 MongoDB 和 Redi">
+<meta property="og:updated_time" content="2024-09-20T13:38:58.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu 上使用 MongoDB 和 Redis 搭建私人服务器">
+<meta name="twitter:description" content="Screeps 游戏引擎是 开源 的, 因此允许任何人自己运行私人服务器。 Screeps 的 Steam 客户端甚至提供了一套工具以简化创建私人服务器的步骤
+对于想要运行没有桌面环境系统(比如在 Linode 或是 AWS 上运行)的玩家, 需要一些额外的工作才能获得一个稳定的服务器, 特别是内建的 LokiJS 引擎不能很好地随着时间推移扩展。这篇教程会知道您使用 MongoDB 和 Redi">
+  <!-- Google Analytics -->
+  
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="https://screeps.com" id="logo">Screeps</a>
+      <a href="/index.html" id="logo-docs">docs</a>
+    </h1>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+    <div id="header-main"></div>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name" id="top">Ubuntu 上使用 MongoDB 和 Redis 搭建私人服务器</h1>
+                <a href="https://github.com/screeps-cn/docs/edit/master/source/contributed/ps_ubuntu.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                
+                <p>Screeps 游戏引擎是 <a href="https://github.com/screeps/screeps" target="_blank" rel="external">开源</a> 的, 因此允许任何人自己运行私人服务器。 Screeps 的 Steam 客户端甚至提供了一套工具以简化创建私人服务器的步骤</p>
+<p>对于想要运行没有桌面环境系统(比如在 Linode 或是 AWS 上运行)的玩家, 需要一些额外的工作才能获得一个稳定的服务器, 特别是内建的 LokiJS 引擎不能很好地随着时间推移扩展。这篇教程会知道您使用 MongoDB 和 Redis 在专有环境中安装 Screeps。</p>
+<h2 id="先决条件" class="article-heading"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件<a class="article-anchor" href="#先决条件" aria-hidden="true"></a></h2><h3 id="服务器" class="article-heading"><a href="#服务器" class="headerlink" title="服务器"></a>服务器<a class="article-anchor" href="#服务器" aria-hidden="true"></a></h3><p>这篇文章假设用户运行 Ubuntu 16。建议服务器至少有两个 CPU 内核和 2GB 内存, 尽管对于单个用户和几个 bot 来说，单核并拥有 2GB 内存的机器会在合理的 tick 速度运行
+由于系统往往非常占用 CPU, 因此建议您避免使用不提供常量 CPU 的 &quot;burstable&quot; 服务器, 比如 AWS t2 系列。</p>
+<h3 id="构建工具" class="article-heading"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具<a class="article-anchor" href="#构建工具" aria-hidden="true"></a></h3><p>以下步骤将需要一些常见的构建和开发工具，我们将在此处安装。</p>
+<pre class="highlight shell tab-shell "><code>sudo apt install <span class="token operator">-</span>y build<span class="token operator">-</span>essential tcl git</code></pre><h3 id="安装-Node-js" class="article-heading"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js<a class="article-anchor" href="#安装-Node-js" aria-hidden="true"></a></h3><p>主要游戏世界在 Node.js 8 上运行, 但是 Ubuntu 只提供了一个更老的版本, Node.js 6。幸运的是, 我们可以使用另一个 apt 存储库来获得最新版本</p>
+<pre class="highlight shell tab-shell "><code>curl <span class="token operator">-</span>sL https<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>deb<span class="token punctuation">.</span>nodesource<span class="token punctuation">.</span>com<span class="token operator">/</span>setup_8<span class="token punctuation">.</span>x <span class="token operator">|</span> sudo <span class="token operator">-</span>E bash <span class="token operator">-</span>
+sudo apt install <span class="token operator">-</span>y nodejs</code></pre><h3 id="安装-MongoDB" class="article-heading"><a href="#安装-MongoDB" class="headerlink" title="安装 MongoDB"></a>安装 MongoDB<a class="article-anchor" href="#安装-MongoDB" aria-hidden="true"></a></h3><p>Ubuntu 存储库中的 MongoDB 版本非常老。 MongoDB维护一个包含更新版本的apt存储库, 因此第一步是配置它。</p>
+<pre class="highlight shell tab-shell "><code>sudo apt<span class="token operator">-</span>key adv <span class="token operator">--</span>keyserver hkp<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>keyserver<span class="token punctuation">.</span>ubuntu<span class="token punctuation">.</span>com<span class="token punctuation">:</span><span class="token number">80</span> <span class="token operator">--</span>recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+echo <span class="token string">"deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse"</span> <span class="token operator">|</span> sudo tee <span class="token operator">/</span>etc<span class="token operator">/</span>apt<span class="token operator">/</span>sources<span class="token punctuation">.</span>list<span class="token punctuation">.</span>d<span class="token operator">/</span>mongodb<span class="token operator">-</span>org<span class="token number">-3.6</span><span class="token punctuation">.</span>list
+sudo apt update</code></pre><p>现在我们可以安装 MonboDB</p>
+<pre class="highlight shell tab-shell "><code>sudo apt<span class="token operator">-</span><span class="token keyword">get</span> install <span class="token operator">-</span>y mongodb<span class="token operator">-</span>org</code></pre><p>默认情况下 MongoDB 不会在系统启动时运行, 所以我们继续修复它。</p>
+<pre class="highlight shell tab-shell "><code>sudo systemctl start mongod
+sudo systemctl enable mongod</code></pre><h3 id="安装-Redis" class="article-heading"><a href="#安装-Redis" class="headerlink" title="安装 Redis"></a>安装 Redis<a class="article-anchor" href="#安装-Redis" aria-hidden="true"></a></h3><p>与上面的 MongoDB 示例一样, Redis 的发行版版本非常过时, 但在这种情况下, 可以使用PPA而不是项目的官方apt存储库。 这个 PPA 维护得很好, 甚至被 redis 开发人员&quot;祝福&quot;了。</p>
+<p><code>software-properties-common</code> 提供了 <code>add-apt-repository</code>, 允许我们跳过几个配置 PPA 的手动步骤。</p>
+<pre class="highlight bash tab-bash "><code>sudo apt install software<span class="token operator">-</span>properties<span class="token operator">-</span>common
+sudo add<span class="token operator">-</span>apt<span class="token operator">-</span>repository ppa<span class="token punctuation">:</span>chris<span class="token operator">-</span>lea<span class="token operator">/</span>redis<span class="token operator">-</span>server
+sudo apt update
+sudo apt install redis<span class="token operator">-</span>server</code></pre><p>就是这样! Redis 服务器非常简单, apt 包会负责它保持运行。</p>
+<h2 id="Screeps-服务器" class="article-heading"><a href="#Screeps-服务器" class="headerlink" title="Screeps 服务器"></a>Screeps 服务器<a class="article-anchor" href="#Screeps-服务器" aria-hidden="true"></a></h2><h2 id="创建-Screeps-用户" class="article-heading"><a href="#创建-Screeps-用户" class="headerlink" title="创建 Screeps 用户"></a>创建 Screeps 用户<a class="article-anchor" href="#创建-Screeps-用户" aria-hidden="true"></a></h2><p>我们将在接下来的步骤中创建一个新的用户, <code>screeps</code>, 然后将服务器设置在那个用户和用户组下。由于这个用户不会拥有 sudo 权限并不需要登录, 我们将不为它设置密码。</p>
+<pre class="highlight shell tab-shell "><code>sudo adduser <span class="token operator">--</span>disabled<span class="token operator">-</span>password <span class="token operator">--</span>gecos <span class="token string">""</span> screeps</code></pre><p>接下来我们将切换到那个用户并完成安装的剩下部分。由于我们不能直接通过它登录, 我们需要用 <code>su</code> 命令来切换用户。 您会希望在想要以 <code>screeps</code> 用户身份运行的任何时候记住这一点, 例如在服务器上调试或安装新 mod 时。</p>
+<pre class="highlight shell tab-shell "><code>sudo su screeps</code></pre><h3 id="配置服务器环境" class="article-heading"><a href="#配置服务器环境" class="headerlink" title="配置服务器环境"></a>配置服务器环境<a class="article-anchor" href="#配置服务器环境" aria-hidden="true"></a></h3><p>现在先决条件已经满足并有了新用户, 我们可以为您的游戏世界创建独一无二的服务器环境。</p>
+<p>在这个步骤中, 你会需要一个 Steam API Key, 你可以在 <a href="https://steamcommunity.com/dev/apikey" target="_blank" rel="external">这里</a> 免费获取。</p>
+<pre class="highlight shell tab-shell "><code>mkdir <span class="token operator">~</span><span class="token operator">/</span>world
+cd <span class="token operator">~</span><span class="token operator">/</span>world
+npm install screeps
+npx screeps init</code></pre><p><code>Init</code> 指令创建了服务器配置文件 <code>.screepsrc</code>。 您应该仔细阅读这个已经很好地创建的文件, 您唯一可能想要更改的内容是 <code>runners_cnt</code> 和 <code>processors_cnt</code>。 在相对较小的系统中(比如 2 个 CPU 核心), 您需要将它们设置成你可用的核心数量, 但是在更大的系统上, 您可能会想保留 1-2 个 空余的核心给 MongoDB 使用。 如果您想在一台服务器上运行多个游戏世界, 您应该确保限制每个世界的 <code>runners_cnt</code> 和 <code>processors_cnt</code> 以确保它们的总和不会超过您系统上的处理器数量。</p>
+<h3 id="安装服务器-Mod" class="article-heading"><a href="#安装服务器-Mod" class="headerlink" title="安装服务器 Mod"></a>安装服务器 Mod<a class="article-anchor" href="#安装服务器-Mod" aria-hidden="true"></a></h3><p>我们将安装几个 mod 以启用新的后端并使得服务器更容易使用和管理</p>
+<ul>
+<li><a href="https://github.com/ScreepsMods/screepsmod-mongo" target="_blank" rel="external">screepsmod-mongo</a> 用 MongoDB 和 Redis 的存储解决方案替换内置的 LokiJS。</li>
+<li><a href="https://github.com/ScreepsMods/screepsmod-auth" target="_blank" rel="external">screepsmod-auth</a> 允许玩家设置登录密码, 允许通过第三方工具登录。</li>
+<li><a href="https://github.com/ScreepsMods/screepsmod-tickrate" target="_blank" rel="external">screepsmod-tickrate</a> 允许服务器管理员通过 screeps cli 更改最小 tick 速度。</li>
+<li><a href="https://github.com/ScreepsMods/screepsmod-admin-utils" target="_blank" rel="external">screepsmod-admin-utils</a> 为 screeps cli 添加了一些有用的功能。</li>
+<li><a href="https://github.com/ScreepsMods/screepsmod-features" target="_blank" rel="external">screepsmod-features</a> 公开了服务器支持功能的列表。</li>
+</ul>
+<p>我们可以用一个简单的命令(以 <code>screeps</code> 用户运行)同时安装以上 Mod。</p>
+<pre class="highlight shell tab-shell "><code>npm install screepsmod<span class="token operator">-</span>mongo screepsmod<span class="token operator">-</span>auth screepsmod<span class="token operator">-</span>tickrate screepsmod<span class="token operator">-</span>admin<span class="token operator">-</span>utils screepsmod<span class="token operator">-</span>features</code></pre><p>然后确认 <code>mods.json</code> 文件如下:</p>
+<pre class="highlight json tab-json "><code><span class="token punctuation">{</span>
+  <span class="token string">"mods"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"node_modules/screepsmod-mongo/index.js"</span><span class="token punctuation">,</span>
+    <span class="token string">"node_modules/screepsmod-auth/index.js"</span><span class="token punctuation">,</span>
+    <span class="token string">"node_modules/screepsmod-tickrate/index.js"</span><span class="token punctuation">,</span>
+    <span class="token string">"node_modules/screepsmod-admin-utils/index.js"</span><span class="token punctuation">,</span>
+    <span class="token string">"node_modules/screepsmod-features/index.js"</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string">"bots"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"simplebot"</span><span class="token punctuation">:</span> <span class="token string">"node_modules/@screeps/simplebot/src"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre><h3 id="初始化数据库" class="article-heading"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库<a class="article-anchor" href="#初始化数据库" aria-hidden="true"></a></h3><p>由于我们更改了默认的存储引擎, 我们需要初始化新的数据库。</p>
+<p>在一个终端中您需要手动启动 Screeps 服务器。 你仍然需要以 <code>screeps</code> 用户运行。</p>
+<pre class="highlight bash tab-bash "><code>cd <span class="token operator">~</span><span class="token operator">/</span>world
+npx screeps start</code></pre><p>现在在另一个终端中打开 Screeps CLI 工具并重置数据</p>
+<pre class="highlight bash tab-bash "><code>sudo su screeps
+cd <span class="token operator">~</span><span class="token operator">/</span>world
+npx screeps cli
+<span class="token operator">></span> system<span class="token punctuation">.</span><span class="token function">resetAllData</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><p>现在您应该在第一个终端中停止 Screeps 服务器</p>
+<p>这是您需要通过 <code>screeps</code> 用户做的最后一件事, 我们现在可以切换回主要用户。</p>
+<pre class="highlight bash tab-bash "><code>exit</code></pre><h3 id="配置服务" class="article-heading"><a href="#配置服务" class="headerlink" title="配置服务"></a>配置服务<a class="article-anchor" href="#配置服务" aria-hidden="true"></a></h3><p>现在我们有了一个正常运行的 Screeps 服务器, 我们回想要确保它保持运行, 包括在重启系统后。 由于我们运行 Ubuntu 16, 我们可以通过一个简单的 systemd 服务文件来实现这个目的。</p>
+<p>作为 root 用户 (不是 <code>screeps</code>!) 打开 <code>/etc/systemd/system/screeps-world.service</code>。</p>
+<pre class="highlight shell tab-shell "><code>sudo nano <span class="token operator">/</span>etc<span class="token operator">/</span>systemd<span class="token operator">/</span>system<span class="token operator">/</span>screeps<span class="token operator">-</span>world<span class="token punctuation">.</span>service</code></pre><p>写入以下内容:</p>
+<pre class="highlight ini tab-ini "><code><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
+Description<span class="token operator">=</span>Screeps Server <span class="token punctuation">(</span>world<span class="token punctuation">)</span>
+Wants<span class="token operator">=</span>network<span class="token operator">-</span>online<span class="token punctuation">.</span>target
+After<span class="token operator">=</span>network<span class="token operator">-</span>online<span class="token punctuation">.</span>target
+
+<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
+Type<span class="token operator">=</span>simple
+WorkingDirectory<span class="token operator">=</span><span class="token operator">/</span>home<span class="token operator">/</span>screeps<span class="token operator">/</span>world
+ExecStart<span class="token operator">=</span><span class="token operator">/</span>home<span class="token operator">/</span>screeps<span class="token operator">/</span>world<span class="token operator">/</span>node_modules<span class="token operator">/</span>screeps<span class="token operator">/</span>bin<span class="token operator">/</span>screeps<span class="token punctuation">.</span>js start
+User<span class="token operator">=</span>screeps
+Group<span class="token operator">=</span>screeps
+
+<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
+WantedBy<span class="token operator">=</span>multi<span class="token operator">-</span>user<span class="token punctuation">.</span>target</code></pre><p>这个文件告诉系统 Screeps 服务器需要网络, 应该以 <code>screeps</code> 用户和用户组运行, 以及启动服务器的文件路径和启动服务器的指令。</p>
+<p>告诉 systemd 加载我们创建的新服务:</p>
+<pre class="highlight shell tab-shell "><code>sudo systemctl daemon<span class="token operator">-</span>reload</code></pre><p>现在我们可以启动服务器, 并告诉 systemd 永远在启动机器后启动它。</p>
+<pre class="highlight shell tab-shell "><code>sudo systemctl start screeps<span class="token operator">-</span>world
+sudo systemctl enable screeps<span class="token operator">-</span>world</code></pre>
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2024-09-20T13:38:58.408Z" itemprop="dateModified">上次更新：9月 20, 2024</time>
+                <a href="/contributed/caching-overview.html" class="article-footer-prev"><i class="fa fa-chevron-left"></i><span>缓存概述</span></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#先决条件"><span class="toc-text">先决条件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器"><span class="toc-text">服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构建工具"><span class="toc-text">构建工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Node-js"><span class="toc-text">安装 Node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-MongoDB"><span class="toc-text">安装 MongoDB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Redis"><span class="toc-text">安装 Redis</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Screeps-服务器"><span class="toc-text">Screeps 服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建-Screeps-用户"><span class="toc-text">创建 Screeps 用户</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置服务器环境"><span class="toc-text">配置服务器环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装服务器-Mod"><span class="toc-text">安装服务器 Mod</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化数据库"><span class="toc-text">初始化数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置服务"><span class="toc-text">配置服务</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+            
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="sidebar-link">总览</a><strong class="sidebar-title">游戏环境</strong><a href="/introduction.html" class="sidebar-link">简介</a><a href="/creeps.html" class="sidebar-link">Creeps</a><a href="/control.html" class="sidebar-link">控制</a><a href="/defense.html" class="sidebar-link">防御</a><a href="/respawn.html" class="sidebar-link">重生</a><a href="/start-areas.html" class="sidebar-link">初始区域</a><a href="/resources.html" class="sidebar-link">资源</a><a href="/market.html" class="sidebar-link">市场</a><a href="/invaders.html" class="sidebar-link">NPC 入侵者</a><a href="/power.html" class="sidebar-link">超能</a><strong class="sidebar-title">脚本</strong><a href="/scripting-basics.html" class="sidebar-link">脚本基础</a><a href="/global-objects.html" class="sidebar-link">全局对象</a><a href="/modules.html" class="sidebar-link">模块</a><a href="/debugging.html" class="sidebar-link">调试</a><a href="/game-loop.html" class="sidebar-link">游戏循环</a><a href="/commit.html" class="sidebar-link">外部提交</a><a href="/simultaneous-actions.html" class="sidebar-link">同步操作</a><a href="/cpu-limit.html" class="sidebar-link">CPU 限制</a><strong class="sidebar-title">其他</strong><a href="/architecture.html" class="sidebar-link">服务器架构</a><a href="/ptr.html" class="sidebar-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="sidebar-link">第三方工具</a><a href="/auth-tokens.html" class="sidebar-link">验证令牌</a><a href="/community-servers.html" class="sidebar-link">社区服务器</a><a href="/tos.html" class="sidebar-link">服务条款</a><a href="/privacy-policy.html" class="sidebar-link">隐私政策</a><strong class="sidebar-title">资源</strong><a href="http://blog.screeps.com" class="sidebar-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="sidebar-link">修改日志</a><a href="http://chat.screeps.com" class="sidebar-link">聊天室</a><a href="https://screeps.com/forum/" class="sidebar-link">论坛</a><strong class="sidebar-title">贡献文章</strong><a href="/contributed/rules.html" class="sidebar-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="sidebar-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="sidebar-link">修改原型</a><a href="/contributed/caching-overview.html" class="sidebar-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="sidebar-link current">私有服务器 MongoDB</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2024 <a href="https://screeps.com/" target="_blank">Screeps</a><br>
+      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
+    </div>
+    <div id="footer-links">
+      <a href="https://github.com/screeps-cn/docs" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    
+      <a href="/api/" class=api-link><span>API Reference</span><img src="/img/link-external.svg"></a><a href="/index.html" class="mobile-nav-link">总览</a><strong class="mobile-nav-title">游戏环境</strong><a href="/introduction.html" class="mobile-nav-link">简介</a><a href="/creeps.html" class="mobile-nav-link">Creeps</a><a href="/control.html" class="mobile-nav-link">控制</a><a href="/defense.html" class="mobile-nav-link">防御</a><a href="/respawn.html" class="mobile-nav-link">重生</a><a href="/start-areas.html" class="mobile-nav-link">初始区域</a><a href="/resources.html" class="mobile-nav-link">资源</a><a href="/market.html" class="mobile-nav-link">市场</a><a href="/invaders.html" class="mobile-nav-link">NPC 入侵者</a><a href="/power.html" class="mobile-nav-link">超能</a><strong class="mobile-nav-title">脚本</strong><a href="/scripting-basics.html" class="mobile-nav-link">脚本基础</a><a href="/global-objects.html" class="mobile-nav-link">全局对象</a><a href="/modules.html" class="mobile-nav-link">模块</a><a href="/debugging.html" class="mobile-nav-link">调试</a><a href="/game-loop.html" class="mobile-nav-link">游戏循环</a><a href="/commit.html" class="mobile-nav-link">外部提交</a><a href="/simultaneous-actions.html" class="mobile-nav-link">同步操作</a><a href="/cpu-limit.html" class="mobile-nav-link">CPU 限制</a><strong class="mobile-nav-title">其他</strong><a href="/architecture.html" class="mobile-nav-link">服务器架构</a><a href="/ptr.html" class="mobile-nav-link">公开测试区域 (PTR)</a><a href="/third-party.html" class="mobile-nav-link">第三方工具</a><a href="/auth-tokens.html" class="mobile-nav-link">验证令牌</a><a href="/community-servers.html" class="mobile-nav-link">社区服务器</a><a href="/tos.html" class="mobile-nav-link">服务条款</a><a href="/privacy-policy.html" class="mobile-nav-link">隐私政策</a><strong class="mobile-nav-title">资源</strong><a href="http://blog.screeps.com" class="mobile-nav-link">博客</a><a href="http://blog.screeps.com/categories/Changelogs/" class="mobile-nav-link">修改日志</a><a href="http://chat.screeps.com" class="mobile-nav-link">聊天室</a><a href="https://screeps.com/forum/" class="mobile-nav-link">论坛</a><strong class="mobile-nav-title">贡献文章</strong><a href="/contributed/rules.html" class="mobile-nav-link">贡献规则</a><a href="/contributed/advanced_grunt.html" class="mobile-nav-link">高级 Grunt 使用</a><a href="/contributed/modifying-prototypes.html" class="mobile-nav-link">修改原型</a><a href="/contributed/caching-overview.html" class="mobile-nav-link">缓存概述</a><a href="/contributed/ps_ubuntu.html" class="mobile-nav-link current">私有服务器 MongoDB</a>
+    
+  </div>
+</nav>
+  <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/scrollingelement.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/custom.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+</body>
+</html>
