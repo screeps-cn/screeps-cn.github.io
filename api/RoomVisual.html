@@ -1,0 +1,314 @@
+<h1 id="RoomVisual"><a href="#RoomVisual" class="headerlink" title="RoomVisual"></a>RoomVisual</h1><p><img align="right" src="img/visual.png"></p>
+<p>房间视觉效果提供了在游戏房间中显示可视化调试信息的途径。你可以使用 <code>RoomVisual</code> 对象绘制一个仅对您可见的简单图形。每一个已存在的 <code>Room</code> 对象都包含有 <a href="#Room.visual"><code>visual</code></a> 属性，不过您也可以使用 <a href="#RoomVisual.constructor">constructor</a> 给任何房间创建一个新的 <code>RoomVisual</code> 对象（即使没有视野）。</p>
+<p>房间视觉效果并不会储存在数据库里，它们的目的仅仅是在您的浏览窗口里显示一些东西。所有绘制的图形只会保留 1 tick，如果后续没有更新的话就会消失。所有的 <code>RoomVisual</code> API 调用都不会产生 CPU 消耗（只会产生一些代码执行的自然成本，并且大多与简单的 <code>JSON.serialize</code> 调用有关）。然而，这里有一些使用限制：您最多只能为每个房间发布 500 KB 的序列化数据（详见 <a href="#RoomVisual.getSize"><code>getSize</code></a> 方法）。</p>
+<p>所有的绘制坐标均等同于游戏坐标，并且以地块的中心为原点，即：(10, 10) 将指向位于 <code>x:10; y:10</code> 处 creep 的中心。允许使用小数坐标。</p>
+<h2 id="RoomVisual.constructor" class="api-property   "><span class="api-property__name">constructor</span><span class="api-property__args">([roomName])</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>rooms<span class="token punctuation">[</span><span class="token string">'W10N10'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>visual<span class="token punctuation">.</span><span class="token function">circle</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">line</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 等同于：</span>
+<span class="token keyword">new</span> <span class="token class-name">RoomVisual</span><span class="token punctuation">(</span><span class="token string">'W10N10'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">circle</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">line</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token comment">// 所有房间都会显示该文本：</span>
+<span class="token keyword">new</span> <span class="token class-name">RoomVisual</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token string">'Some text'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token literal-property property">align</span><span class="token operator">:</span> <span class="token string">'left'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> </code></pre><p>您可以直接为任何房间创建 <code>RoomVisual</code> 对象，即使您的脚本没有该房间的视野。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>roomName (可选)</code></td><td>string</td><td><p>房间的名称。如果未定义，则该效果将发布到所有房间。</p>
+</td>
+</tbody></table>
+
+<h2 id="RoomVisual.roomName" class="api-property api-property--property  "><span class="api-property__name">roomName</span><span class="api-property__type">string</span></h2>
+<p>房间的名称。</p>
+<h2 id="RoomVisual.line" class="api-property api-property--method  "><span class="api-property__name">line</span><span class="api-property__args">(x1, y1, x2, y2, [style])<br>(pos1, pos2, [style])</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">new</span> <span class="token class-name">RoomVisual</span><span class="token punctuation">(</span><span class="token string">'W1N1'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">line</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>visual<span class="token punctuation">.</span><span class="token function">line</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>pos<span class="token punctuation">,</span> target<span class="token punctuation">.</span>pos<span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token literal-property property">color</span><span class="token operator">:</span> <span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token literal-property property">lineStyle</span><span class="token operator">:</span> <span class="token string">'dashed'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>绘制一条线。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x1</code></td><td>number</td><td><p>起始点的 X 坐标。</p>
+</td>
+<tr><td><code>y1</code></td><td>number</td><td><p>起始点的 Y 坐标。</p>
+</td>
+<tr><td><code>x2</code></td><td>number</td><td><p>结束点的 X 坐标。</p>
+</td>
+<tr><td><code>y2</code></td><td>number</td><td><p>结束点的 Y 坐标。</p>
+</td>
+<tr><td><code>pos1</code></td><td><a href="#RoomPosition">RoomPosition</a></td><td><p>起始点位置对象。</p>
+</td>
+<tr><td><code>pos2</code></td><td><a href="#RoomPosition">RoomPosition</a></td><td><p>结束点位置对象。</p>
+</td>
+<tr><td><code>style (可选)</code></td><td>object</td><td><p>包含下列属性的对象：</p>
+<ul>
+    <li>
+        <div class="api-arg-title">width</div>
+        <div class="api-arg-type">number</div>
+        <div class="api-arg-desc">线条的宽度，默认值为 0.1。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">color</div>
+        <div class="api-arg-type">string</div>
+        <div class="api-arg-desc">线条颜色，允许使用任何 web 格式颜色，默认值为 <code>#ffffff</code> (白色)。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">opacity</div>
+        <div class="api-arg-type">number</div>
+        <div class="api-arg-desc">透明度，默认值为 0.5。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">lineStyle</div>
+        <div class="api-arg-type">string</div>
+        <div class="api-arg-desc"><code>undefined</code> (实线)，<code>dashed</code> (虚线) 或者 <code>dotted</code> (点线) 之一。默认值为 undefined。</div>
+    </li>
+</ul></td>
+</tbody></table>
+
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>该
+<code>RoomVisual</code>
+对象本身，您可以使用链式调用。</p>
+<h2 id="RoomVisual.circle" class="api-property api-property--method  "><span class="api-property__name">circle</span><span class="api-property__args">(x, y, [style])<br>(pos, [style])</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">new</span> <span class="token class-name">RoomVisual</span><span class="token punctuation">(</span><span class="token string">'W1N1'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">circle</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>visual<span class="token punctuation">.</span><span class="token function">circle</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>pos<span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token literal-property property">fill</span><span class="token operator">:</span> <span class="token string">'transparent'</span><span class="token punctuation">,</span> <span class="token literal-property property">radius</span><span class="token operator">:</span> <span class="token number">0.55</span><span class="token punctuation">,</span> <span class="token literal-property property">stroke</span><span class="token operator">:</span> <span class="token string">'red'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>绘制一个圆。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>圆心的 X 坐标。</p>
+</td>
+<tr><td><code>y</code></td><td>number</td><td><p>圆心的 Y 坐标。</p>
+</td>
+<tr><td><code>pos</code></td><td><a href="#RoomPosition">RoomPosition</a></td><td><p>圆心的位置对象。</p>
+</td>
+<tr><td><code>style (可选)</code></td><td>object</td><td><p>包含下列属性的对象：</p>
+<ul>
+    <li>
+        <div class="api-arg-title">radius</div>
+        <div class="api-arg-type">number</div>
+        <div class="api-arg-desc">圆的半径，默认值为 0.15。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">fill</div>
+        <div class="api-arg-type">string</div>
+        <div class="api-arg-desc">填充颜色，允许使用任何 web 格式颜色，默认值为 <code>#ffffff</code> (白色)。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">opacity</div>
+        <div class="api-arg-type">number</div>
+        <div class="api-arg-desc">透明度，默认值为 0.5。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">stroke</div>
+        <div class="api-arg-type">string</div>
+        <div class="api-arg-desc">轮廓颜色，允许使用任何 web 格式颜色，默认未定义（没有轮廓）。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">strokeWidth</div>
+        <div class="api-arg-type">number</div>
+        <div class="api-arg-desc">轮廓宽度，默认值为 0.1。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">lineStyle</div>
+        <div class="api-arg-type">string</div>
+        <div class="api-arg-desc"><code>undefined</code> (实线)，<code>dashed</code> (虚线) 或者 <code>dotted</code> (点线) 之一。默认值为 undefined。</div>
+    </li>
+</ul></td>
+</tbody></table>
+
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>该
+<code>RoomVisual</code>
+对象本身，您可以使用链式调用。</p>
+<h2 id="RoomVisual.rect" class="api-property api-property--method  "><span class="api-property__name">rect</span><span class="api-property__args">(x, y, width, height, [style])<br>(topLeftPos, width, height, [style])</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token comment">// 从 (2,2) 到 (10,10) 的 9x9 区域</span>
+<span class="token keyword">new</span> <span class="token class-name">RoomVisual</span><span class="token punctuation">(</span><span class="token string">'W1N1'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">rect</span><span class="token punctuation">(</span><span class="token number">1.5</span><span class="token punctuation">,</span> <span class="token number">1.5</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span> </code></pre><pre class="highlight javascript tab-javascript "><code><span class="token comment">// creep 上的矩形边框</span>
+creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>visual<span class="token punctuation">.</span><span class="token function">rect</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span>x <span class="token operator">-</span> <span class="token number">0.6</span><span class="token punctuation">,</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span>y <span class="token operator">-</span> <span class="token number">0.6</span><span class="token punctuation">,</span> 
+    <span class="token number">1.2</span><span class="token punctuation">,</span> <span class="token number">1.2</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token literal-property property">fill</span><span class="token operator">:</span> <span class="token string">'transparent'</span><span class="token punctuation">,</span> <span class="token literal-property property">stroke</span><span class="token operator">:</span> <span class="token string">'#f00'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>绘制一个矩形。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>左上角的 X 坐标。</p>
+</td>
+<tr><td><code>y</code></td><td>number</td><td><p>左上角的 Y 坐标。</p>
+</td>
+<tr><td><code>topLeftPos</code></td><td><a href="#RoomPosition">RoomPosition</a></td><td><p>左上角的位置对象。</p>
+</td>
+<tr><td><code>width</code></td><td>number</td><td><p>矩形的宽度。</p>
+</td>
+<tr><td><code>height</code></td><td>number</td><td><p>矩形的高度。</p>
+</td>
+<tr><td><code>style (可选)</code></td><td>object</td><td><p>包含下列属性的对象：</p>
+<ul>
+    <li>
+        <div class="api-arg-title">fill</div>
+        <div class="api-arg-type">string</div>
+        <div class="api-arg-desc">填充颜色，允许使用任何 web 格式颜色，默认值为 <code>#ffffff</code> (白色)。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">opacity</div>
+        <div class="api-arg-type">number</div>
+        <div class="api-arg-desc">透明度，默认值为 0.5。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">stroke</div>
+        <div class="api-arg-type">string</div>
+        <div class="api-arg-desc">轮廓颜色，允许使用任何 web 格式颜色，默认未定义（没有轮廓）。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">strokeWidth</div>
+        <div class="api-arg-type">number</div>
+        <div class="api-arg-desc">轮廓宽度，默认值为 0.1。</div>
+    </li>
+    <li>
+        <div class="api-arg-title">lineStyle</div>
+        <div class="api-arg-type">string</div>
+        <div class="api-arg-desc"><code>undefined</code> (实线)，<code>dashed</code> (虚线) 或者 <code>dotted</code> (点线) 之一。默认值为 undefined。</div>
+    </li>
+</ul></td>
+</tbody></table>
+
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>该
+<code>RoomVisual</code>
+对象本身，您可以使用链式调用。</p>
+<h2 id="RoomVisual.poly" class="api-property api-property--method  "><span class="api-property__name">poly</span><span class="api-property__args">(points, [style])</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> points <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+points<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>creep1<span class="token punctuation">.</span>pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+points<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+points<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">RoomPosition</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">21</span><span class="token punctuation">,</span><span class="token string">'W1N1'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">RoomVisual</span><span class="token punctuation">(</span><span class="token string">'W1N1'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">poly</span><span class="token punctuation">(</span>points<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token literal-property property">fill</span><span class="token operator">:</span> <span class="token string">'aqua'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> </code></pre><pre class="highlight javascript tab-javascript "><code><span class="token comment">// 将路径可视化</span>
+<span class="token keyword">const</span> path <span class="token operator">=</span> Game<span class="token punctuation">.</span>rooms<span class="token punctuation">[</span><span class="token string">'W1N1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">findPath</span><span class="token punctuation">(</span>from<span class="token punctuation">,</span> to<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">RoomVisual</span><span class="token punctuation">(</span><span class="token string">'W1N1'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">poly</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token literal-property property">stroke</span><span class="token operator">:</span> <span class="token string">'#fff'</span><span class="token punctuation">,</span> <span class="token literal-property property">strokeWidth</span><span class="token operator">:</span> <span class="token number">.15</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">opacity</span><span class="token operator">:</span> <span class="token number">.2</span><span class="token punctuation">,</span> <span class="token literal-property property">lineStyle</span><span class="token operator">:</span> <span class="token string">'dashed'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> </code></pre><p>绘制一条折线。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>points</code></td><td>array</td><td><p>折点数组。每个元素都应是两个数字的数组（即 <code>[10,15]</code>），或者是一个 <a href="#RoomPosition"><code>RoomPosition</code></a> 对象。</p>
+</td>
+<tr><td><code>style (可选)</code></td><td>object</td><td><p>包含下列属性的对象：
+                    <ul>
+                        <li>
+                            <div class="api-arg-title">fill</div>
+                            <div class="api-arg-type">string</div>
+                            <div class="api-arg-desc">填充颜色，允许使用任何 web 格式颜色，默认值为 <code>undefined</code>（不填充）。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">opacity</div>
+                            <div class="api-arg-type">number</div>
+                            <div class="api-arg-desc">透明度，默认值为 0.5。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">stroke</div>
+                            <div class="api-arg-type">string</div>
+                            <div class="api-arg-desc">线条颜色，允许使用任何 web 格式颜色，默认值为 <code>#ffffff</code> (白色)。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">strokeWidth</div>
+                            <div class="api-arg-type">number</div>
+                            <div class="api-arg-desc">线条宽度，默认值为 0.1。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">lineStyle</div>
+                            <div class="api-arg-type">string</div>
+                            <div class="api-arg-desc"><code>undefined</code> (实线)，<code>dashed</code> (虚线) 或者 <code>dotted</code> (点线) 之一。默认值为 undefined。</div>
+                        </li>
+                    </ul></p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-3"><a href="#返回值-3" class="headerlink" title="返回值"></a>返回值</h3><p>该
+<code>RoomVisual</code>
+对象本身，您可以使用链式调用。</p>
+<h2 id="RoomVisual.text" class="api-property api-property--method  "><span class="api-property__name">text</span><span class="api-property__args">(text, x, y, [style])<br>(text, pos, [style])</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">new</span> <span class="token class-name">RoomVisual</span><span class="token punctuation">(</span><span class="token string">'W1N1'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token string">"Target💥"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token literal-property property">color</span><span class="token operator">:</span> <span class="token string">'green'</span><span class="token punctuation">,</span> <span class="token literal-property property">font</span><span class="token operator">:</span> <span class="token number">0.8</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> </code></pre><p>绘制一个文本标签。你可以使用任何有效的 Unicode 字符，包括 <a href="http://unicode.org/emoji/charts/emoji-style.txt" target="_blank">emoji</a>。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>text</code></td><td>string</td><td><p>文本信息</p>
+</td>
+<tr><td><code>x</code></td><td>number</td><td><p>文本基线（baseline）起始点的 X 坐标。</p>
+</td>
+<tr><td><code>y</code></td><td>number</td><td><p>文本基线起始点的 Y 坐标。</p>
+</td>
+<tr><td><code>pos</code></td><td><a href="#RoomPosition">RoomPosition</a></td><td><p>文本基线起始点的位置对象。</p>
+</td>
+<tr><td><code>style (可选)</code></td><td>object</td><td><p>包含下列属性的对象：
+                    <ul>
+                        <li>
+                            <div class="api-arg-title">color</div>
+                            <div class="api-arg-type">string</div>
+                            <div class="api-arg-desc">字体颜色，允许使用任何 web 格式颜色，默认值为 <code>#ffffff</code> (白色)。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">font</div>
+                            <div class="api-arg-type">number, string</div>
+                            <div class="api-arg-desc">数字或者字符串，应使用下列形式：
+                                <ul>
+                                    <li><code>0.7</code> - 基于游戏坐标的相对大小</li>
+                                    <li><code>20px</code> - 基于像素的绝对大小</li>
+                                    <li><code>0.7 serif</code></li>
+                                    <li><code>bold italic 1.5 Times New Roman</code></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">stroke</div>
+                            <div class="api-arg-type">string</div>
+                            <div class="api-arg-desc">轮廓颜色，允许使用任何 web 格式颜色，默认未定义（没有轮廓）。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">strokeWidth</div>
+                            <div class="api-arg-type">number</div>
+                            <div class="api-arg-desc">轮廓宽度，默认值为 0.15。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">backgroundColor</div>
+                            <div class="api-arg-type">string</div>
+                            <div class="api-arg-desc">背景颜色，允许使用任何 web 格式颜色，默认未定义（没有背景）。当启用背景时，文本的竖直对齐模式将设置为 middle（默认为 baseline）。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">backgroundPadding</div>
+                            <div class="api-arg-type">number</div>
+                            <div class="api-arg-desc">背景矩形的 padding，默认值为 0.3。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">align</div>
+                            <div class="api-arg-type">string</div>
+                            <div class="api-arg-desc">文本对齐模式，<code>center</code>，<code>left</code> 或者 <code>right</code> 之一。默认值为 <code>center</code>。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">opacity</div>
+                            <div class="api-arg-type">number</div>
+                            <div class="api-arg-desc">透明度，默认值为 1.0。</div>
+                        </li>
+                    </ul></p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-4"><a href="#返回值-4" class="headerlink" title="返回值"></a>返回值</h3><p>该
+<code>RoomVisual</code>
+对象本身，您可以使用链式调用。</p>
+<h2 id="RoomVisual.clear" class="api-property api-property--method  "><span class="api-property__name">clear</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">new</span> <span class="token class-name">RoomVisual</span><span class="token punctuation">(</span><span class="token string">'W1N1'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>移除该房间的所有视觉效果。</p>
+<h3 id="返回值-5"><a href="#返回值-5" class="headerlink" title="返回值"></a>返回值</h3><p>该
+<code>RoomVisual</code>
+对象本身，您可以使用链式调用。</p>
+<h2 id="RoomVisual.getSize" class="api-property api-property--method  "><span class="api-property__name">getSize</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>visual<span class="token punctuation">.</span><span class="token function">getSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">512000</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 本 tick 将无法添加更多的视觉效果</span>
+<span class="token punctuation">}</span></code></pre><p>当前 tick 添加到该房间的视觉效果的存储大小。它不能超过 512,000（500 KB）。</p>
+<h3 id="返回值-6"><a href="#返回值-6" class="headerlink" title="返回值"></a>返回值</h3><p>视觉效果的大小（单位：字节）。</p>
+<h2 id="RoomVisual.export" class="api-property api-property--method  "><span class="api-property__name">export</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Memory<span class="token punctuation">.</span>RoomVisualData<span class="token punctuation">[</span><span class="token string">'E2S7'</span><span class="token punctuation">]</span> <span class="token operator">=</span> Game<span class="token punctuation">.</span>rooms<span class="token punctuation">.</span><span class="token constant">E2S7</span><span class="token punctuation">.</span>visual<span class="token punctuation">.</span><span class="token function">export</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>返回当前 tick 中添加到房间中的所有可视化效果的紧凑格式。</p>
+<h3 id="返回值-7"><a href="#返回值-7" class="headerlink" title="返回值"></a>返回值</h3><p>代表了可视化数据的字符串。除了将其存储以备后续使用外，您不应该对其进行其他操作。</p>
+<h2 id="RoomVisual.import" class="api-property api-property--method  "><span class="api-property__name">import</span><span class="api-property__args">(val)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>Memory<span class="token punctuation">.</span>RoomVisualData<span class="token punctuation">[</span><span class="token string">'E2S7'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span>rooms<span class="token punctuation">.</span><span class="token constant">E2S7</span><span class="token punctuation">.</span>visual<span class="token punctuation">.</span><span class="token function">import</span><span class="token punctuation">(</span>Memory<span class="token punctuation">.</span>RoomVisualData<span class="token punctuation">[</span><span class="token string">'E2S7'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>将先前导出（使用<a href="#RoomVisual.export">RoomVisual.export</a>）的房间可视化效果添加到当前 tick。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>val</code></td><td>string</td><td><p>从 RoomVisual.export 返回的字符串。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-8"><a href="#返回值-8" class="headerlink" title="返回值"></a>返回值</h3><p><code>RoomVisual</code> 对象自身，以便进行链式调用。</p>

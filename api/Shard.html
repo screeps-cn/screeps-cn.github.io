@@ -1,0 +1,29 @@
+<h1 id="Game-shard"><a href="#Game-shard" class="headerlink" title="Game.shard"></a>Game.shard</h1><p>描述当前执行脚本的 shard 对象。</p>
+<h2 id="Game.shard.name" class="api-property api-property--property  "><span class="api-property__name">Game.shard.name</span><span class="api-property__type">string</span></h2>
+<p>shard 的名称。</p>
+<h2 id="Game.shard.type" class="api-property api-property--property  "><span class="api-property__name">Game.shard.type</span><span class="api-property__type">string</span></h2>
+<p>目前总是等于 <code>normal</code>。</p>
+<h2 id="Game.shard.ptr" class="api-property api-property--property  "><span class="api-property__name">Game.shard.ptr</span><span class="api-property__type">boolean</span></h2>
+<p>这个 shard 是否属于 <a href="/ptr.html">PTR</a>.</p>
+<h2 id="Game.shard.access" class="api-property api-property--property  "><span class="api-property__name">Game.shard.access</span><span class="api-property__type">boolean</span></h2>
+<p>您当前是否有访问此 shard 的权限。 在非限制性 shard 上总是 <code>true</code>。在限制性 shards 上, 需要激活 <a href="#Constants"><code>ACCESS_KEY</code></a> 资源或激活无限访问权限。 使用 <a href="#Game.shard.activateAccess"><code>Game.shard.activateAccess</code></a> 激活访问。</p>
+<h2 id="Game.shard.accessTime" class="api-property api-property--property  "><span class="api-property__name">Game.shard.accessTime</span><span class="api-property__type">number</span></h2>
+<p>这个 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime#Syntax" target="_blank" rel="noopener">UNIX毫秒时间戳</a> 为激活访问权限的时间。 无访问限制的 shard 或未激活访问权限时此属性未被定义。</p>
+<h2 id="Game.shard.activateAccess" class="api-property api-property--method  "><span class="api-property__name">Game.shard.activateAccess</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>shard<span class="token punctuation">.</span>access <span class="token operator">&amp;&amp;</span> Game<span class="token punctuation">.</span>shard<span class="token punctuation">.</span>accessTime <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>shard<span class="token punctuation">.</span>accessTime <span class="token operator">-</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1000</span><span class="token operator">*</span><span class="token number">60</span><span class="token operator">*</span><span class="token number">60</span><span class="token operator">*</span><span class="token number">24</span><span class="token operator">*</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span>shard<span class="token punctuation">.</span><span class="token function">activateAccess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>激活对当前受限 shard 30天的访问授权。 此方法将消耗一个 <a href="#Constants"><code>ACCESS_KEY</code></a> 资源（详见 <a href="#Game.resources"><code>Game.resources</code></a>）。 这个方法仅适用于受限的 shard (定义了 <code>Game.shard.access</code> 的 shard)。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一:
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>你账户中的 <code>accessKey</code> 资源不足。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>这个 shard 不受限。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>你的访问权限是无限的。</p>
+</td></tr>
+</tbody></table>
+</p>

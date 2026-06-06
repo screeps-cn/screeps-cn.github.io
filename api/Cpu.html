@@ -1,0 +1,100 @@
+<h1 id="Game-cpu"><a href="#Game-cpu" class="headerlink" title="Game.cpu"></a>Game.cpu</h1><p>一个包含 CPU 使用情况的全局对象。</p>
+<h2 id="Game.cpu.limit" class="api-property api-property--property  "><span class="api-property__name">Game.cpu.limit</span><span class="api-property__type">number</span></h2>
+<p>你在当前指定 shard 的CPU限制。</p>
+<h2 id="Game.cpu.tickLimit" class="api-property api-property--property  "><span class="api-property__name">Game.cpu.tickLimit</span><span class="api-property__type">number</span></h2>
+<p>当前游戏 tick 可用的 CPU 时间。 通常它高于 <code>Game.cpu.limit</code>。 <a href="/cpu-limit.html">了解更多</a></p>
+<h2 id="Game.cpu.bucket" class="api-property api-property--property  "><span class="api-property__name">Game.cpu.bucket</span><span class="api-property__type">number</span></h2>
+<p>在你的 <a href="/cpu-limit.html#Bucket">bucket</a> 中累积的未使用的 CPU 数量。</p>
+<h2 id="Game.cpu.shardLimits" class="api-property api-property--property  "><span class="api-property__name">Game.cpu.shardLimits</span><span class="api-property__type">object&lt;string,number&gt;</span></h2>
+<p>包含了每个 shard cpu 上限的对象，以 shard 名称为关键字。你可以使用 <a href="#Game.cpu.setShardLimits"><code>setShardLimits</code></a> 方法重设他们。</p>
+<h2 id="Game.cpu.unlocked" class="api-property api-property--property  "><span class="api-property__name">Game.cpu.unlocked</span><span class="api-property__type">boolean</span></h2>
+<p>您的账户是否已经解锁了完整的 CPU。</p>
+<h2 id="Game.cpu.unlockedTime" class="api-property api-property--property  "><span class="api-property__name">Game.cpu.unlockedTime</span><span class="api-property__type">number</span></h2>
+<p>您账户解锁完整 CPU 时的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime#Syntax" target="_blank" rel="noopener">UNIX 毫秒时间戳</a> 当您账户的完整 CPU 未解锁或未使用 subscription 时该属性未定义。</p>
+<h2 id="Game.cpu.getHeapStatistics" class="api-property api-property--method  "><span class="api-property__name">Game.cpu.getHeapStatistics</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">let</span> heap <span class="token operator">=</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getHeapStatistics</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Used </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>heap<span class="token punctuation">.</span>total_heap_size<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> / </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>heap<span class="token punctuation">.</span>heap_size_limit<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>使用此方法获取虚拟机的堆统计信息。 返回值几乎与 Node.js 函数 <a href="https://nodejs.org/dist/latest-v8.x/docs/api/v8.html#v8_v8_getheapstatistics" target="_blank" rel="noopener"><code>v8.getHeapStatistics()</code></a> 相同。 此函数返回一个附加属性：<code>externally_allocated_size</code>，它是当前分配的内存总量，不包含在 v8 堆中，但会计入此隔离的内存限制。超过一定大小的 <code>ArrayBuffer</code> 实例是外部分配的，将在此计算。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>以下列格式返回具有堆统计信息的对象：</p>
+<pre class="highlight javascript tab-javascript nosidebar"><code><span class="token punctuation">{</span>
+  <span class="token string-property property">"total_heap_size"</span><span class="token operator">:</span> <span class="token number">29085696</span><span class="token punctuation">,</span>
+  <span class="token string-property property">"total_heap_size_executable"</span><span class="token operator">:</span> <span class="token number">3670016</span><span class="token punctuation">,</span>
+  <span class="token string-property property">"total_physical_size"</span><span class="token operator">:</span> <span class="token number">26447928</span><span class="token punctuation">,</span>
+  <span class="token string-property property">"total_available_size"</span><span class="token operator">:</span> <span class="token number">319649520</span><span class="token punctuation">,</span>
+  <span class="token string-property property">"used_heap_size"</span><span class="token operator">:</span> <span class="token number">17493824</span><span class="token punctuation">,</span>
+  <span class="token string-property property">"heap_size_limit"</span><span class="token operator">:</span> <span class="token number">343932928</span><span class="token punctuation">,</span>
+  <span class="token string-property property">"malloced_memory"</span><span class="token operator">:</span> <span class="token number">8192</span><span class="token punctuation">,</span>
+  <span class="token string-property property">"peak_malloced_memory"</span><span class="token operator">:</span> <span class="token number">1060096</span><span class="token punctuation">,</span>
+  <span class="token string-property property">"does_zap_garbage"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token string-property property">"externally_allocated_size"</span><span class="token operator">:</span> <span class="token number">38430000</span>
+<span class="token punctuation">}</span></code></pre><h2 id="Game.cpu.getUsed" class="api-property api-property--method  "><span class="api-property__name">Game.cpu.getUsed</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span>tickLimit <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Used half of CPU already!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> name <span class="token keyword">in</span> Game<span class="token punctuation">.</span>creeps<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> startCpu <span class="token operator">=</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// creep logic goes here</span>
+
+    <span class="token keyword">const</span> elapsed <span class="token operator">=</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> startCpu<span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Creep '</span><span class="token operator">+</span>name<span class="token operator">+</span><span class="token string">' has used '</span><span class="token operator">+</span>elapsed<span class="token operator">+</span><span class="token string">' CPU time'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>获取当前游戏开始时使用的 CPU 时间总量。在模拟模式下始终返回 0.</p>
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>以浮点数返回当前使用的 CPU 时间。</p>
+<h2 id="Game.cpu.halt" class="api-property api-property--method  "><span class="api-property__name">Game.cpu.halt</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">halt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>重置你的运行环境并擦除堆内存中的所有数据。</p>
+<h2 id="Game.cpu.setShardLimits" class="api-property api-property--method  "><span class="api-property__name">Game.cpu.setShardLimits</span><span class="api-property__args">(limits)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">setShardLimits</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">shard0</span><span class="token operator">:</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token literal-property property">shard1</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>分配 CPU 限制到不同的 shard。CPU总量应保持等于
+ <a href="#Game.cpu.shardLimits"><code>Game.cpu.shardLimits</code></a>。 此方法每 12 小时只能使用一次。
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>limits</code></td><td>object&lt;string, number&gt;</td><td><p>表示每个 shard 的 CPU 值，与 <code>Game.cpu.shardLimits</code> 格式相同。</p>
+</td>
+</tbody></table>
+</p>
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一:
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>12 小时的冷却时间尚未结束。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>该参数不是有效的 shard 限制对象。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Game.cpu.unlock" class="api-property api-property--method  "><span class="api-property__name">Game.cpu.unlock</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span>unlockedTime <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span>unlockedTime <span class="token operator">-</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1000</span><span class="token operator">*</span><span class="token number">60</span><span class="token operator">*</span><span class="token number">60</span><span class="token operator">*</span><span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>为您的账户解锁 24 小时的完整 CPU。该方法将消耗一个您账户中的 CPU unlock（详见 <a href="#Game.resources"><code>Game.resources</code></a>）。
+如果之前尚未激活过完整 CPU。则可能需要一点时间（5 分钟之内）来为您的账户应用解锁。</p>
+<h3 id="返回值-3"><a href="#返回值-3" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一:
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>您的帐户没有足够的 <code>cpuUnlock</code> 资源。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>您的 CPU 已经使用了 subscription 解锁。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="Game.cpu.generatePixel" class="api-property api-property--method  "><span class="api-property__name">Game.cpu.generatePixel</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--3" title="这种方法的CPU成本很高。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span>bucket <span class="token operator">==</span> <span class="token number">10000</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">generatePixel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>从您的 bucket 中取出 10000 CPU 来生成一点 pixel 资源。</p>
+<h3 id="返回值-4"><a href="#返回值-4" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一:
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>您的 bucket 中没有足够的 CPU。</p>
+</td></tr>
+</tbody></table>
+</p>

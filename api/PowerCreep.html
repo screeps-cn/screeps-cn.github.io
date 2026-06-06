@@ -1,0 +1,650 @@
+<h1 id="PowerCreep"><a href="#PowerCreep" class="headerlink" title="PowerCreep"></a>PowerCreep</h1><p>Power Creep 是和您账户绑定的不朽“英雄”单位。其死后可以在任何 <code>PowerSpawn</code> 重生。你可以升级它们的能力（“powers”），可升级的等级取决于您的 Global Power Level。(查看 <a href="#Game.gpl"><code>Game.gpl</code></a>)。</p>
+<table class="table gameplay-info">
+    <tbody>
+    <tr>
+        <td><strong>存活时间</strong></td>
+        <td>5,000</td>
+    </tr>
+    <tr>
+        <td><strong>生命值</strong></td>
+        <td>1,000 每级</td>
+    </tr>
+    <tr>
+        <td><strong>容量</strong></td>
+        <td>100 每级</td>
+    </tr><br>    </tbody>
+</table>
+
+<p><a href="/power.html#Powers">可用 power 的完整列表</a></p>
+<h2 id="PowerCreep.create" class="api-property api-property--method  "><span class="api-property__name">PowerCreep.create</span><span class="api-property__args">(name, className)</span>
+        <div class="api-property__cpu api-property__cpu--1" title="该方法具有较低的CPU开销。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>PowerCreep<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token string">'PowerCreep1'</span><span class="token punctuation">,</span> <span class="token constant">POWER_CLASS</span><span class="token punctuation">.</span><span class="token constant">OPERATOR</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>向您账户中添加新的 Power Creep 实例。在添加之后默认为未孵化状态，使用 <a href="#PowerCreep.spawn"><code>spawn</code></a> 方法在游戏世界中生成它。</p>
+<p>您的账户中拥有至少一个可用的 Power Level 才能执行该操作。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>name</code></td><td>string</td><td><p>新 power creep 的名字。最长不能超过 100 个字符。</p>
+</td>
+<tr><td><code>className</code></td><td>string</td><td><p>新 power creep 的类型，<code>POWER_CLASS</code> 常量之一。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NAME_EXISTS</code></td><td>-3</td><td><p>指定的 power creep 名称已被使用。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>您的账户中没有足够的 Power Level。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>指定的 power creep 名称超过长度，或者 power creep 的类型（class）无效。</p>
+</td></tr>
+</tbody></table>
+ </p>
+<h2 id="PowerCreep.effects" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">effects</span><span class="api-property__type">array</span></h2>
+<p>附加的效果，一个包含如下属性的对象数组：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>effect</code></td><td>number</td><td><p>该附加效果的 ID。可以是自然效果 ID 或者 Power ID。</p>
+</td>
+<tr><td><code>level (可选)</code></td><td>number </td><td><p>该附加效果的 Power 等级。如果效果不是 Power 效果则不存在该属性。</p>
+</td>
+<tr><td><code>ticksRemaining</code></td><td>number</td><td><p>多长时间之后会失去这个效果。</p>
+</td>
+</tbody></table>
+
+<h2 id="PowerCreep.pos" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">pos</span><span class="api-property__type"><a href="#RoomPosition">RoomPosition</a></span></h2>
+<p>表示该对象在房间中的坐标的对象。</p>
+<h2 id="PowerCreep.room" class="api-property api-property--property api-property--inherited "><div class="api-property__inherited">Inherited from <a href="#RoomObject">RoomObject</a></div><span class="api-property__name">room</span><span class="api-property__type"><a href="#Room">Room</a></span></h2>
+<p>Room对象的链接。如果对象是标志或工地并且放置在你不可见的房间中，则可能为undefined。</p>
+
+<h2 id="PowerCreep.carry" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">carry</span><span class="api-property__type">object</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#PowerCreep.store"><code>PowerCreep.store</code></a> 的别名。</p>
+<h2 id="PowerCreep.carryCapacity" class="api-property api-property--property  api-property--deprecated"><span class="api-property__name">carryCapacity</span><span class="api-property__type">number</span></h2><div class="api-deprecated"><p>此属性已被弃用，将很快删除。</p>
+</div>
+<p><a href="#Store.getCapacity"><code>PowerCreep.store.getCapacity()</code></a> 的别名。</p>
+<h2 id="PowerCreep.className" class="api-property api-property--property  "><span class="api-property__name">className</span><span class="api-property__type">string</span></h2>
+<p>该 power creep 的类型，<code>POWER_CLASS</code> 常量之一。</p>
+<h2 id="PowerCreep.deleteTime" class="api-property api-property--property  "><span class="api-property__name">deleteTime</span><span class="api-property__type">number</span></h2>
+<p>该 creep 被从账户中永久删除的时间戳，否则为 undefined。</p>
+<h2 id="PowerCreep.hits" class="api-property api-property--property  "><span class="api-property__name">hits</span><span class="api-property__type">number</span></h2>
+<p>该 creep 当前的 hit 生命值。</p>
+<h2 id="PowerCreep.hitsMax" class="api-property api-property--property  "><span class="api-property__name">hitsMax</span><span class="api-property__type">number</span></h2>
+<p>该 creep 当前的最大生命值。</p>
+<h2 id="PowerCreep.id" class="api-property api-property--property  "><span class="api-property__name">id</span><span class="api-property__type">string</span></h2>
+<p>一个唯一的对象标识。你可以使用<a href="#Game.getObjectById"><code>Game.getObjectById</code></a>方法获取对象实例。</p>
+<h2 id="PowerCreep.level" class="api-property api-property--property  "><span class="api-property__name">level</span><span class="api-property__type">number</span></h2>
+<p>该 power creep 的等级。</p>
+<h2 id="PowerCreep.memory" class="api-property api-property--property  "><span class="api-property__name">memory</span><span class="api-property__type">any</span></h2>
+<pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>task <span class="token operator">=</span> <span class="token string">'building'</span><span class="token punctuation">;</span></code></pre><p><code>Memory.powerCreeps[creep.name]</code> 的简写。您可以使用它来快速访问该 creep 的特定内存数据对象。<a href="/global-objects.html#Memory-object">点此了解有关 memory 的更多信息</a></p>
+<h2 id="PowerCreep.my" class="api-property api-property--property  "><span class="api-property__name">my</span><span class="api-property__type">boolean</span></h2>
+<p>您是否为该 creep 的所有者。</p>
+<h2 id="PowerCreep.name" class="api-property api-property--property  "><span class="api-property__name">name</span><span class="api-property__type">string</span></h2>
+<p>Power creep 的名字。您可以在创建一个新 power creep 时为其指定名称，一旦指定无法修改（在 creep 存活时无法修改）。此名称是 <a href="#Game.powerCreeps">Game.powerCreeps</a> 对象中指向该 creep 的哈希键。你可以使用它来快速访问到该 creep。</p>
+<h2 id="PowerCreep.owner" class="api-property api-property--property  "><span class="api-property__name">owner</span><span class="api-property__type">object</span></h2>
+<p>一个代表其拥有者信息的对象，包含以下属性：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>username</code></td><td>string</td><td><p>拥有者姓名。</p>
+</td>
+</tbody></table>
+
+<h2 id="PowerCreep.store" class="api-property api-property--property  "><span class="api-property__name">store</span><span class="api-property__type"><a href="#Store">Store</a></span></h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>store<span class="token punctuation">[</span><span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> creep<span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">getCapacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">goHarvest</span><span class="token punctuation">(</span>creep<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>一个包含了该 creep 所携带资源的 <a href="#Store"><code>Store</code></a> 对象。</p>
+<h2 id="PowerCreep.powers" class="api-property api-property--property  "><span class="api-property__name">powers</span><span class="api-property__type">object</span></h2>
+<p>可用的 power，一个使用 power ID 作为键的对象，包含以下属性：</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>level</code></td><td>number</td><td><p>该 power 的等级。</p>
+</td>
+<tr><td><code>cooldown</code></td><td>number</td><td><p>剩余的冷却时间，当 power creep 还没有出生时为 undefined。</p>
+</td>
+</tbody></table>
+
+<h2 id="PowerCreep.saying" class="api-property api-property--property  "><span class="api-property__name">saying</span><span class="api-property__type">string</span></h2>
+<p>该 creep 在最后一 tick 说过的话。</p>
+<h2 id="PowerCreep.shard" class="api-property api-property--property  "><span class="api-property__name">shard</span><span class="api-property__type">string</span></h2>
+<p>该 power creep 孵化到的 shard 名称，或者为 undefined。</p>
+<h2 id="PowerCreep.spawnCooldownTime" class="api-property api-property--property  "><span class="api-property__name">spawnCooldownTime</span><span class="api-property__type">number</span></h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>powerCreeps<span class="token punctuation">[</span><span class="token string">'PowerCreep1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>spawnCooldownTime <span class="token operator">></span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span>powerCreeps<span class="token punctuation">[</span><span class="token string">'PowerCreep1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">spawn</span><span class="token punctuation">(</span>powerSpawn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>在生成或者删除 creep 时该时间戳可用。
+在该 power creep 已经出生后为 undefined。</p>
+<h2 id="PowerCreep.ticksToLive" class="api-property api-property--property  "><span class="api-property__name">ticksToLive</span><span class="api-property__type">number</span></h2>
+<p>在 creep 死亡并变为未孵化状态前的剩余存活 tick 时长。在 creep 未孵化时该属性为 undefined。</p>
+<h2 id="PowerCreep.cancelOrder" class="api-property api-property--method  "><span class="api-property__name">cancelOrder</span><span class="api-property__args">(methodName)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token constant">LEFT</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep<span class="token punctuation">.</span><span class="token function">cancelOrder</span><span class="token punctuation">(</span><span class="token string">'move'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 该 creep 本 tick 将不会移动。</span></code></pre><p>取消当前 tick 已经调用的操作。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>methodName</code></td><td>string</td><td><p>要取消的 creep 方法名称。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>该操作已被成功取消。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是该 creep 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 还没有出生。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_FOUND</code></td><td>-5</td><td><p>要取消的方法名称未找到。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.delete" class="api-property api-property--method  "><span class="api-property__name">delete</span><span class="api-property__args">([cancel])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>powerCreeps<span class="token punctuation">[</span><span class="token string">'PowerCreep1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>从您的账户中永久删除一个 power creep。在删除时 creep 应处于未孵化状态。该 creep 并不会被立刻删除，而是会启动一个 24 小时的删除倒计时 (详见 <a href="#PowerCreep.deleteTime"><code>deleteTime</code></a>)。你可以通过调用 <code>delete(true)</code> 来取消删除。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>cancel</code></td><td>boolean</td><td><p>将其设为 true 来取消之前的删除计划。</p>
+</td>
+</tbody></table>
+ 
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个 creep 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 仍然存活在这个世界上。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.drop" class="api-property api-property--method  "><span class="api-property__name">drop</span><span class="api-property__args">(resourceType, [amount])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">drop</span><span class="token punctuation">(</span><span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token comment">// 丢弃所有资源</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> resourceType <span class="token keyword">in</span> creep<span class="token punctuation">.</span>carry<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">drop</span><span class="token punctuation">(</span>resourceType<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>将资源丢弃到地上。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>resourceType</code></td><td>string</td><td><p><code>RESOURCE_*</code>常量之一。</p>
+</td>
+<tr><td><code>amount (可选)</code></td><td>number</td><td><p>要被丢弃的资源数量。如果为空，则所有该类型资源都会被丢弃。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-3"><a href="#返回值-3" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个creep的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 还没有出生。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>该 creep 上携带的资源数量小于给定的 amount。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>resourceType 不是一个有效的 <code>RESOURCE_*</code> 常量。</p>
+</td></tr>
+</tbody></table>
+</p>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>powerCreeps<span class="token punctuation">[</span><span class="token string">'PowerCreep1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">usePower</span><span class="token punctuation">(</span><span class="token constant">PWR_GENERATE_OPS</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h2 id="PowerCreep.enableRoom" class="api-property api-property--method  "><span class="api-property__name">enableRoom</span><span class="api-property__args">(controller)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>powerCreep<span class="token punctuation">.</span><span class="token function">enableRoom</span><span class="token punctuation">(</span>powerCreep<span class="token punctuation">.</span>room<span class="token punctuation">.</span>controller<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>在该房间启用 power。房间控制器应位于相邻的地块上。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>controller</code></td><td><a href="#StructureController">StructureController</a></td><td><p>房间控制器。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-4"><a href="#返回值-4" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个creep的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个控制器建筑。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.move" class="api-property api-property--method  "><span class="api-property__name">move</span><span class="api-property__args">(direction)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token constant">RIGHT</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> path <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findPathTo</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>flags<span class="token punctuation">.</span>Flag1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span>path<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>direction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><pre class="highlight javascript tab-javascript "><code>creep1<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token constant">TOP</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep1<span class="token punctuation">.</span><span class="token function">pull</span><span class="token punctuation">(</span>creep2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep2<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span>creep1<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>使 creep 朝指定方向移动一个地块。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>direction</code></td><td><a href="#Creep">Creep</a>|number</td><td><p>一个相邻的 creep 或者下列常量之一：
+                    <ul>
+                        <li><code>TOP</code></li>
+                        <li><code>TOP_RIGHT</code></li>
+                        <li><code>RIGHT</code></li>
+                        <li><code>BOTTOM_RIGHT</code></li>
+                        <li><code>BOTTOM</code></li>
+                        <li><code>BOTTOM_LEFT</code></li>
+                        <li><code>LEFT</code></li>
+                        <li><code>TOP_LEFT</code></li>
+                    </ul></p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-5"><a href="#返回值-5" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个creep的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 还没有出生。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标 creep 距离过远。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>提供的方向不正确。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>该 creep 的疲劳(fatigue)计数器不为零。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.moveByPath" class="api-property api-property--method  "><span class="api-property__name">moveByPath</span><span class="api-property__args">(path)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> path <span class="token operator">=</span> spawn<span class="token punctuation">.</span>room<span class="token punctuation">.</span><span class="token function">findPath</span><span class="token punctuation">(</span>spawn<span class="token punctuation">,</span> source<span class="token punctuation">)</span><span class="token punctuation">;</span>
+creep<span class="token punctuation">.</span><span class="token function">moveByPath</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>creep<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>path<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>path <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findPathTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+creep<span class="token punctuation">.</span><span class="token function">moveByPath</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span>memory<span class="token punctuation">.</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>使用预先定义的路径进行移动。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>path</code></td><td>array|string</td><td><p><a href="#Room.findPath"><code>Room.findPath</code></a>、<a href="#RoomPosition.findPathTo"><code>RoomPosition.findPathTo</code></a> 或 <a href="#PathFinder.PathFinder-search"><code>PathFinder.search</code></a> 的返回值。数组和序列化的字符串都可以接受。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-6"><a href="#返回值-6" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个creep的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 还没有出生。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_FOUND</code></td><td>-5</td><td><p>指定的路径与该 creep 的位置不匹配。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p><code>path</code> 不是一个有效的路径数组。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>该 creep 的疲劳(fatigue)计数器不为零。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.moveTo" class="api-property api-property--method  "><span class="api-property__name">moveTo</span><span class="api-property__args">(x, y, [opts])<br>(target, [opts])</span>
+        <div class="api-property__cpu api-property__cpu--3" title="这种方法的CPU成本很高。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>flags<span class="token punctuation">.</span>Flag1<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">RoomPosition</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token string">'W10N5'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>pos<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token literal-property property">reusePath</span><span class="token operator">:</span> <span class="token number">50</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token comment">// 优先使用缓存路径进行移动</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> name <span class="token keyword">in</span> Game<span class="token punctuation">.</span>creeps<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Game<span class="token punctuation">.</span>creeps<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token literal-property property">noPathFinding</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 仅当有足够 CPU 时才执行寻路</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span>tickLimit <span class="token operator">-</span> Game<span class="token punctuation">.</span>cpu<span class="token punctuation">.</span><span class="token function">getUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> name <span class="token keyword">in</span> Game<span class="token punctuation">.</span>creeps<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Game<span class="token punctuation">.</span>creeps<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre><p>在本房间内查询到目标的最佳路径并向目标移动。该方法是 <a href="#RoomPosition.findPathTo">pos.findPathTo( )</a> <a href="#Creep.move">move( )</a> 的调用简写。如果目标在其他房间，则相应的出口将被当做目标(在本房间中)。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>x</code></td><td>number</td><td><p>目标在 creep 所在房间中的 x 坐标。</p>
+</td>
+<tr><td><code>y</code></td><td>number</td><td><p>目标在 creep 所在房间中的 y 坐标。</p>
+</td>
+<tr><td><code>target</code></td><td>object</td><td><p>可以是 <a href="#RoomPosition">RoomPosition</a> 对象或者任何包含 <a href="#RoomPosition">RoomPosition</a> 属性的对象。 The position doesn&#39;t have to be in the same room with the creep.</p>
+</td>
+<tr><td><code>opts (可选)</code></td><td>object</td><td><p>包含可选项的对象：
+                    <ul>
+                        <li>
+                            <div class="api-arg-title">reusePath</div>
+                            <div class="api-arg-type">number</div>
+                            <div class="api-arg-desc">此选项将缓存前方多个 tick 将要移动的路径。该操作可以节省 cpu 时间，但是会导致 creep 的反应变慢。路径被缓存到 creep 内存中的 <code>_move</code> 属性里。<code>reusePath</code> 的值定义了要缓存前方多少 tick 的移动路径。默认值为 5。增加该值来节省更多的 CPU。减少该值来使移动更加连贯。设置为 0 来禁用路径重用。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">serializeMemory</div>
+                            <div class="api-arg-type">boolean</div>
+                            <div class="api-arg-desc">如果 <code>reusePath</code> 启用并且该值设为 true，重用的路径将会使用 <a href="#Room.Room-serializePath"><code>Room.serializePath</code></a> 进行序列化并储存在内存中。默认值为 true。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">noPathFinding</div>
+                            <div class="api-arg-type">boolean</div>
+                            <div class="api-arg-desc">如果该选择设为 true 并且内存中没有重用路径时，<code>moveTo</code> 将会返回 <code>ERR_NOT_FOUND</code>。在某些情况下，这会节省大量的 CPU 时间。默认值为 false。</div>
+                        </li>
+                        <li>
+                            <div class="api-arg-title">visualizePathStyle</div>
+                            <div class="api-arg-type">object</div>
+                            <div class="api-arg-desc">使用 <a href="#RoomVisual.poly"><code>RoomVisual.poly</code></a> 来在 creep 的移动路线上画一条线。你可以提供一个空对象或者自定义样式参数。默认的样式如下：
+                                <pre class="language-javascript"><code>{
+    fill: &#39;transparent&#39;,
+    stroke: &#39;#fff&#39;,
+    lineStyle: &#39;dashed&#39;,
+    strokeWidth: .15,
+    opacity: .1
+}</code></pre>
+                            </div>
+                        </li>
+                        <li>任何 <a href="#Room.findPath"><code>Room.findPath</code></a> 方法支持的可选项。</li>
+                    </ul></p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-7"><a href="#返回值-7" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个creep的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_NO_PATH</code></td><td>-2</td><td><p>没有找到可以抵达目标的路径。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 还没有出生。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_FOUND</code></td><td>-5</td><td><p>该 creep 没有找到可重用的路径。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>提供了无效目标。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>该 creep 的疲劳(fatigue)计数器不为零。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.notifyWhenAttacked" class="api-property api-property--method  "><span class="api-property__name">notifyWhenAttacked</span><span class="api-property__args">(enabled)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>powerCreeps<span class="token punctuation">[</span><span class="token string">'PC1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">notifyWhenAttacked</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>当 creep 受到攻击时切换自动通知。通知将发送到您的帐户邮箱。默认情况下启用。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>enabled</code></td><td>boolean</td><td><p>是否启用通知。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-8"><a href="#返回值-8" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个creep的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 还没有出生。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p><code>enable</code> 参数不是 boolean 值。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.pickup" class="api-property api-property--method  "><span class="api-property__name">pickup</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> target <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findClosestByRange</span><span class="token punctuation">(</span><span class="token constant">FIND_DROPPED_RESOURCES</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">pickup</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>捡起一个物品 (如捡起一些能量)。目标必须在紧邻 creep 的正方形区域中或者和 creep 在相同位置。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Resource">Resource</a></td><td><p>要捡起的目标对象。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-9"><a href="#返回值-9" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个creep的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 还没有出生。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个有效的可拾取对象。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>该 creep 已无法存储更多资源。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.rename" class="api-property api-property--method  "><span class="api-property__name">rename</span><span class="api-property__args">(name)</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>powerCreeps<span class="token punctuation">[</span><span class="token string">'PC1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">rename</span><span class="token punctuation">(</span><span class="token string">'PC1X'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>重命名 power creep。该 creep 必须尚未出生。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>name</code></td><td>string</td><td><p>power creep 的新名字。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-10"><a href="#返回值-10" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是该 creep 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_NAME_EXISTS</code></td><td>-3</td><td><p>指定的名称已经被已存在的 power creep 使用。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>power creep 已经出生。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.renew" class="api-property api-property--method  "><span class="api-property__name">renew</span><span class="api-property__args">(target)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">let</span> powerBank <span class="token operator">=</span> Game<span class="token punctuation">.</span><span class="token function">getObjectById</span><span class="token punctuation">(</span><span class="token string">'XXX'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Game<span class="token punctuation">.</span>powerCreeps<span class="token punctuation">[</span><span class="token string">'PowerCreep1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">renew</span><span class="token punctuation">(</span>powerBank<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>立刻使用一个 Power Spawn 或者附近的 Power Bank 恢复最大的存活时间。目标必须在相邻的地块上。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#StructurePowerBank">StructurePowerBank</a> | <a href="#StructurePowerSpawn">StructurePowerSpawn</a></td><td><p>目标建筑。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-11"><a href="#返回值-11" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个creep的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 还没有出生。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个有效的 power bank 对象。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.say" class="api-property api-property--method  "><span class="api-property__name">say</span><span class="api-property__args">(message, [public])</span>
+        <div class="api-property__cpu api-property__cpu--0" title="该方法的CPU开销很小。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">const</span> hostiles <span class="token operator">=</span> creep<span class="token punctuation">.</span>pos<span class="token punctuation">.</span><span class="token function">findInRange</span><span class="token punctuation">(</span><span class="token constant">FIND_HOSTILE_CREEPS</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>hostiles<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">say</span><span class="token punctuation">(</span><span class="token string">'OMG!😨'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token function">doWork</span><span class="token punctuation">(</span>creep<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>在该 creep 上显示带有指定内容的可视对话气泡。此信息只会显示 1 tick。你可以通过 <code>saying</code> 属性获取说过的最后一条信息。允许使用任何有效的 Unicode 字符。包括 <a href="http://unicode.org/emoji/charts/emoji-style.txt" target="_blank">emoji</a>。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>message</code></td><td>string</td><td><p>要显示的信息，最长 10 字符。</p>
+</td>
+<tr><td><code>public (可选)</code></td><td>boolean</td><td><p>设置为 true 来让其他玩家也能看到该信息。默认为 false。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-12"><a href="#返回值-12" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个creep的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 还没有出生。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.spawn" class="api-property api-property--method  "><span class="api-property__name">spawn</span><span class="api-property__args">(powerSpawn)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>powerCreeps<span class="token punctuation">[</span><span class="token string">'PowerCreep1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">spawn</span><span class="token punctuation">(</span>Game<span class="token punctuation">.</span><span class="token function">getObjectById</span><span class="token punctuation">(</span><span class="token string">'XXX'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>使用指定的 Power Spawn 孵化该 power creep。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>powerSpawn</code></td><td><a href="#StructurePowerSpawn">StructurePowerSpawn</a></td><td><p>您的 Power Spawn 建筑。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-13"><a href="#返回值-13" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>您不是该 creep 或者 spawn 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 已经出生了。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>指定的对象不是一个 Power Spawn。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>由于 power creep 仍在冷却中导致其无法生成。</p>
+</td></tr>
+<tr><td><code>ERR_RCL_NOT_ENOUGH</code></td><td>-14</td><td><p>房间控制等级（RCL）不足以使用该 spawn。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.suicide" class="api-property api-property--method  "><span class="api-property__name">suicide</span><span class="api-property__args">()</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<p>立刻杀死一个 power creep。这不会永久的删除它，而是将其转为未孵化状态，
+所以你可以重新 <a href="#PowerCreep.spawn"><code>spawn</code></a> 它。</p>
+<h3 id="返回值-14"><a href="#返回值-14" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个creep的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 还没有出生。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.transfer" class="api-property api-property--method  "><span class="api-property__name">transfer</span><span class="api-property__args">(target, resourceType, [amount])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">transfer</span><span class="token punctuation">(</span>storage<span class="token punctuation">,</span> <span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>storage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><pre class="highlight javascript tab-javascript "><code><span class="token comment">// 转移所有资源</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> resourceType <span class="token keyword">in</span> creep<span class="token punctuation">.</span>carry<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">transfer</span><span class="token punctuation">(</span>storage<span class="token punctuation">,</span> resourceType<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>将资源从该 creep 转移至其他对象。目标必须在紧邻 creep 的正方形区域中。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Creep">Creep</a>, <a href="#PowerCreep">PowerCreep</a>, <a href="#Structure">Structure</a></td><td><p>目标对象。</p>
+</td>
+<tr><td><code>resourceType</code></td><td>string</td><td><p><code>RESOURCE_*</code>常量之一。</p>
+</td>
+<tr><td><code>amount (可选)</code></td><td>number</td><td><p>要转移的资源数量。如果省略，将转移携带的全部指定资源。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-15"><a href="#返回值-15" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是这个creep的拥有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 还没有出生。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>该 creep 没有携带足够的资源。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个能存放指定资源的有效对象。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>目标无法携带更多的资源。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>resourceType 不是 <code>RESOURCE_*</code> 常量之一，或者 amount 数量错误。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.upgrade" class="api-property api-property--method  "><span class="api-property__name">upgrade</span><span class="api-property__args">(power)</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>powerCreeps<span class="token punctuation">[</span><span class="token string">'PowerCreep1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">upgrade</span><span class="token punctuation">(</span><span class="token constant">PWR_GENERATE_OPS</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>升级该 creep，给它添加一个新的 power 能力或者升级已存在的 power 能力。
+你账户中需要有一个空闲的 Power Level 才能执行该操作。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>power</code></td><td>number</td><td><p>要升级的 power，<code>PWR_*</code> 常量之一。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-16"><a href="#返回值-16" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是该 creep 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>您账户中的 Power Level 不足。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>该 creep 的等级不允许升级指定的 power，或者 creep 已经到达了最大等级。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>指定了无效的 power ID。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.usePower" class="api-property api-property--method  "><span class="api-property__name">usePower</span><span class="api-property__args">(power, [target])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>powerCreeps<span class="token punctuation">[</span><span class="token string">'PowerCreep1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">usePower</span><span class="token punctuation">(</span><span class="token constant">PWR_GENERATE_OPS</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><pre class="highlight javascript tab-javascript "><code>Game<span class="token punctuation">.</span>powerCreeps<span class="token punctuation">[</span><span class="token string">'PowerCreep1'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">usePower</span><span class="token punctuation">(</span><span class="token constant">PWR_OPERATE_SPAWN</span><span class="token punctuation">,</span> Game<span class="token punctuation">.</span>spawns<span class="token punctuation">[</span><span class="token string">'Spawn1'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>在指定目标上附加该 creep 的 power。
+你只能在没有控制器或者 <a href="#PowerCreep.enableRoom">power-enabled</a> 的控制器所在的房间中使用 power。
+同一 tick 中只能使用一种 power，每个 <code>usePower</code> 调用都将覆盖前一个。
+如果目标拥有较低或相同等级的效果，则将已存在的效果覆盖。如果已存在的效果等级更高，则返回一个错误码。</p>
+<p><a href="/power.html#Powers">可用 power 的完整列表</a>   </p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>power</code></td><td>number</td><td><p>要使用的 power 能力，<code>PWR_*</code>常量之一。</p>
+</td>
+<tr><td><code>target (可选)</code></td><td><a href="#RoomObject">RoomObject</a></td><td><p>房间中的指定目标。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-17"><a href="#返回值-17" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是该 creep 的所有者。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 creep 还没有出生。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>该 creep 没有足够的资源来使用这个 power。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>指定了无效的目标。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>目标拥有相同或更高等级的已激活效果。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>指定目标距离过远。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>该房间控制器还没有启用 power。</p>
+</td></tr>
+<tr><td><code>ERR_TIRED</code></td><td>-11</td><td><p>该 power 能力仍在冷却中。</p>
+</td></tr>
+<tr><td><code>ERR_NO_BODYPART</code></td><td>-12</td><td><p>该 creep 没有指定的 power 能力。</p>
+</td></tr>
+</tbody></table>
+</p>
+<h2 id="PowerCreep.withdraw" class="api-property api-property--method  "><span class="api-property__name">withdraw</span><span class="api-property__args">(target, resourceType, [amount])</span>
+        <div class="api-property__cpu api-property__cpu--A" title="这个方法是一个改变游戏状态的动作。在返回OK代码的情况下，它的自然成本增加了0.2个CPU成本。"></div>
+        </h2>
+<pre class="highlight javascript tab-javascript "><code><span class="token keyword">if</span><span class="token punctuation">(</span>creep<span class="token punctuation">.</span><span class="token function">withdraw</span><span class="token punctuation">(</span>storage<span class="token punctuation">,</span> <span class="token constant">RESOURCE_ENERGY</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ERR_NOT_IN_RANGE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    creep<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>storage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>从建筑(structure)或是墓碑(tombstone)中拿取资源。目标必须在紧邻 creep 的正方形区域中。多个 creep 可以在同一 tick 里从相同对象中拿取资源。你的 creep 同样也可以从敌对建筑/墓碑中拿取资源，如果它上面没有敌对的 rampart 的话。</p>
+<p>此方法不应该被用来在 creep 之间转移资源。想要在 creep 之间转移，请对携带资源的 creep 执行 <a href="#Creep.transfer"><code>transfer</code></a> 方法。</p>
+<table><thead><tr><th>parameter</th><th>type</th><th>description</th></tr></thead><tbody>
+<tr><td><code>target</code></td><td><a href="#Structure">Structure</a>, <a href="#Tombstone">Tombstone</a>, <a href="#Ruin">Ruin</a></td><td><p>目标对象。</p>
+</td>
+<tr><td><code>resourceType</code></td><td>string</td><td><p><code>RESOURCE_*</code>常量之一。</p>
+</td>
+<tr><td><code>amount (可选)</code></td><td>number</td><td><p>被传递资源的数量。如果没有这个参数，传递全部可用数量的资源。</p>
+</td>
+</tbody></table>
+
+<h3 id="返回值-18"><a href="#返回值-18" class="headerlink" title="返回值"></a>返回值</h3><p>如下错误码之一：
+<table class='api-return-codes'><thead><tr><th>constant</th><th>value</th><th>description</th></tr></thead><tbody>
+<tr><td><code>OK</code></td><td>0</td><td><p>这个操作已经成功纳入计划。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_OWNER</code></td><td>-1</td><td><p>你不是此 creep 的所有者，或者目标位于敌方 rampart 之下。</p>
+</td></tr>
+<tr><td><code>ERR_BUSY</code></td><td>-4</td><td><p>该 power creep 还没有出生。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_ENOUGH_RESOURCES</code></td><td>-6</td><td><p>目标中没有足够数量的资源。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_TARGET</code></td><td>-7</td><td><p>目标不是一个能存储指定资源的对象。</p>
+</td></tr>
+<tr><td><code>ERR_FULL</code></td><td>-8</td><td><p>此 creep 的存储已经满了。</p>
+</td></tr>
+<tr><td><code>ERR_NOT_IN_RANGE</code></td><td>-9</td><td><p>目标太远了。</p>
+</td></tr>
+<tr><td><code>ERR_INVALID_ARGS</code></td><td>-10</td><td><p>resourceType 不是 <code>RESOURCE_*</code> 常量之一, 或者 amount 数量错误。</p>
+</td></tr>
+</tbody></table>
+</p>
